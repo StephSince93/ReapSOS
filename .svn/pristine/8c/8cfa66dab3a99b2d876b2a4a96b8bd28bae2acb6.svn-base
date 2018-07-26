@@ -1,0 +1,126 @@
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, Platform } from 'ionic-angular';
+import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { Md5 } from 'ts-md5/dist/md5';
+import { Geolocation } from '@ionic-native/geolocation';
+
+import { MenuPage } from '../menu/menu';
+import { SuccessPage } from '../success/success';
+import { StemApiProvider } from '../../providers/stem-api/stem-api';
+@IonicPage()
+@Component({
+  selector: 'page-safety-review',
+  templateUrl: 'safety-review.html',
+})
+export class SafetyReviewPage {
+  @ViewChild(SignaturePad) public signaturePad: SignaturePad;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private alertCtrl: AlertController,
+              private viewCtrl: ViewController,
+              private platform: Platform,
+              private geolocation: Geolocation,
+              private stemAPI: StemApiProvider) {
+            this.formDetails.push(this.navParams.get('form'));
+            console.log(this.formDetails)
+
+            /* Ensure the platform is ready */
+this.platform.ready().then(() => {
+    /* Perform initial geolocation */
+    this.geolocation.getCurrentPosition().then((resp) => {
+        this.lonlat = [resp.coords.latitude,resp.coords.longitude];
+        console.log(this.lonlat);
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+    });
+  }
+  private formDetails:any[] = [];
+  public signatureImage: string;
+  public cancelled = "false";
+  private submitData:any[] = [];
+  private md5Data:any;
+  private lonlat:any = [];
+  canvasResize(){
+    let canvas = document.querySelector('canvas');
+    this.signaturePad.set('canvasWidth', canvas.offsetWidth);
+    this.signaturePad.set('canvasHeight', canvas.offsetHeight);
+  }
+
+  sigClear(){
+    this.signaturePad.clear();
+  }
+  sigSubmit(){
+    var md5 = new Md5();//md5 hash for custom guid
+    var time = new Date();//timestamp
+    let alert = this.alertCtrl.create({
+   title: 'Confirm Submittion',
+   message: 'Are you sure you want to submit?',
+   buttons: [
+             {
+               text: 'Yes',
+                role: 'Yes',
+               handler: () => {
+                 //console.log('Yes clicked');
+                 //saves as base64
+                 this.signatureImage = this.signaturePad.toDataURL();
+                 //console.log(this.signatureImage);
+                 /*md5 hashes form data with signature and timestamp for unique guid*/
+                 this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
+                 /*Pushes all data to array for form submission*/
+                 this.submitData.push({'main':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data});
+
+                 // this.stemAPI.submitBOLData(this.submitData,MenuPage.token).then((result) =>{
+                 //    this.navCtrl.push(SuccessPage);//goes to success page
+                 //    }, (err) => {
+                 //      console.log(err);
+                 //    });
+               }
+             },
+             {
+               text: 'No',
+               role: 'cancel',
+               handler: () => {
+                 //console.log('No clicked');
+               }
+             }
+          ]
+      });
+   alert.present();
+  }
+
+  ngAfterViewInit(){
+  //  console.log("Comes here!");
+    this.signaturePad.clear();
+    this.canvasResize();
+  }
+
+  //goes back to the form page
+  sigBack(){
+    let alert = this.alertCtrl.create({
+    title: 'Are you sure you want to cancel?',
+    message: 'This will return you to the home page and form will not be submitted, Continue?',
+    buttons: [
+           {
+             text: 'Yes',
+              role: 'Yes',
+             handler: () => {
+               //console.log('Yes clicked');
+               //pops to home page
+               this.navCtrl.popTo(this.navCtrl.getByIndex(0));
+               this.cancelled = "true";
+               this.viewCtrl.dismiss(this.cancelled);
+             }
+           },
+           {
+             text: 'No',
+             role: 'cancel',
+             handler: () => {
+               //console.log('No clicked');
+             }
+           }
+        ]
+    });
+ alert.present();
+ }
+}

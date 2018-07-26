@@ -1,0 +1,8 @@
+{
+  "name": "ASI",
+  "app_id": "481f26eb",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

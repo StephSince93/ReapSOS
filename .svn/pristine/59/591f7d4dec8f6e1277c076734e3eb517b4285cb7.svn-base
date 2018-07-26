@@ -1,0 +1,61 @@
+import { Injectable } from '@angular/core';
+
+import { LoginPage } from '../pages/login/login';
+import { StemApiProvider } from '../providers/stem-api/stem-api';
+@Injectable()
+export class ReapService {
+    //data exported and saved into service values
+    public getData:any;
+    public getLocations:any[]=[];
+    public equipmentType:any[]=[];
+    public getEquipment:any[]=[];
+    public getPersonnel:any[]=[];
+  /********************************************/
+    public mileage:any[] = [];
+    public equipment:any[] = [];
+    public labor:any[] = [];
+    public safetyForm:any[] = [];
+    public completeForm:any[] = [];
+    public token:any;
+    //private count:number;
+    constructor(private stemAPI: StemApiProvider
+                ){}
+
+    grabAPIData(token){
+      this.token=token;
+      //console.log(token);
+      LoginPage.initialLogin = false;//changes login variable to false after user logs in
+      //console.log('this is:',LoginPage.initialLogin);
+        //imported data from API
+        this.stemAPI.getData(this.token).then((result) =>{
+        this.getData = (JSON.stringify(result));
+        this.getData = JSON.parse(this.getData);
+
+        this.getLocations = this.getData['Locations'];
+        this.equipmentType = this.getData['EquipmentType'];
+        this.getEquipment = this.getData['Equipment'];
+        this.getPersonnel = this.getData['Personnel'];
+
+        //console.log(this.getPersonnel);
+        //console.log(this.getEquipment);
+      }, (err) => {
+        console.log(err);
+  });
+    }
+
+    //creates and pushes mileage array
+    totalMileage(data){
+      this.mileage.push(data);
+      //console.log(this.mileage);
+    }
+    //creates and pushes labor array
+    totalLabor(data){
+      this.labor.push(data);
+      //console.log(this.labor);
+    }
+    //creates and pushes equipment array
+    totalEquipment(data){
+      this.equipment.push(data);
+      //console.log(this.equipment);
+    }
+}

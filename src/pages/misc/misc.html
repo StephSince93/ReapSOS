@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Misc.</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Category</ion-label>
+        <ion-select
+          ngModel
+          name="category"
+          required>
+          <ion-option value={{misc.Type}} *ngFor="let misc of miscCategory" selected="misc.Type == '1'">{{misc.Type}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Description</ion-label>
+        <ion-textarea
+        type="text"
+        name="description"
+        placeholder=""
+        ngModel></ion-textarea>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Quantity</ion-label>
+        <ion-input
+        type="number"
+        name="quantity"
+        placeholder=""
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <button id="submitButton" ion-button full large>Submit</button>
+     </ion-item>
+   </ion-list>
+  </form>
+</ion-content>

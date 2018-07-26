@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Project Review</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-label>Project Summary</ion-label>
+          <ion-grid class="formDetails" *ngFor="let details of formDetails">
+                <ion-row>
+                  <ion-col>Project Name:</ion-col>
+                  <ion-col>{{details.projectName}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Location:</ion-col>
+                  <ion-col>{{details.Location?.Location}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Company Man:</ion-col>
+                  <ion-col>{{details.companyMan}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Company Man Phone Number:</ion-col>
+                  <ion-col>{{details.phoneNumber}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>AFE/Order Number:</ion-col>
+                  <ion-col>{{details.orderNumber}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Rig Name & Number:</ion-col>
+                  <ion-col>{{details.rigName}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Department:</ion-col>
+                  <ion-col>{{details.department}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Division:</ion-col>
+                  <ion-col>{{details.division}}</ion-col>
+                </ion-row>
+              </ion-grid>
+               <ion-grid>
+                 <ion-row>
+                  <ion-col>
+                     <button type="button" ion-button full color="light" name="editForm" (click)="editForm()">Edit Project Form</button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+      <br>
+      <br>
+      <hr>
+
+
+  <div class="box">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button full color="danger" (click)="toCancel()" large>Cancel</button>
+        </ion-col>
+        <ion-col col-12>
+          <button ion-button full color="secondary" [disabled]='submitClicked===true' (click)="onSubmit()" large>Submit</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

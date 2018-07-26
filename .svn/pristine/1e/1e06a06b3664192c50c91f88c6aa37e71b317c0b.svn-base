@@ -1,0 +1,29 @@
+page-safety-review {
+  signature-pad{
+    canvas{
+      border: 1px dashed #333333;
+      width: 100%;
+      height: 150px;
+    }
+  }
+  ion-title {
+    color: grey;
+    text-align:center;
+    font-size: 10px;
+  }
+  h2{
+    text-align:center;
+  }
+  .formDetails{
+    margin-bottom:25px;
+    border: 1px solid black;
+    border-width: thin;
+    height:225px;
+  }
+  #hidden-button{
+    height: 100%;
+    width: 100%;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+}

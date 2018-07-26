@@ -1,0 +1,177 @@
+import { Component,ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, Platform } from 'ionic-angular';
+import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { Md5 } from 'ts-md5/dist/md5';
+import { Geolocation } from '@ionic-native/geolocation';
+
+import { MenuPage } from '../menu/menu';
+import { SuccessPage } from '../success/success';
+import { ReapService } from '../../services/reap-service';
+import { StemApiProvider } from '../../providers/stem-api/stem-api';
+@IonicPage()
+@Component({
+  selector: 'page-safety-review',
+  templateUrl: 'safety-review.html',
+})
+export class SafetyReviewPage {
+  @ViewChild(SignaturePad) public signaturePad: SignaturePad;
+  private formDetails:any[] = [];
+  private mileageDetails:any[] = this.reap.mileage;
+  private laborDetails:any[] = this.reap.labor;
+  private equipmentDetails:any[] = this.reap.equipment;
+  public signatureImage: string;
+  public cancelled = "false";
+  private submitData:any[] = [];
+  private md5Data:any;
+  private lonlat:any = [];
+  res:any = {};//API submission response
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private alertCtrl: AlertController,
+              private viewCtrl: ViewController,
+              private platform: Platform,
+              private geolocation: Geolocation,
+              private stemAPI: StemApiProvider,
+              private reap: ReapService) {
+
+            this.formDetails.push(this.reap.safetyForm);
+            var date = new Date(this.formDetails[0]['currentDate']);
+            this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '-' + date.getDate() + '-' + date.getFullYear();
+
+            console.log(this.formDetails[0]['currentDate'])
+            //console.log(this.mileageDetails);
+            /* Ensure the platform is ready */
+this.platform.ready().then(() => {
+    /* Perform initial geolocation */
+    this.geolocation.getCurrentPosition().then((resp) => {
+        this.lonlat = [resp.coords.latitude,resp.coords.longitude];
+        console.log(this.lonlat);
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+    });
+  }
+  canvasResize(){
+    let canvas = document.querySelector('canvas');
+    this.signaturePad.set('canvasWidth', canvas.offsetWidth);
+    this.signaturePad.set('canvasHeight', canvas.offsetHeight);
+  }
+
+  sigClear(){
+    this.signaturePad.clear();
+  }
+  sigSubmit(){
+    var md5 = new Md5();//md5 hash for custom guid
+    var time = new Date();//timestamp
+    let alert = this.alertCtrl.create({
+   title: 'Confirm Submittion',
+   message: 'Are you sure you want to submit?',
+   buttons: [
+             {
+               text: 'Yes',
+                role: 'Yes',
+               handler: () => {
+                 //console.log('Yes clicked');
+                 //saves as base64
+                 this.signatureImage = this.signaturePad.toDataURL();
+                 //console.log(this.signatureImage);
+                 /*md5 hashes form data with signature and timestamp for unique guid*/
+                 this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
+                 /*Pushes all data to array for form submission*/
+                 this.submitData.push({'main':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data});
+                 /*
+                 *
+                 */
+                 this.stemAPI.submitSafteyForm(this.submitData,this.reap.token).then((result) =>{
+                   //converts result to array
+                   this.res = JSON.stringify(result);
+                   this.res = JSON.parse(this.res);
+                   console.log(this.res);
+
+                   this.navCtrl.push(SuccessPage);
+                 }, (err) => {
+                   let alert = this.alertCtrl.create({
+         title: 'Error Submitting, ',
+         message: 'Try submitting again, If issues persists contact stem support.',
+         buttons: [
+                  {
+                    text: 'Acknowledged',
+                     role: 'Yes',
+                    handler: () => {
+
+                    }
+                  }
+               ]
+           });
+         alert.present();
+         console.log(err);
+                 });
+              }
+             },{
+               text: 'No',
+               role: 'cancel',
+               handler: () => {
+                 //console.log('No clicked');
+               }
+             },
+           ]
+      });
+   alert.present();
+  }
+
+
+
+  ngAfterViewInit(){
+  //  console.log("Comes here!");
+    this.signaturePad.clear();
+    this.canvasResize();
+  }
+
+  //goes back to the form page
+  sigBack(){
+    let alert = this.alertCtrl.create({
+    title: 'Are you sure you want to cancel?',
+    message: 'This will return you to the home page and form will not be submitted, Continue?',
+    buttons: [
+           {
+             text: 'Yes',
+              role: 'Yes',
+             handler: () => {
+               //console.log('Yes clicked');
+               //pops to home page
+               this.navCtrl.popTo(this.navCtrl.getByIndex(1));
+             }
+           },
+           {
+             text: 'No',
+             role: 'cancel',
+             handler: () => {
+               //console.log('No clicked');
+             }
+           }
+        ]
+    });
+ alert.present();
+ }
+ editForm(){
+  this.navCtrl.popTo(this.navCtrl.getByIndex(2));
+ }
+ removeMileage(index){
+
+     this.reap.mileage.splice(index, 1);
+     this.mileageDetails = this.reap.mileage;
+     //console.log(this.mileageDetails);
+ }
+ removeLabor(index){
+
+     this.reap.labor.splice(index, 1);
+     this.laborDetails = this.reap.labor;
+     //console.log(this.mileageDetails);
+ }
+ removeEquipment(index){
+
+     this.reap.equipment.splice(index, 1);
+     this.equipmentDetails = this.reap.equipment;
+     //console.log(this.mileageDetails);
+ }
+}

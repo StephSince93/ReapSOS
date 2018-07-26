@@ -1,0 +1,51 @@
+{
+  "_from": "@ionic-native/app-version",
+  "_id": "@ionic-native/app-version@4.7.0",
+  "_inBundle": false,
+  "_integrity": "sha512-P0NMfs1OORy6jm/H9Mx9Og1NLjpD3CeWOiUoBJI2HeyDMBUWjTpyXlN1wa01mgzlidyVIgDouRhbOUcRID7Eew==",
+  "_location": "/@ionic-native/app-version",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ionic-native/app-version",
+    "name": "@ionic-native/app-version",
+    "escapedName": "@ionic-native%2fapp-version",
+    "scope": "@ionic-native",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/app-version/-/app-version-4.7.0.tgz",
+  "_shasum": "117aba8bab2f6ca625a5e4773b47caffa8fc63f9",
+  "_spec": "@ionic-native/app-version",
+  "_where": "C:\\Users\\Stem Dev\\Desktop\\ASI\\ASI",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/app-version",
+  "peerDependencies": {
+    "@ionic-native/core": "^4.2.0",
+    "@angular/core": "*",
+    "rxjs": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "4.7.0"
+}

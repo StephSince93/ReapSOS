@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar center hideBackButton="true">
+    <ion-title>TASK</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<!-- <ion-item>
+  <b>Bill of Lading</b>
+  <button ion-button block outline>
+
+</button>
+</ion-item> -->
+<ion-content>
+  <!-- <ion-item  no-lines>
+    <button  class="menuButton"ion-button large block (tap)="toMileage()" >
+      New Milage Form</button>
+  </ion-item> -->
+  <ion-item  no-lines>
+    <button  class="menuButton"ion-button large block (tap)="toEquipment()" >
+      New Equipment Form</button>
+  </ion-item>
+  <ion-item  no-lines>
+    <button  class="menuButton"ion-button large block (tap)="toLabor()" >
+      New Labor Form</button>
+  </ion-item>
+  <ion-item  no-lines>
+    <button  class="menuButton"ion-button large block (tap)="toReview()" >
+      Review</button>
+  </ion-item>
+
+
+</ion-content>

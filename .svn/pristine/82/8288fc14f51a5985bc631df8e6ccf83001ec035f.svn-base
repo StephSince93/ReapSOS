@@ -1,0 +1,37 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { LoginPage } from '../login/login';
+import { SafetyPage } from '../safety/safety';
+import { ReapService } from '../../services/reap-service';
+import { StemApiProvider } from '../../providers/stem-api/stem-api';
+import { SupportPage } from '../support/support';
+@IonicPage()
+@Component({
+  selector: 'page-menu',
+  templateUrl: 'menu.html',
+})
+export class MenuPage {
+  public importedData:any ;
+  static token:any;
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public stemAPI: StemApiProvider,
+              public reap: ReapService) {
+    const data = localStorage.getItem('authToken');
+     MenuPage.token = data.toString();
+     if(LoginPage.initialLogin==true){
+       console.log('this is:',LoginPage.initialLogin);
+      this.reap.grabAPIData(MenuPage.token);//calls service to grab API data on initial login
+    }
+  }
+
+  toSaftey(){
+    this.navCtrl.push(SafetyPage);
+  }
+  toSupport(){
+    this.navCtrl.push(SupportPage);
+  }
+
+}

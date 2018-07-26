@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar center hideBackButton="true">
+    <ion-title>TASK</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<!-- <ion-item>
+  <b>Bill of Lading</b>
+  <button ion-button block outline>
+
+</button>
+</ion-item> -->
+<ion-content>
+  <ion-item  no-lines>
+    <button  class="menuButton"ion-button large block (click)="toSaftey()" >
+      New Saftey Form</button>
+  </ion-item>
+  <ion-item  no-lines>
+    <button  class="menuButton"ion-button large block (click)="toSupport()" >
+      Support</button>
+  </ion-item>
+
+
+</ion-content>

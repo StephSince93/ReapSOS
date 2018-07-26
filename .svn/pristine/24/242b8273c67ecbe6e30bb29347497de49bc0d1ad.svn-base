@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Safety Form</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Date</ion-label>
+        <ion-datetime
+        type="date"
+        name="currentDate"
+        pickerFormat="MM/DD/YYYY"
+        displayFormat="MM/DD/YYYY"
+        [(ngModel)]="currentDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item class="formField">
+        <!-- <ion-label color="primary" stacked >Location</ion-label> -->
+        <select-searchable
+        [(ngModel)]="location"
+        [items]="locationsArray"
+        title="Location"
+        itemValueField=ID
+        itemTextField=Location
+        name="Location"
+        [canSearch]="true"
+        [canReset]="true"
+        (onChange)="locationChange($event)">
+        <ng-template selectSearchableLabelTemplate>
+              Location
+        </ng-template>
+      </select-searchable>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked >Company Man</ion-label>
+        <ion-input ngModel name="companyMan">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>AFE/Order Number</ion-label>
+        <ion-input
+        type="text"
+        name="orderNumber"
+        placeholder="AFE"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Rig Name & Number</ion-label>
+        <ion-input
+        type="text"
+        name="rigName"
+        placeholder="Rig Name"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Start Date</ion-label>
+        <ion-datetime
+        type="date"
+        name="startDate"
+        displayFormat="MM/DD/YYYY"
+        ngModel></ion-datetime>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>End Date</ion-label>
+        <ion-datetime
+        type="date"
+        name="endDate"
+        displayFormat="MM/DD/YYYY"
+        ngModel></ion-datetime>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Department</ion-label>
+        <ion-select ngModel name="department">
+          <ion-option value="Department-1">Drilling</ion-option>
+          <ion-option value="Department-2">Production</ion-option>
+          <ion-option value="Department-3">Completion</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Job Decription</ion-label>
+        <ion-textarea
+        type="textarea"
+        name="description"
+        placeholder="ex. delivering trailers,supervision,etc"
+        ngModel></ion-textarea>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Number of Trips</ion-label>
+        <ion-input
+        type="number"
+        name="trips"
+        placeholder=""
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Number of Miles</ion-label>
+        <ion-input
+        type="number"
+        name="miles"
+        placeholder=""
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Comments</ion-label>
+        <ion-textarea
+        type="text"
+        name="comments"
+        placeholder=""
+        ngModel></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <button id="submitButton" ion-button full large>Submit</button>
+     </ion-item>
+   </ion-list>
+  </form>
+</ion-content>

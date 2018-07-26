@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-navbar  hideBackButton="true">
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item no-lines>
+    <h1>Submission Success!</h1>
+  </ion-item>
+  <ion-item no-lines>
+    <button id="homeButton" (click)="backToMenu()" ion-button large>Home</button>
+  </ion-item>
+</ion-content>

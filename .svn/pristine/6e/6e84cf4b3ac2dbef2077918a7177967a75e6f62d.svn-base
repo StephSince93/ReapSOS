@@ -1,0 +1,38 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { MileagePage } from '../mileage/mileage';
+import { LaborPage } from '../labor/labor';
+import { EquipmentPage } from '../equipment/equipment';
+import { SafetyReviewPage } from '../safety-review/safety-review';
+import { ReapService } from '../../services/reap-service';
+@IonicPage()
+@Component({
+  selector: 'page-sub-menu',
+  templateUrl: 'sub-menu.html',
+})
+export class SubMenuPage {
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public reap: ReapService) {
+
+  }
+
+  ionViewDidLoad() {
+
+  }
+  toMileage(){
+    this.navCtrl.push(MileagePage);
+  }
+  toLabor(){
+    this.navCtrl.push(LaborPage);
+  }
+  toEquipment(){
+    this.navCtrl.push(EquipmentPage);
+  }
+  toReview(){
+    this.navCtrl.push(SafetyReviewPage);
+  }
+
+}

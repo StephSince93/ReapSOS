@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Stem Dev\Desktop\ASI\ASI\platforms\android\app\build\intermediates\transforms\desugar\release\0.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="27.0.3"
+        sha1="3e41042ea2161e7c6e1b72eba111a87552bb7cd4">
+        <dex dex="C:\Users\Stem Dev\Desktop\ASI\ASI\platforms\android\app\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Stem Dev\Desktop\ASI\ASI\platforms\android\app\build\intermediates\transforms\desugar\release\2.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="27.0.3"
+        sha1="6b9f5da101c2b7348d4ac251ab256100a925e290">
+        <dex dex="C:\Users\Stem Dev\Desktop\ASI\ASI\platforms\android\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+
+</items>

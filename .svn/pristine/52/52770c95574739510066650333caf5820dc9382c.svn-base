@@ -1,0 +1,68 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController,LoadingController, NavParams } from 'ionic-angular';
+import { Device } from '@ionic-native/device';
+import { AppVersion } from '@ionic-native/app-version';
+
+import { ReapService } from '../../services/reap-service';
+import { MenuPage } from '../menu/menu';
+
+@IonicPage()
+@Component({
+  selector: 'page-support',
+  templateUrl: 'support.html',
+})
+export class SupportPage {
+  private omegaPlatform:any;
+  private deviceVersion:any;
+  private omegaVersion:any;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private loadingCtrl: LoadingController,
+              // public plt: Platform,
+              private device: Device,
+              private appVersion: AppVersion,
+              private reap: ReapService) {
+                this.omegaPlatform = this.device.platform;
+                this.deviceVersion = this.device.version;
+
+                this.appVersion.getVersionNumber().then((version) => {
+                      this.omegaVersion = version;
+                      console.log(JSON.stringify(this.omegaVersion));
+                    },(error)=>{
+                        console.log(error);
+                      })
+                  }
+
+  ionViewDidLoad() {
+    //console.log('ionViewDidLoad SupportPage');
+  }
+  toSync(){
+    //console.log(this.reap.token);
+    const loading = this.loadingCtrl.create({
+      content: 'Syncing...'
+    });
+    loading.present();
+    this.reap.grabAPIData(this.reap.token);
+       setTimeout(() => {
+         loading.dismiss();
+      }, 2000);
+
+  }
+
+  onLogout(){
+    //clears the authToken from the local storage
+          localStorage.clear();
+          this.reap.token = "";
+
+          //SelectPage.token=null;
+          const loading = this.loadingCtrl.create({
+            content: 'Logging Out...'
+          });
+          loading.present();
+             setTimeout(() => {
+               loading.dismiss();
+            }, 1000);
+          //pops back to the login page
+          this.navCtrl.popToRoot();
+     }
+  }

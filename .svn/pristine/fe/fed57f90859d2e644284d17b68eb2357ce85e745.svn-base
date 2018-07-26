@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Labor</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Personnel</ion-label>
+        <ion-input
+        type="text"
+        name="personnel"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Hours</ion-label>
+        <ion-input
+        ngModel
+        type="number"
+        name="hours">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <button id="submitButton" ion-button full large>Submit</button>
+     </ion-item>
+   </ion-list>
+  </form>
+</ion-content>

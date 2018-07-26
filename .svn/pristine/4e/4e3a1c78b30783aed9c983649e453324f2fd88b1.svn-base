@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Support</ion-title>
+    <ion-buttons end>
+       <button class="navButtons" (click)="onLogout()"> Logout </button>
+     </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row style="padding-bottom:25px;">
+      <ion-col>
+      <h1>For Technical Support</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <h1>Email Us</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row class="supportData">
+    <ion-col>
+      <a href="mailto:support@stemsoftware.com">support@stemsoftware.com</a>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <h1>Call Us</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row class="supportData">
+    <ion-col>
+      <a href="tel:432-444-4444">432-444-4444</a>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <h1>Platform Type: {{this.omegaPlatform}}</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <h1>OS Version: {{this.deviceVersion}}</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <h1>App Version:
+         {{this.omegaVersion}}
+      </h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <button ion button id="supportButton" block large>Sync</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <h2>Last Sync:</h2>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>

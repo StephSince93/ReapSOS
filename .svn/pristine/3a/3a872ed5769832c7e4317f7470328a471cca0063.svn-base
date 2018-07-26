@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Review</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-label stacked>Form Details</ion-label>
+          <ion-grid class="formDetails" *ngFor="let details of formDetails">
+             <button type="button" name="editForm" id='hidden-button' (click)="editForm()">
+                <ion-row>
+                  <ion-col>Company Man:</ion-col>
+                  <ion-col>{{details.companyMan}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Date:</ion-col>
+                  <ion-col>{{details.date}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Order Number:</ion-col>
+                  <ion-col>{{details.orderNumber}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Department:</ion-col>
+                  <ion-col>{{details.department}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Job Title:</ion-col>
+                  <ion-col>{{details.jobTitle}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Details:</ion-col>
+                  <ion-col>{{details.details}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Hours Worked:</ion-col>
+                  <ion-col>{{details.hours}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Comments:</ion-col>
+                  <ion-col>{{details.comments}}</ion-col>
+                </ion-row>
+              </button>
+          </ion-grid>
+  <hr>
+  <ion-label color="primary" stacked>Signature</ion-label>
+  <div class="box">
+    <signature-pad
+      name="Signature"
+      id="signaturecanvas"></signature-pad>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button type="button" ion-button full color="light" (click)="sigClear()" large>Clear</button>
+        </ion-col>
+        <ion-col col-12>
+          <button ion-button full color="danger" (click)="sigBack()" large>Cancel</button>
+        </ion-col>
+        <ion-col col-12>
+          <button ion-button full color="secondary" (click)="sigSubmit()" large>Submit</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

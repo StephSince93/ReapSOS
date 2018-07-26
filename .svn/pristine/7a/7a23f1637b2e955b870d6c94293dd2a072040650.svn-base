@@ -1,0 +1,51 @@
+{
+  "_from": "@ionic-native/file-transfer",
+  "_id": "@ionic-native/file-transfer@4.8.0",
+  "_inBundle": false,
+  "_integrity": "sha512-jSDhQkGAeGvzk0zO8t/19aQLAEgSPERXir/zDD2tBzudNdypEQHdSPPQMba2ACM/k44MFT2mjhwV2rWNF2NPyw==",
+  "_location": "/@ionic-native/file-transfer",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ionic-native/file-transfer",
+    "name": "@ionic-native/file-transfer",
+    "escapedName": "@ionic-native%2ffile-transfer",
+    "scope": "@ionic-native",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/file-transfer/-/file-transfer-4.8.0.tgz",
+  "_shasum": "18fe8bc81390e05e0a1ff95104ae59e9ac64f596",
+  "_spec": "@ionic-native/file-transfer",
+  "_where": "C:\\Users\\Stem Dev\\Desktop\\ASI\\ASI",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/file-transfer",
+  "peerDependencies": {
+    "@ionic-native/core": "^4.2.0",
+    "@angular/core": "*",
+    "rxjs": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "4.8.0"
+}

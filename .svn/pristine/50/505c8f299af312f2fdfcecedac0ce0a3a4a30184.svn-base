@@ -1,0 +1,650 @@
+webpackJsonp([3],{
+
+/***/ 102:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MenuPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__safety_safety__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_stem_api_stem_api__ = __webpack_require__(47);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var MenuPage = /** @class */ (function () {
+    function MenuPage(navCtrl, navParams, stemAPI) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.stemAPI = stemAPI;
+        var data = localStorage.getItem('authToken');
+        MenuPage_1.token = data.toString();
+        //imported data from API
+        //     this.stemAPI.getData(MenuPage.token).then((result) =>{
+        //       this.importedData = (JSON.stringify(result));
+        //       this.importedData = JSON.parse(this.importedData);
+        //       console.log(this.importedData);
+        //     }, (err) => {
+        //     console.log(err);
+        // });
+    }
+    MenuPage_1 = MenuPage;
+    MenuPage.prototype.toSaftey = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__safety_safety__["a" /* SafetyPage */]);
+    };
+    MenuPage = MenuPage_1 = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-menu',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\menu\menu.html"*/'<ion-header>\n\n  <ion-navbar center hideBackButton="true">\n    <ion-title>TASK</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<!-- <ion-item>\n  <b>Bill of Lading</b>\n  <button ion-button block outline>\n\n</button>\n</ion-item> -->\n<ion-content>\n  <ion-item  no-lines>\n    <button  class="menuButton"ion-button large block (click)="toSaftey()" >\n      New Saftey Form</button>\n  </ion-item>\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\menu\menu.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_stem_api_stem_api__["a" /* StemApiProvider */]])
+    ], MenuPage);
+    return MenuPage;
+    var MenuPage_1;
+}());
+
+//# sourceMappingURL=menu.js.map
+
+/***/ }),
+
+/***/ 103:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SafetyPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__safety_review_safety_review__ = __webpack_require__(104);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SafetyPage = /** @class */ (function () {
+    function SafetyPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    SafetyPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad SafetyPage');
+    };
+    SafetyPage.prototype.onSubmit = function (Form) {
+        this.formData = Form.value;
+        console.log(this.formData);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__safety_review_safety_review__["a" /* SafetyReviewPage */], { 'form': this.formData });
+    };
+    SafetyPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-safety',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\safety\safety.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Safety Form</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <form #f="ngForm" (ngSubmit)="onSubmit(f)">\n    <ion-list>\n      <ion-item class="formField">\n        <ion-label color="primary" stacked >Company Man</ion-label>\n        <ion-input ngModel name="companyMan">\n        </ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Date</ion-label>\n        <ion-datetime\n        type="date"\n        name="date"\n        displayFormat="MM/DD/YYYY"\n        ngModel></ion-datetime>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Order Number</ion-label>\n        <ion-input\n        type="text"\n        name="orderNumber"\n        placeholder="Drilling rig number/dispatch "\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Department</ion-label>\n        <ion-select ngModel name="department">\n          <ion-option value="Department-1">Drilling</ion-option>\n          <ion-option value="Department-2">Production</ion-option>\n          <ion-option value="Department-3">Completion</ion-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Job Title</ion-label>\n        <ion-input\n        type="text"\n        name="jobTitle"\n        placeholder=""\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Job Detail</ion-label>\n        <ion-input\n        type="text"\n        name="details"\n        placeholder="ex. delivering trailers,supervision,etc"\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Hours Worked</ion-label>\n        <ion-input\n        type="number"\n        name="hours"\n        placeholder=""\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary"  class="test"stacked>Comments</ion-label>\n        <ion-textarea\n        type="text"\n        name="comments"\n        placeholder=""\n        ngModel></ion-textarea>\n      </ion-item>\n\n      <ion-item>\n        <button id="submitButton" ion-button full large>Submit</button>\n     </ion-item>\n   </ion-list>\n  </form>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\safety\safety.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+    ], SafetyPage);
+    return SafetyPage;
+}());
+
+//# sourceMappingURL=safety.js.map
+
+/***/ }),
+
+/***/ 104:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SafetyReviewPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ts_md5_dist_md5__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ts_md5_dist_md5__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_stem_api_stem_api__ = __webpack_require__(47);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var SafetyReviewPage = /** @class */ (function () {
+    function SafetyReviewPage(navCtrl, navParams, alertCtrl, viewCtrl, platform, geolocation, stemAPI) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.viewCtrl = viewCtrl;
+        this.platform = platform;
+        this.geolocation = geolocation;
+        this.stemAPI = stemAPI;
+        this.formDetails = [];
+        this.cancelled = "false";
+        this.submitData = [];
+        this.lonlat = [];
+        this.formDetails.push(this.navParams.get('form'));
+        console.log(this.formDetails);
+        /* Ensure the platform is ready */
+        this.platform.ready().then(function () {
+            /* Perform initial geolocation */
+            _this.geolocation.getCurrentPosition().then(function (resp) {
+                _this.lonlat = [resp.coords.latitude, resp.coords.longitude];
+                console.log(_this.lonlat);
+            }).catch(function (error) {
+                console.log('Error getting location', error);
+            });
+        });
+    }
+    SafetyReviewPage.prototype.canvasResize = function () {
+        var canvas = document.querySelector('canvas');
+        this.signaturePad.set('canvasWidth', canvas.offsetWidth);
+        this.signaturePad.set('canvasHeight', canvas.offsetHeight);
+    };
+    SafetyReviewPage.prototype.sigClear = function () {
+        this.signaturePad.clear();
+    };
+    SafetyReviewPage.prototype.sigSubmit = function () {
+        var _this = this;
+        var md5 = new __WEBPACK_IMPORTED_MODULE_3_ts_md5_dist_md5__["Md5"](); //md5 hash for custom guid
+        var time = new Date(); //timestamp
+        var alert = this.alertCtrl.create({
+            title: 'Confirm Submittion',
+            message: 'Are you sure you want to submit?',
+            buttons: [
+                {
+                    text: 'Yes',
+                    role: 'Yes',
+                    handler: function () {
+                        //console.log('Yes clicked');
+                        //saves as base64
+                        _this.signatureImage = _this.signaturePad.toDataURL();
+                        //console.log(this.signatureImage);
+                        /*md5 hashes form data with signature and timestamp for unique guid*/
+                        _this.md5Data = md5.appendStr(JSON.stringify(_this.formDetails)).appendStr(_this.signatureImage.toString()).appendStr(_this.lonlat.toString()).appendStr(time.getTime().toString()).end();
+                        /*Pushes all data to array for form submission*/
+                        _this.submitData.push({ 'main': _this.formDetails }, { 'sig': _this.signatureImage }, { 'gpsLoc': _this.lonlat.toString() }, { 'md5': _this.md5Data });
+                        // this.stemAPI.submitBOLData(this.submitData,MenuPage.token).then((result) =>{
+                        //    this.navCtrl.push(SuccessPage);//goes to success page
+                        //    }, (err) => {
+                        //      console.log(err);
+                        //    });
+                    }
+                },
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: function () {
+                        //console.log('No clicked');
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    SafetyReviewPage.prototype.ngAfterViewInit = function () {
+        //  console.log("Comes here!");
+        this.signaturePad.clear();
+        this.canvasResize();
+    };
+    //goes back to the form page
+    SafetyReviewPage.prototype.sigBack = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Are you sure you want to cancel?',
+            message: 'This will return you to the home page and form will not be submitted, Continue?',
+            buttons: [
+                {
+                    text: 'Yes',
+                    role: 'Yes',
+                    handler: function () {
+                        //console.log('Yes clicked');
+                        //pops to home page
+                        _this.navCtrl.popTo(_this.navCtrl.getByIndex(0));
+                        _this.cancelled = "true";
+                        _this.viewCtrl.dismiss(_this.cancelled);
+                    }
+                },
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: function () {
+                        //console.log('No clicked');
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad__["SignaturePad"]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad__["SignaturePad"])
+    ], SafetyReviewPage.prototype, "signaturePad", void 0);
+    SafetyReviewPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-safety-review',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\safety-review\safety-review.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Review</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-label stacked>Form Details</ion-label>\n          <ion-grid class="formDetails" *ngFor="let details of formDetails">\n             <button type="button" name="editForm" id=\'hidden-button\' (click)="editForm()">\n                <ion-row>\n                  <ion-col>Company Man:</ion-col>\n                  <ion-col>{{details.companyMan}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Date:</ion-col>\n                  <ion-col>{{details.date}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Order Number:</ion-col>\n                  <ion-col>{{details.orderNumber}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Department:</ion-col>\n                  <ion-col>{{details.department}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Job Title:</ion-col>\n                  <ion-col>{{details.jobTitle}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Details:</ion-col>\n                  <ion-col>{{details.details}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Hours Worked:</ion-col>\n                  <ion-col>{{details.hours}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Comments:</ion-col>\n                  <ion-col>{{details.comments}}</ion-col>\n                </ion-row>\n              </button>\n          </ion-grid>\n  <hr>\n  <ion-label color="primary" stacked>Signature</ion-label>\n  <div class="box">\n    <signature-pad\n      name="Signature"\n      id="signaturecanvas"></signature-pad>\n    <ion-grid>\n      <ion-row>\n        <ion-col col-12>\n          <button type="button" ion-button full color="light" (click)="sigClear()" large>Clear</button>\n        </ion-col>\n        <ion-col col-12>\n          <button ion-button full color="danger" (click)="sigBack()" large>Cancel</button>\n        </ion-col>\n        <ion-col col-12>\n          <button ion-button full color="secondary" (click)="sigSubmit()" large>Submit</button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\safety-review\safety-review.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_5__providers_stem_api_stem_api__["a" /* StemApiProvider */]])
+    ], SafetyReviewPage);
+    return SafetyReviewPage;
+}());
+
+//# sourceMappingURL=safety-review.js.map
+
+/***/ }),
+
+/***/ 116:
+/***/ (function(module, exports) {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 116;
+
+/***/ }),
+
+/***/ 158:
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"../pages/menu/menu.module": [
+		286,
+		2
+	],
+	"../pages/safety-review/safety-review.module": [
+		287,
+		1
+	],
+	"../pages/safety/safety.module": [
+		288,
+		0
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = 158;
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ 203:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_stem_api_stem_api__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__menu_menu__ = __webpack_require__(102);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var LoginPage = /** @class */ (function () {
+    function LoginPage(navCtrl, navParams, stemAPI, loadingCtrl, alertCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.stemAPI = stemAPI;
+        this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
+        this.res = {};
+        this.authToken = { "AuthToken": "" };
+    }
+    LoginPage.prototype.onSubmit = function (form) {
+        var _this = this;
+        var loading = this.loadingCtrl.create({
+            content: 'Signing in...'
+        });
+        loading.present();
+        //console.log(form.value);
+        // API POST authentication
+        this.stemAPI.validateUser(form.value).then(function (result) {
+            //clears values of the form after data is saved to array
+            form.reset();
+            //converts result to array
+            _this.res = JSON.parse(result.toString());
+            //console.log(this.res);
+            //sets authtoken to local storage
+            if (_this.res.token != "") {
+                localStorage.setItem('authToken', _this.res.token);
+            }
+            //console.log(localStorage);
+            if (_this.res.status == true) {
+                setTimeout(function () {
+                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__menu_menu__["a" /* MenuPage */]);
+                    loading.dismiss();
+                }, 1000);
+            }
+            else {
+                loading.dismiss();
+                var alert_1 = _this.alertCtrl.create({
+                    title: _this.res.msg,
+                    buttons: ['Dismiss']
+                });
+                alert_1.present();
+            }
+            //console.log(result.toString());
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    LoginPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      ASI\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<!-- ion-content is similar to the body of the page -->\n<ion-content padding class="background">\n\n<form #f="ngForm" (ngSubmit)="onSubmit(f)">\n  <ion-list>\n    <ion-item class="bg-form">\n      <ion-label color="primary" stacked style="font-size:20px;color:black;">Username</ion-label>\n      <ion-input style="padding-top:10px;font-size:18px;"\n      type="text"\n      name="userName"\n      placeholder="Username"\n      ngModel\n      required></ion-input>\n    </ion-item>\n    <ion-item  class="bg-form">\n      <ion-label color="primary" stacked style="font-size:20px;color:black;">Password</ion-label>\n      <ion-input style="padding-top:10px;font-size:18px;"\n      type="password"\n      name="passWord"\n      placeholder="Password"\n      ngModel\n      required></ion-input>\n    </ion-item>\n    <button\n    id="loginButton"\n    ion-button\n    type="submit"\n    block\n    large\n    [disabled]="!f.valid">Login</button>\n  </ion-list>\n</form>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\login\login.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_stem_api_stem_api__["a" /* StemApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    ], LoginPage);
+    return LoginPage;
+}());
+
+//# sourceMappingURL=login.js.map
+
+/***/ }),
+
+/***/ 204:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(225);
+
+
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 225:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular2_signaturepad__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular2_signaturepad___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_angular2_signaturepad__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_geolocation__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_device__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_app_version__ = __webpack_require__(284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_menu_menu__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_safety_safety__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_safety_review_safety_review__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_stem_api_stem_api__ = __webpack_require__(47);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var AppModule = /** @class */ (function () {
+    function AppModule() {
+    }
+    AppModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_11__pages_login_login__["a" /* LoginPage */],
+                __WEBPACK_IMPORTED_MODULE_12__pages_menu_menu__["a" /* MenuPage */],
+                __WEBPACK_IMPORTED_MODULE_13__pages_safety_safety__["a" /* SafetyPage */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_safety_review_safety_review__["a" /* SafetyReviewPage */]
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["b" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_6_angular2_signaturepad__["SignaturePadModule"],
+                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* MyApp */], {}, {
+                    links: [
+                        { loadChildren: '../pages/menu/menu.module#MenuPageModule', name: 'MenuPage', segment: 'menu', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/safety-review/safety-review.module#SafetyReviewPageModule', name: 'SafetyReviewPage', segment: 'safety-review', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/safety/safety.module#SafetyPageModule', name: 'SafetyPage', segment: 'safety', priority: 'low', defaultHistory: [] }
+                    ]
+                })
+            ],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
+            entryComponents: [
+                __WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_11__pages_login_login__["a" /* LoginPage */],
+                __WEBPACK_IMPORTED_MODULE_12__pages_menu_menu__["a" /* MenuPage */],
+                __WEBPACK_IMPORTED_MODULE_13__pages_safety_safety__["a" /* SafetyPage */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_safety_review_safety_review__["a" /* SafetyReviewPage */]
+            ],
+            providers: [
+                __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
+                __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
+                __WEBPACK_IMPORTED_MODULE_7__ionic_native_geolocation__["a" /* Geolocation */],
+                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
+                __WEBPACK_IMPORTED_MODULE_15__providers_stem_api_stem_api__["a" /* StemApiProvider */],
+                __WEBPACK_IMPORTED_MODULE_8__ionic_native_device__["a" /* Device */],
+                __WEBPACK_IMPORTED_MODULE_9__ionic_native_app_version__["a" /* AppVersion */]
+            ]
+        })
+    ], AppModule);
+    return AppModule;
+}());
+
+//# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ 285:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(203);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var MyApp = /** @class */ (function () {
+    function MyApp(platform, statusBar, splashScreen) {
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_login_login__["a" /* LoginPage */];
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            statusBar.styleDefault();
+            splashScreen.hide();
+        });
+    }
+    MyApp = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\app\app.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    ], MyApp);
+    return MyApp;
+}());
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 47:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StemApiProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var StemApiProvider = /** @class */ (function () {
+    function StemApiProvider(http) {
+        this.http = http;
+        //api urls will change according to which build is being tested
+        this.apiloginUrl = 'http://10.0.0.21/api.php?action=Newreaplogin';
+        this.apisubmitbolUrl = 'http://10.0.0.21/api.php?action=submitASISaftey';
+        this.apiGetUrl = 'http://10.0.0.21/api.php?action=GetASIData';
+        //console.log('Hello RestProvider Provider');
+    }
+    //POST login info
+    StemApiProvider.prototype.validateUser = function (data) {
+        var _this = this;
+        //console.log(data.userName,data.passWord)
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiloginUrl, data, { responseType: 'text' })
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    //POST form submitBOL
+    StemApiProvider.prototype.submitBOLData = function (data, authToken) {
+        var _this = this;
+        //console.log(data);
+        var httpOptions = {
+            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({
+                'Accept': 'application/json, text/plain',
+                'Content-Type': 'application/json',
+                'Authorization': authToken
+            })
+        };
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apisubmitbolUrl, JSON.stringify(data), httpOptions)
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    //GET BOLdata details
+    StemApiProvider.prototype.getData = function (authToken) {
+        var _this = this;
+        var httpOptions = {
+            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({
+                'Accept': 'application/json, text/plain',
+                'Content-Type': 'application/json',
+                'Authorization': authToken
+            })
+        };
+        //console.log(authToken);
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.apiGetUrl, httpOptions)
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    StemApiProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
+    ], StemApiProvider);
+    return StemApiProvider;
+    var _a;
+}());
+
+//# sourceMappingURL=stem-api.js.map
+
+/***/ })
+
+},[204]);
+//# sourceMappingURL=main.js.map

@@ -1,0 +1,139 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
+import { Subscription } from 'rxjs/Subscription';
+import { LoginPage } from '../pages/login/login';
+import { StemApiProvider } from '../providers/stem-api/stem-api';
+import { Storage } from '@ionic/storage';
+import { Network } from '@ionic-native/network';
+@Injectable()
+export class ReapService {
+    //data exported and saved into service values
+    public getData:any;
+    public getLocations:any[]=[];
+    public equipmentType:any[]=[];
+    public getEquipment:any[]=[];
+    public getPersonnel:any[]=[];
+  /********************************************/
+    public misc:any[] = [];
+    public equipment:any[] = [];
+    public labor:any[] = [];
+    public photo:any[] = [];
+    public safetyForm:any[] = [];
+    public completeForm:any[] = [];
+    public token:any;
+    public networkType:any;
+    public online:any = true;
+    connected: Subscription;
+    disconnected: Subscription;
+    getAndPost: Subscription;
+    checkConnection: Subscription;
+    constructor(public network: Network,private stemAPI: StemApiProvider,public storage: Storage){
+    //May have to unsubscribe from Observable
+    this.checkConnection = Observable.interval(250 * 60).subscribe(x => {
+      console.log('here every 15 seconds');
+          this.connected;
+          this.disconnected;
+          this.networkType = this.network.type;
+          console.log(this.networkType)
+          this.connected = this.network.onConnect().subscribe(data =>{
+               //console.log(data)
+               console.log('online');
+               this.online = data.type;
+             }, error => console.error(error));
+
+          this.network.onDisconnect().subscribe(data =>{
+               //console.log(data)
+                this.online = data.type;
+               console.log('offline');
+             },);
+            }, error => console.error(error));
+
+        this.getAndPost = Observable.interval(5000 * 60).subscribe(x => {
+              this.grabAPIData(this.token);
+              console.log('here every 5 minutes');
+            }, error => console.error(error));
+          }
+
+    grabAPIData(token){
+      console.log('GET request happened');
+      this.token = token;
+      console.log(this.token);
+      LoginPage.initialLogin = false;//changes login variable to false after user logs in
+      //console.log('this is:',LoginPage.initialLogin);
+        //imported data from API
+        this.stemAPI.getData(this.token).then((result) =>{
+        this.getData = (JSON.stringify(result));
+        this.getData = JSON.parse(this.getData);
+        console.log(this.getData);
+
+        this.getLocations = this.getData['Locations'];
+        this.storage.set('Locations',this.getLocations);
+
+        this.equipmentType = this.getData['EquipmentType'];
+        this.storage.set('EquipmentType',this.equipmentType);
+
+        this.getEquipment = this.getData['Equipment'];
+        this.storage.set('Equipment',this.getEquipment);
+
+        this.getPersonnel = this.getData['Personnel'];
+        this.storage.set('Personnel',this.getPersonnel);
+        //console.log(this.getPersonnel);
+        //console.log(this.getEquipment);
+        }, (err) => {
+          console.log(err);
+        });
+    }
+      getLocalStorage(){
+        console.log('grabbed local storage');
+
+        this.storage.get('authToken').then((data)=>{
+          this.token=data;
+        });
+
+        this.storage.get('Locations').then((data)=>{
+        this.getLocations = data;
+        });
+
+        this.storage.get('EquipmentType').then((data)=>{
+        this.equipmentType = data;
+        });
+
+        this.storage.get('Equipment').then((data)=>{
+        this.getEquipment = data;
+        });
+
+        this.storage.get('Personnel').then((data)=>{
+        this.getPersonnel = data;
+        });
+
+
+      }
+
+    //creates and pushes mileage array
+    totalMisc(data){
+      this.misc.push(data);
+      //console.log(this.mileage);
+    }
+    //creates and pushes labor array
+    totalLabor(data){
+      this.labor.push(data);
+      //console.log(this.labor);
+    }
+    //creates and pushes equipment array
+    totalEquipment(data){
+      this.equipment.push(data);
+      //console.log(this.equipment);
+    }
+    totalPhotos(data){
+      this.photo.push(data);
+      //console.log(this.photo);
+    }
+
+    removeConnections(){
+      this.checkConnection.unsubscribe();
+      this.getAndPost.unsubscribe();
+      this.connected.unsubscribe();
+      this.disconnected.unsubscribe();
+    }
+}

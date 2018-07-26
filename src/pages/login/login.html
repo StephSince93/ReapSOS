@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      ASSI
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<!-- ion-content is similar to the body of the page -->
+<ion-content padding class="background">
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <ion-list>
+    <ion-item class="bg-form">
+      <ion-label color="primary" stacked style="font-size:20px;color:black;">Username</ion-label>
+      <ion-input style="padding-top:10px;font-size:18px;"
+      type="text"
+      name="userName"
+      placeholder="Username"
+      ngModel
+      required></ion-input>
+    </ion-item>
+    <ion-item  class="bg-form">
+      <ion-label color="primary" stacked style="font-size:20px;color:black;">Password</ion-label>
+      <ion-input style="padding-top:10px;font-size:18px;"
+      type="password"
+      name="passWord"
+      placeholder="Password"
+      ngModel
+      required></ion-input>
+    </ion-item>
+    <button
+    id="loginButton"
+    ion-button
+    type="submit"
+    block
+    large
+    [disabled]="!f.valid">Login</button>
+  </ion-list>
+</form>
+
+</ion-content>

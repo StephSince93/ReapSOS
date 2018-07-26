@@ -1,0 +1,62 @@
+{
+  "_from": "ionic-select-searchable",
+  "_id": "ionic-select-searchable@2.5.1",
+  "_inBundle": false,
+  "_integrity": "sha512-z+diihL6ZVkOCcXXKlKolGYmDhYX54w9xrrsFKYDHRRpjn5MGW7jVqkq0JWtk82ihQfnSV1RL3r0KA0NTPFkYw==",
+  "_location": "/ionic-select-searchable",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ionic-select-searchable",
+    "name": "ionic-select-searchable",
+    "escapedName": "ionic-select-searchable",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ionic-select-searchable/-/ionic-select-searchable-2.5.1.tgz",
+  "_shasum": "951c45eaf18dd7d76d91c453fd6e6b138a1614e2",
+  "_spec": "ionic-select-searchable",
+  "_where": "C:\\Users\\Stem Dev\\Desktop\\ASI\\ASI",
+  "author": {
+    "name": "Evgenii Koriakin",
+    "url": "https://github.com/eakoriakin"
+  },
+  "bugs": {
+    "url": "https://github.com/eakoriakin/ionic-select-searchable/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "An Ionic component similar to ion-select, that allows to search items, including async search and infinite scrolling.",
+  "homepage": "https://github.com/eakoriakin/ionic-select-searchable#readme",
+  "keywords": [
+    "ionic",
+    "ionic 2",
+    "ion-select",
+    "search",
+    "searchable",
+    "searchbar",
+    "select"
+  ],
+  "main": "ionic-select-searchable.umd.js",
+  "module": "ionic-select-searchable.js",
+  "name": "ionic-select-searchable",
+  "peerDependencies": {
+    "@angular/core": ">=4.1.3",
+    "ionic-angular": ">=3.6.0",
+    "rxjs": ">=5.4.0",
+    "zone.js": ">=0.8.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eakoriakin/ionic-select-searchable.git"
+  },
+  "title": "Ionic Select with Searchbar",
+  "typings": "ionic-select-searchable.d.ts",
+  "version": "2.5.1"
+}

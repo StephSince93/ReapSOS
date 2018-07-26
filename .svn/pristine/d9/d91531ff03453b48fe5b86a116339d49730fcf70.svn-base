@@ -1,0 +1,65 @@
+// http://ionicframework.com/docs/theming/
+ion-title {
+    color: reapHeader;
+    font-size: 9px;
+    font-family: sans-serif;
+    }
+ion-label.label-md[stacked]{
+  height:50px;
+  font-size:1.2em;
+  font-weight:bold;
+  color:blue;
+}
+.select-searchable-md .select-searchable-label{
+  height:50px;
+  font-size:1.2em;
+  font-weight: bold;
+  color:blue;
+}.select-searchable-md .select-searchable-value{
+  padding:0;
+  margin-right: 90px;
+  margin-top: 50px;
+}.select-searchable-value-item{
+  overflow:inherit;
+  font-size: 10.5px;
+  font-weight: bold;
+}
+ion-input{
+  font-size: 1.5em;
+  text-align: center;
+}
+#submitButton{
+  color: white;
+  background-color: $toolbar-background;
+  width:100%;
+  margin:50px 0 0 0;
+  text-align: center;
+}.item-label-stacked ion-datetime, .item-label-floating ion-datetime{
+  width:100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}.item-label-stacked .text-input-md, .item-label-floating .text-input-md{
+  width:100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}.item-label-stacked .select-md, .item-label-floating .select-md{
+  width:100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.

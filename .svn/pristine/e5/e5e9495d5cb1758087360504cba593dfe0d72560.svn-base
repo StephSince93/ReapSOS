@@ -1,0 +1,48 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-app-version": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.stemsoftware.ASSI"
+    }
+  },
+  "dependent_plugins": {}
+}

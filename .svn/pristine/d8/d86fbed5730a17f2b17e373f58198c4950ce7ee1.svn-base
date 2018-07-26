@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Safety Form</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item class="formField">
+        <ion-label color="primary" stacked >Company Man</ion-label>
+        <ion-input ngModel name="companyMan">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Date</ion-label>
+        <ion-datetime
+        type="date"
+        name="date"
+        displayFormat="MM/DD/YYYY"
+        ngModel></ion-datetime>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Order Number</ion-label>
+        <ion-input
+        type="text"
+        name="orderNumber"
+        placeholder="Drilling rig number/dispatch "
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Department</ion-label>
+        <ion-select ngModel name="department">
+          <ion-option value="Department-1">Drilling</ion-option>
+          <ion-option value="Department-2">Production</ion-option>
+          <ion-option value="Department-3">Completion</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Job Title</ion-label>
+        <ion-input
+        type="text"
+        name="jobTitle"
+        placeholder=""
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Job Detail</ion-label>
+        <ion-input
+        type="text"
+        name="details"
+        placeholder="ex. delivering trailers,supervision,etc"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Hours Worked</ion-label>
+        <ion-input
+        type="number"
+        name="hours"
+        placeholder=""
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary"  class="test"stacked>Comments</ion-label>
+        <ion-textarea
+        type="text"
+        name="comments"
+        placeholder=""
+        ngModel></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <button id="submitButton" ion-button full large>Submit</button>
+     </ion-item>
+   </ion-list>
+  </form>
+</ion-content>

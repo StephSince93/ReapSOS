@@ -1,0 +1,34 @@
+import { AfterViewInit, OnInit } from '@angular/core';
+import { Content, InfiniteScroll, NavParams, Platform, Searchbar, ViewController } from 'ionic-angular';
+import { SelectSearchableComponent } from './select-searchable.component';
+export declare class SelectSearchablePageComponent implements OnInit, AfterViewInit {
+    private navParams;
+    private viewController;
+    private platform;
+    private _cssClass;
+    private readonly _canResetCssClass;
+    private readonly _isMultipleCssClass;
+    private readonly _isSearchingCssClass;
+    private _isIos;
+    private _isMD;
+    private _filteredGroups;
+    selectedItems: any[];
+    infiniteScroll: InfiniteScroll;
+    selectComponent: SelectSearchableComponent;
+    searchbarComponent: Searchbar;
+    _content: Content;
+    constructor(navParams: NavParams, viewController: ViewController, platform: Platform);
+    ngOnInit(): void;
+    ngAfterViewInit(): void;
+    private _setItemsToConfirm(items);
+    private _isItemDisabled(item);
+    private _isItemSelected(item);
+    private _deleteSelectedItem(item);
+    private _addSelectedItem(item);
+    private _filterItems();
+    private _getMoreItems(infiniteScroll);
+    select(item: any): void;
+    ok(): void;
+    close(): void;
+    reset(): void;
+}

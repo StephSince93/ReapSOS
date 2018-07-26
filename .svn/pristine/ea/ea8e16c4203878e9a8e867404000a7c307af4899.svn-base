@@ -1,0 +1,71 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { HttpClientModule } from '@angular/common/http';
+import { SignaturePadModule } from 'angular2-signaturepad';
+import { Geolocation } from '@ionic-native/geolocation';
+import { Device } from '@ionic-native/device';
+import { AppVersion } from '@ionic-native/app-version';
+
+import { MyApp } from './app.component';
+import { LoginPage } from '../pages/login/login';
+import { MenuPage } from '../pages/menu/menu';
+import { SafetyPage } from '../pages/safety/safety';
+import { MileagePage } from '../pages/mileage/mileage';
+import { EquipmentPage } from '../pages/equipment/equipment';
+import { LaborPage } from '../pages/labor/labor';
+import { SafetyReviewPage } from '../pages/safety-review/safety-review';
+import { SubMenuPage } from '../pages/sub-menu/sub-menu';
+import { SuccessPage } from '../pages/success/success';
+import { SupportPage } from '../pages/support/support';
+import { ReapService } from '../services/reap-service';
+import { StemApiProvider } from '../providers/stem-api/stem-api';
+
+@NgModule({
+  declarations: [
+    MyApp,
+    LoginPage,
+    MenuPage,
+    SafetyPage,
+    MileagePage,
+    EquipmentPage,
+    LaborPage,
+    SubMenuPage,
+    SafetyReviewPage,
+    SuccessPage,
+    SupportPage
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    SignaturePadModule,
+    IonicModule.forRoot(MyApp)
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    LoginPage,
+    MenuPage,
+    SafetyPage,
+    MileagePage,
+    EquipmentPage,
+    LaborPage,
+    SubMenuPage,
+    SafetyReviewPage,
+    SuccessPage,
+    SupportPage
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    Geolocation,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    StemApiProvider,
+    ReapService,
+    Device,
+    AppVersion
+  ]
+})
+export class AppModule {}

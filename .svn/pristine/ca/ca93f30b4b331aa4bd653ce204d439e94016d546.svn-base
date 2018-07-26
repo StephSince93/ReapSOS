@@ -1,0 +1,50 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NgForm,FormGroup, FormControl, Validator, Validators } from '@angular/forms';
+import { SelectSearchableComponent } from 'ionic-select-searchable';
+
+import { SubMenuPage } from '../sub-menu/sub-menu';
+import { ReapService } from '../../services/reap-service';
+import { SafetyReviewPage } from '../safety-review/safety-review';
+
+class Location {
+  public ID: number;
+  public Location: string;
+}
+@IonicPage()
+@Component({
+  selector: 'page-safety',
+  templateUrl: 'safety.html',
+})
+
+export class SafetyPage {
+  private formData:any[];
+  private locationsArray: Location[];
+  location: Location;
+  private afeArray:any[] = [];
+  currentDate:any = new Date().toISOString();
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public reap: ReapService) {
+        this.locationsArray = reap.getLocations;
+        this.afeArray = this.reap.getAFE;
+        //console.log(this.locationsArray);
+  }
+
+  ionViewDidLoad() {
+    //console.log('ionViewDidLoad SafetyPage');
+  }
+  onSubmit(Form: NgForm){
+    this.formData = Form.value;
+    console.log(this.formData);
+    //this.reap.safetyForm = this.formData;
+    //this.navCtrl.push(SafetyReviewPage,{'form':this.formData});
+    //this.navCtrl.push(SubMenuPage);
+  }
+  locationChange(event: { component: SelectSearchableComponent, value: any }) {
+        //console.log('value:', event.value);
+    }
+    updateDateFields(){
+      console.log('updating required fields')
+    }
+}

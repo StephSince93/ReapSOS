@@ -1,0 +1,37 @@
+import { Injectable } from '@angular/core';
+
+import { StemApiProvider } from '../providers/stem-api/stem-api';
+@Injectable()
+export class ReapService {
+    public mileage:any[] = [];
+    public equipment:any[] = [];
+    public labor:any[] = [];
+    public safetyForm:any[] = [];
+    public completeForm:any[] = [];
+    //private count:number;
+    constructor(stem: StemApiProvider){}
+    //creates and pushes mileage array
+    totalMileage(data){
+      this.mileage.push(data);
+      console.log(this.mileage);
+    }
+    //creates and pushes labor array
+    totalLabor(data){
+      this.labor.push(data);
+      console.log(this.labor);
+    }
+    //creates and pushes equipment array
+    totalEquipment(data){
+      this.equipment.push(data);
+      console.log(this.equipment);
+    }
+    //submits to API, will also store as local data for offline syncing
+    submitForm(data){
+      this.completeForm.push({'main':data},{'mileage':this.mileage},{'labor':this.labor},{'equipment':this.equipment})
+      console.log(this.completeForm);
+      /* Submits to API
+      *
+      */
+      return;
+    }
+}

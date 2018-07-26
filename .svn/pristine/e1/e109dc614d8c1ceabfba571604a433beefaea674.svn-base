@@ -1,0 +1,57 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Equipment</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Equipment Type</ion-label>
+        <ion-select
+          [(ngModel)]="Type"
+          (ngModelChange)="typeSelected()"
+          name="Type"
+          required>
+          <ion-option value={{equipment.Type}} *ngFor="let equipment of equipmentType" selected="equipment.Type == '1'">{{equipment.Type}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="formField" >
+        <!-- <ion-label color="primary" stacked>Equipment</ion-label> -->
+      <select-searchable
+       [(ngModel)]="Equipment"
+       title="Equipment"
+       itemValueField=ID
+       itemTextField=Unit
+       name="Equipment"
+       [items]="equipmentArray"
+       [canSearch]="true"
+       [canReset]="true"
+       (onChange)="equipmentChange($event)"
+       text-wrap>
+        <ng-template selectSearchableLabelTemplate>
+        Equipment
+        </ng-template>
+     </select-searchable>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Number of Days</ion-label>
+        <ion-input
+        ngModel
+        type="number"
+        name="days">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <button id="submitButton" ion-button full large>Submit</button>
+     </ion-item>
+   </ion-list>
+  </form>
+</ion-content>

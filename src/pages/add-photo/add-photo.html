@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Take Photo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+
+  <ion-card-header>
+    <button class="photo" (click)="takePhoto()"  ion-button full color="primary">Take Photo</button>
+    <!-- <button class="photo" (click)="getPhoto()"  ion-button full color="secondary">Select Photo From Device</button> -->
+    <!-- <button class="photo" (click)="cropPhoto()"  ion-button full color="warning">Crop Photo</button> -->
+
+  </ion-card-header>
+
+  <ion-card-content>
+        <img src="{{imageURI}}" *ngIf="imageURI" alt="Upload Error"/>
+  </ion-card-content>
+
+</ion-card>
+        <button class="submit" (click)="uploadPhoto()"  [disabled]="!imageURI" ion-button full >Submit</button>
+</ion-content>

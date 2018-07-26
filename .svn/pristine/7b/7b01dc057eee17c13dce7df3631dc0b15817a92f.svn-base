@@ -1,0 +1,51 @@
+{
+  "_from": "@ionic-native/camera",
+  "_id": "@ionic-native/camera@4.8.0",
+  "_inBundle": false,
+  "_integrity": "sha512-AU8d4YVOAkC/t6eWFKdgaa7MRyoIOfhS1Dho5W28pCyhEt6QuyZDAK0FL2SuLP6OsAhkn/tqF5MH2m51yvMNCw==",
+  "_location": "/@ionic-native/camera",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ionic-native/camera",
+    "name": "@ionic-native/camera",
+    "escapedName": "@ionic-native%2fcamera",
+    "scope": "@ionic-native",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/camera/-/camera-4.8.0.tgz",
+  "_shasum": "e7a34c3d03d04b9ebbeb3348db7522a024506fd2",
+  "_spec": "@ionic-native/camera",
+  "_where": "C:\\Users\\Stem Dev\\Desktop\\ASI\\ASI",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/camera",
+  "peerDependencies": {
+    "@ionic-native/core": "^4.2.0",
+    "@angular/core": "*",
+    "rxjs": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "4.8.0"
+}

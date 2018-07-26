@@ -1,0 +1,27 @@
+page-project-review {
+  ion-title {
+    color: grey;
+    text-align:center;
+    font-size: 10px;
+  }
+  ion-label{
+    font-size: 2em;
+    text-align: center;
+    font-weight: bold;
+  }
+  h2{
+    text-align:center;
+  }
+  .formDetails{
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    border-width: thin;
+    width: 100%;
+    font-size: 1.5em;
+
+  }
+  ion-row{
+    border-bottom:solid 1px;
+  }
+}

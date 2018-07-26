@@ -1,0 +1,23 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NgForm } from '@angular/forms';
+import { SafetyReviewPage } from '../safety-review/safety-review';
+@IonicPage()
+@Component({
+  selector: 'page-safety',
+  templateUrl: 'safety.html',
+})
+export class SafetyPage {
+  private formData:any[];
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad SafetyPage');
+  }
+  onSubmit(Form: NgForm){
+    this.formData = Form.value;
+    console.log(this.formData);
+    this.navCtrl.push(SafetyReviewPage,{'form':this.formData});
+  }
+}

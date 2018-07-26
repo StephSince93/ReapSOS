@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Review</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-label>Safety Summary</ion-label>
+          <ion-grid class="formDetails" *ngFor="let details of formDetails">
+                <ion-row>
+                  <ion-col>Date:</ion-col>
+                  <ion-col>{{details.currentDate}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Location:</ion-col>
+                  <ion-col>{{details.Location?.Location}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Company Man:</ion-col>
+                  <ion-col>{{details.companyMan}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Phone Number:</ion-col>
+                  <ion-col>{{details.phoneNumber}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>AFE/Order Number:</ion-col>
+                  <ion-col>{{details.orderNumber}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Rig Name & Number:</ion-col>
+                  <ion-col>{{details.rigName}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Start Date:</ion-col>
+                  <ion-col>{{details.startDate}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>End Date:</ion-col>
+                  <ion-col>{{details.endDate}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Quantity of Hours:</ion-col>
+                  <ion-col>{{details.hours}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Department:</ion-col>
+                  <ion-col>{{details.department}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Division:</ion-col>
+                  <ion-col>{{details.division}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Job Description:</ion-col>
+                  <ion-col>{{details.description}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Number of trips:</ion-col>
+                  <ion-col>{{details.trips}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Number of miles:</ion-col>
+                  <ion-col>{{details.miles}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Representative to Sign:</ion-col>
+                  <ion-col>{{details.representative}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Comments:</ion-col>
+                  <ion-col>{{details.comments}}</ion-col>
+                </ion-row>
+              </ion-grid>
+               <ion-grid>
+                 <ion-row>
+                  <ion-col>
+                     <button type="button" ion-button full color="light" name="editForm" (click)="editForm()">Edit Main Form</button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+      <br>
+      <br>
+      <hr>
+  <ion-label>Misc. Summary</ion-label>
+  <hr>
+            <ion-grid class="formDetails" *ngFor="let misc of miscDetails;index as i;">
+                <ion-row>
+                  <ion-col col-6>Category:</ion-col>
+                  <ion-col col-3>{{misc.category}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-6>Description:</ion-col>
+                  <ion-col col-3>{{misc.description}}</ion-col>
+                  <ion-col col-3> <button (tap)="removeMileage(i)"ion-button><ion-icon class="trashButton"name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Quantity:</ion-col>
+                  <ion-col>{{misc.quantity}}</ion-col>
+                </ion-row>
+            </ion-grid>
+
+  <ion-label>Labor Summary</ion-label>
+  <hr>
+              <ion-grid class="formDetails" *ngFor="let labor of laborDetails;index as i;">
+                  <ion-row>
+                    <ion-col col-6>Personnel:</ion-col>
+                      <ion-col col-3>{{labor.Personnel?.FullName}}</ion-col>
+                      <ion-col col-3> <button (tap)="removeLabor(i)"ion-button><ion-icon class="trashButton"name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col>Hours:</ion-col>
+                      <ion-col>{{labor.hours}}</ion-col>
+                    </ion-row>
+              </ion-grid>
+
+  <ion-label>Equipment Summary</ion-label>
+  <hr>
+              <ion-grid class="formDetails" *ngFor="let equipment of equipmentDetails;index as i;">
+                  <ion-row>
+                      <ion-col>Equipment:</ion-col>
+                      <ion-col>{{equipment.Type}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col col-6>Unit:</ion-col>
+                      <ion-col col-3>{{equipment.Equipment?.Unit}}</ion-col>
+                      <ion-col col-3> <button (tap)="removeEquipment(i)"ion-button><ion-icon class="trashButton"name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>Number of Days:</ion-col>
+                      <ion-col>{{equipment.days}}</ion-col>
+                  </ion-row>
+              </ion-grid>
+
+  <ion-label>Photos</ion-label>
+  <hr>
+  <ion-grid class="formDetails" *ngFor="let photo of photoDetails;index as i;">
+                <ion-row>
+                    <ion-col col-9><img src="{{photo}}" alt="Upload Error"/></ion-col>
+                    <ion-col col-3><button (tap)="removePhoto(i)"ion-button><ion-icon class="trashButton"name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                </ion-row>
+              </ion-grid>
+  <hr>
+  <ion-label color="primary" stacked>Signature</ion-label>
+  <div class="box">
+    <signature-pad
+      name="Signature"
+      id="signaturecanvas"></signature-pad>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button type="button" ion-button full color="light" (click)="sigClear()" large>Clear</button>
+        </ion-col>
+        <ion-col col-12>
+          <button ion-button full color="danger" (click)="sigBack()" large>Cancel</button>
+        </ion-col>
+        <ion-col col-12>
+          <button ion-button full color="secondary" [disabled]='submitClicked===true'(click)="sigSubmit()" large>Submit</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

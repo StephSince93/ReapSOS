@@ -1,0 +1,8 @@
+page-equipment {
+  .select-searchable-value-item{
+    overflow:inherit;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 35px;
+  }
+}

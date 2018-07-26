@@ -1,0 +1,21 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { ReapService } from '../../services/reap-service';
+@IonicPage()
+@Component({
+  selector: 'page-success',
+  templateUrl: 'success.html',
+})
+export class SuccessPage {
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public reap: ReapService) {
+  }
+    backToMenu(){
+      this.reap.equipment = [];
+      this.reap.labor = [];
+      this.navCtrl.popTo(this.navCtrl.getByIndex(1));//pops to menu page
+    }
+}

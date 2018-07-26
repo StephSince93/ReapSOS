@@ -1,0 +1,114 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New Project</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Project Name</ion-label>
+        <ion-input
+          #projectName
+          ngModel
+          name="projectName"
+          placeholder="New Project Name">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <!-- <ion-label color="primary" stacked >Location</ion-label> -->
+        <select-searchable
+        [(ngModel)]="location"
+        [items]="locationsArray"
+        title="Location"
+        itemValueField=ID
+        itemTextField=Location
+        name="Location"
+        [canSearch]="true"
+        [canReset]="true"
+        (onChange)="locationChange($event)"
+        text-wrap>
+        <ng-template selectSearchableLabelTemplate>
+              Location
+        </ng-template>
+      </select-searchable>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked >Company Man</ion-label>
+        <ion-input ngModel name="companyMan">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked >Company Man Phone Number</ion-label>
+        <ion-input
+        ngModel
+        type="text"
+        (keypress)="keyPress($event)"
+        name="phoneNumber"
+        minlength="7"
+        maxlength="10"
+        placeholder="Phone Number">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>AFE/Order Number</ion-label>
+        <ion-select
+          [(ngModel)]="orderNumber"
+          name="orderNumber"
+          placeholder="existing AFE numbers">
+          <ion-option value=newAFE>New AFE</ion-option>
+          <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == '1'">{{afe.Name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="orderNumber == 'newAFE'">
+        <ion-label color="primary" stacked>New AFE</ion-label>
+        <ion-input type="text" ngModel name="orderNumber" placeholder="Note: AFE will take up to 5 minutes to populate" text-wrap></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Rig Name & Number</ion-label>
+        <ion-input
+        type="text"
+        name="rigName"
+        placeholder="Rig Name"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Department</ion-label>
+        <ion-select ngModel name="department">
+          <ion-option value="Drilling">Drilling</ion-option>
+          <ion-option value="Production">Production</ion-option>
+          <ion-option value="Completion">Completion</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Division</ion-label>
+        <ion-select ngModel name="division">
+          <ion-option value="Safety Services">Safety Services</ion-option>
+          <ion-option value="Environmental Services">Environmental Services</ion-option>
+          <ion-option value="Rental Services">Pulling Unit Services</ion-option>
+          <ion-option value="Water Services">Water Services</ion-option>
+          <ion-option value="Flowback Equipment">Roustabout Services</ion-option>
+          <ion-option value="Sandblasting Division">Trucking Services</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <button [disabled]="!f.valid" type="submit" id="submitButton" ion-button full large>Submit</button>
+     </ion-item>
+   </ion-list>
+  </form>
+</ion-content>

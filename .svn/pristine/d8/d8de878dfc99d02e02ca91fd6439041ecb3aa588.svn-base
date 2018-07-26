@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Labor</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item class="formField">
+        <select-searchable
+         [(ngModel)]="Personnel"
+         title="Personnel"
+         itemValueField=ID
+         itemTextField=FullName
+         name="Personnel"
+         [items]="personnelArray"
+         [canSearch]="true"
+         [canReset]="true"
+         (onChange)="personnelChange($event)"
+         text-wrap>
+          <ng-template selectSearchableLabelTemplate>
+          Personnel
+          </ng-template>
+       </select-searchable>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" stacked>Hours</ion-label>
+        <ion-input
+        ngModel
+        type="number"
+        name="hours">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <button id="submitButton" ion-button full large>Submit</button>
+     </ion-item>
+   </ion-list>
+  </form>
+</ion-content>

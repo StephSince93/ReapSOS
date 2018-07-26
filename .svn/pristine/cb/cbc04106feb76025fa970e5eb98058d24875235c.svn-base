@@ -1,0 +1,20 @@
+page-add-photo {
+  ion-title {
+      color: reapHeader;
+      text-align:center;
+      font-size: 9px;
+      font-family: sans-serif;
+      }
+ion-list{
+  padding-top: 25px;
+}
+  .photo{
+    height:50px;
+    margin: 5px 0 5px 0;
+  }
+  .submit{
+    background-color: $toolbar-background;
+    height:50px;
+    margin: 5px 0 5px 0;
+  }
+}

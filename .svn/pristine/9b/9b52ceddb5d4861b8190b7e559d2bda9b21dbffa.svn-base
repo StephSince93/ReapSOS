@@ -1,0 +1,33 @@
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { SafetyPage } from '../safety/safety';
+import { StemApiProvider } from '../../providers/stem-api/stem-api';
+@IonicPage()
+@Component({
+  selector: 'page-menu',
+  templateUrl: 'menu.html',
+})
+export class MenuPage {
+  public importedData:any ;
+  static token:any;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public stemAPI: StemApiProvider) {
+    const data = localStorage.getItem('authToken');
+     MenuPage.token = data.toString();
+    //imported data from API
+//     this.stemAPI.getData(MenuPage.token).then((result) =>{
+//       this.importedData = (JSON.stringify(result));
+//       this.importedData = JSON.parse(this.importedData);
+//       console.log(this.importedData);
+//     }, (err) => {
+//     console.log(err);
+// });
+  }
+
+  toSaftey(){
+    this.navCtrl.push(SafetyPage);
+  }
+
+}

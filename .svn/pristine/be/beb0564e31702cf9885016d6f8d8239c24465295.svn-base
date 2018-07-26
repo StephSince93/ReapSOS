@@ -1,0 +1,1978 @@
+webpackJsonp([12],{
+
+/***/ 108:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddPhotoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_reap_service__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var AddPhotoPage = /** @class */ (function () {
+    function AddPhotoPage(navCtrl, toastCtrl, loadingCtrl, navParams, camera, reap) {
+        this.navCtrl = navCtrl;
+        this.toastCtrl = toastCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.navParams = navParams;
+        this.camera = camera;
+        this.reap = reap;
+    }
+    AddPhotoPage.prototype.takePhoto = function () {
+        var _this = this;
+        var options = {
+            quality: 70,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE,
+            saveToPhotoAlbum: true,
+            correctOrientation: true
+        };
+        this.camera.getPicture(options).then(function (imageData) {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64:
+            _this.imageURI = 'data:image/jpeg;base64,' + imageData;
+        }, function (err) {
+            // Handle error
+            console.log(err);
+            _this.presentToast(err);
+        });
+    };
+    // getPhoto(){
+    // const options: CameraOptions = {
+    //     quality: 70,
+    //     encodingType: this.camera.EncodingType.JPEG,
+    //     mediaType: this.camera.MediaType.PICTURE,
+    //     destinationType: this.camera.DestinationType.DATA_URL,
+    //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    //     saveToPhotoAlbum: false,
+    //     correctOrientation: true
+    //     }
+    //   this.camera.getPicture(options).then((imageData) => {
+    //     // imageData is either a base64 encoded string or a file URI
+    //     // If it's base64:
+    //   this.imageURI = 'data:image/jpeg;base64,' + imageData;
+    //         }, (err) => {
+    //           console.log(err);
+    //           this.presentToast(err);
+    //         });
+    //     }
+    // cropPhoto(){
+    //   const options: CameraOptions = {
+    //       quality: 70,
+    //       encodingType: this.camera.EncodingType.JPEG,
+    //       mediaType: this.camera.MediaType.PICTURE,
+    //       destinationType: this.camera.DestinationType.DATA_URL,
+    //       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    //       saveToPhotoAlbum: false,
+    //       allowEdit: true,
+    //       correctOrientation: true
+    //       }
+    //     this.camera.getPicture(options).then((imageData) => {
+    //        // imageData is either a base64 encoded string or a file URI
+    //        // If it's base64:
+    //       this.imageURI = 'data:image/jpeg;base64,' + imageData;
+    //           }, (err) => {
+    //             console.log(err);
+    //             this.presentToast(err);
+    //       });
+    //   }
+    AddPhotoPage.prototype.uploadPhoto = function () {
+        this.reap.totalPhotos(this.imageURI);
+        this.navCtrl.pop();
+        //   let loader = this.loadingCtrl.create({
+        //     content: "Uploading..."
+        //   });
+        //   loader.present();
+        //       //create file transfer object
+        //       const fileTransfer: FileTransferObject = this.transfer.create();
+        //
+        //   let options: FileUploadOptions = {
+        //     fileKey: 'uploaded_file',
+        //     fileName: 'upload.jpg',
+        //     httpMethod: 'POST',
+        //     chunkedMode: false,
+        //     mimeType: "image/jpeg",
+        //     params:{'uploaded_file': this.imageURI,ID:this.formID},
+        //     headers: {Authorization: "Authorization"}
+        //   }
+        //
+        // fileTransfer.upload(this.imageURI,'http://10.0.0.140/api.php?action=ReceiveDemoInvoicePics',options,true)
+        //   .then(data => {
+        //     //console.log(data.response);
+        //     //console.log(res+" Uploaded Successfully");
+        //     loader.dismiss();
+        //     this.presentToast("Image uploaded successfully");
+        //     this.navCtrl.popTo( this.navCtrl.getByIndex(1));
+        //   }, (err) => {
+        //     loader.dismiss();
+        //     this.presentToast(err);
+        //   });
+    };
+    AddPhotoPage.prototype.presentToast = function (msg) {
+        var toast = this.toastCtrl.create({
+            message: msg,
+            duration: 3000,
+            position: 'bottom',
+            dismissOnPageChange: false,
+            cssClass: 'customToast'
+        });
+        toast.onDidDismiss(function () {
+            //console.log('Dismissed toast');
+        });
+        toast.present();
+    };
+    AddPhotoPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-add-photo',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\add-photo\add-photo.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Take Photo</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-card>\n\n  <ion-card-header>\n    <button class="photo" (click)="takePhoto()"  ion-button full color="primary">Take Photo</button>\n    <!-- <button class="photo" (click)="getPhoto()"  ion-button full color="secondary">Select Photo From Device</button> -->\n    <!-- <button class="photo" (click)="cropPhoto()"  ion-button full color="warning">Crop Photo</button> -->\n\n  </ion-card-header>\n\n  <ion-card-content>\n        <img src="{{imageURI}}" *ngIf="imageURI" alt="Upload Error"/>\n  </ion-card-content>\n\n</ion-card>\n        <button class="submit" (click)="uploadPhoto()"  [disabled]="!imageURI" ion-button full >Submit</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\add-photo\add-photo.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ToastController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_3__services_reap_service__["a" /* ReapService */]])
+    ], AddPhotoPage);
+    return AddPhotoPage;
+}());
+
+//# sourceMappingURL=add-photo.js.map
+
+/***/ }),
+
+/***/ 109:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MenuPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__safety_safety__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__project_project__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_reap_service__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_stem_api_stem_api__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__support_support__ = __webpack_require__(118);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var MenuPage = /** @class */ (function () {
+    function MenuPage(navCtrl, navParams, stemAPI, reap, storage) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.stemAPI = stemAPI;
+        this.reap = reap;
+        this.storage = storage;
+        /* calls local storage once user hits menupage*/
+        this.reap.getLocalStorage();
+        if (__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */].initialLogin == true) {
+            //console.log('this is:',LoginPage.initialLogin);
+            this.storage.get('authToken').then(function (data) {
+                if (data != null) {
+                    //console.log('GET request happened');
+                    _this.reap.grabAPIData(data); //calls service to grab API data on initial login
+                }
+            });
+        }
+    }
+    MenuPage.prototype.toSaftey = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__safety_safety__["a" /* SafetyPage */]);
+    };
+    MenuPage.prototype.toProject = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__project_project__["a" /* ProjectPage */]);
+    };
+    MenuPage.prototype.toSupport = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__support_support__["a" /* SupportPage */]);
+    };
+    MenuPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-menu',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\menu\menu.html"*/'<ion-header>\n\n  <ion-navbar center hideBackButton="true">\n    <ion-title>TASK</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<!-- <ion-item>\n  <b>Bill of Lading</b>\n  <button ion-button block outline>\n\n</button>\n</ion-item> -->\n<ion-content>\n  <ion-item  no-lines>\n    <button  class="menuButton"ion-button large block (click)="toSaftey()" >\n      New Safety Form</button>\n  </ion-item>\n  <ion-item  no-lines>\n    <button  class="menuButton"ion-button large block (click)="toProject()" >\n      New Project </button>\n  </ion-item>\n  <ion-item  no-lines>\n    <button  class="menuButton"ion-button large block (click)="toSupport()" >\n      Support</button>\n  </ion-item>\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\menu\menu.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_7__providers_stem_api_stem_api__["a" /* StemApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_6__services_reap_service__["a" /* ReapService */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
+    ], MenuPage);
+    return MenuPage;
+}());
+
+//# sourceMappingURL=menu.js.map
+
+/***/ }),
+
+/***/ 110:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SafetyPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sub_menu_sub_menu__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_reap_service__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var Location = /** @class */ (function () {
+    function Location() {
+    }
+    return Location;
+}());
+var SafetyPage = /** @class */ (function () {
+    function SafetyPage(navCtrl, navParams, reap) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.reap = reap;
+        this.afeArray = [];
+        this.projectArray = [];
+        this.selectedArray = [];
+        this.projectSelected = false;
+        this.currentDate = new Date().toISOString();
+        this.projectArray = this.reap.getProject;
+        this.locationsArray = reap.getLocations;
+        this.afeArray = this.reap.getAFE;
+        //console.log(this.projectArray[0]['Rig_Name_And_Number']);
+    }
+    SafetyPage.prototype.ionViewDidLoad = function () {
+        //console.log('ionViewDidLoad SafetyPage');
+    };
+    SafetyPage.prototype.projectSelect = function (project, i) {
+        //console.log(i);
+        this.selectedArray = this.projectArray[i];
+        //console.log(this.selectedArray['Location']);
+        this.afeString = JSON.stringify(this.selectedArray['AFE_Or_Order_Number']);
+        //console.log(this.afeString)
+        this.projectSelected = true;
+    };
+    SafetyPage.prototype.keyPress = function (event) {
+        var pattern = /[0-9\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    SafetyPage.prototype.onSubmit = function (Form) {
+        this.reap.safetyForm = Form.value;
+        //console.log(this.reap.safetyForm);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__sub_menu_sub_menu__["a" /* SubMenuPage */]);
+    };
+    SafetyPage.prototype.locationChange = function (event) {
+        //console.log('value:', event.value);
+    };
+    SafetyPage.prototype.delete = function (chip) {
+        chip.control.touched = false;
+        chip.valueAccessor._text = "";
+        console.log(chip);
+    };
+    SafetyPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-safety',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\safety\safety.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Safety Form</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <form #f="ngForm" (ngSubmit)="onSubmit(f)">\n    <ion-list>\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Date</ion-label>\n        <ion-datetime\n        type="date"\n        name="currentDate"\n        pickerFormat="MM/DD/YYYY"\n        displayFormat="MM/DD/YYYY"\n        [(ngModel)]="currentDate"></ion-datetime>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Project</ion-label>\n        <ion-select\n          #projectName\n          ngModel\n          name="project"\n          placeholder="existing Project">\n          <ion-option (ionSelect)="projectSelect(project.ProjectName,i)" value={{project.ID}} *ngFor="let project of projectArray; let i = index" >{{project.ProjectName}}</ion-option>\n        </ion-select>\n      </ion-item>\n<!------------------------------------------------------------------------->\n\n<div *ngIf="projectSelected">\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>AFE/Order Number</ion-label>\n        <ion-select\n          [(ngModel)]="selectedArray[\'AFE_Or_Order_Number\']"\n          name="orderNumber">\n          <ion-option value="newAFE">New AFE</ion-option>\n          <ion-option value="{{afe.Name}}" *ngFor="let afe of afeArray; let i = index">{{afe.Name}}</ion-option>\n        </ion-select>\n      </ion-item>\n      <!-- When user types new AFE, but decides to click back\n            on a current AFE the value is not submitted -->\n      <ion-item *ngIf="selectedArray[\'AFE_Or_Order_Number\'] == \'newAFE\'">\n          <ion-label color="primary" stacked>New AFE</ion-label>\n          <ion-input type="text" ngModel name="orderNumber" placeholder="Note: New AFE number will take up to 5 minutes to populate in the system" text-wrap></ion-input>\n      </ion-item>\n    <ion-item class="formField">\n          <!-- <ion-label color="primary" stacked >Location</ion-label> -->\n          <select-searchable\n          [(ngModel)]="selectedArray[\'Location\']"\n          [items]="locationsArray"\n          title="Location"\n          itemValueField=ID\n          itemTextField=Location\n          name="Location"\n          [canSearch]="true"\n          [canReset]="true"\n          (onChange)="locationChange($event)"\n          text-wrap>\n          <ng-template selectSearchableLabelTemplate>\n          Location\n          </ng-template>\n        </select-searchable>\n        </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Rig Name & Number</ion-label>\n          <ion-input\n            type="text"\n            name="rigName"\n            [(ngModel)]="selectedArray[\'Rig_Name_And_Number\']">\n          </ion-input>\n        </ion-item>\n\n\n        <ion-item class="formField">\n          <ion-label color="primary" stacked>Department</ion-label>\n          <ion-select [(ngModel)]="selectedArray[\'Department\']" name="department">\n            <ion-option value="Drilling">Drilling</ion-option>\n            <ion-option value="Production">Production</ion-option>\n            <ion-option value="Completion">Completion</ion-option>\n          </ion-select>\n        </ion-item>\n\n\n        <ion-item class="formField">\n          <ion-label color="primary" stacked>Division</ion-label>\n          <ion-select [(ngModel)]="selectedArray[\'Division\']" name="division">\n            <ion-option value="Safety Services">Safety Services</ion-option>\n            <ion-option value="Environmental Services">Environmental Services</ion-option>\n            <ion-option value="Rental Services">Pulling Unit Services</ion-option>\n            <ion-option value="Water Services">Water Services</ion-option>\n            <ion-option value="Flowback Equipment">Roustabout Services</ion-option>\n            <ion-option value="Sandblasting Division">Trucking Services</ion-option>\n          </ion-select>\n        </ion-item>\n\n        <ion-item class="formField">\n          <ion-label color="primary" stacked >Company Man</ion-label>\n          <ion-input [(ngModel)]="selectedArray[\'Company_Man\']" name="companyMan">\n          </ion-input>\n        </ion-item>\n\n        <ion-item class="formField">\n          <ion-label color="primary" stacked >Company Man Phone Number</ion-label>\n          <ion-input\n          [(ngModel)]="selectedArray[\'Company_Man_Phone_Number\']"\n          type="text"\n          (keypress)="keyPress($event)"\n          name="phoneNumber"\n          minlength="7"\n          maxlength="10"\n          placeholder="Phone Number">\n          </ion-input>\n        </ion-item>\n</div>\n<div *ngIf="!projectSelected">\n      <ion-item class="formField">\n        <!-- <ion-label color="primary" stacked >Location</ion-label> -->\n        <select-searchable\n        [(ngModel)]="location"\n        [items]="locationsArray"\n        title="Location"\n        itemValueField=ID\n        itemTextField=Location\n        name="Location"\n        [canSearch]="true"\n        [canReset]="true"\n        (onChange)="locationChange($event)"\n        text-wrap>\n        <ng-template selectSearchableLabelTemplate>\n              Location\n        </ng-template>\n      </select-searchable>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked >Company Man</ion-label>\n        <ion-input ngModel name="companyMan">\n        </ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked >Company Man Phone Number</ion-label>\n        <ion-input\n        ngModel\n        type="text"\n        (keypress)="keyPress($event)"\n        name="phoneNumber"\n        minlength="7"\n        maxlength="10"\n        placeholder="Phone Number">\n        </ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>AFE/Order Number</ion-label>\n        <ion-select\n          [(ngModel)]="orderNumber"\n          name="orderNumber"\n          placeholder="existing AFE numbers">\n          <ion-option value=newAFE>New AFE</ion-option>\n          <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == \'1\'">{{afe.Name}}</ion-option>\n        </ion-select>\n      </ion-item>\n    <!-- When user types new AFE, but decides to click back\n        on a current AFE the value is not submitted -->\n      <ion-item *ngIf="orderNumber == \'newAFE\'">\n        <ion-label color="primary" stacked>New AFE</ion-label>\n        <ion-input type="text" ngModel name="orderNumber" placeholder="Note: AFE will take up to 5 minutes to populate" text-wrap></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Rig Name & Number</ion-label>\n        <ion-input\n        type="text"\n        name="rigName"\n        placeholder="Rig Name"\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Department</ion-label>\n        <ion-select ngModel name="department">\n          <ion-option value="Drilling">Drilling</ion-option>\n          <ion-option value="Production">Production</ion-option>\n          <ion-option value="Completion">Completion</ion-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Division</ion-label>\n        <ion-select ngModel name="division">\n          <ion-option value="Safety Services">Safety Services</ion-option>\n          <ion-option value="Environmental Services">Environmental Services</ion-option>\n          <ion-option value="Rental Services">Pulling Unit Services</ion-option>\n          <ion-option value="Water Services">Water Services</ion-option>\n          <ion-option value="Flowback Equipment">Roustabout Services</ion-option>\n          <ion-option value="Sandblasting Division">Trucking Services</ion-option>\n        </ion-select>\n      </ion-item>\n</div>\n\n      <ion-chip *ngIf="startDate.touched" class="removeText" >\n        <ion-label>Clear Start Date</ion-label>\n          <button ion-button type="button" clear color="danger" (click)="delete(startDate)">\n              <ion-icon name="close-circle"></ion-icon>\n          </button>\n      </ion-chip>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Start Date</ion-label>\n        <ion-datetime\n        type="date"\n        name="startDate"\n        id="startDate"\n        displayFormat="MM/DD/YYYY"\n        ngModel\n        #startDate="ngModel">\n        </ion-datetime>\n      </ion-item>\n\n      <ion-chip *ngIf="endDate.touched" class="removeText" #chip1>\n        <ion-label>Clear End Date</ion-label>\n          <button ion-button clear color="danger" (click)="delete(endDate)">\n              <ion-icon name="close-circle"></ion-icon>\n          </button>\n      </ion-chip>\n\n      <div>\n      <ion-label class="warningLabel"*ngIf="startDate.touched && endDate.pristine">Please Select An End Date!</ion-label>\n    </div>\n\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>End Date</ion-label>\n        <ion-datetime\n        type="date"\n        name="endDate"\n        displayFormat="MM/DD/YYYY"\n        ngModel\n        #endDate="ngModel"></ion-datetime>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Quantity of Hours</ion-label>\n        <ion-input\n        type="number"\n        name="hours"\n        id="hours"\n        placeholder="Enter either hours or dates"\n        ngModel\n        [disabled]="startDate.touched || endDate.touched">\n        </ion-input>\n    </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Job Decription</ion-label>\n        <ion-textarea\n        type="textarea"\n        name="description"\n        placeholder="ex. delivering trailers,supervision,etc"\n        ngModel></ion-textarea>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Number of Trips</ion-label>\n        <ion-input\n        type="number"\n        name="trips"\n        placeholder=""\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Number of Miles</ion-label>\n        <ion-input\n        type="number"\n        name="miles"\n        placeholder=""\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Representative to Sign</ion-label>\n        <ion-input\n        type="text"\n        name="representative"\n        placeholder="First and Last Name"\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Comments</ion-label>\n        <ion-textarea\n        type="text"\n        name="comments"\n        placeholder=""\n        ngModel></ion-textarea>\n      </ion-item>\n\n      <ion-item>\n        <button [disabled]="!f.valid" type="submit" id="submitButton" ion-button full large>Submit</button>\n     </ion-item>\n   </ion-list>\n  </form>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\safety\safety.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_3__services_reap_service__["a" /* ReapService */]])
+    ], SafetyPage);
+    return SafetyPage;
+}());
+
+//# sourceMappingURL=safety.js.map
+
+/***/ }),
+
+/***/ 111:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SubMenuPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__misc_misc__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__labor_labor__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__equipment_equipment__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__add_photo_add_photo__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__safety_review_safety_review__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_reap_service__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var SubMenuPage = /** @class */ (function () {
+    function SubMenuPage(navCtrl, navParams, reap) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.reap = reap;
+    }
+    SubMenuPage.prototype.ionViewDidLoad = function () {
+    };
+    SubMenuPage.prototype.toMisc = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__misc_misc__["a" /* MiscPage */]);
+    };
+    SubMenuPage.prototype.toLabor = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__labor_labor__["a" /* LaborPage */]);
+    };
+    SubMenuPage.prototype.toEquipment = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__equipment_equipment__["a" /* EquipmentPage */]);
+    };
+    SubMenuPage.prototype.toPhoto = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__add_photo_add_photo__["a" /* AddPhotoPage */]);
+    };
+    SubMenuPage.prototype.toReview = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__safety_review_safety_review__["a" /* SafetyReviewPage */]);
+    };
+    SubMenuPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-sub-menu',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\sub-menu\sub-menu.html"*/'<ion-header>\n\n  <ion-navbar center hideBackButton="true">\n    <ion-title>TASK</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n  <ion-item  no-lines>\n    <button  class="menuButton"ion-button large block (tap)="toMisc()" >\n      New Misc. Form</button>\n  </ion-item>\n  <ion-item  no-lines>\n    <button  class="menuButton"ion-button large block (tap)="toEquipment()" >\n      New Equipment Form</button>\n  </ion-item>\n  <ion-item  no-lines>\n    <button  class="menuButton"ion-button large block (tap)="toLabor()" >\n      New Labor Form</button>\n  </ion-item>\n  <ion-item  no-lines>\n    <button  class="menuButton"ion-button large block (tap)="toPhoto()" >\n      Add Photo</button>\n  </ion-item>\n  <ion-item  no-lines>\n    <button  class="menuButton"ion-button large block (tap)="toReview()" >\n      Review</button>\n  </ion-item>\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\sub-menu\sub-menu.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_7__services_reap_service__["a" /* ReapService */]])
+    ], SubMenuPage);
+    return SubMenuPage;
+}());
+
+//# sourceMappingURL=sub-menu.js.map
+
+/***/ }),
+
+/***/ 112:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MiscPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_reap_service__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MiscPage = /** @class */ (function () {
+    function MiscPage(navCtrl, navParams, reap) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.reap = reap;
+        this.miscCategory = [];
+        //temporary
+        this.miscCategory = reap.equipmentType;
+    }
+    MiscPage.prototype.onSubmit = function (form) {
+        //console.log(form.value);
+        this.reap.totalMisc(form.value);
+        this.navCtrl.pop();
+    };
+    MiscPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-misc',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\misc\misc.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Misc.</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <form #f="ngForm" (ngSubmit)="onSubmit(f)">\n    <ion-list>\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Category</ion-label>\n        <ion-select\n          ngModel\n          name="category"\n          required>\n          <ion-option value={{misc.Type}} *ngFor="let misc of miscCategory" selected="misc.Type == \'1\'">{{misc.Type}}</ion-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Description</ion-label>\n        <ion-textarea\n        type="text"\n        name="description"\n        placeholder=""\n        ngModel></ion-textarea>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Quantity</ion-label>\n        <ion-input\n        type="number"\n        name="quantity"\n        placeholder=""\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <button id="submitButton" ion-button full large>Submit</button>\n     </ion-item>\n   </ion-list>\n  </form>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\misc\misc.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_2__services_reap_service__["a" /* ReapService */]])
+    ], MiscPage);
+    return MiscPage;
+}());
+
+//# sourceMappingURL=misc.js.map
+
+/***/ }),
+
+/***/ 113:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LaborPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_reap_service__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var Personnel = /** @class */ (function () {
+    function Personnel() {
+        this.personnelArray = [];
+    }
+    return Personnel;
+}());
+var LaborPage = /** @class */ (function () {
+    function LaborPage(navCtrl, navParams, reap) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.reap = reap;
+        this.personnelArray = this.reap.getPersonnel;
+        //console.log(this.personnelArray);
+    }
+    LaborPage.prototype.onSubmit = function (form) {
+        //console.log(form.value);
+        this.reap.totalLabor(form.value);
+        this.navCtrl.pop();
+    };
+    LaborPage.prototype.personnelChange = function (event) {
+        //console.log('value:', event.value);
+    };
+    LaborPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-labor',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\labor\labor.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Labor</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <form #f="ngForm" (ngSubmit)="onSubmit(f)">\n    <ion-list>\n      <ion-item class="formField">\n        <select-searchable\n         [(ngModel)]="Personnel"\n         title="Personnel"\n         itemValueField=ID\n         itemTextField=FullName\n         name="Personnel"\n         [items]="personnelArray"\n         [canSearch]="true"\n         [canReset]="true"\n         (onChange)="personnelChange($event)"\n         text-wrap>\n          <ng-template selectSearchableLabelTemplate>\n          Personnel\n          </ng-template>\n       </select-searchable>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Hours</ion-label>\n        <ion-input\n        ngModel\n        type="number"\n        name="hours">\n        </ion-input>\n      </ion-item>\n\n      <ion-item>\n        <button id="submitButton" ion-button full large>Submit</button>\n     </ion-item>\n   </ion-list>\n  </form>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\labor\labor.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_2__services_reap_service__["a" /* ReapService */]])
+    ], LaborPage);
+    return LaborPage;
+}());
+
+//# sourceMappingURL=labor.js.map
+
+/***/ }),
+
+/***/ 114:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EquipmentPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_reap_service__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var Equipment = /** @class */ (function () {
+    function Equipment() {
+    }
+    return Equipment;
+}());
+var EquipmentPage = /** @class */ (function () {
+    function EquipmentPage(navCtrl, navParams, reap) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.reap = reap;
+        this.equipmentType = [];
+        this.test = [];
+        this.equipmentType = reap.equipmentType;
+        this.equipmentArray = reap.getEquipment;
+        //console.log(this.equipmentArray);
+    }
+    EquipmentPage.prototype.typeSelected = function () {
+        this.equipmentArray = this.reap.getEquipment;
+        this.test = [];
+        //console.log('test');
+        for (var i = 0; i < this.equipmentArray.length; i++) {
+            //console.log(this.equipmentArray[i]['EquipmentType']);
+            //console.log(this.Type);
+            if (this.equipmentArray[i]['EquipmentType'] === this.Type) {
+                //console.log('here');
+                this.test.push(this.equipmentArray[i]);
+            }
+        }
+        this.equipmentArray = this.test;
+        //console.log(this.test);
+        //console.log(this.equipmentArray);
+    };
+    EquipmentPage.prototype.onSubmit = function (form) {
+        //console.log(form.value);
+        this.reap.totalEquipment(form.value);
+        this.navCtrl.pop();
+    };
+    EquipmentPage.prototype.equipmentChange = function (event) {
+        //console.log('value:', event.value);
+    };
+    EquipmentPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-equipment',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\equipment\equipment.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Equipment</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <form #f="ngForm" (ngSubmit)="onSubmit(f)">\n    <ion-list>\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Equipment Type</ion-label>\n        <ion-select\n          [(ngModel)]="Type"\n          (ngModelChange)="typeSelected()"\n          name="Type"\n          required>\n          <ion-option value={{equipment.Type}} *ngFor="let equipment of equipmentType" selected="equipment.Type == \'1\'">{{equipment.Type}}</ion-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-item class="formField" >\n        <!-- <ion-label color="primary" stacked>Equipment</ion-label> -->\n      <select-searchable\n       [(ngModel)]="Equipment"\n       title="Equipment"\n       itemValueField=ID\n       itemTextField=Unit\n       name="Equipment"\n       [items]="equipmentArray"\n       [canSearch]="true"\n       [canReset]="true"\n       (onChange)="equipmentChange($event)"\n       text-wrap>\n        <ng-template selectSearchableLabelTemplate>\n        Equipment\n        </ng-template>\n     </select-searchable>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Number of Days</ion-label>\n        <ion-input\n        ngModel\n        type="number"\n        name="days">\n        </ion-input>\n      </ion-item>\n\n      <ion-item>\n        <button id="submitButton" ion-button full large>Submit</button>\n     </ion-item>\n   </ion-list>\n  </form>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\equipment\equipment.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_2__services_reap_service__["a" /* ReapService */]])
+    ], EquipmentPage);
+    return EquipmentPage;
+}());
+
+//# sourceMappingURL=equipment.js.map
+
+/***/ }),
+
+/***/ 115:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SafetyReviewPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ts_md5_dist_md5__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ts_md5_dist_md5__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__success_success__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_reap_service__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_stem_api_stem_api__ = __webpack_require__(36);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var SafetyReviewPage = /** @class */ (function () {
+    function SafetyReviewPage(navCtrl, navParams, alertCtrl, viewCtrl, platform, geolocation, stemAPI, reap, loadingCtrl, storage) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.viewCtrl = viewCtrl;
+        this.platform = platform;
+        this.geolocation = geolocation;
+        this.stemAPI = stemAPI;
+        this.reap = reap;
+        this.loadingCtrl = loadingCtrl;
+        this.storage = storage;
+        this.formDetails = [];
+        this.miscDetails = this.reap.misc;
+        this.laborDetails = this.reap.labor;
+        this.equipmentDetails = this.reap.equipment;
+        this.photoDetails = this.reap.photo;
+        this.cancelled = "false";
+        this.submitData = [];
+        this.lonlat = [];
+        this.res = {}; //API submission response
+        this.submitClicked = false;
+        this.formDetails.push(this.reap.safetyForm);
+        console.log(this.formDetails[0]['project']);
+        for (var i = 0; i < this.reap.getProject.length; i++) {
+            if (this.formDetails[0]['project'] == this.reap.getProject[i]['ID']) {
+                this.projectName = this.reap.getProject[i]['ProjectName'];
+                console.log(this.projectName);
+            }
+            else {
+                this.projectName = "";
+            }
+        }
+        var date = new Date(this.formDetails[0]['currentDate']);
+        this.formDetails[0]['currentDate'] = (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear();
+        //console.log(this.laborDetails);
+        //console.log(this.formDetails[0]['currentDate'])
+        //console.log(this.mileageDetails);
+        /* Ensure the platform is ready */
+        this.platform.ready().then(function () {
+            /* Perform initial geolocation */
+            _this.geolocation.getCurrentPosition().then(function (resp) {
+                _this.lonlat = [resp.coords.latitude, resp.coords.longitude];
+                //console.log(this.lonlat);
+            }).catch(function (error) {
+                console.log('Error getting location', error);
+            });
+        });
+    }
+    SafetyReviewPage.prototype.canvasResize = function () {
+        var canvas = document.querySelector('canvas');
+        this.signaturePad.set('canvasWidth', canvas.offsetWidth);
+        this.signaturePad.set('canvasHeight', canvas.offsetHeight);
+    };
+    SafetyReviewPage.prototype.sigClear = function () {
+        this.signaturePad.clear();
+    };
+    SafetyReviewPage.prototype.sigSubmit = function () {
+        var _this = this;
+        this.submitClicked = true;
+        var md5 = new __WEBPACK_IMPORTED_MODULE_3_ts_md5_dist_md5__["Md5"](); //md5 hash for custom guid
+        var time = new Date(); //timestamp
+        var alert = this.alertCtrl.create({
+            title: 'Confirm Submittion',
+            message: 'Are you sure you want to submit?',
+            buttons: [
+                {
+                    text: 'Yes',
+                    role: 'Yes',
+                    handler: function () {
+                        var loading = _this.loadingCtrl.create({
+                            content: 'Submitting...'
+                        });
+                        //console.log('Yes clicked');
+                        //saves as base64
+                        _this.signatureImage = _this.signaturePad.toDataURL();
+                        //console.log(this.signatureImage);
+                        /*md5 hashes form data with signature and timestamp for unique guid*/
+                        _this.md5Data = md5.appendStr(JSON.stringify(_this.formDetails)).appendStr(_this.signatureImage.toString()).appendStr(_this.lonlat.toString()).appendStr(time.getTime().toString()).end();
+                        /*Pushes all data to array for form submission*/
+                        _this.submitData.push({ 'safety': _this.formDetails }, { 'sig': _this.signatureImage }, { 'gpsLoc': _this.lonlat.toString() }, { 'md5': _this.md5Data }, { 'Equipment': _this.equipmentDetails }, { 'Labor': _this.laborDetails }, { 'Misc': _this.miscDetails }, { 'Photo': _this.photoDetails });
+                        /*
+                        *
+                        */
+                        console.log(_this.submitData);
+                        loading.present();
+                        /*******************TESTING***********************************/
+                        if (_this.reap.online == "offline") {
+                            console.log('user is offline while submitting, will store data and submit later');
+                            console.log(_this.reap.online);
+                            _this.storage.set('offlineSubmission', _this.submitData);
+                            var alert_1 = _this.alertCtrl.create({
+                                title: 'Submitted Form Offline',
+                                message: 'Please wait for device to return online before submitting another form! Form will be submitted once online again!',
+                                buttons: [
+                                    {
+                                        text: 'Acknowledged',
+                                        role: 'Yes',
+                                        handler: function () {
+                                            setTimeout(function () {
+                                                loading.dismiss();
+                                            });
+                                            _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__success_success__["a" /* SuccessPage */], { 'success': 'Please wait before submitting another form!' });
+                                            _this.submitData = []; //resets Submission so data isnt inserted twice
+                                        }
+                                    }
+                                ]
+                            });
+                            alert_1.present();
+                        }
+                        else {
+                            console.log(_this.reap.online);
+                            //creates a loading controller while user submits
+                            _this.stemAPI.submitSafetyForm(_this.submitData, _this.reap.token).then(function (result) {
+                                //converts result to array
+                                _this.res = JSON.stringify(result);
+                                _this.res = JSON.parse(_this.res);
+                                console.log(_this.res);
+                                setTimeout(function () {
+                                    loading.dismiss();
+                                }, 3000);
+                                setTimeout(function () {
+                                    if (_this.res.Status == false) {
+                                        var alert_2 = _this.alertCtrl.create({
+                                            title: 'Error Submitting, ',
+                                            message: _this.res.MSG,
+                                            buttons: [
+                                                {
+                                                    text: 'Acknowledged',
+                                                    role: 'Yes',
+                                                    handler: function () {
+                                                        setTimeout(function () {
+                                                            loading.dismiss();
+                                                        });
+                                                        _this.submitClicked = false; //enables the submission button to resubmit
+                                                        _this.submitData = []; //resets Submission so data isnt inserted twice
+                                                    }
+                                                }
+                                            ]
+                                        });
+                                        alert_2.present();
+                                        console.log(_this.res.MSG);
+                                    }
+                                    else {
+                                        _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__success_success__["a" /* SuccessPage */], { 'success': _this.res.MSG });
+                                    }
+                                }, 2000);
+                            }, function (err) {
+                                var alert = _this.alertCtrl.create({
+                                    title: 'Error Submitting, ',
+                                    message: 'Error:' + err + ', please screen shot this error and send to support!',
+                                    buttons: [
+                                        {
+                                            text: 'Acknowledged',
+                                            role: 'Yes',
+                                            handler: function () {
+                                                setTimeout(function () {
+                                                    loading.dismiss();
+                                                });
+                                                _this.submitClicked = false; //enables the submission button to resubmit
+                                                _this.submitData = []; //resets Submission so data isnt inserted twice
+                                            }
+                                        }
+                                    ]
+                                });
+                                alert.present();
+                                console.log(err);
+                            });
+                        }
+                    }
+                }, {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: function () {
+                        _this.submitClicked = false; //enables the submission button to resubmit
+                        //console.log('No clicked');
+                    }
+                },
+            ]
+        });
+        alert.present();
+    };
+    SafetyReviewPage.prototype.ngAfterViewInit = function () {
+        //  console.log("Comes here!");
+        this.signaturePad.clear();
+        this.canvasResize();
+    };
+    //goes back to the form page
+    SafetyReviewPage.prototype.sigBack = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Are you sure you want to cancel?',
+            message: 'This will return you to the home page and form will not be submitted, Continue?',
+            buttons: [
+                {
+                    text: 'Yes',
+                    role: 'Yes',
+                    handler: function () {
+                        //console.log('Yes clicked');
+                        //pops to home page
+                        _this.navCtrl.popTo(_this.navCtrl.getByIndex(1));
+                    }
+                },
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: function () {
+                        //console.log('No clicked');
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    SafetyReviewPage.prototype.editForm = function () {
+        this.navCtrl.popTo(this.navCtrl.getByIndex(2));
+    };
+    SafetyReviewPage.prototype.removeMileage = function (index) {
+        this.reap.misc.splice(index, 1);
+        this.miscDetails = this.reap.misc;
+        //console.log(this.mileageDetails);
+    };
+    SafetyReviewPage.prototype.removeLabor = function (index) {
+        this.reap.labor.splice(index, 1);
+        this.laborDetails = this.reap.labor;
+        //console.log(this.laborDetails);
+    };
+    SafetyReviewPage.prototype.removeEquipment = function (index) {
+        this.reap.equipment.splice(index, 1);
+        this.equipmentDetails = this.reap.equipment;
+        //console.log(this.equipmentDetails);
+    };
+    SafetyReviewPage.prototype.removePhoto = function (index) {
+        this.reap.photo.splice(index, 1);
+        this.photoDetails = this.reap.photo;
+        //console.log(this.photoDetails);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad__["SignaturePad"]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_angular2_signaturepad_signature_pad__["SignaturePad"])
+    ], SafetyReviewPage.prototype, "signaturePad", void 0);
+    SafetyReviewPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-safety-review',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\safety-review\safety-review.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Review</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-label>Safety Summary</ion-label>\n          <ion-grid class="formDetails" *ngFor="let details of formDetails">\n                <ion-row>\n                  <ion-col>Date:</ion-col>\n                  <ion-col>{{details.currentDate}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Project:</ion-col>\n                  <ion-col>{{this.projectName}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Location:</ion-col>\n                  <ion-col>{{details.Location?.Location}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Company Man:</ion-col>\n                  <ion-col>{{details.companyMan}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Phone Number:</ion-col>\n                  <ion-col>{{details.phoneNumber}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>AFE/Order Number:</ion-col>\n                  <ion-col>{{details.orderNumber}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Rig Name & Number:</ion-col>\n                  <ion-col>{{details.rigName}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Start Date:</ion-col>\n                  <ion-col>{{details.startDate}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>End Date:</ion-col>\n                  <ion-col>{{details.endDate}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Quantity of Hours:</ion-col>\n                  <ion-col>{{details.hours}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Department:</ion-col>\n                  <ion-col>{{details.department}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Division:</ion-col>\n                  <ion-col>{{details.division}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Job Description:</ion-col>\n                  <ion-col>{{details.description}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Number of trips:</ion-col>\n                  <ion-col>{{details.trips}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Number of miles:</ion-col>\n                  <ion-col>{{details.miles}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Representative to Sign:</ion-col>\n                  <ion-col>{{details.representative}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Comments:</ion-col>\n                  <ion-col>{{details.comments}}</ion-col>\n                </ion-row>\n              </ion-grid>\n               <ion-grid>\n                 <ion-row>\n                  <ion-col>\n                     <button type="button" ion-button full color="light" name="editForm" (click)="editForm()">Edit Main Form</button>\n                  </ion-col>\n                </ion-row>\n              </ion-grid>\n      <br>\n      <br>\n      <hr>\n  <ion-label>Misc. Summary</ion-label>\n  <hr>\n            <ion-grid class="formDetails" *ngFor="let misc of miscDetails;index as i;">\n                <ion-row>\n                  <ion-col col-6>Category:</ion-col>\n                  <ion-col col-3>{{misc.category}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col col-6>Description:</ion-col>\n                  <ion-col col-3>{{misc.description}}</ion-col>\n                  <ion-col col-3> <button (tap)="removeMileage(i)"ion-button><ion-icon class="trashButton"name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Quantity:</ion-col>\n                  <ion-col>{{misc.quantity}}</ion-col>\n                </ion-row>\n            </ion-grid>\n\n  <ion-label>Labor Summary</ion-label>\n  <hr>\n              <ion-grid class="formDetails" *ngFor="let labor of laborDetails;index as i;">\n                  <ion-row>\n                    <ion-col col-6>Personnel:</ion-col>\n                      <ion-col col-3>{{labor.Personnel?.FullName}}</ion-col>\n                      <ion-col col-3> <button (tap)="removeLabor(i)"ion-button><ion-icon class="trashButton"name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>\n                    </ion-row>\n                    <ion-row>\n                      <ion-col>Hours:</ion-col>\n                      <ion-col>{{labor.hours}}</ion-col>\n                    </ion-row>\n              </ion-grid>\n\n  <ion-label>Equipment Summary</ion-label>\n  <hr>\n              <ion-grid class="formDetails" *ngFor="let equipment of equipmentDetails;index as i;">\n                  <ion-row>\n                      <ion-col>Equipment:</ion-col>\n                      <ion-col>{{equipment.Type}}</ion-col>\n                  </ion-row>\n                  <ion-row>\n                      <ion-col col-6>Unit:</ion-col>\n                      <ion-col col-3>{{equipment.Equipment?.Unit}}</ion-col>\n                      <ion-col col-3> <button (tap)="removeEquipment(i)"ion-button><ion-icon class="trashButton"name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>\n                  </ion-row>\n                  <ion-row>\n                      <ion-col>Number of Days:</ion-col>\n                      <ion-col>{{equipment.days}}</ion-col>\n                  </ion-row>\n              </ion-grid>\n\n  <ion-label>Photos</ion-label>\n  <hr>\n  <ion-grid class="formDetails" *ngFor="let photo of photoDetails;index as i;">\n                <ion-row>\n                    <ion-col col-9><img src="{{photo}}" alt="Upload Error"/></ion-col>\n                    <ion-col col-3><button (tap)="removePhoto(i)"ion-button><ion-icon class="trashButton"name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>\n                </ion-row>\n              </ion-grid>\n  <hr>\n  <ion-label color="primary" stacked>Signature</ion-label>\n  <div class="box">\n    <signature-pad\n      name="Signature"\n      id="signaturecanvas"></signature-pad>\n    <ion-grid>\n      <ion-row>\n        <ion-col col-12>\n          <button type="button" ion-button full color="light" (click)="sigClear()" large>Clear</button>\n        </ion-col>\n        <ion-col col-12>\n          <button ion-button full color="danger" (click)="sigBack()" large>Cancel</button>\n        </ion-col>\n        <ion-col col-12>\n          <button ion-button full color="secondary" [disabled]=\'submitClicked===true\'(click)="sigSubmit()" large>Submit</button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\safety-review\safety-review.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ViewController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_8__providers_stem_api_stem_api__["a" /* StemApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_7__services_reap_service__["a" /* ReapService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"],
+            __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]])
+    ], SafetyReviewPage);
+    return SafetyReviewPage;
+}());
+
+//# sourceMappingURL=safety-review.js.map
+
+/***/ }),
+
+/***/ 116:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_reap_service__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__project_review_project_review__ = __webpack_require__(117);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var Location = /** @class */ (function () {
+    function Location() {
+    }
+    return Location;
+}());
+var ProjectPage = /** @class */ (function () {
+    function ProjectPage(navCtrl, navParams, reap) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.reap = reap;
+        this.afeArray = [];
+        this.locationsArray = reap.getLocations;
+        this.afeArray = this.reap.getAFE;
+    }
+    ProjectPage.prototype.keyPress = function (event) {
+        var pattern = /[0-9\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    ProjectPage.prototype.onSubmit = function (Form) {
+        this.reap.projectForm = Form.value;
+        //console.log(this.reap.projectForm);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__project_review_project_review__["a" /* ProjectReviewPage */]);
+    };
+    ProjectPage.prototype.locationChange = function (event) {
+        //console.log('value:', event.value);
+    };
+    ProjectPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-project',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\project\project.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>New Project</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <form #f="ngForm" (ngSubmit)="onSubmit(f)">\n    <ion-list>\n\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Project Name</ion-label>\n        <ion-input\n          #projectName\n          ngModel\n          name="projectName"\n          placeholder="New Project Name">\n        </ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <!-- <ion-label color="primary" stacked >Location</ion-label> -->\n        <select-searchable\n        [(ngModel)]="location"\n        [items]="locationsArray"\n        title="Location"\n        itemValueField=ID\n        itemTextField=Location\n        name="Location"\n        [canSearch]="true"\n        [canReset]="true"\n        (onChange)="locationChange($event)"\n        text-wrap>\n        <ng-template selectSearchableLabelTemplate>\n              Location\n        </ng-template>\n      </select-searchable>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked >Company Man</ion-label>\n        <ion-input ngModel name="companyMan">\n        </ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked >Company Man Phone Number</ion-label>\n        <ion-input\n        ngModel\n        type="text"\n        (keypress)="keyPress($event)"\n        name="phoneNumber"\n        minlength="7"\n        maxlength="10"\n        placeholder="Phone Number">\n        </ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>AFE/Order Number</ion-label>\n        <ion-select\n          [(ngModel)]="orderNumber"\n          name="orderNumber"\n          placeholder="existing AFE numbers">\n          <ion-option value=newAFE>New AFE</ion-option>\n          <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == \'1\'">{{afe.Name}}</ion-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-item *ngIf="orderNumber == \'newAFE\'">\n        <ion-label color="primary" stacked>New AFE</ion-label>\n        <ion-input type="text" ngModel name="orderNumber" placeholder="Note: AFE will take up to 5 minutes to populate" text-wrap></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Rig Name & Number</ion-label>\n        <ion-input\n        type="text"\n        name="rigName"\n        placeholder="Rig Name"\n        ngModel></ion-input>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Department</ion-label>\n        <ion-select ngModel name="department">\n          <ion-option value="Drilling">Drilling</ion-option>\n          <ion-option value="Production">Production</ion-option>\n          <ion-option value="Completion">Completion</ion-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-item class="formField">\n        <ion-label color="primary" stacked>Division</ion-label>\n        <ion-select ngModel name="division">\n          <ion-option value="Safety Services">Safety Services</ion-option>\n          <ion-option value="Environmental Services">Environmental Services</ion-option>\n          <ion-option value="Rental Services">Pulling Unit Services</ion-option>\n          <ion-option value="Water Services">Water Services</ion-option>\n          <ion-option value="Flowback Equipment">Roustabout Services</ion-option>\n          <ion-option value="Sandblasting Division">Trucking Services</ion-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-item>\n        <button [disabled]="!f.valid" type="submit" id="submitButton" ion-button full large>Submit</button>\n     </ion-item>\n   </ion-list>\n  </form>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\project\project.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_2__services_reap_service__["a" /* ReapService */]])
+    ], ProjectPage);
+    return ProjectPage;
+}());
+
+//# sourceMappingURL=project.js.map
+
+/***/ }),
+
+/***/ 117:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectReviewPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__success_success__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_stem_api_stem_api__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_reap_service__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+//import { mergeMap, retry } from 'rxjs/operators';
+
+
+
+var ProjectReviewPage = /** @class */ (function () {
+    function ProjectReviewPage(navCtrl, navParams, reap, stemAPI, alertCtrl, loadingCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.reap = reap;
+        this.stemAPI = stemAPI;
+        this.alertCtrl = alertCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.formDetails = [];
+        this.submitData = [];
+        this.submitClicked = false;
+        this.formDetails.push(this.reap.projectForm);
+    }
+    ProjectReviewPage.prototype.editForm = function () {
+        this.navCtrl.pop();
+    };
+    ProjectReviewPage.prototype.onSubmit = function () {
+        var _this = this;
+        this.submitClicked = true;
+        var alert = this.alertCtrl.create({
+            title: 'Confirm Submittion',
+            message: 'Are you sure you want to submit?',
+            buttons: [
+                {
+                    text: 'Yes',
+                    role: 'Yes',
+                    handler: function () {
+                        var loading = _this.loadingCtrl.create({
+                            content: 'Submitting...'
+                        });
+                        _this.submitData.push({ 'project': _this.reap.projectForm });
+                        loading.present();
+                        _this.stemAPI.submitSafetyForm(_this.submitData, _this.reap.token).then(function (result) {
+                            console.log(result['Status']);
+                            setTimeout(function () {
+                                loading.dismiss();
+                                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__success_success__["a" /* SuccessPage */], { 'success': 'Project form Submitted!' });
+                            }, 3000);
+                            if (result['Status'] == false) {
+                            }
+                        }, function (err) {
+                        });
+                    }
+                }, {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: function () {
+                        _this.submitClicked = false;
+                        //console.log('No clicked');
+                    }
+                },
+            ]
+        });
+        alert.present();
+    };
+    ProjectReviewPage.prototype.toCancel = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Are you sure you want to cancel?',
+            message: 'This will return you to the home page and form will not be submitted, Continue?',
+            buttons: [
+                {
+                    text: 'Yes',
+                    role: 'Yes',
+                    handler: function () {
+                        //console.log('Yes clicked');
+                        //pops to home page
+                        _this.navCtrl.popTo(_this.navCtrl.getByIndex(1));
+                    }
+                },
+                {
+                    text: 'No',
+                    role: 'cancel',
+                    handler: function () {
+                        //console.log('No clicked');
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    ProjectReviewPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-project-review',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\project-review\project-review.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Project Review</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-label>Project Summary</ion-label>\n          <ion-grid class="formDetails" *ngFor="let details of formDetails">\n                <ion-row>\n                  <ion-col>Project Name:</ion-col>\n                  <ion-col>{{details.projectName}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Location:</ion-col>\n                  <ion-col>{{details.Location?.Location}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Company Man:</ion-col>\n                  <ion-col>{{details.companyMan}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Company Man Phone Number:</ion-col>\n                  <ion-col>{{details.phoneNumber}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>AFE/Order Number:</ion-col>\n                  <ion-col>{{details.orderNumber}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Rig Name & Number:</ion-col>\n                  <ion-col>{{details.rigName}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Department:</ion-col>\n                  <ion-col>{{details.department}}</ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>Division:</ion-col>\n                  <ion-col>{{details.division}}</ion-col>\n                </ion-row>\n              </ion-grid>\n               <ion-grid>\n                 <ion-row>\n                  <ion-col>\n                     <button type="button" ion-button full color="light" name="editForm" (click)="editForm()">Edit Project Form</button>\n                  </ion-col>\n                </ion-row>\n              </ion-grid>\n      <br>\n      <br>\n      <hr>\n\n\n  <div class="box">\n    <ion-grid>\n      <ion-row>\n        <ion-col col-12>\n          <button ion-button full color="danger" (click)="toCancel()" large>Cancel</button>\n        </ion-col>\n        <ion-col col-12>\n          <button ion-button full color="secondary" [disabled]=\'submitClicked===true\' (click)="onSubmit()" large>Submit</button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\project-review\project-review.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_4__services_reap_service__["a" /* ReapService */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_stem_api_stem_api__["a" /* StemApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"]])
+    ], ProjectReviewPage);
+    return ProjectReviewPage;
+}());
+
+//# sourceMappingURL=project-review.js.map
+
+/***/ }),
+
+/***/ 118:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SupportPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_device__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_app_version__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_network__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_reap_service__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var SupportPage = /** @class */ (function () {
+    //private networkType:string = this.reap.networkType;
+    function SupportPage(navCtrl, navParams, loadingCtrl, 
+        // public plt: Platform,
+        device, appVersion, reap, storage, network) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.loadingCtrl = loadingCtrl;
+        this.device = device;
+        this.appVersion = appVersion;
+        this.reap = reap;
+        this.storage = storage;
+        this.network = network;
+        this.omegaPlatform = this.device.platform;
+        this.deviceVersion = this.device.version;
+        this.appVersion.getVersionNumber().then(function (version) {
+            _this.omegaVersion = version;
+            console.log(JSON.stringify(_this.omegaVersion));
+        }, function (error) {
+            console.log(error);
+        });
+    }
+    SupportPage.prototype.toSync = function () {
+        //console.log(this.reap.token);
+        var loading = this.loadingCtrl.create({
+            content: 'Syncing...'
+        });
+        loading.present();
+        this.reap.grabAPIData(this.reap.token);
+        setTimeout(function () {
+            loading.dismiss();
+        }, 2000);
+    };
+    SupportPage.prototype.onLogout = function () {
+        var _this = this;
+        //clears the authToken from the local storage
+        this.reap.token = "";
+        this.storage.remove('authToken');
+        this.storage.remove('MD5');
+        var loading = this.loadingCtrl.create({
+            content: 'Logging Out...'
+        });
+        loading.present();
+        setTimeout(function () {
+            _this.reap.removeConnections();
+            loading.dismiss();
+        }, 2000);
+        //pops back to the login page
+        this.navCtrl.popToRoot();
+    };
+    SupportPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-support',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\support\support.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Support</ion-title>\n    <ion-buttons end>\n       <button class="navButtons" (click)="onLogout()"> Logout </button>\n     </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid>\n    <ion-row style="padding-bottom:25px;">\n      <ion-col>\n      <h1>For Technical Support</h1>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <h1>Email Us</h1>\n    </ion-col>\n  </ion-row>\n  <ion-row class="supportData">\n    <ion-col>\n      <a href="mailto:support@stemsoftware.com">support@stemsoftware.com</a>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <h1>Call Us</h1>\n    </ion-col>\n  </ion-row>\n  <ion-row class="supportData">\n    <ion-col>\n      <a href="tel:432-444-4444">432-444-4444</a>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <h1>Connection: {{this.reap.networkType}}</h1>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <h1>Platform Type: {{this.omegaPlatform}}</h1>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <h1>OS Version: {{this.deviceVersion}}</h1>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <h1>App Version:\n         {{this.omegaVersion}}\n      </h1>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      <button ion button id="supportButton" (click)="toSync()" block large>Sync</button>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <!-- <ion-col>\n      <h2>Last Sync:</h2>\n    </ion-col> -->\n  </ion-row>\n</ion-grid>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\support\support.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_native_device__["a" /* Device */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_app_version__["a" /* AppVersion */],
+            __WEBPACK_IMPORTED_MODULE_6__services_reap_service__["a" /* ReapService */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */],
+            __WEBPACK_IMPORTED_MODULE_5__ionic_native_network__["a" /* Network */]])
+    ], SupportPage);
+    return SupportPage;
+}());
+
+//# sourceMappingURL=support.js.map
+
+/***/ }),
+
+/***/ 129:
+/***/ (function(module, exports) {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 129;
+
+/***/ }),
+
+/***/ 13:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReapService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_interval__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_interval___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_interval__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_stem_api_stem_api__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_network__ = __webpack_require__(86);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var ReapService = /** @class */ (function () {
+    function ReapService(loadingCtrl, toast, network, stemAPI, storage) {
+        var _this = this;
+        this.loadingCtrl = loadingCtrl;
+        this.toast = toast;
+        this.network = network;
+        this.stemAPI = stemAPI;
+        this.storage = storage;
+        this.getLocations = [];
+        this.equipmentType = [];
+        this.getEquipment = [];
+        this.getPersonnel = [];
+        this.getProject = [];
+        this.getAFE = [];
+        /********************************************/
+        this.misc = [];
+        this.equipment = [];
+        this.labor = [];
+        this.photo = [];
+        this.safetyForm = [];
+        this.projectForm = [];
+        this.completeForm = [];
+        this.storeFormData = [];
+        this.online = true;
+        //May have to unsubscribe from Observable
+        this.checkConnection = __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].interval(10000 * 60).subscribe(function (x) {
+            //console.log('here every 15 seconds');
+            _this.connected;
+            _this.disconnected;
+            _this.networkType = _this.network.type;
+            //console.log(this.networkType)
+            _this.connected = _this.network.onConnect().subscribe(function (data) {
+                //console.log(data.type)
+                //console.log('online');
+                _this.online = data.type;
+            }, function (error) { return console.error(error); });
+            _this.network.onDisconnect().subscribe(function (data) {
+                console.log(data.type);
+                _this.online = data.type;
+                //console.log('offline');
+            });
+        }, function (error) { return console.error(error); });
+        this.getAndPost = __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].interval(10000 * 60).subscribe(function (x) {
+            /*******************TESTING***********************************/
+            _this.storage.get('MD5').then(function (data) {
+                //console.log(data);
+                //console.log('here in MD5');
+                _this.checkMD5();
+            });
+            /*******************TESTING***********************************/
+            _this.storage.get('offlineSubmission').then(function (data) {
+                //console.log('here every 5 minutes');
+                if (data != null) {
+                    console.log(data);
+                    _this.submitOfflineForm(data);
+                }
+            });
+        }, function (error) { return console.error(error); });
+    }
+    ReapService.prototype.grabAPIData = function (token) {
+        var _this = this;
+        //console.log('GET request happened');
+        this.token = token;
+        //console.log(this.token);
+        __WEBPACK_IMPORTED_MODULE_4__pages_login_login__["a" /* LoginPage */].initialLogin = false; //changes login variable to false after user logs in
+        //console.log('this is:',LoginPage.initialLogin);
+        //imported data from API
+        this.stemAPI.getData(this.token).then(function (result) {
+            _this.getData = (JSON.stringify(result));
+            _this.getData = JSON.parse(_this.getData);
+            //console.log(this.getData);
+            _this.getMD5 = _this.getData['md5'];
+            _this.storage.set('MD5', _this.getMD5);
+            _this.getLocations = _this.getData['Locations'];
+            _this.storage.set('Locations', _this.getLocations);
+            _this.equipmentType = _this.getData['EquipmentType'];
+            _this.storage.set('EquipmentType', _this.equipmentType);
+            _this.getEquipment = _this.getData['Equipment'];
+            _this.storage.set('Equipment', _this.getEquipment);
+            _this.getPersonnel = _this.getData['Personnel'];
+            _this.storage.set('Personnel', _this.getPersonnel);
+            _this.getAFE = _this.getData['AFE'];
+            _this.storage.set('AFE', _this.getAFE);
+            _this.getProject = _this.getData['Project'];
+            _this.storage.set('Project', _this.getProject);
+            //console.log(this.getProject);
+            //console.log(this.getEquipment);
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    ReapService.prototype.getLocalStorage = function () {
+        //console.log('grabbed local storage');
+        var _this = this;
+        this.storage.get('authToken').then(function (data) {
+            _this.token = data;
+        });
+        this.storage.get('MD5').then(function (data) {
+            _this.getMD5 = data;
+            //console.log(this.getMD5);
+        });
+        this.storage.get('Locations').then(function (data) {
+            _this.getLocations = data;
+        });
+        this.storage.get('EquipmentType').then(function (data) {
+            _this.equipmentType = data;
+        });
+        this.storage.get('Equipment').then(function (data) {
+            _this.getEquipment = data;
+        });
+        this.storage.get('Personnel').then(function (data) {
+            _this.getPersonnel = data;
+        });
+        this.storage.get('Project').then(function (data) {
+            _this.getProject = data;
+            //console.log(this.getProject);
+        });
+        this.storage.get('AFE').then(function (data) {
+            _this.getAFE = data;
+        });
+    };
+    ReapService.prototype.submitOfflineForm = function (data) {
+        var _this = this;
+        var loading = this.loadingCtrl.create({
+            content: 'Retrying Form Submission...'
+        });
+        loading.present();
+        this.stemAPI.submitSafetyForm(data, this.token).then(function (result) {
+            _this.storage.remove('offlineSubmission');
+            _this.presentToast('submission Successful');
+            setTimeout(function () {
+                loading.dismiss();
+            }, 5000);
+        }, function (err) {
+            setTimeout(function () {
+                loading.dismiss();
+            }, 5000);
+            _this.presentToast(err);
+            console.log(err);
+        });
+    };
+    ReapService.prototype.checkMD5 = function () {
+        var _this = this;
+        this.stemAPI.getMD5Check(this.token).then(function (result) {
+            //console.log('here in get MD5');
+            var md5 = result;
+            console.log(result);
+            console.log(md5['downloadJson']);
+            if (md5['downloadJson'] == true) {
+                _this.grabAPIData(_this.token);
+                _this.presentToast('Sync Data Updated');
+            }
+        }, function (err) {
+            _this.presentToast(err);
+        });
+    };
+    //creates and pushes mileage array
+    ReapService.prototype.totalMisc = function (data) {
+        this.misc.push(data);
+        //console.log(this.mileage);
+    };
+    //creates and pushes labor array
+    ReapService.prototype.totalLabor = function (data) {
+        this.labor.push(data);
+        //console.log(this.labor);
+    };
+    //creates and pushes equipment array
+    ReapService.prototype.totalEquipment = function (data) {
+        this.equipment.push(data);
+        //console.log(this.equipment);
+    };
+    ReapService.prototype.totalPhotos = function (data) {
+        this.photo.push(data);
+        //console.log(this.photo);
+    };
+    ReapService.prototype.removeConnections = function () {
+        this.checkConnection.unsubscribe();
+        this.getAndPost.unsubscribe();
+        //this.connected.unsubscribe();
+        //this.disconnected.unsubscribe();
+    };
+    ReapService.prototype.presentToast = function (msg) {
+        var toast = this.toast.create({
+            message: msg,
+            duration: 3000,
+            position: 'bottom',
+            dismissOnPageChange: false,
+            cssClass: 'customToast'
+        });
+        toast.onDidDismiss(function () {
+            //console.log('Dismissed toast');
+        });
+        toast.present();
+    };
+    ReapService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["LoadingController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["LoadingController"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["ToastController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["ToastController"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_network__["a" /* Network */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_network__["a" /* Network */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5__providers_stem_api_stem_api__["a" /* StemApiProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_stem_api_stem_api__["a" /* StemApiProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */]) === "function" && _e || Object])
+    ], ReapService);
+    return ReapService;
+    var _a, _b, _c, _d, _e;
+}());
+
+//# sourceMappingURL=reap-service.js.map
+
+/***/ }),
+
+/***/ 171:
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"../pages/add-photo/add-photo.module": [
+		314,
+		11
+	],
+	"../pages/equipment/equipment.module": [
+		315,
+		10
+	],
+	"../pages/labor/labor.module": [
+		316,
+		9
+	],
+	"../pages/menu/menu.module": [
+		317,
+		8
+	],
+	"../pages/misc/misc.module": [
+		318,
+		7
+	],
+	"../pages/project-review/project-review.module": [
+		319,
+		6
+	],
+	"../pages/project/project.module": [
+		320,
+		5
+	],
+	"../pages/safety-review/safety-review.module": [
+		321,
+		4
+	],
+	"../pages/safety/safety.module": [
+		322,
+		3
+	],
+	"../pages/sub-menu/sub-menu.module": [
+		323,
+		2
+	],
+	"../pages/success/success.module": [
+		324,
+		1
+	],
+	"../pages/support/support.module": [
+		325,
+		0
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = 171;
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ 220:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(240);
+
+
+Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 240:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common_http__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_signaturepad__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_signaturepad___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_signaturepad__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_geolocation__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_device__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_app_version__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_select_searchable__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_select_searchable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_ionic_select_searchable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_storage__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_file_transfer__ = __webpack_require__(311);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_file__ = __webpack_require__(312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_camera__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_network__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__app_component__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_login_login__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_menu_menu__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_safety_safety__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_project_project__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_misc_misc__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_equipment_equipment__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_labor_labor__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_add_photo_add_photo__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_safety_review_safety_review__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_project_review_project_review__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_sub_menu_sub_menu__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_success_success__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_support_support__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__services_reap_service__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__providers_stem_api_stem_api__ = __webpack_require__(36);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var AppModule = /** @class */ (function () {
+    function AppModule() {
+    }
+    AppModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_17__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_18__pages_login_login__["a" /* LoginPage */],
+                __WEBPACK_IMPORTED_MODULE_19__pages_menu_menu__["a" /* MenuPage */],
+                __WEBPACK_IMPORTED_MODULE_20__pages_safety_safety__["a" /* SafetyPage */],
+                __WEBPACK_IMPORTED_MODULE_21__pages_project_project__["a" /* ProjectPage */],
+                __WEBPACK_IMPORTED_MODULE_22__pages_misc_misc__["a" /* MiscPage */],
+                __WEBPACK_IMPORTED_MODULE_23__pages_equipment_equipment__["a" /* EquipmentPage */],
+                __WEBPACK_IMPORTED_MODULE_24__pages_labor_labor__["a" /* LaborPage */],
+                __WEBPACK_IMPORTED_MODULE_25__pages_add_photo_add_photo__["a" /* AddPhotoPage */],
+                __WEBPACK_IMPORTED_MODULE_28__pages_sub_menu_sub_menu__["a" /* SubMenuPage */],
+                __WEBPACK_IMPORTED_MODULE_26__pages_safety_review_safety_review__["a" /* SafetyReviewPage */],
+                __WEBPACK_IMPORTED_MODULE_27__pages_project_review_project_review__["a" /* ProjectReviewPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_success_success__["a" /* SuccessPage */],
+                __WEBPACK_IMPORTED_MODULE_30__pages_support_support__["a" /* SupportPage */]
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["b" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_7_angular2_signaturepad__["SignaturePadModule"],
+                __WEBPACK_IMPORTED_MODULE_11_ionic_select_searchable__["SelectSearchableModule"],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
+                __WEBPACK_IMPORTED_MODULE_12__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["IonicModule"].forRoot(__WEBPACK_IMPORTED_MODULE_17__app_component__["a" /* MyApp */], {}, {
+                    links: [
+                        { loadChildren: '../pages/add-photo/add-photo.module#AddPhotoPageModule', name: 'AddPhotoPage', segment: 'add-photo', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/equipment/equipment.module#EquipmentPageModule', name: 'EquipmentPage', segment: 'equipment', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/labor/labor.module#LaborPageModule', name: 'LaborPage', segment: 'labor', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/menu/menu.module#MenuPageModule', name: 'MenuPage', segment: 'menu', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/misc/misc.module#MileagePageModule', name: 'MiscPage', segment: 'misc', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/project-review/project-review.module#ProjectReviewPageModule', name: 'ProjectReviewPage', segment: 'project-review', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/project/project.module#ProjectPageModule', name: 'ProjectPage', segment: 'project', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/safety-review/safety-review.module#SafetyReviewPageModule', name: 'SafetyReviewPage', segment: 'safety-review', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/safety/safety.module#SafetyPageModule', name: 'SafetyPage', segment: 'safety', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/sub-menu/sub-menu.module#SubMenuPageModule', name: 'SubMenuPage', segment: 'sub-menu', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/success/success.module#SuccessPageModule', name: 'SuccessPage', segment: 'success', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/support/support.module#SupportPageModule', name: 'SupportPage', segment: 'support', priority: 'low', defaultHistory: [] }
+                    ]
+                })
+            ],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["IonicApp"]],
+            entryComponents: [
+                __WEBPACK_IMPORTED_MODULE_17__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_18__pages_login_login__["a" /* LoginPage */],
+                __WEBPACK_IMPORTED_MODULE_19__pages_menu_menu__["a" /* MenuPage */],
+                __WEBPACK_IMPORTED_MODULE_20__pages_safety_safety__["a" /* SafetyPage */],
+                __WEBPACK_IMPORTED_MODULE_21__pages_project_project__["a" /* ProjectPage */],
+                __WEBPACK_IMPORTED_MODULE_22__pages_misc_misc__["a" /* MiscPage */],
+                __WEBPACK_IMPORTED_MODULE_23__pages_equipment_equipment__["a" /* EquipmentPage */],
+                __WEBPACK_IMPORTED_MODULE_24__pages_labor_labor__["a" /* LaborPage */],
+                __WEBPACK_IMPORTED_MODULE_25__pages_add_photo_add_photo__["a" /* AddPhotoPage */],
+                __WEBPACK_IMPORTED_MODULE_28__pages_sub_menu_sub_menu__["a" /* SubMenuPage */],
+                __WEBPACK_IMPORTED_MODULE_26__pages_safety_review_safety_review__["a" /* SafetyReviewPage */],
+                __WEBPACK_IMPORTED_MODULE_27__pages_project_review_project_review__["a" /* ProjectReviewPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_success_success__["a" /* SuccessPage */],
+                __WEBPACK_IMPORTED_MODULE_30__pages_support_support__["a" /* SupportPage */]
+            ],
+            providers: [
+                __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__["a" /* StatusBar */],
+                __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */],
+                __WEBPACK_IMPORTED_MODULE_8__ionic_native_geolocation__["a" /* Geolocation */],
+                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["IonicErrorHandler"] },
+                __WEBPACK_IMPORTED_MODULE_32__providers_stem_api_stem_api__["a" /* StemApiProvider */],
+                __WEBPACK_IMPORTED_MODULE_31__services_reap_service__["a" /* ReapService */],
+                __WEBPACK_IMPORTED_MODULE_9__ionic_native_device__["a" /* Device */],
+                __WEBPACK_IMPORTED_MODULE_10__ionic_native_app_version__["a" /* AppVersion */],
+                __WEBPACK_IMPORTED_MODULE_13__ionic_native_file_transfer__["a" /* FileTransfer */],
+                __WEBPACK_IMPORTED_MODULE_16__ionic_native_network__["a" /* Network */],
+                //FileUploadOptions,
+                //FileTransferObject,
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_file__["a" /* File */],
+                __WEBPACK_IMPORTED_MODULE_15__ionic_native_camera__["a" /* Camera */]
+            ]
+        })
+    ], AppModule);
+    return AppModule;
+}());
+
+//# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ 313:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(50);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var MyApp = /** @class */ (function () {
+    function MyApp(platform, statusBar, splashScreen) {
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_login_login__["a" /* LoginPage */];
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            statusBar.styleDefault();
+            splashScreen.hide();
+        });
+    }
+    MyApp = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\app\app.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    ], MyApp);
+    return MyApp;
+}());
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 36:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StemApiProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+// import { Observable } from 'rxjs/Observable';
+//import { mergeMap, retry } from 'rxjs/operators';
+var StemApiProvider = /** @class */ (function () {
+    function StemApiProvider(http) {
+        this.http = http;
+        //api urls will change according to which build is being tested
+        //private apiloginUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=Newreaplogin';
+        this.apiloginUrl = 'http://10.0.0.21/api.php?action=Newreaplogin';
+        //private apisubmitSafteyUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=SaveASIsafetyform';
+        this.apisubmitSafteyUrl = 'http://10.0.0.21/api.php?action=SaveASIsafetyform';
+        //private apiGetUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=GetASIData';
+        this.apiGetUrl = 'http://10.0.0.21/api.php?action=GetASIData';
+        //private getMd5Check:string = 'https://sandbox.stemsoftware.com/api.php?action=GetMd5Check';
+        this.getMd5Check = 'http://10.0.0.21/api.php?action=GetMd5Check';
+        //console.log('Hello RestProvider Provider');
+    }
+    //POST login info
+    StemApiProvider.prototype.validateUser = function (data) {
+        var _this = this;
+        //console.log(data.userName,data.passWord)
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apiloginUrl, data, { responseType: 'text' })
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    //POST form submitBOL
+    StemApiProvider.prototype.submitSafetyForm = function (data, authToken) {
+        var _this = this;
+        console.log(data, authToken);
+        var httpOptions = {
+            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({
+                'Accept': 'application/json, text/plain',
+                'Content-Type': 'application/json',
+                'Authorization': authToken
+            })
+        };
+        return new Promise(function (resolve, reject) {
+            _this.http.post(_this.apisubmitSafteyUrl, JSON.stringify(data), httpOptions)
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    //GET BOLdata details
+    StemApiProvider.prototype.getData = function (authToken) {
+        var _this = this;
+        var httpOptions = {
+            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({
+                'Accept': 'application/json, text/plain',
+                'Content-Type': 'application/json',
+                'Authorization': authToken
+            })
+        };
+        //console.log(authToken);
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.apiGetUrl, httpOptions)
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    StemApiProvider.prototype.getMD5Check = function (authToken) {
+        var _this = this;
+        var httpOptions = {
+            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({
+                'Accept': 'application/json, text/plain',
+                'Content-Type': 'application/json',
+                'Authorization': authToken
+            })
+        };
+        return new Promise(function (resolve, reject) {
+            _this.http.get(_this.getMd5Check, httpOptions)
+                .subscribe(function (res) {
+                resolve(res);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    };
+    StemApiProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object])
+    ], StemApiProvider);
+    return StemApiProvider;
+    var _a;
+}());
+
+//# sourceMappingURL=stem-api.js.map
+
+/***/ }),
+
+/***/ 50:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_stem_api_stem_api__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__menu_menu__ = __webpack_require__(109);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var LoginPage = /** @class */ (function () {
+    function LoginPage(navCtrl, navParams, stemAPI, loadingCtrl, alertCtrl, storage) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.stemAPI = stemAPI;
+        this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
+        this.storage = storage;
+        this.res = {};
+        /* Verifies if the user is authenticated */
+        //console.log(this.storage.get('authToken'));
+        this.storage.get('authToken').then(function (data) {
+            if (data != null) {
+                _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__menu_menu__["a" /* MenuPage */]);
+            }
+        });
+    }
+    LoginPage_1 = LoginPage;
+    LoginPage.prototype.onSubmit = function (form) {
+        var _this = this;
+        var loading = this.loadingCtrl.create({
+            content: 'Signing in...'
+        });
+        loading.present();
+        //console.log(form.value);
+        // API POST authentication
+        this.stemAPI.validateUser(form.value).then(function (result) {
+            form.reset(); //clears values of the form after data is saved to array
+            _this.res = JSON.parse(result.toString()); //converts result to array
+            //console.log(this.res);
+            if (_this.res.token != "") {
+                _this.storage.set('authToken', _this.res.token);
+            }
+            //console.log(localStorage);
+            if (_this.res.status == true) {
+                setTimeout(function () {
+                    LoginPage_1.initialLogin = true;
+                    _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__menu_menu__["a" /* MenuPage */]);
+                    loading.dismiss();
+                }, 1000);
+            }
+            else {
+                loading.dismiss();
+                var alert_1 = _this.alertCtrl.create({
+                    title: _this.res.msg,
+                    buttons: ['Dismiss']
+                });
+                alert_1.present();
+            }
+            //console.log(result.toString());
+        }, function (err) {
+            loading.dismiss();
+            var alert = _this.alertCtrl.create({
+                title: err.msg,
+                buttons: ['Dismiss']
+            });
+            alert.present();
+            console.log(err);
+        });
+    };
+    LoginPage.initialLogin = false;
+    LoginPage = LoginPage_1 = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      ASSI\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<!-- ion-content is similar to the body of the page -->\n<ion-content padding class="background">\n\n<form #f="ngForm" (ngSubmit)="onSubmit(f)">\n  <ion-list>\n    <ion-item class="bg-form">\n      <ion-label color="primary" stacked style="font-size:20px;color:black;">Username</ion-label>\n      <ion-input style="padding-top:10px;font-size:18px;"\n      type="text"\n      name="userName"\n      placeholder="Username"\n      ngModel\n      required></ion-input>\n    </ion-item>\n    <ion-item  class="bg-form">\n      <ion-label color="primary" stacked style="font-size:20px;color:black;">Password</ion-label>\n      <ion-input style="padding-top:10px;font-size:18px;"\n      type="password"\n      name="passWord"\n      placeholder="Password"\n      ngModel\n      required></ion-input>\n    </ion-item>\n    <button\n    id="loginButton"\n    ion-button\n    type="submit"\n    block\n    large\n    [disabled]="!f.valid">Login</button>\n  </ion-list>\n</form>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\login\login.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_2__providers_stem_api_stem_api__["a" /* StemApiProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
+    ], LoginPage);
+    return LoginPage;
+    var LoginPage_1;
+}());
+
+//# sourceMappingURL=login.js.map
+
+/***/ }),
+
+/***/ 55:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SuccessPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_reap_service__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SuccessPage = /** @class */ (function () {
+    function SuccessPage(navCtrl, navParams, reap) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.reap = reap;
+        this.successMessage = this.navParams.get('success');
+    }
+    SuccessPage.prototype.backToMenu = function () {
+        this.reap.equipment = [];
+        this.reap.labor = [];
+        this.reap.misc = [];
+        this.reap.photo = [];
+        this.navCtrl.popTo(this.navCtrl.getByIndex(1)); //pops to menu page
+    };
+    SuccessPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-success',template:/*ion-inline-start:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\success\success.html"*/'<ion-header>\n  <ion-navbar  hideBackButton="true">\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-item no-lines>\n    <h1>Submission Success!</h1>\n  </ion-item>\n  <ion-item no-lines>\n    <h3>{{this.successMessage}}</h3>\n  </ion-item>\n  <ion-item no-lines>\n    <button id="homeButton" (click)="backToMenu()" ion-button large>Home</button>\n  </ion-item>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Stem Dev\Desktop\ASI\ASI\src\pages\success\success.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+            __WEBPACK_IMPORTED_MODULE_2__services_reap_service__["a" /* ReapService */]])
+    ], SuccessPage);
+    return SuccessPage;
+}());
+
+//# sourceMappingURL=success.js.map
+
+/***/ })
+
+},[220]);
+//# sourceMappingURL=main.js.map

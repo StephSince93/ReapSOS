@@ -1,0 +1,24 @@
+page-menu {
+  ion-title {
+    color: reapHeader;
+    text-align:center;
+    font-size: 9px;
+    font-family: sans-serif;
+    }
+  ion-item{
+    text-align:center;
+
+    width: 100% !important;
+    max-width: 100%;
+    .menuButton{
+        width: 100% !important;
+        max-width: 100%;
+        height:75px;
+        background-color: white;
+        color: black;
+    }
+  }
+  .full-width {
+  width: 100%;
+}
+}

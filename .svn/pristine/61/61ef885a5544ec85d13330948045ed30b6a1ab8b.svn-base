@@ -1,0 +1,51 @@
+{
+  "_from": "@ionic-native/network",
+  "_id": "@ionic-native/network@4.8.0",
+  "_inBundle": false,
+  "_integrity": "sha512-60F6VLpWLmCTSPxaFGxmXRVre+e09xWU/x050MUkeOX/OkCfCjDOQUP1bleLe9O7rZFL3fPtngZV7TObOrRmXQ==",
+  "_location": "/@ionic-native/network",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ionic-native/network",
+    "name": "@ionic-native/network",
+    "escapedName": "@ionic-native%2fnetwork",
+    "scope": "@ionic-native",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ionic-native/network/-/network-4.8.0.tgz",
+  "_shasum": "ccc4aaca43fd9b73a21b9440a339f6444fb849c5",
+  "_spec": "@ionic-native/network",
+  "_where": "C:\\Users\\Stem Dev\\Desktop\\ASI\\ASI",
+  "author": {
+    "name": "ionic"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/ionic-native/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Ionic Native - Native plugins for ionic apps",
+  "homepage": "https://github.com/ionic-team/ionic-native#readme",
+  "license": "MIT",
+  "module": "index.js",
+  "name": "@ionic-native/network",
+  "peerDependencies": {
+    "@ionic-native/core": "^4.2.0",
+    "@angular/core": "*",
+    "rxjs": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionic-team/ionic-native.git"
+  },
+  "typings": "index.d.ts",
+  "version": "4.8.0"
+}

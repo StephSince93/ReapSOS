@@ -1,0 +1,37 @@
+page-support {
+  ion-title {
+      color: white;
+      text-align:center;
+      font-size: 1.6em;
+      }
+  .navButtons{
+      background-color: green;
+      font-size: 18px;
+      color: white;
+      font-family: inherit;
+      font-weight: lighter;
+      text-decoration:underline;
+    }
+  ion-col{
+    text-align: center;
+    margin: 10px 0 10px 0;
+  }
+  #supportButton{
+    color: white;
+    background-color: $toolbar-background;
+    width:70%;
+    margin:50px 0 0 0;
+    text-align: center;
+    height:50px;
+    font-size: 18px;
+    font-family: inherit;
+  }toolbar-title toolbar-title-md{
+    font-family: inherit;
+  }
+  .supportData{
+    padding-bottom:25px;
+    text-decoration:underline;
+    color:blue;
+    font-size:1.1em;
+  }
+}
