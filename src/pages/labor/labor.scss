@@ -6,4 +6,29 @@ page-labor {
     margin-top:25px;
     margin-right: 20px !important;
   }
+  ion-title {
+      color: reapHeader;
+      font-size: 9px;
+      font-family: sans-serif;
+      }
+  .label-md[stacked]{
+    height:50px;
+    font-size:1.2em;
+    font-weight:bold;
+    color:primary;
+  }
+  .label-md{
+    margin:0;
+    // margin-top:5px;
+    // margin-bottom:5px;
+  }
+  .label-ios{
+    margin:0;
+    // margin-top:5px;
+    // margin-bottom:5px;
+  }
+  ion-input{
+    font-size: 1.5em;
+    text-align: center;
+  }
 }

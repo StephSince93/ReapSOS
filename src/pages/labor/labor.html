@@ -10,7 +10,7 @@
 <ion-content>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-list>
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <select-searchable
          [(ngModel)]="Personnel"
          title="Personnel"
@@ -28,7 +28,7 @@
        </select-searchable>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Hours</ion-label>
         <ion-input
         ngModel

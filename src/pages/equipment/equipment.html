@@ -10,7 +10,7 @@
 <ion-content>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-list>
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Equipment Type</ion-label>
         <ion-select
           [(ngModel)]="Type"
@@ -21,7 +21,7 @@
         </ion-select>
       </ion-item>
 
-      <ion-item class="formField" >
+      <ion-item class="formField ionField" >
         <!-- <ion-label color="primary" stacked>Equipment</ion-label> -->
       <select-searchable
        [(ngModel)]="Equipment"
@@ -40,7 +40,7 @@
      </select-searchable>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Number of Days</ion-label>
         <ion-input
         ngModel

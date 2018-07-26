@@ -10,11 +10,21 @@ page-safety {
     font-weight:bold;
     color:primary;
   }
+  .label-md{
+    margin:0;
+    // margin-top:5px;
+    // margin-bottom:5px;
+  }
+  .label-ios{
+    margin:0;
+    // margin-top:5px;
+    // margin-bottom:5px;
+  }
   ion-input{
     font-size: 1.5em;
     text-align: center;
   }
-  
+
   .warningLabel{
     text-align: center;
     text-decoration: underline;

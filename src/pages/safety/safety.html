@@ -8,7 +8,7 @@
 <ion-content>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-list>
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Date</ion-label>
         <ion-datetime
         type="date"
@@ -18,7 +18,7 @@
         [(ngModel)]="currentDate"></ion-datetime>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Project</ion-label>
         <ion-select
           #projectName
@@ -31,7 +31,7 @@
 <!------------------------------------------------------------------------->
 
 <div *ngIf="projectSelected">
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>AFE/Order Number</ion-label>
         <ion-select
           [(ngModel)]="selectedArray['AFE_Or_Order_Number']"
@@ -43,12 +43,12 @@
       </ion-item>
       <!-- When user types new AFE, but decides to click back
             on a current AFE the value is not submitted -->
-      <ion-item *ngIf="selectedArray['AFE_Or_Order_Number'] == 'newAFE'">
+      <ion-item class="formField ionField" *ngIf="selectedArray['AFE_Or_Order_Number'] == 'newAFE'">
           <ion-label color="primary" stacked>New AFE</ion-label>
           <ion-label class="warningLabel" *ngIf="orderNumber.touched" text-wrap>Note: New AFE will take up to 5 minutes to populate on forms!</ion-label>
           <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" text-wrap></ion-input>
       </ion-item>
-    <ion-item class="formField">
+    <ion-item class="formField ionField">
           <!-- <ion-label color="primary" stacked >Location</ion-label> -->
           <select-searchable
           [(ngModel)]="selectedArray['Location']"
@@ -67,7 +67,7 @@
         </select-searchable>
         </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Rig Name & Number</ion-label>
           <ion-input
             type="text"
@@ -77,7 +77,7 @@
         </ion-item>
 
 
-        <ion-item class="formField">
+        <ion-item class="formField ionField">
           <ion-label color="primary" stacked>Department</ion-label>
           <ion-select [(ngModel)]="selectedArray['Department']" name="department">
             <ion-option value="Drilling">Drilling</ion-option>
@@ -87,7 +87,7 @@
         </ion-item>
 
 
-        <ion-item class="formField">
+        <ion-item class="formField ionField">
           <ion-label color="primary" stacked>Division</ion-label>
           <ion-select [(ngModel)]="selectedArray['Division']" name="division">
             <ion-option value="Safety Services">Safety Services</ion-option>
@@ -99,13 +99,13 @@
           </ion-select>
         </ion-item>
 
-        <ion-item class="formField">
+        <ion-item class="formField ionField">
           <ion-label color="primary" stacked >Company Man</ion-label>
           <ion-input [(ngModel)]="selectedArray['Company_Man']" name="companyMan">
           </ion-input>
         </ion-item>
 
-        <ion-item class="formField">
+        <ion-item class="formField ionField">
           <ion-label color="primary" stacked >Company Man Phone Number</ion-label>
           <ion-input
           [(ngModel)]="selectedArray['Company_Man_Phone_Number']"
@@ -119,7 +119,7 @@
         </ion-item>
 </div>
 <div *ngIf="!projectSelected">
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <!-- <ion-label color="primary" stacked >Location</ion-label> -->
         <select-searchable
         [(ngModel)]="location"
@@ -138,13 +138,13 @@
       </select-searchable>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked >Company Man</ion-label>
         <ion-input ngModel name="companyMan">
         </ion-input>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked >Company Man Phone Number</ion-label>
         <ion-input
         ngModel
@@ -157,7 +157,7 @@
         </ion-input>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>AFE/Order Number</ion-label>
         <ion-select
           [(ngModel)]="orderNumber"
@@ -169,13 +169,13 @@
       </ion-item>
     <!-- When user types new AFE, but decides to click back
         on a current AFE the value is not submitted -->
-      <ion-item *ngIf="orderNumber == 'newAFE'">
+      <ion-item class="formField ionField" *ngIf="orderNumber == 'newAFE'">
         <ion-label color="primary" stacked>New AFE</ion-label>
         <ion-label class="warningLabel"*ngIf="orderNumber.touched" text-wrap>Note: New AFE will take up to 5 minutes to populate on forms!</ion-label>
         <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" placeholder="" text-wrap></ion-input>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Rig Name & Number</ion-label>
         <ion-input
         type="text"
@@ -184,7 +184,7 @@
         ngModel></ion-input>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Department</ion-label>
         <ion-select ngModel name="department">
           <ion-option value="Drilling">Drilling</ion-option>
@@ -193,7 +193,7 @@
         </ion-select>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Division</ion-label>
         <ion-select ngModel name="division">
           <ion-option value="Safety Services">Safety Services</ion-option>
@@ -213,7 +213,7 @@
           </button>
       </ion-chip>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Start Date</ion-label>
         <ion-datetime
         type="date"
@@ -237,7 +237,7 @@
     </div>
 
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>End Date</ion-label>
         <ion-datetime
         type="date"
@@ -247,7 +247,7 @@
         #endDate="ngModel"></ion-datetime>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Quantity of Hours</ion-label>
         <ion-input
         type="number"
@@ -259,7 +259,7 @@
         </ion-input>
     </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Job Decription</ion-label>
         <ion-textarea
         type="textarea"
@@ -268,7 +268,7 @@
         ngModel></ion-textarea>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Number of Trips</ion-label>
         <ion-input
         type="number"
@@ -277,7 +277,7 @@
         ngModel></ion-input>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Number of Miles</ion-label>
         <ion-input
         type="number"
@@ -286,7 +286,7 @@
         ngModel></ion-input>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Representative to Sign</ion-label>
         <ion-input
         type="text"
@@ -295,7 +295,7 @@
         ngModel></ion-input>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Comments</ion-label>
         <ion-textarea
         type="text"

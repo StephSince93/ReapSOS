@@ -14,22 +14,22 @@ page-support {
     }
   ion-col{
     text-align: center;
-    margin: 10px 0 10px 0;
+    margin: 5px 0 5px 0;
   }
   #supportButton{
     color: white;
     background-color: $toolbar-background;
     width:70%;
-    margin:50px 0 0 0;
+    margin:0;
     text-align: center;
-    height:50px;
+    height: 40px;
     font-size: 18px;
     font-family: inherit;
   }toolbar-title toolbar-title-md{
     font-family: inherit;
   }
   .supportData{
-    padding-bottom:25px;
+    padding-bottom:15px;
     text-decoration:underline;
     color:blue;
     font-size:1.1em;

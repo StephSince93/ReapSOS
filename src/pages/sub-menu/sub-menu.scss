@@ -7,16 +7,23 @@ page-sub-menu {
     }
   ion-item{
     text-align:center;
-
     width: 100% !important;
     max-width: 100%;
-    .menuButton{
-        width: 100% !important;
-        max-width: 100%;
-        height:75px;
-        background-color: white;
-        color: black;
-    }
+  }
+  //Removes spaces between menu buttons
+  .item-md{
+    padding: 0;
+  }
+  .label-md{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .item-ios{
+    padding: 0;
+  }
+  .label-ios{
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .full-width {
   width: 100%;
