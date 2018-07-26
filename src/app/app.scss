@@ -61,6 +61,12 @@ ion-label.label-ios[stacked]{
   text-align: left;
   float:left;
 }
+.searchbar-md .searchbar-input{//makes background-color for ion-search bar white
+  background-color:white;
+}
+.searchbar-ios .searchbar-input{//makes background-color for ion-search bar white
+  background-color:white;
+}
 .item-md.item-block .item-inner{
   border:none;
   padding:0;
