@@ -35,8 +35,8 @@ export class ProjectPage {
 
   onSubmit(Form: NgForm){
     this.reap.projectForm = Form.value;
-    console.log(this.reap.projectForm);
-    //this.navCtrl.push(ProjectReviewPage);
+    //console.log(this.reap.projectForm);
+    this.navCtrl.push(ProjectReviewPage);
   }
   locationChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);

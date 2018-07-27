@@ -25,7 +25,7 @@ export class MenuPage {
      /* calls local storage once user hits menupage*/
 
      if(LoginPage.initialLogin==true){
-        console.log('Initial Login is:',LoginPage.initialLogin);
+        //console.log('Initial Login is:',LoginPage.initialLogin);
        this.storage.get('authToken').then((data)=>{
        if(data!=null){
        //console.log('GET request happened');
@@ -35,7 +35,7 @@ export class MenuPage {
     }
     else{
       this.reap.getLocalStorage();
-      console.log('Initial Login is:',LoginPage.initialLogin);
+      //console.log('Initial Login is:',LoginPage.initialLogin);
     }
   }
 

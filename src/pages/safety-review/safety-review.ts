@@ -104,12 +104,12 @@ this.platform.ready().then(() => {
                  /*
                  *
                  */
-                 console.log(this.submitData);
+                 //console.log(this.submitData);
                  loading.present();
               /*******************TESTING***********************************/
                  if(this.reap.online=="offline"){
-                   console.log('user is offline while submitting, will store data and submit later');
-                   console.log(this.reap.online);
+                   //console.log('user is offline while submitting, will store data and submit later');
+                   //console.log(this.reap.online);
 
                    this.storage.set('offlineSubmission',this.submitData);
                    let alert = this.alertCtrl.create({
@@ -123,7 +123,7 @@ this.platform.ready().then(() => {
                                 setTimeout(() => {
                                 loading.dismiss();
                               });
-                                 this.navCtrl.push(SuccessPage,{'success':'Please wait before submitting another form!'});
+                                 this.navCtrl.push(SuccessPage,{'Success':'Please wait before submitting another form!'});
                                  this.submitData = [];//resets Submission so data isnt inserted twice
                               }
                             }
@@ -132,7 +132,7 @@ this.platform.ready().then(() => {
                    alert.present();
 
                  }else{
-                 console.log(this.reap.online);
+                 //console.log(this.reap.online);
                  //creates a loading controller while user submits
                  this.stemAPI.submitSafetyForm(this.submitData,this.reap.token).then((result) =>{
                    //converts result to array
@@ -147,19 +147,32 @@ this.platform.ready().then(() => {
               if(this.res.Status == false){
               let alert = this.alertCtrl.create({
               title: 'Error Submitting, ',
-              message: this.res.MSG,
+              message: 'Try submitting again, If issues persists contact stem support.',
               buttons: [
                        {
-                         text: 'Acknowledged',
+                         text: 'Try Submitting Again',
                           role: 'Yes',
                          handler: () => {
                            setTimeout(() => {
                            loading.dismiss();
                          });
-                             this.submitClicked=false;//enables the submission button to resubmit
+                            this.submitClicked=false;//enables the submission button to resubmit
                             this.submitData = [];//resets Submission so data isnt inserted twice
                          }
-                       }
+                       },
+                       {
+                     text: 'Submit Offline and Sync later',
+                      role: 'Yes',
+                     handler: () => {
+                        /* allows user to submit offline and saves form data into a form variable
+                        no data will be submitted until interenet connection is made via a sync or observable call */
+                        /****** TESTING    *********************/
+                        this.storage.set('offlineSubmission',this.submitData);
+                        this.submitData = [];
+
+                        this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
+                     }
+                   }
                     ]
                 });
               alert.present();

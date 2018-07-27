@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 //import { mergeMap, retry } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
 import { SuccessPage } from '../success/success';
 import { StemApiProvider } from '../../providers/stem-api/stem-api';
 import { ReapService } from '../../services/reap-service';
@@ -18,7 +19,8 @@ export class ProjectReviewPage {
               public reap: ReapService,
               private stemAPI: StemApiProvider,
               private alertCtrl: AlertController,
-              private loadingCtrl: LoadingController) {
+              private loadingCtrl: LoadingController,
+              private storage: Storage) {
     this.formDetails.push(this.reap.projectForm);
   }
   editForm(){
@@ -78,7 +80,20 @@ export class ProjectReviewPage {
              handler: () => {
               this.submitClicked = false;
              }
-           }
+           },
+                   {
+                     text: 'Submit Offline and Sync later',
+                      role: 'Yes',
+                     handler: () => {
+                        /* allows user to submit offline and saves form data into a form variable
+                        no data will be submitted until interenet connection is made via a sync or observable call */
+                        /****** TESTING    *********************/
+                        this.storage.set('offlineSubmission',this.submitData);
+                        this.submitData = [];
+
+                        this.navCtrl.push(SuccessPage,{'success':'Please go to support page and manually submit current form before submitting any new forms!'});
+                     }
+                   }
         ]
     });
  alert.present();

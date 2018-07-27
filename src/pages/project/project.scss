@@ -20,6 +20,12 @@ page-project {
     // margin-top:5px;
     // margin-bottom:5px;
   }
+  .select-searchable-md .select-searchable-value{
+    max-width:45%;
+  }
+  .select-searchable-ios .select-searchable-value{
+    max-width:45%;
+  }
   ion-input{
     font-size: 1.5em;
     text-align: center;

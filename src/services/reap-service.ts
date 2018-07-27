@@ -37,7 +37,7 @@ export class ReapService {
     checkConnection: Subscription;
     constructor(public loadingCtrl:LoadingController,public toast: ToastController,public network: Network,private stemAPI: StemApiProvider,public storage: Storage){
     //May have to unsubscribe from Observable
-    console.log('here in service Constructor');
+    //console.log('here in service Constructor');
     /* Time Interval checking for network connection */
     this.checkConnection = Observable.interval(250 * 60).subscribe(x => {
       //console.log('here every 15 seconds');
@@ -154,12 +154,17 @@ export class ReapService {
         this.getAFE = data;
         });
       }
-      
+//submits form user saved offline When they click the button in Support Page
     submitOfflineForm(data){
+      // console.log(data);
+      // console.log(data[0]);
+
       const loading = this.loadingCtrl.create({
         content: 'Retrying Form Submission...'
       });
       loading.present();
+      if(data[0]['safety']){//checks if safety form was submitted offline
+        //console.log('safety form submitted');
       this.stemAPI.submitSafetyForm(data,this.token).then((result) =>{
           this.storage.remove('offlineSubmission');
           this.presentToast('submission Successful');
@@ -173,6 +178,28 @@ export class ReapService {
               this.presentToast(err);
               console.log(err);
             });
+       }else if(data[0]['project']){//checks if project form was submitted offline
+          //console.log('project form submitted');
+          this.stemAPI.submitSafetyForm(data,this.token).then((result) =>{
+              this.storage.remove('offlineSubmission');
+              this.presentToast('submission Successful');
+              setTimeout(() => {
+              loading.dismiss();
+            }, 5000);
+            },(err)=>{
+                    setTimeout(() => {
+                    loading.dismiss();
+                  }, 5000);
+                  this.presentToast(err);
+                  console.log(err);
+                });
+      }
+      else{
+        setTimeout(() => {
+        loading.dismiss();
+      }, 5000);
+      this.presentToast('Error Submittiing Offline Form!');
+      }
     }
 
     checkMD5(){

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController,LoadingController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController,LoadingController,AlertController, NavParams } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { AppVersion } from '@ionic-native/app-version';
 import { Storage } from '@ionic/storage';
@@ -25,7 +25,8 @@ export class SupportPage {
               private appVersion: AppVersion,
               private reap: ReapService,
               private storage: Storage,
-              private network: Network) {
+              private network: Network,
+              private alertCtrl: AlertController) {
                 this.omegaPlatform = this.device.platform;
                 this.deviceVersion = this.device.version;
 
@@ -66,4 +67,19 @@ export class SupportPage {
           //pops back to the login page
           this.navCtrl.popToRoot();
      }
+     toSubmitOffline(){
+     this.storage.get('offlineSubmission').then((data)=>{
+       if(data==null){
+         let alert = this.alertCtrl.create({
+              title: 'No data',
+             subTitle: 'No data was submitted offline',
+              buttons: ['Dismiss']
+            });
+          alert.present();
+       }
+       else{
+         this.reap.submitOfflineForm(data);
+       }
+     });
+   }
   }
