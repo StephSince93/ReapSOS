@@ -45,7 +45,7 @@ ion-label.label-ios[stacked]{
 
 
 }.select-searchable-value-item{
-  overflow:inherit;
+  overflow: inherit;
   text-align: center;
   //font-size: 10.5px;
   font-weight: bold;
@@ -66,6 +66,12 @@ ion-label.label-ios[stacked]{
 }
 .searchbar-ios .searchbar-input{//makes background-color for ion-search bar white
   background-color:white!important;
+}
+ion-item-group.select-searchable-group button.select-searchable-item.item.item-block.item-md div.item-inner div.input-wrapper ion-label.label.label-md div{
+  white-space: pre-line !important;//breaks the company/lease/well string in the ion-seachable
+}
+ion-item-group.select-searchable-group button.select-searchable-item.item.item-block.item-md div.item-inner div.input-wrapper ion-label.label.label-ios div{
+  white-space: pre-line !important;//breaks the company/lease/well string in the ion-seachable
 }
 .item-md.item-block .item-inner{
   border:none;

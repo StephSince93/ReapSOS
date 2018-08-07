@@ -36,9 +36,6 @@ export class SafetyPage {
         //console.log(this.projectArray[0]['Rig_Name_And_Number']);
   }
 
-  ionViewDidLoad() {
-    //console.log('ionViewDidLoad SafetyPage');
-  }
   projectSelect(project,i){
     //console.log(i);
     this.selectedArray = this.projectArray[i];
@@ -64,11 +61,11 @@ export class SafetyPage {
   locationChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
     }
-
-  delete(chip){
-    chip.control.touched = false;
-    chip.valueAccessor._text = "";
-    console.log(chip);
-
-  }
+  // 
+  // delete(chip){
+  //   chip.control.touched = false;
+  //   chip.valueAccessor._text = "";
+  //   console.log(chip);
+  //
+  // }
 }

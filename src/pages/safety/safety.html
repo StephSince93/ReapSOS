@@ -206,12 +206,12 @@
       </ion-item>
 </div>
 
-      <ion-chip *ngIf="startDate.touched" class="removeText" >
+      <!-- <ion-chip *ngIf="startDate.touched" class="removeText" >
         <ion-label>Clear Start Date</ion-label>
           <button ion-button type="button" clear color="danger" (click)="delete(startDate)">
               <ion-icon name="close-circle"></ion-icon>
           </button>
-      </ion-chip>
+      </ion-chip> -->
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Start Date</ion-label>
@@ -225,16 +225,16 @@
         </ion-datetime>
       </ion-item>
 
-      <ion-chip *ngIf="endDate.touched" class="removeText" #chip1>
+      <!-- <ion-chip *ngIf="endDate.touched" class="removeText" #chip1>
         <ion-label>Clear End Date</ion-label>
           <button ion-button clear color="danger" (click)="delete(endDate)">
               <ion-icon name="close-circle"></ion-icon>
           </button>
-      </ion-chip>
+      </ion-chip> -->
 
-      <div>
+      <!-- <div>
       <ion-label class="warningLabel"*ngIf="startDate.touched && endDate.pristine">Please Select An End Date!</ion-label>
-    </div>
+    </div> -->
 
 
       <ion-item class="formField ionField">
@@ -247,6 +247,7 @@
         #endDate="ngModel"></ion-datetime>
       </ion-item>
 
+<!-- [disabled]="startDate.touched || endDate.touched" --> 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>Quantity of Hours</ion-label>
         <ion-input
@@ -254,8 +255,7 @@
         name="hours"
         id="hours"
         placeholder="Enter either hours or dates"
-        ngModel
-        [disabled]="startDate.touched || endDate.touched">
+        ngModel>
         </ion-input>
     </ion-item>
 

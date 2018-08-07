@@ -42,11 +42,11 @@ export class SafetyReviewPage {
               private storage: Storage) {
 
             this.formDetails.push(this.reap.safetyForm);
-            console.log(this.formDetails[0]['project']);
+            //console.log(this.formDetails[0]['project']);
             for(let i=0;i<this.reap.getProject.length;i++){
               if(this.formDetails[0]['project']==this.reap.getProject[i]['ID']){
                 this.projectName = this.reap.getProject[i]['ProjectName'];
-                console.log(this.projectName);
+                //console.log(this.projectName);
               }
               else{
                 this.projectName = "";
@@ -83,13 +83,22 @@ this.platform.ready().then(() => {
     var md5 = new Md5();//md5 hash for custom guid
     var time = new Date();//timestamp
     let alert = this.alertCtrl.create({
-   title: 'Confirm Submittion',
+   title: 'Confirm Submission',
    message: 'Are you sure you want to submit?',
    buttons: [
              {
                text: 'Yes',
                 role: 'Yes',
                handler: () => {
+            let alert = this.alertCtrl.create({
+                title: 'Double Check Information',
+                message: 'Did you review all information submitted?',
+                buttons: [
+                          {
+                            text: 'Yes',
+                             role: 'Yes',
+                            handler: () => {
+
                  let loading = this.loadingCtrl.create({
                    content: 'Submitting...'
                   });
@@ -205,18 +214,30 @@ this.platform.ready().then(() => {
                  });
               }
             }
-          },{
-               text: 'No',
-               role: 'cancel',
-               handler: () => {
-                  this.submitClicked=false;//enables the submission button to resubmit
-                 //console.log('No clicked');
-               }
-             },
-           ]
-      });
-   alert.present();
-  }
+         },{//Second alert asking about submission
+              text: 'No',
+              role: 'cancel',
+              handler: () => {
+                 this.submitClicked=false;//enables the submission button to resubmit
+                //console.log('No clicked');
+              }
+            },
+          ]
+     });
+    alert.present();
+/**********************************************************************/
+   }
+ },{//First alert asking about submission
+    text: 'No',
+    role: 'cancel',
+    handler: () => {
+    this.submitClicked=false;//enables the submission button to resubmit
+       }
+      },
+     ]
+   });
+ alert.present();
+}
 
 
 

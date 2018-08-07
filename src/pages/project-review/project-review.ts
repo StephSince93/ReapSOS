@@ -41,10 +41,10 @@ export class ProjectReviewPage {
                   });
 
     this.submitData.push({'project':this.reap.projectForm});
-    console.log(this.submitData);
+    //console.log(this.submitData);
     loading.present();
     this.stemAPI.submitSafetyForm(this.submitData,this.reap.token).then((result)=>{
-    console.log(result['Status']);
+    //console.log(result['Status']);
         setTimeout(() => {
         loading.dismiss();
       }, 3000);
