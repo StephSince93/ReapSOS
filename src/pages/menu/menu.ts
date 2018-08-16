@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../login/login';
@@ -14,14 +14,16 @@ import { SupportPage } from '../support/support';
   templateUrl: 'menu.html',
 })
 export class MenuPage {
-  public importedData:any ;
+  public importedData:any;
 
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public stemAPI: StemApiProvider,
               public reap: ReapService,
-              public storage: Storage) {
+              public storage: Storage,
+              public loadingCtrl: LoadingController,
+              public alertCtrl: AlertController) {
      /* calls local storage once user hits menupage*/
 
      if(LoginPage.initialLogin==true){
@@ -40,8 +42,41 @@ export class MenuPage {
   }
 
   toSaftey(){
-    this.navCtrl.push(SafetyPage);
-  }
+    //console.log(this.reap.formStart);
+      if(this.reap.formStart==null){//checks if there is not a variable stored in local storage
+        let loading = this.loadingCtrl.create({
+          content: 'Grabbing information from server..'
+         });
+        loading.present();
+        this.reap.formStart = true;
+        this.stemAPI.submitSafetyForm({"formStart":this.reap.formStart},this.reap.token).then((result) =>{
+        this.storage.set('formStart',this.reap.formStart);//sets local storage
+        setTimeout(() => {
+        loading.dismiss();
+        this.navCtrl.push(SafetyPage);
+          }, 2000);
+        }, (err) => {
+        let alert = this.alertCtrl.create({
+            title: 'Error Grabbing Data.. ',
+            message: 'Try Again! If issues persists, please contact Stem Support!',
+            buttons: [
+                 {
+                   text: 'Acknowledged',
+                    role: 'Yes',
+                   handler: () => {
+                     setTimeout(() => {
+                     loading.dismiss();
+                     }, 2000);
+                   }
+                 }
+                ]
+              });//end alert
+            });//end api call
+          }
+      else{// pushed straight to Safety Page if user had previously submitted an initial Safety Form
+        this.navCtrl.push(SafetyPage);
+      }
+  }//end function
   toProject(){
     this.navCtrl.push(ProjectPage);
   }

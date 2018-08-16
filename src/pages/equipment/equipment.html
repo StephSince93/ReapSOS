@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Equipment</ion-title>
+    <ion-title>EQUIPMENT</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,7 +11,7 @@
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-list>
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>Equipment Type</ion-label>
+        <ion-label color="primary" stacked>EQUIPMENT TYPE</ion-label>
         <ion-select
           [(ngModel)]="Type"
           (ngModelChange)="typeSelected()"
@@ -35,13 +35,13 @@
        (onChange)="equipmentChange($event)"
        text-wrap>
         <ng-template selectSearchableLabelTemplate>
-        Equipment
+        EQUIPMENT
         </ng-template>
      </select-searchable>
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>Number of Days</ion-label>
+        <ion-label color="primary" stacked>NUMBER OF DAYS</ion-label>
         <ion-input
         ngModel
         type="number"
@@ -50,7 +50,7 @@
       </ion-item>
 
       <ion-item>
-        <button id="submitButton" ion-button full large>Submit</button>
+        <button id="submitButton" ion-button full large>SUBMIT</button>
      </ion-item>
    </ion-list>
   </form>

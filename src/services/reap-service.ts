@@ -29,6 +29,7 @@ export class ReapService {
     public completeForm:any[]=[];
     public storeFormData:any[]=[];
     public token:any;
+    public formStart:any;
     public networkType:any;
     public online:any = true;
     connected: Subscription;
@@ -121,14 +122,18 @@ export class ReapService {
         //console.log('grabbed local storage');
 
         this.storage.get('authToken').then((data)=>{
-        this.token=data;
+        this.token = data;
         });
 
         this.storage.get('MD5').then((data)=>{
-        this.getMD5=data;
+        this.getMD5 = data;
         //console.log(this.getMD5);
         });
 
+        this.storage.get('formStart').then((data)=>{
+        this.formStart = data;
+        //console.log(this.formStart);
+        });
         this.storage.get('Locations').then((data)=>{
         this.getLocations = data;
         });
@@ -166,6 +171,7 @@ export class ReapService {
       if(data[0]['safety']){//checks if safety form was submitted offline
         //console.log('safety form submitted');
       this.stemAPI.submitSafetyForm(data,this.token).then((result) =>{
+          this.storage.remove('formStart');
           this.storage.remove('offlineSubmission');
           this.presentToast('submission Successful');
           setTimeout(() => {

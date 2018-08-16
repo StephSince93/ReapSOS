@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>New Project</ion-title>
+    <ion-title>NEW PROJECT</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -13,12 +13,11 @@
 
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>Project Name</ion-label>
+        <ion-label color="primary" stacked>PROJECT NAME</ion-label>
         <ion-input
           #projectName
           ngModel
-          name="projectName"
-          placeholder="New Project Name">
+          name="projectName">
         </ion-input>
       </ion-item>
 
@@ -36,75 +35,72 @@
         (onChange)="locationChange($event)"
         text-wrap>
         <ng-template selectSearchableLabelTemplate>
-              Location
+              LOCATION
         </ng-template>
       </select-searchable>
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >Company Man</ion-label>
+        <ion-label color="primary" stacked >COMPANY MAN</ion-label>
         <ion-input ngModel name="companyMan">
         </ion-input>
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >Company Man Phone Number</ion-label>
+        <ion-label color="primary" stacked >COMPANY MAN PHONE NUMBER</ion-label>
         <ion-input
         ngModel
         type="text"
         (keypress)="keyPress($event)"
         name="phoneNumber"
         minlength="7"
-        maxlength="10"
-        placeholder="Phone Number">
+        maxlength="10">
         </ion-input>
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>AFE/Order Number</ion-label>
+        <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
         <ion-select
           [(ngModel)]="orderNumber"
-          name="orderNumber"
-          placeholder="existing AFE numbers">
-          <ion-option value=newAFE>New AFE</ion-option>
+          name="orderNumber">
+          <ion-option value=newAFE>NEW AFE</ion-option>
           <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == '1'">{{afe.Name}}</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item class="formField ionField" *ngIf="orderNumber == 'newAFE'">
-        <ion-label color="primary" stacked>New AFE</ion-label>
+        <ion-label color="primary" stacked>NEW AFE</ion-label>
         <ion-label class="warningLabel"*ngIf="orderNumber.touched" text-wrap>Note: New AFE will take up to 5 minutes to populate on forms!</ion-label>
         <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel"></ion-input>
       </ion-item>
 
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>Rig Name & Number</ion-label>
+        <ion-label color="primary" stacked>RIG NAME & NUMBER</ion-label>
         <ion-input
         type="text"
         name="rigName"
-        placeholder="Rig Name"
         ngModel></ion-input>
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>Department</ion-label>
+        <ion-label color="primary" stacked>DEPARTMENT</ion-label>
         <ion-select ngModel name="department">
-          <ion-option value="Drilling">Drilling</ion-option>
-          <ion-option value="Production">Production</ion-option>
-          <ion-option value="Completion">Completion</ion-option>
+          <ion-option value="DRILLING">DRILLING</ion-option>
+          <ion-option value="PRODUCTION">PRODUCTION</ion-option>
+          <ion-option value="COMPLETION">COMPLETION</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>Division</ion-label>
+        <ion-label color="primary" stacked>DIVISION</ion-label>
         <ion-select ngModel name="division">
-          <ion-option value="Safety Services">Safety Services</ion-option>
-          <ion-option value="Environmental Services">Environmental Services</ion-option>
-          <ion-option value="Pulling Unit Services">Pulling Unit Services</ion-option>
-          <ion-option value="Water Services">Water Services</ion-option>
-          <ion-option value="Roustabout Services">Roustabout Services</ion-option>
-          <ion-option value="Trucking Services">Trucking Services</ion-option>
+          <ion-option value="SAFETY SERVICES">SAFETY SERVICES</ion-option>
+          <ion-option value="ENVOIRNMENTAL SERVICES">ENVIORNMENTAL SERVICES</ion-option>
+          <ion-option value="PULLING UNIT SERVICES">PULLING UNIT SERVICES</ion-option>
+          <ion-option value="WATER SERVICES">WATER SERVICES</ion-option>
+          <ion-option value="ROUSTABOUT SERVICES">ROUSTABOUT SERVICES</ion-option>
+          <ion-option value="TRUCKING SERVICES">TRUCKING SERVICES</ion-option>
         </ion-select>
       </ion-item>
 

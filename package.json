@@ -1,8 +1,8 @@
 {
   "name": "ASI",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "version": "0.2.5",
+  "author": "Stem Software",
+  "homepage": "https://stem.software/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -57,7 +57,7 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.1.9",
+    "@ionic/app-scripts": "^3.1.11",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",

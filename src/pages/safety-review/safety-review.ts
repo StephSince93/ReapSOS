@@ -26,7 +26,6 @@ export class SafetyReviewPage {
   private submitData:any[] = [];
   private md5Data:any;
   private lonlat:any = [];
-  private projectName:string;
   res:any = {};//API submission response
   private submitClicked:boolean = false;
   isDisconnected:any;
@@ -42,17 +41,7 @@ export class SafetyReviewPage {
               private storage: Storage) {
 
             this.formDetails.push(this.reap.safetyForm);
-            //console.log(this.formDetails[0]['project']);
-            for(let i=0;i<this.reap.getProject.length;i++){
-              if(this.formDetails[0]['project']==this.reap.getProject[i]['ID']){
-                this.projectName = this.reap.getProject[i]['ProjectName'];
-                //console.log(this.projectName);
-              }
-              else{
-                this.projectName = "";
-              }
-            }
-
+            console.log(this.formDetails);
             var date = new Date(this.formDetails[0]['currentDate']);
             this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '-' + date.getDate() + '-' + date.getFullYear();
             //console.log(this.laborDetails);
@@ -69,6 +58,7 @@ this.platform.ready().then(() => {
       });
     });
   }
+
   canvasResize(){
     let canvas = document.querySelector('canvas');
     this.signaturePad.set('canvasWidth', canvas.offsetWidth);
@@ -113,7 +103,7 @@ this.platform.ready().then(() => {
                  /*
                  *
                  */
-                 //console.log(this.submitData);
+                 console.log(this.submitData);
                  loading.present();
               /*******************TESTING***********************************/
                  if(this.reap.online=="offline"){
@@ -123,7 +113,7 @@ this.platform.ready().then(() => {
                    this.storage.set('offlineSubmission',this.submitData);
                    let alert = this.alertCtrl.create({
                    title: 'Submitted Form Offline',
-                   message: 'Please wait for device to return online before submitting another form! Form will be submitted once online again!',
+                   message: 'Please go to support page an re-submit form once back online!',
                    buttons: [
                             {
                               text: 'Acknowledged',
@@ -131,8 +121,10 @@ this.platform.ready().then(() => {
                               handler: () => {
                                 setTimeout(() => {
                                 loading.dismiss();
-                              });
-                                 this.navCtrl.push(SuccessPage,{'Success':'Please wait before submitting another form!'});
+                                },1000);
+
+                                 this.navCtrl.push(SuccessPage,{'Success':'Please go to support page an re-submit form once back online!'});
+                                  loading.dismiss();
                                  this.submitData = [];//resets Submission so data isnt inserted twice
                               }
                             }
@@ -147,13 +139,13 @@ this.platform.ready().then(() => {
                    //converts result to array
                    this.res = JSON.stringify(result);
                    this.res = JSON.parse(this.res);
-                   //console.log(this.res);
+                   console.log(this.res);
 
-                    setTimeout(() => {
-                    loading.dismiss();
-                  }, 3000);
+                    // setTimeout(() => {
+                  // }, 3000);
                     setTimeout(() => {
               if(this.res.Status == false){
+              loading.dismiss();
               let alert = this.alertCtrl.create({
               title: 'Error Submitting, ',
               message: 'Try submitting again, If issues persists contact stem support.',
@@ -164,53 +156,81 @@ this.platform.ready().then(() => {
                          handler: () => {
                            setTimeout(() => {
                            loading.dismiss();
-                         });
+                           },1000);
+
                             this.submitClicked=false;//enables the submission button to resubmit
                             this.submitData = [];//resets Submission so data isnt inserted twice
                          }
                        },
                        {
-                     text: 'Submit Offline and Sync later',
+                     text: 'Check location and try submitting again!',
                       role: 'Yes',
                      handler: () => {
                         /* allows user to submit offline and saves form data into a form variable
                         no data will be submitted until interenet connection is made via a sync or observable call */
                         /****** TESTING    *********************/
-                        this.storage.set('offlineSubmission',this.submitData);
-                        this.submitData = [];
-
-                        this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
+                        setTimeout(() => {
+                        loading.dismiss();
+                        },1000);
+                        //this.reap.formStart==null
+                        this.storage.remove('formStart');
+                        //this.storage.set('offlineSubmission',this.submitData);
+                        this.submitClicked=false;//enables the submission button to resubmit
+                        this.submitData = [];//resets Submission so data isnt inserted twice
+                        //this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
                      }
                    }
                     ]
                 });
               alert.present();
-              console.log(this.res.MSG);
+              //console.log(this.res.MSG);
                       }
                       else{
+                     loading.dismiss();
+                     this.reap.formStart = null;
+                     this.storage.remove('formStart');
                      this.navCtrl.push(SuccessPage,{'success':this.res.MSG});
                    }
                    }, 2000);
                  }, (err) => {
                    let alert = this.alertCtrl.create({
-         title: 'Error Submitting, ',
-         message: 'Error:'+ err+ ', please screen shot this error and send to support!',
-         buttons: [
-                  {
-                    text: 'Acknowledged',
-                     role: 'Yes',
-                    handler: () => {
-                      setTimeout(() => {
-                      loading.dismiss();
-                    });
-                        this.submitClicked=false;//enables the submission button to resubmit
-                       this.submitData = [];//resets Submission so data isnt inserted twice
-                    }
-                  }
-               ]
-           });
-         alert.present();
-         console.log(err);
+                   title: 'Error Submitting, ',
+                   message: 'Try submitting again, If issues persists contact stem support!',
+                   buttons: [
+                            {
+                              text: 'Try Submitting Again',
+                               role: 'Yes',
+                              handler: () => {
+                                  setTimeout(() => {
+                                  loading.dismiss();
+                                  },1000);
+
+                                 this.submitClicked=false;//enables the submission button to resubmit
+                                 this.submitData = [];//resets Submission so data isnt inserted twice
+                              }
+                            },
+                            {
+                          text: 'Submit Offline and Sync later',
+                           role: 'Yes',
+                          handler: () => {
+                             /* allows user to submit offline and saves form data into a form variable
+                             no data will be submitted until interenet connection is made via a sync or observable call */
+                             /****** TESTING    *********************/
+                             setTimeout(() => {
+                             loading.dismiss();
+                             },1000);
+                             this.reap.formStart = null;
+                             this.storage.remove('formStart');
+                             this.storage.set('offlineSubmission',this.submitData);
+                             this.submitData = [];
+
+                             this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
+                          }
+                        }
+                         ]
+                     });
+                   alert.present();
+                  console.log(err);
                  });
               }
             }
