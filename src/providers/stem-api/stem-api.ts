@@ -9,14 +9,14 @@ import { mergeMap, retry } from 'rxjs/operators';
 @Injectable()
 export class StemApiProvider {
   //api urls will change according to which build is being tested
-      //private apiloginUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=Newreaplogin';
-      private apiloginUrl:string = 'http://10.0.0.140/api.php?action=Newreaplogin';
-      //private apisubmitSafteyUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=SaveASIsafetyform';
-      private apisubmitSafteyUrl:string = 'http://10.0.0.140/api.php?action=SaveASIsafetyform';
-      //private apiGetUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=GetASIData';
-      private apiGetUrl:string = 'http://10.0.0.140/api.php?action=GetASIData';
-      //private getMd5Check:string = 'https://sandbox.stemsoftware.com/api.php?action=GetMd5Check';
-      private getMd5Check:string = 'http://10.0.0.140/api.php?action=GetMd5Check';
+      private apiloginUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=Newreaplogin';
+      //private apiloginUrl:string = 'http://10.0.0.140/api.php?action=Newreaplogin';
+      private apisubmitSafteyUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=SaveASIsafetyform';
+      //private apisubmitSafteyUrl:string = 'http://10.0.0.140/api.php?action=SaveASIsafetyform';
+      private apiGetUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=GetASIData';
+      //private apiGetUrl:string = 'http://10.0.0.140/api.php?action=GetASIData';
+      private getMd5Check:string = 'https://sandbox.stemsoftware.com/api.php?action=GetMd5Check';
+      //private getMd5Check:string = 'http://10.0.0.140/api.php?action=GetMd5Check';
   constructor(public http: HttpClient) {
     //console.log('Hello RestProvider Provider');
   }
