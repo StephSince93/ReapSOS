@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import {FormsModule } from '@angular/forms';
+import { ErrorHandler, NgModule, Injectable, Injector  } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -14,6 +14,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 import { Network } from '@ionic-native/network';
+import { Pro } from '@ionic/pro';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -31,6 +32,31 @@ import { SuccessPage } from '../pages/success/success';
 import { SupportPage } from '../pages/support/support';
 import { ReapService } from '../services/reap-service';
 import { StemApiProvider } from '../providers/stem-api/stem-api';
+
+Pro.init('481f26eb', {
+  appVersion: '0.2.7'
+})
+
+@Injectable()
+export class MyErrorHandler implements ErrorHandler {
+  ionicErrorHandler: IonicErrorHandler;
+
+  constructor(injector: Injector) {
+    try {
+      this.ionicErrorHandler = injector.get(IonicErrorHandler);
+    } catch(e) {
+      // Unable to get the IonicErrorHandler provider, ensure
+      // IonicErrorHandler has been added to the providers list below
+    }
+  }
+
+  handleError(err: any): void {
+    Pro.monitoring.handleNewError(err);
+    // Remove this if you want to disable Ionic's auto exception handling
+    // in development mode.
+    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -79,7 +105,8 @@ import { StemApiProvider } from '../providers/stem-api/stem-api';
     StatusBar,
     SplashScreen,
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    IonicErrorHandler,
+    {provide: ErrorHandler, useClass: MyErrorHandler},
     StemApiProvider,
     ReapService,
     Device,
