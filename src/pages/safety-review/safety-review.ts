@@ -41,7 +41,7 @@ export class SafetyReviewPage {
               private storage: Storage) {
 
             this.formDetails.push(this.reap.safetyForm);
-            console.log(this.formDetails);
+            //console.log(this.formDetails);
             var date = new Date(this.formDetails[0]['currentDate']);
             this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '-' + date.getDate() + '-' + date.getFullYear();
             //console.log(this.laborDetails);
@@ -103,7 +103,7 @@ this.platform.ready().then(() => {
                  /*
                  *
                  */
-                 console.log(this.submitData);
+                 //console.log(this.submitData);
                  loading.present();
               /*******************TESTING***********************************/
                  if(this.reap.online=="offline"){
@@ -139,7 +139,7 @@ this.platform.ready().then(() => {
                    //converts result to array
                    this.res = JSON.stringify(result);
                    this.res = JSON.parse(this.res);
-                   console.log(this.res);
+                   //console.log(this.res);
 
                     // setTimeout(() => {
                   // }, 3000);
