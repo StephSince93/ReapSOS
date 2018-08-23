@@ -1,6 +1,6 @@
 {
   "name": "ASI",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "Stem Software",
   "homepage": "https://stem.software/",
   "private": true,
@@ -83,13 +83,8 @@
       "cordova-plugin-ionic": {
         "APP_ID": "481f26eb",
         "CHANNEL_NAME": "Master",
-<<<<<<< HEAD
         "UPDATE_METHOD": "none",
         "MAX_STORE": "5",
-=======
-        "UPDATE_METHOD": "auto",
-        "MAX_STORE": "2",
->>>>>>> c915059e25f3636f940cf7f2bbc35897547f83d9
         "WARN_DEBUG": "true",
         "UPDATE_API": "https://api.ionicjs.com",
         "MIN_BACKGROUND_DURATION": "30"

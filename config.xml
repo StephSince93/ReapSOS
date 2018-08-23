@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.stemsoftware.ASSI" version="0.2.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.stemsoftware.ASSI" version="0.2.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>REAP</name>
     <description>A REAP app designed for ASI</description>
     <author email="dev@stemsoftware.com" href="https://v3.stemsoftware.com/">REAP team</author>
@@ -105,7 +105,6 @@
     </edit-config>
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
-<<<<<<< HEAD
     <engine name="browser" spec="5.0.3" />
     <engine name="ios" spec="4.5.5" />
     <plugin name="cordova-plugin-ionic-webview" spec="^2.1.0" />
@@ -113,15 +112,7 @@
         <variable name="APP_ID" value="481f26eb" />
         <variable name="CHANNEL_NAME" value="Master" />
         <variable name="UPDATE_METHOD" value="none" />
-        <variable name="MAX_STORE" value="5"/>
-=======
-    <plugin name="cordova-plugin-ionic-webview" spec="^2.0.3" />
-    <plugin name="cordova-plugin-ionic" spec="^5.0.10">
-        <variable name="APP_ID" value="481f26eb" />
-        <variable name="CHANNEL_NAME" value="Master" />
-        <variable name="UPDATE_METHOD" value="auto" />
-        <variable name="MAX_STORE" value="2" />
->>>>>>> c915059e25f3636f940cf7f2bbc35897547f83d9
+        <variable name="MAX_STORE" value="5" />
         <variable name="WARN_DEBUG" value="true" />
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
         <variable name="MIN_BACKGROUND_DURATION" value="30" />
