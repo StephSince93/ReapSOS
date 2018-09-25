@@ -48,8 +48,9 @@
           <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" text-wrap></ion-input>
       </ion-item>
     <ion-item class="formField ionField">
-          <!-- <ion-label color="primary" stacked >Location</ion-label> -->
-          <select-searchable
+      <ion-label color="primary" stacked >LOCATION</ion-label>
+        <select-searchable
+          item-content
           [(ngModel)]="selectedArray['Location']"
           [items]="locationsArray"
           title="Location"
@@ -57,14 +58,10 @@
           itemTextField=Location
           name="Location"
           [canSearch]="true"
-          [canReset]="true"
-          (onChange)="locationChange($event)"
-          text-wrap>
-          <ng-template selectSearchableLabelTemplate>
-          LOCATION
-          </ng-template>
+          [canClear]="true"
+          (onChange)="locationChange($event)">
         </select-searchable>
-        </ion-item>
+      </ion-item>
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>RIG NAME & NUMBER</ion-label>
@@ -119,8 +116,9 @@
 </div>
 <div *ngIf="!projectSelected">
       <ion-item class="formField ionField">
-        <!-- <ion-label color="primary" stacked >Location</ion-label> -->
+        <ion-label color="primary" stacked >LOCATION</ion-label>
         <select-searchable
+        item-content
         [(ngModel)]="location"
         [items]="locationsArray"
         title="Location"
@@ -128,12 +126,8 @@
         itemTextField=Location
         name="Location"
         [canSearch]="true"
-        [canReset]="true"
-        (onChange)="locationChange($event)"
-        text-wrap>
-        <ng-template selectSearchableLabelTemplate>
-              LOCATION
-        </ng-template>
+        [canClear]="true"
+        (onChange)="locationChange($event)">
       </select-searchable>
       </ion-item>
 

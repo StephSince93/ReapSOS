@@ -22,22 +22,19 @@
       </ion-item>
 
       <ion-item class="formField">
-        <!-- <ion-label color="primary" stacked >Location</ion-label> -->
-        <select-searchable
-        [(ngModel)]="location"
-        [items]="locationsArray"
-        title="Location"
-        itemValueField=ID
-        itemTextField=Location
-        name="Location"
-        [canSearch]="true"
-        [canReset]="true"
-        (onChange)="locationChange($event)"
-        text-wrap>
-        <ng-template selectSearchableLabelTemplate>
-              LOCATION
-        </ng-template>
-      </select-searchable>
+        <ion-label color="primary" stacked >LOCATION</ion-label>
+          <select-searchable
+          item-content
+          [(ngModel)]="location"
+          [items]="locationsArray"
+          title="Location"
+          itemValueField=ID
+          itemTextField=Location
+          name="Location"
+          [canSearch]="true"
+          [canClear]="true"
+          (onChange)="locationChange($event)">
+        </select-searchable>
       </ion-item>
 
       <ion-item class="formField ionField">

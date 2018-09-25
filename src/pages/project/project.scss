@@ -5,7 +5,7 @@ page-project {
       font-family: sans-serif;
       }
   .label-md[stacked]{
-    height:50px;
+    height:25px;
     font-size:1.2em;
     font-weight:bold;
     color:primary;
@@ -20,12 +20,7 @@ page-project {
     // margin-top:5px;
     // margin-bottom:5px;
   }
-  .select-searchable-md .select-searchable-value{
-    max-width:45%;
-  }
-  .select-searchable-ios .select-searchable-value{
-    max-width:45%;
-  }
+
   ion-input{
     font-size: 1.5em;
     text-align: center;

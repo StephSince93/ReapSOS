@@ -22,8 +22,9 @@
       </ion-item>
 
       <ion-item class="formField ionField" >
-        <!-- <ion-label color="primary" stacked>Equipment</ion-label> -->
+        <ion-label color="primary" stacked>EQUIPMENT</ion-label>
       <select-searchable
+       item-content
        [(ngModel)]="Equipment"
        title="Equipment"
        itemValueField=ID
@@ -31,12 +32,8 @@
        name="Equipment"
        [items]="equipmentArray"
        [canSearch]="true"
-       [canReset]="true"
-       (onChange)="equipmentChange($event)"
-       text-wrap>
-        <ng-template selectSearchableLabelTemplate>
-        EQUIPMENT
-        </ng-template>
+       [canClear]="true"
+       (onChange)="equipmentChange($event)">
      </select-searchable>
       </ion-item>
 

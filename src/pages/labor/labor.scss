@@ -1,10 +1,8 @@
 page-labor {
   .select-searchable-value-item{
-    overflow:inherit;
+
     font-size: 20px;
     font-weight: bold;
-    margin-top:25px;
-    margin-right: 20px !important;
   }
   ion-title {
       color: reapHeader;
@@ -30,11 +28,5 @@ page-labor {
   ion-input{
     font-size: 1.5em;
     text-align: center;
-  }
-  .select-searchable-md .select-searchable-value{
-    margin-right: 69px;
-  }
-  .select-searchable-ios .select-searchable-value{
-    margin-right: 69px;
   }
 }

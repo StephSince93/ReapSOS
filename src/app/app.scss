@@ -39,11 +39,8 @@ ion-label.label-ios[stacked]{
 
 }.select-searchable-md .select-searchable-value{
   padding:0;
-  margin-right: 75px;
   text-align: left;
   float:left;
-
-
 }.select-searchable-value-item{
   overflow: inherit;
   text-align: center;
@@ -57,7 +54,6 @@ ion-label.label-ios[stacked]{
   color:#404040;
 }.select-searchable-ios .select-searchable-value{
   padding:0;
-  margin-right: 75px;
   text-align: left;
   float:left;
 }
@@ -67,10 +63,13 @@ ion-label.label-ios[stacked]{
 .searchbar-ios .searchbar-input{//makes background-color for ion-search bar white
   background-color:white!important;
 }
-ion-item-group.select-searchable-group button.select-searchable-item.item.item-block.item-md div.item-inner div.input-wrapper ion-label.label.label-md div{
+.select-searchable-value-item{
   white-space: pre-line !important;//breaks the company/lease/well string in the ion-seachable
 }
-ion-item-group.select-searchable-group button.select-searchable-item.item.item-block.item-md div.item-inner div.input-wrapper ion-label.label.label-ios div{
+.select-searchable-value-item{
+  white-space: pre-line !important;//breaks the company/lease/well string in the ion-seachable
+}
+a, a div, a span, a ion-icon, a ion-label, button, button div, button span, button ion-icon, button ion-label, [tappable], [tappable] div, [tappable] span, [tappable] ion-icon, [tappable] ion-label, input, textarea{
   white-space: pre-line !important;//breaks the company/lease/well string in the ion-seachable
 }
 .item-md.item-block .item-inner{
