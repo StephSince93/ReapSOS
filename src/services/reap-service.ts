@@ -31,6 +31,8 @@ export class ReapService {
     public projectForm:any[]=[];
     public completeForm:any[]=[];
     public storeFormData:any[]=[];
+    public updatedLocation:any [] = [];
+    public wellLocation:any [] = [];
     public token:any;
     public formStart:any;
     public networkType:any;
@@ -231,6 +233,49 @@ export class ReapService {
       }, 5000);
       this.presentToast('Error Submittiing Offline Form!');
       }
+    }
+    //Compared UserLocation to Well Locations and gives user nearest location within 5 miles
+  grabUserLoc(lat,lon){
+        //Resets arrays for every time the user alternates buttons
+        this.updatedLocation = [];
+        this.wellLocation = [];
+        //console.log(wellLocation,updatedLocation,lat,lon);
+        for(let i=0;i<this.getLocations.length;i++){
+          if((this.getLocations[i]['Lat']!="") && this.getLocations[i]['Lon']){
+          //console.log('Lat: '+(this.getLocations[i]['Lat'])+ ' Lat: '+(parseFloat(resp.coords.latitude.toFixed(4))));
+          //console.log('Lon: '+(this.getLocations[i]['Lon'])+ ' Lon: '+(parseFloat(resp.coords.longitude.toFixed(4))));
+          let R = 6371;// km
+          let RinM = (6371*0.621371);
+          let Lat1 = (parseFloat(lat.toFixed(4)));
+          let Lat2 = (this.getLocations[i]['Lat']);
+          let Lon1 = (parseFloat(lon.toFixed(4)));
+          let Lon2 = (this.getLocations[i]['Lon']);
+          let dLat = this.toRad(Lat2-Lat1);
+          let dLon = this.toRad(Lon2-Lon1);
+          let RLat1 = this.toRad(Lat1);
+          let RLat2 = this.toRad(Lat2);
+          let a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(RLat1) * Math.cos(RLat2);
+          let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+          //let d = R * c;
+          let e = RinM * c;
+           //console.log('Distance in km: '+ d);
+           //console.log('Distance in mi: '+ parseFloat(e.toFixed(4)));
+          if(e < 50){//This is where distance is calculated
+
+            this.wellLocation.push(this.getLocations[i]);
+            //console.log(wellLocation);
+            //console.log("this location is within 5 miles!");
+           }
+          }
+          this.updatedLocation = this.wellLocation;
+        }
+        console.log(this.updatedLocation);
+        //return this.updatedLocation;
+    }
+    // Converts numeric degrees to radians
+    toRad(Value)
+    {
+      return Value * Math.PI / 180;
     }
 
     checkMD5(){

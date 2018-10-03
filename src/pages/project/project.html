@@ -21,7 +21,22 @@
         </ion-input>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item  class="location">
+      <ion-chip>
+          <p>Grab nearest locations</p>
+          <button ion-button type="button" [disabled]="selectedClosestLoc" clear color="primary" (click)="grabLocation()">
+              <ion-icon class="locIcon" name="navigate"></ion-icon>
+          </button>
+       </ion-chip>
+       <ion-chip>
+           <p>Reset</p>
+           <button ion-button type="button" [disabled]="!selectedClosestLoc" clear color="primary" (click)="resetLocation()">
+               <ion-icon class="locIcon" name="refresh"></ion-icon>
+           </button>
+       </ion-chip>
+    </ion-item>
+
+      <ion-item class="formField ionField" *ngIf="!selectedClosestLoc">
         <ion-label color="primary" stacked >LOCATION</ion-label>
           <select-searchable
           item-content
@@ -36,6 +51,24 @@
           (onChange)="searchableChange($event)">
         </select-searchable>
       </ion-item>
+
+      <ion-item class="formField ionField" *ngIf="selectedClosestLoc">
+      <!-- data thrown into dropdown from API -->
+      <ion-label stacked>NEAREST LOCATION</ion-label>
+        <select-searchable
+         item-content
+         ngModel
+         title="updatedLocation"
+         itemValueField=ID
+         itemTextField=Location
+         name="updatedLocation"
+         [items]="updatedLocation"
+         [canSearch]="true"
+         [canClear]="true"
+         [focusSearchbar]="true"
+         (onChange)="searchableChange($event)">
+       </select-searchable>
+    </ion-item>
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked >COMPANY MAN</ion-label>
@@ -72,7 +105,7 @@
       </ion-item>
 
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked >RIG NAME & NUMBER</ion-label>
           <select-searchable
           class="specialSelect"
@@ -89,7 +122,7 @@
         </select-searchable>
       </ion-item>
 
-      <ion-item class="formField">
+      <ion-item class="formField ionField">
         <ion-label color="primary" class="specialSelect" stacked >CLASS</ion-label>
           <select-searchable
           class="specialSelect"

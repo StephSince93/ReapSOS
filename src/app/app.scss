@@ -162,7 +162,18 @@ ion-input{
 .customToast{
   text-align: center;
 }
-
+.location{
+    text-align: center;
+}
+.item-md p{
+    line-height:inherit;
+}
+.item-ios p{
+    line-height:inherit;
+}
+ion-icon.locIcon{
+    font-size: 2.2em;
+}
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
