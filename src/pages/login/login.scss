@@ -9,15 +9,11 @@ page-login {
     // .bg-form{
     //   background: linear-gradient(to left,	#2F4F4F 0%, #fff 100% )
     // }
-
-        ion-title {
+    ion-title {
             color: reapHeader;
             text-align:center;
             font-size: 9px;
             font-family: sans-serif;
-            }
-      ion-list{
-        padding-top: 25px;
       }
       h1{
         text-align: center;
@@ -26,9 +22,6 @@ page-login {
         font-size: 30px;
         font-family:sans-serif;
       }
-      ion-footer{
-        background-color: yellow;
-      }
       #loginButton{
         color: white;
         background-color: $toolbar-background;
@@ -36,7 +29,13 @@ page-login {
         margin:50px 0 0 0;
         text-align: center;
       }
-    .bg-form{
-      background-color: white;
-    }
+      .bg-form{
+        background-color: white;
+      }
+      .item-md{
+        height:65px;
+      }
+      .item-ios{
+        height:80px;
+      }
   }

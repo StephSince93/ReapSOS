@@ -1,10 +1,12 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { Observable } from 'rxjs/Observable';
-import { interval } from 'rxjs/observable/interval';
-import { of } from 'rxjs/observable/of';
-import { _throw } from 'rxjs/observable/throw';
-import { mergeMap, retry } from 'rxjs/operators';
+// import { interval } from 'rxjs/observable/interval';
+// import { of } from 'rxjs/observable/of';
+// import { _throw } from 'rxjs/observable/throw';
+// import { mergeMap, retry } from 'rxjs/operators';
+import {  retry } from 'rxjs/operators';
+
 
 @Injectable()
 export class StemApiProvider {
@@ -17,6 +19,9 @@ export class StemApiProvider {
       //private apiGetUrl:string = 'http://10.0.0.140/api.php?action=GetASIData';
       private getMd5Check:string = 'https://sandbox.stemsoftware.com/api.php?action=GetMd5Check';
       //private getMd5Check:string = 'http://10.0.0.140/api.php?action=GetMd5Check';
+      private apiUpdateGPSUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=ASIGPSUpdate';
+      //private apiUpdateGPSUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=ASIGPSUpdate';
+      //private apiUpdateGPSUrl:string = 'https://v3.stemsoftware.com/api.php?action=ASIGPSUpdate';
   constructor(public http: HttpClient) {
     //console.log('Hello RestProvider Provider');
   }
@@ -99,6 +104,24 @@ export class StemApiProvider {
              reject(err);
            });
          });
+       }
+  updateGPSLoc(data,authToken){
+          const httpOptions = {
+              headers: new HttpHeaders({
+                  'Accept': 'application/json, text/plain',
+                  'Content-Type':  'application/json',
+                  'Authorization': authToken
+                })
+       };
 
- }
+           //console.log(data,authToken);
+           return new Promise((resolve, reject) => {
+             this.http.post(this.apiUpdateGPSUrl, JSON.stringify(data), httpOptions)
+             .subscribe(res=>  {
+               resolve(res);
+             }, (err) => {
+               reject(err);
+             });
+           });
+      }
 }

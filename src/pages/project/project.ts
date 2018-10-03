@@ -9,7 +9,14 @@ class Location {
   public ID: number;
   public Location: string;
 }
-
+class Class {
+  public ID: number;
+  public Name: string;
+}
+class RigInfo {
+  public ID: number;
+  public Name: string;
+}
 @IonicPage()
 @Component({
   selector: 'page-project',
@@ -18,10 +25,17 @@ class Location {
 export class ProjectPage {
   private locationsArray: Location[];
   location: Location;
-  private afeArray:any[] = [];
+  private classArray: Class[];
+  class: Class;
+  private rigInfoArray: RigInfo[];
+  riginfo: RigInfo;
+/**************************************************************/
+  private afeArray:any[] = this.reap.getAFE;
+  private ASILocations:any[] = this.reap.getASILocations;
   constructor(public navCtrl: NavController, public navParams: NavParams,public reap: ReapService) {
     this.locationsArray = reap.getLocations;
-    this.afeArray = this.reap.getAFE;
+    this.classArray = this.reap.getClass;
+    this.rigInfoArray = this.reap.getRigInfo;
   }
 
   keyPress(event: any) {
@@ -35,11 +49,10 @@ export class ProjectPage {
 
   onSubmit(Form: NgForm){
     this.reap.projectForm = Form.value;
-    //console.log(this.reap.projectForm);
+    console.log(this.reap.projectForm);
     this.navCtrl.push(ProjectReviewPage);
   }
-  locationChange(event: { component: SelectSearchableComponent, value: any }) {
-        //console.log('value:', event.value);
+  searchableChange(event: { component: SelectSearchableComponent, value: any }) {
+        console.log('value:', event.value);
     }
-
 }

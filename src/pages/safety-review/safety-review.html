@@ -34,7 +34,15 @@
                 </ion-row>
                 <ion-row>
                   <ion-col>RIG NAME & NUMBER:</ion-col>
-                  <ion-col>{{details.rigName}}</ion-col>
+                  <ion-col>{{details.RigInfo?.Name}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>CLASS:</ion-col>
+                  <ion-col>{{details.Class?.Name}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>ASSI LOCATION:</ion-col>
+                  <ion-col>{{details.ASILocation}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>START DATE:</ion-col>
@@ -43,10 +51,6 @@
                 <ion-row>
                   <ion-col>END DATE:</ion-col>
                   <ion-col>{{details.endDate}}</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col>QUANTITY OF HOURS:</ion-col>
-                  <ion-col>{{details.hours}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>DEPARTMENT:</ion-col>
@@ -61,14 +65,6 @@
                   <ion-col>{{details.description}}</ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col>NUMBER OF TRIPS:</ion-col>
-                  <ion-col>{{details.trips}}</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col>NUMBER OF MILES:</ion-col>
-                  <ion-col>{{details.miles}}</ion-col>
-                </ion-row>
-                <ion-row>
                   <ion-col>REPRESENTATIVE TO SIGN:</ion-col>
                   <ion-col>{{details.representative}}</ion-col>
                 </ion-row>
@@ -80,7 +76,7 @@
                <ion-grid>
                  <ion-row>
                   <ion-col>
-                     <button type="button" ion-button full color="light" name="editForm" (click)="editForm()">EDIT MAIN FORM</button>
+                     <button type="button" ion-button full color="warning" name="editForm" (click)="editForm()">EDIT MAIN FORM</button>
                   </ion-col>
                 </ion-row>
               </ion-grid>

@@ -13,6 +13,9 @@ export class ReapService {
     //data exported and saved into service values
     public getData:any;
     public getLocations:any[]=[];
+    public getASILocations:any[]=[];
+    public getClass:any[]=[];
+    public getRigInfo:any[]=[];
     public equipmentType:any[]=[];
     public getEquipment:any[]=[];
     public getPersonnel:any[]=[];
@@ -64,7 +67,8 @@ export class ReapService {
         this.storage.get('MD5').then((data)=>{
         //console.log(data);
         //console.log('here in MD5');
-        this.checkMD5();
+/** Temporarily disabled to allow user to manually sync in support */
+        //this.checkMD5();
         });
     /*******************TESTING***********************************/
       this.storage.get('offlineSubmission').then((data)=>{
@@ -111,6 +115,15 @@ export class ReapService {
 
         this.getProject = this.getData['Project'];
         this.storage.set('Project',this.getProject);
+
+        this.getASILocations = this.getData['ASILocations'];
+        this.storage.set('ASILocations',this.getASILocations);
+
+        this.getClass = this.getData['Class'];
+        this.storage.set('Class',this.getClass);
+
+        this.getRigInfo = this.getData['RigInfo'];
+        this.storage.set('RigInfo',this.getRigInfo);
         //console.log(this.getProject);
         //console.log(this.getEquipment);
 
@@ -157,6 +170,18 @@ export class ReapService {
 
         this.storage.get('AFE').then((data)=>{
         this.getAFE = data;
+        });
+
+        this.storage.get('ASILocations').then((data)=>{
+        this.getASILocations = data;
+        });
+
+        this.storage.get('Class').then((data)=>{
+        this.getClass = data;
+        });
+
+        this.storage.get('RigInfo').then((data)=>{
+        this.getRigInfo = data;
         });
       }
 //submits form user saved offline When they click the button in Support Page

@@ -57,6 +57,10 @@ ion-label.label-ios[stacked]{
   text-align: left;
   float:left;
 }
+.specialSelect{//Select Searchable elements fits same size as normal elements
+  font-size: 20px;
+  font-weight:bold;
+}
 .searchbar-md .searchbar-input{//makes background-color for ion-search bar white
   background-color:white!important;
 }

@@ -22,12 +22,14 @@ export class AddPhotoPage {
 
   takePhoto(){
   const options: CameraOptions = {
-      quality: 70,
+      quality: 50,//testing picture parameters
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: true,
-      correctOrientation: true
+      correctOrientation: true,
+      targetHeight: 100,//testing picture parameters
+      targetWidth: 100//testing picture parameters
   }
   this.camera.getPicture(options).then((imageData) => {
   // imageData is either a base64 encoded string or a file URI

@@ -21,6 +21,7 @@ import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
 import { SafetyPage } from '../pages/safety/safety';
 import { ProjectPage } from '../pages/project/project';
+import { WellLocationsPage } from '../pages/well-locations/well-locations';
 import { MiscPage } from '../pages/misc/misc';
 import { EquipmentPage } from '../pages/equipment/equipment';
 import { LaborPage } from '../pages/labor/labor';
@@ -65,6 +66,7 @@ export class MyErrorHandler implements ErrorHandler {
     MenuPage,
     SafetyPage,
     ProjectPage,
+    WellLocationsPage,
     MiscPage,
     EquipmentPage,
     LaborPage,
@@ -91,6 +93,7 @@ export class MyErrorHandler implements ErrorHandler {
     MenuPage,
     SafetyPage,
     ProjectPage,
+    WellLocationsPage,
     MiscPage,
     EquipmentPage,
     LaborPage,

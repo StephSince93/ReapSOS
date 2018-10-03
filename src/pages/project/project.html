@@ -33,7 +33,7 @@
           name="Location"
           [canSearch]="true"
           [canClear]="true"
-          (onChange)="locationChange($event)">
+          (onChange)="searchableChange($event)">
         </select-searchable>
       </ion-item>
 
@@ -72,12 +72,45 @@
       </ion-item>
 
 
+      <ion-item class="formField">
+        <ion-label color="primary" stacked >RIG NAME & NUMBER</ion-label>
+          <select-searchable
+          class="specialSelect"
+          item-content
+          [(ngModel)]="riginfo"
+          [items]="rigInfoArray"
+          title="RigInfo"
+          itemValueField=ID
+          itemTextField=Name
+          name="RigInfo"
+          [canSearch]="true"
+          [canClear]="true"
+          (onChange)="searchableChange($event)">
+        </select-searchable>
+      </ion-item>
+
+      <ion-item class="formField">
+        <ion-label color="primary" class="specialSelect" stacked >CLASS</ion-label>
+          <select-searchable
+          class="specialSelect"
+          item-content
+          [(ngModel)]="class"
+          [items]="classArray"
+          title="Class"
+          itemValueField=ID
+          itemTextField=Name
+          name="Class"
+          [canSearch]="true"
+          [canClear]="true"
+          (onChange)="searchableChange($event)">
+        </select-searchable>
+      </ion-item>
+
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>RIG NAME & NUMBER</ion-label>
-        <ion-input
-        type="text"
-        name="rigName"
-        ngModel></ion-input>
+        <ion-label color="primary" stacked>ASSI LOCATION</ion-label>
+        <ion-select [(ngModel)]="ASILocation" name="ASILocation">
+          <ion-option value="{{asi.Name}}" *ngFor="let asi of ASILocations">{{asi.Name}}</ion-option>
+        </ion-select>
       </ion-item>
 
       <ion-item class="formField ionField">
@@ -92,12 +125,19 @@
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>DIVISION</ion-label>
         <ion-select ngModel name="division">
-          <ion-option value="SAFETY SERVICES">SAFETY SERVICES</ion-option>
+          <ion-option value="COMPLETION">COMPLETION</ion-option>
+          <ion-option value="CONSTRUCTION">CONSTRUCTION</ion-option>
+          <ion-option value="DRILLING">DRILLING</ion-option>
+          <ion-option value="MAINTENANCE">MAINTENANCE</ion-option>
+          <ion-option value="NON-COMPLETION">NON-COMPLETION</ion-option>
+          <ion-option value="OTHER">OTHER</ion-option>
+          <ion-option value="PRODUCTION">PRODUCTION</ion-option>
+          <!-- <ion-option value="SAFETY SERVICES">SAFETY SERVICES</ion-option>
           <ion-option value="ENVOIRNMENTAL SERVICES">ENVIORNMENTAL SERVICES</ion-option>
           <ion-option value="PULLING UNIT SERVICES">PULLING UNIT SERVICES</ion-option>
           <ion-option value="WATER SERVICES">WATER SERVICES</ion-option>
           <ion-option value="ROUSTABOUT SERVICES">ROUSTABOUT SERVICES</ion-option>
-          <ion-option value="TRUCKING SERVICES">TRUCKING SERVICES</ion-option>
+          <ion-option value="TRUCKING SERVICES">TRUCKING SERVICES</ion-option> -->
         </ion-select>
       </ion-item>
 

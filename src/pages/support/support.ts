@@ -52,6 +52,7 @@ export class SupportPage {
   }
 
   onLogout(){
+          this.reap.formStart = null;
           //clears the authToken from the local storage
           this.reap.token = "";
           /* Clears all local Storage from device when user logs out */

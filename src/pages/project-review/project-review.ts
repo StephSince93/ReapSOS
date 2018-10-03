@@ -47,7 +47,7 @@ export class ProjectReviewPage {
     //console.log(result['Status']);
         setTimeout(() => {
         loading.dismiss();
-      }, 3000);
+      }, 2000);
     //give error to user if Location is not sent
     if(result['Status']==false){
       let alert = this.alertCtrl.create({

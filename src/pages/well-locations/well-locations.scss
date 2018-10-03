@@ -1,11 +1,11 @@
-page-safety {
+page-well-locations {
   ion-title {
       color: reapHeader;
       font-size: 9px;
       font-family: sans-serif;
       }
   .label-md[stacked]{
-    height:50px;
+    height:25px;
     font-size:1.2em;
     font-weight:bold;
     color:primary;
@@ -20,19 +20,9 @@ page-safety {
     // margin-top:5px;
     // margin-bottom:5px;
   }
+
   ion-input{
     font-size: 1.5em;
     text-align: center;
   }
-
-  .warningLabel{
-    text-align: center;
-    text-decoration: underline;
-    color:red;
-    font-weight:bold;
-  }
-  .removeText{
-    float:right;
-  }
-
 }

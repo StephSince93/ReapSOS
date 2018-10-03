@@ -69,6 +69,7 @@ this.platform.ready().then(() => {
     this.signaturePad.clear();
   }
   sigSubmit(){
+    console.log(this.formDetails);
     this.submitClicked = true;
     var md5 = new Md5();//md5 hash for custom guid
     var time = new Date();//timestamp

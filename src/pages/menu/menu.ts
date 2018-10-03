@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
 import { SafetyPage } from '../safety/safety';
 import { ProjectPage } from '../project/project';
+import { WellLocationsPage } from '../well-locations/well-locations';
 import { ReapService } from '../../services/reap-service';
 import { StemApiProvider } from '../../providers/stem-api/stem-api';
 import { SupportPage } from '../support/support';
@@ -82,6 +83,9 @@ export class MenuPage {
   }
   toSupport(){
     this.navCtrl.push(SupportPage);
+  }
+  toWellLocations(){
+    this.navCtrl.push(WellLocationsPage);
   }
 
 }
