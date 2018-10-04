@@ -35,7 +35,7 @@ import { ReapService } from '../services/reap-service';
 import { StemApiProvider } from '../providers/stem-api/stem-api';
 
 Pro.init('481f26eb', {
-  appVersion: '0.2.7'
+  appVersion: '0.5.1'
 })
 
 @Injectable()

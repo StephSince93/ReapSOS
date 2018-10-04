@@ -1,6 +1,6 @@
 {
   "name": "ASSI",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": "Stem Software",
   "homepage": "https://stem.software/",
   "private": true,
@@ -34,7 +34,7 @@
     "@ionic/pro": "^2.0.3",
     "@ionic/storage": "^2.2.0",
     "angular2-signaturepad": "^2.8.0",
-    "cordova-android": "7.0.0",
+    "cordova-android": "^7.1.1",
     "cordova-browser": "5.0.3",
     "cordova-ios": "4.5.5",
     "cordova-plugin-app-version": "^0.1.9",
@@ -92,8 +92,8 @@
     },
     "platforms": [
       "browser",
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
