@@ -143,7 +143,7 @@
   <hr>
   <ion-grid class="formDetails" *ngFor="let photo of photoDetails;index as i;">
                 <ion-row>
-                    <ion-col col-12><img src="{{photo}}" alt="Upload Error"/></ion-col>
+                    <ion-col col-12 style="text-align:center"><img src="{{photo}}" alt="Upload Error"/></ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col col-12 style="text-align:center"> <button (tap)="removePhoto(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
