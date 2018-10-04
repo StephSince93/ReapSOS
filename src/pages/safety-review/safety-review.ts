@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController,LoadingController, NavParams, ViewController, AlertController, Platform } from 'ionic-angular';
+import { IonicPage, NavController,LoadingController, NavParams, ViewController, AlertController, Platform, ToastController } from 'ionic-angular';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -38,7 +38,8 @@ export class SafetyReviewPage {
               private stemAPI: StemApiProvider,
               private reap: ReapService,
               public loadingCtrl: LoadingController,
-              private storage: Storage) {
+              private storage: Storage,
+              private toastCtrl: ToastController) {
 
             this.formDetails.push(this.reap.safetyForm);
             //console.log(this.formDetails);
@@ -54,9 +55,9 @@ this.platform.ready().then(() => {
         this.lonlat = [resp.coords.latitude,resp.coords.longitude];
         //console.log(this.lonlat);
       }).catch((error) => {
-        console.log('Error getting location', error);
-      });
-    });
+        this.presentToast(error);
+      });//end of error
+    });//end of platform
   }
 
   canvasResize(){
@@ -69,7 +70,7 @@ this.platform.ready().then(() => {
     this.signaturePad.clear();
   }
   sigSubmit(){
-    console.log(this.formDetails);
+    //console.log(this.formDetails);
     this.submitClicked = true;
     var md5 = new Md5();//md5 hash for custom guid
     var time = new Date();//timestamp
@@ -231,7 +232,7 @@ this.platform.ready().then(() => {
                          ]
                      });
                    alert.present();
-                  console.log(err);
+                  //console.log(err);
                  });
               }
             }
@@ -320,4 +321,19 @@ this.platform.ready().then(() => {
      this.photoDetails = this.reap.photo;
      //console.log(this.photoDetails);
  }
+ presentToast(msg) {
+   let toast = this.toastCtrl.create({
+     message: msg,
+     duration: 3000,
+     position: 'bottom',
+     dismissOnPageChange: false,
+     cssClass: 'customToast'
+   });
+
+   toast.onDidDismiss(() => {
+     //console.log('Dismissed toast');
+   });
+
+   toast.present();
+   }
 }

@@ -72,13 +72,13 @@ export class ProjectPage {
             this.userLocation = [parseFloat(resp.coords.latitude.toFixed(4)),parseFloat(resp.coords.longitude.toFixed(4))];
             //100% accurate
             this.userLocation = [resp.coords.latitude,resp.coords.longitude];
-            var t0 = performance.now();
+            //var t0 = performance.now();
             this.reap.grabUserLoc(resp.coords.latitude,resp.coords.longitude);
-            var t1 = performance.now();
-            console.log("Call to grabUserLoc took " + (t1 - t0) + " milliseconds.");
+            //var t1 = performance.now();
+            //console.log("Call to grabUserLoc took " + (t1 - t0) + " milliseconds.");
             this.updatedLocation = this.reap.updatedLocation;
 
-            console.log(this.updatedLocation);
+            //console.log(this.updatedLocation);
           }).catch((error) => {
             //console.log('Error getting location', error);
             this.presentToast(error);
@@ -89,15 +89,16 @@ export class ProjectPage {
   onSubmit(Form: NgForm){
     if(!Form.value.Location){//If user grabs nearest location
       Form.value.Location = Form.value.updatedLocation;
-      console.log(Form.value.Location);
-      //Form.value.remove.updatedLocation;
+      // console.log(Form.value.Location);
+      // Form.removeControl['updatedLocation'];
+      // console.log(Form.controls)
     }
     this.reap.projectForm = Form.value;
-    console.log(this.reap.projectForm);
+    //console.log(this.reap.projectForm);
     this.navCtrl.push(ProjectReviewPage);
   }
   searchableChange(event: { component: SelectSearchableComponent, value: any }) {
-        console.log('value:', event.value);
+        //console.log('value:', event.value);
     }
     presentToast(msg) {
       let toast = this.toastCtrl.create({

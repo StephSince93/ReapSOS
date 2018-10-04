@@ -64,8 +64,8 @@ export class WellLocationsPage {
         this.geolocation.getCurrentPosition().then((resp) => {
             this.lat = resp.coords.latitude.toFixed(8);
             this.lon = resp.coords.longitude.toFixed(8);
-            console.log(this.lon);
-            console.log(this.lat);
+            // console.log(this.lon);
+            // console.log(this.lat);
           }).catch((error) => {
             console.log('Error getting location', error);
           });
@@ -84,7 +84,7 @@ export class WellLocationsPage {
                            content: 'Submitting...'
                           });
              this.newGPSLoc.push({'ID':form.value["Location"]["ID"]},{'Lat':form.value["Lat"]},{'Lon':form.value["Lon"]});
-             console.log(this.newGPSLoc);
+             //console.log(this.newGPSLoc);
 
             loading.present();
 
@@ -93,7 +93,7 @@ export class WellLocationsPage {
               //converts result to JSON response
               this.res = JSON.stringify(result);
               this.res = JSON.parse(this.res);
-              console.log(this.res);
+              //console.log(this.res);
               setTimeout(() => {
                               loading.dismiss();
                             }, 2000);

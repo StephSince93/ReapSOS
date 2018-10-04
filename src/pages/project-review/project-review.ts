@@ -45,9 +45,9 @@ export class ProjectReviewPage {
     loading.present();
     this.stemAPI.submitSafetyForm(this.submitData,this.reap.token).then((result)=>{
     //console.log(result['Status']);
-        setTimeout(() => {
+        //setTimeout(() => {
         loading.dismiss();
-      }, 2000);
+      //}, 2000);
     //give error to user if Location is not sent
     if(result['Status']==false){
       let alert = this.alertCtrl.create({

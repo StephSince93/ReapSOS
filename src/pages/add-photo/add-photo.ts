@@ -28,8 +28,8 @@ export class AddPhotoPage {
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: true,
       correctOrientation: true,
-      targetHeight: 100,//testing picture parameters
-      targetWidth: 100//testing picture parameters
+      targetHeight: 250,//testing picture parameters
+      targetWidth: 250//testing picture parameters
   }
   this.camera.getPicture(options).then((imageData) => {
   // imageData is either a base64 encoded string or a file URI
@@ -37,7 +37,7 @@ export class AddPhotoPage {
   this.imageURI = 'data:image/jpeg;base64,' + imageData;
   }, (err) => {
   // Handle error
-  console.log(err);
+  //console.log(err);
   this.presentToast(err);
   });
 }

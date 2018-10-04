@@ -95,7 +95,7 @@ export class ReapService {
         this.stemAPI.getData(this.token).then((result) =>{
         this.getData = (JSON.stringify(result));
         this.getData = JSON.parse(this.getData);
-        console.log(this.getData);
+        //console.log(this.getData);
 
         this.getMD5 = this.getData['md5'];
         this.storage.set('MD5',this.getMD5);
@@ -269,7 +269,7 @@ export class ReapService {
           }
           this.updatedLocation = this.wellLocation;
         }
-        console.log(this.updatedLocation);
+        //console.log(this.updatedLocation);
         //return this.updatedLocation;
     }
     // Converts numeric degrees to radians

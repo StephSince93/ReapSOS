@@ -73,17 +73,17 @@ export class SafetyPage {
         if(this.selectedArray['Rig_Name_And_Number']===this.rigInfoArray[j]["Name"]){
           this.selectedArray['Rig_Name_And_Number'] = this.rigInfoArray[j];
           //this.projectArray[i]['Rig_Name_And_Number'] = this.rigInfoArray[j];
-          console.log('Selected: ' + this.selectedArray['Rig_Name_And_Number']);
+          //console.log('Selected: ' + this.selectedArray['Rig_Name_And_Number']);
         }
     }
     for(let k=0;k<this.classArray.length;k++){
       if(this.selectedArray['Class']===this.classArray[k]["Name"]){
         this.selectedArray['Class'] = this.classArray[k];
         //this.projectArray[i]['Class'] = this.rigInfoArray[k];
-        console.log('Selected: ' + this.selectedArray['Class']);
+        //console.log('Selected: ' + this.selectedArray['Class']);
       }
     }
-      console.log(this.selectedArray);
+      //console.log(this.selectedArray);
 
     this.afeString = JSON.stringify(this.selectedArray['AFE_Or_Order_Number']);
     //console.log(this.afeString)
@@ -101,11 +101,11 @@ export class SafetyPage {
   onSubmit(Form: NgForm){
     if(!Form.value.Location){//If user grabs nearest location
       Form.value.Location = Form.value.updatedLocation;
-      console.log(Form.value.Location);
+      //console.log(Form.value.Location);
       //Form.value.remove.updatedLocation;
     }
     this.reap.safetyForm = Form.value;
-    console.log(this.reap.safetyForm);
+    //console.log(this.reap.safetyForm);
     this.navCtrl.push(SubMenuPage);
   }
   grabLocation(){
@@ -118,13 +118,13 @@ export class SafetyPage {
             this.userLocation = [parseFloat(resp.coords.latitude.toFixed(4)),parseFloat(resp.coords.longitude.toFixed(4))];
             //100% accurate
             this.userLocation = [resp.coords.latitude,resp.coords.longitude];
-            var t0 = performance.now();
+            //var t0 = performance.now();
             this.reap.grabUserLoc(resp.coords.latitude,resp.coords.longitude);
-            var t1 = performance.now();
-            console.log("Call to grabUserLoc took " + (t1 - t0) + " milliseconds.");
+            //var t1 = performance.now();
+            //console.log("Call to grabUserLoc took " + (t1 - t0) + " milliseconds.");
             this.updatedLocation = this.reap.updatedLocation;
 
-            console.log(this.updatedLocation);
+            //console.log(this.updatedLocation);
           }).catch((error) => {
             //console.log('Error getting location', error);
             this.presentToast(error);

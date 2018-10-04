@@ -14,63 +14,63 @@
                 </ion-row>
                 <ion-row>
                   <ion-col>PROJECT:</ion-col>
-                  <ion-col>{{details.project?.Name}}</ion-col>
+                  <ion-col>{{details.project?.Name | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>LOCATION:</ion-col>
-                  <ion-col>{{details.Location?.Location}}</ion-col>
+                  <ion-col>{{details.Location?.Location | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>COMPANY MAN:</ion-col>
-                  <ion-col>{{details.companyMan}}</ion-col>
+                  <ion-col>{{details.companyMan | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>PHONE NUMBER:</ion-col>
-                  <ion-col>{{details.phoneNumber}}</ion-col>
+                  <ion-col>{{details.phoneNumber }}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>AFE/ORDER NUMBER:</ion-col>
-                  <ion-col>{{details.orderNumber}}</ion-col>
+                  <ion-col>{{details.orderNumber | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>RIG NAME & NUMBER:</ion-col>
-                  <ion-col>{{details.RigInfo?.Name}}</ion-col>
+                  <ion-col>{{details.RigInfo?.Name | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>CLASS:</ion-col>
-                  <ion-col>{{details.Class?.Name}}</ion-col>
+                  <ion-col>{{details.Class?.Name | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>ASSI LOCATION:</ion-col>
-                  <ion-col>{{details.ASILocation}}</ion-col>
+                  <ion-col>{{details.ASILocation | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>START DATE:</ion-col>
-                  <ion-col>{{details.startDate}}</ion-col>
+                  <ion-col>{{details.startDate }}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>END DATE:</ion-col>
-                  <ion-col>{{details.endDate}}</ion-col>
+                  <ion-col>{{details.endDate }}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>DEPARTMENT:</ion-col>
-                  <ion-col>{{details.department}}</ion-col>
+                  <ion-col>{{details.department | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>DIVISION:</ion-col>
-                  <ion-col>{{details.division}}</ion-col>
+                  <ion-col>{{details.division | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>JOB DESCRIPTION:</ion-col>
-                  <ion-col>{{details.description}}</ion-col>
+                  <ion-col>{{details.description | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>REPRESENTATIVE TO SIGN:</ion-col>
-                  <ion-col>{{details.representative}}</ion-col>
+                  <ion-col>{{details.representative | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>COMMENTS:</ion-col>
-                  <ion-col>{{details.comments}}</ion-col>
+                  <ion-col>{{details.comments | uppercase}}</ion-col>
                 </ion-row>
               </ion-grid>
                <ion-grid>
@@ -88,15 +88,15 @@
             <ion-grid class="formDetails" *ngFor="let misc of miscDetails;index as i;">
                 <ion-row>
                   <ion-col col-6>CATEGORY:</ion-col>
-                  <ion-col col-6>{{misc.category}}</ion-col>
+                  <ion-col col-6>{{misc.category | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col col-6>DESCRIPTION:</ion-col>
-                  <ion-col col-6>{{misc.description}}</ion-col>
+                  <ion-col col-6>{{misc.description | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>QUANTITY:</ion-col>
-                  <ion-col>{{misc.quantity}}</ion-col>
+                  <ion-col>{{misc.quantity | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col col-12 style="text-align:center"> <button (tap)="removeMileage(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
@@ -108,7 +108,7 @@
               <ion-grid class="formDetails" *ngFor="let labor of laborDetails;index as i;">
                   <ion-row>
                     <ion-col col-6>PERSONNEL:</ion-col>
-                    <ion-col col-6>{{labor.Personnel?.FullName}}</ion-col>
+                    <ion-col col-6>{{labor.Personnel?.FullName | uppercase}}</ion-col>
                   </ion-row>
                   <ion-row>
                     <ion-col>HOURS:</ion-col>
@@ -124,11 +124,11 @@
               <ion-grid class="formDetails" *ngFor="let equipment of equipmentDetails;index as i;">
                   <ion-row>
                       <ion-col>EQUIPMENT:</ion-col>
-                      <ion-col>{{equipment.Type}}</ion-col>
+                      <ion-col>{{equipment.Type | uppercase}}</ion-col>
                   </ion-row>
                   <ion-row>
                       <ion-col col-6>UNIT:</ion-col>
-                      <ion-col col-6>{{equipment.Equipment?.Unit}}</ion-col>
+                      <ion-col col-6>{{equipment.Equipment?.Unit | uppercase}}</ion-col>
                   </ion-row>
                   <ion-row>
                       <ion-col col-6>NUMBER OF DAYS:</ion-col>
