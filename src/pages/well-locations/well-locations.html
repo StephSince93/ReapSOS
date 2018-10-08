@@ -9,7 +9,7 @@
 
 <ion-content>
       <form #form="ngForm" (ngSubmit)="submitAssetLoc(form)" novalidate>
-        
+
        <ion-item class="formField ionField">
         <!-- data thrown into dropdown from API -->
         <ion-label stacked>LOCATION</ion-label>
@@ -42,6 +42,6 @@
             <button  ion-button type="button" block large (click)="updateLocation()">Update Current Location</button>
         </ion-item>
 
-        <button id="submitButton" ion-button type="submit" block large >Submit</button>
+        <button id="submitButton" ion-button type="submit" [disabled]="!form.valid" block large >Submit</button>
       </form>
 </ion-content>
