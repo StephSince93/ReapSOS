@@ -9,9 +9,10 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Device } from '@ionic-native/device';
 import { AppVersion } from '@ionic-native/app-version';
-import { SelectSearchableModule } from 'ionic-select-searchable';
+import { SelectSearchableModule } from 'ionic-select-searchable';//deprecated
+//import { IonicSelectableModule } from 'ionic-selectable';
 import { IonicStorageModule } from '@ionic/storage';
-import { File } from '@ionic-native/file';
+//import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 import { Network } from '@ionic-native/network';
 import { Pro } from '@ionic/pro';
@@ -25,6 +26,7 @@ import { WellLocationsPage } from '../pages/well-locations/well-locations';
 import { MiscPage } from '../pages/misc/misc';
 import { EquipmentPage } from '../pages/equipment/equipment';
 import { LaborPage } from '../pages/labor/labor';
+import { MileagePage } from '../pages/mileage/mileage';
 import { AddPhotoPage } from '../pages/add-photo/add-photo';
 import { SafetyReviewPage } from '../pages/safety-review/safety-review';
 import { ProjectReviewPage } from '../pages/project-review/project-review';
@@ -35,7 +37,7 @@ import { ReapService } from '../services/reap-service';
 import { StemApiProvider } from '../providers/stem-api/stem-api';
 
 Pro.init('481f26eb', {
-  appVersion: '0.5.1'
+  appVersion: '0.6.0'
 })
 
 @Injectable()
@@ -70,6 +72,7 @@ export class MyErrorHandler implements ErrorHandler {
     MiscPage,
     EquipmentPage,
     LaborPage,
+    MileagePage,
     AddPhotoPage,
     SubMenuPage,
     SafetyReviewPage,
@@ -81,7 +84,8 @@ export class MyErrorHandler implements ErrorHandler {
     BrowserModule,
     HttpClientModule,
     SignaturePadModule,
-    SelectSearchableModule,
+    SelectSearchableModule,//deprecated
+    //IonicSelectableModule,
     FormsModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
@@ -97,6 +101,7 @@ export class MyErrorHandler implements ErrorHandler {
     MiscPage,
     EquipmentPage,
     LaborPage,
+    MileagePage,
     AddPhotoPage,
     SubMenuPage,
     SafetyReviewPage,
@@ -115,7 +120,7 @@ export class MyErrorHandler implements ErrorHandler {
     Device,
     AppVersion,
     Network,
-    File,
+    //File,
     Camera
   ]
 })

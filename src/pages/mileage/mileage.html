@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>MILEAGE</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>MILES</ion-label>
+        <ion-input
+          ngModel
+          name="miles"
+          type="number">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>NUMBER OF TRIPS</ion-label>
+        <ion-input
+          ngModel
+          name="trips"
+          type="number">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <button id="submitButton" ion-button full large>SUBMIT</button>
+     </ion-item>
+   </ion-list>
+  </form>
+</ion-content>

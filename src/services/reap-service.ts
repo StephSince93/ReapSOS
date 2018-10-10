@@ -26,6 +26,7 @@ export class ReapService {
     public misc:any[]=[];
     public equipment:any[]=[];
     public labor:any[]=[];
+    public mileage:any[]=[];
     public photo:any[]=[];
     public safetyForm:any[]=[];
     public projectForm:any[]=[];
@@ -95,7 +96,7 @@ export class ReapService {
         this.stemAPI.getData(this.token).then((result) =>{
         this.getData = (JSON.stringify(result));
         this.getData = JSON.parse(this.getData);
-        //console.log(this.getData);
+        console.log(this.getData);
 
         this.getMD5 = this.getData['md5'];
         this.storage.set('MD5',this.getMD5);
@@ -314,6 +315,9 @@ export class ReapService {
     totalPhotos(data){
       this.photo.push(data);
       //console.log(this.photo);
+    }
+    totalMileage(data){
+      this.mileage.push(data);
     }
 
     removeConnections(){

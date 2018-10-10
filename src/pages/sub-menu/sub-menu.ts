@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MiscPage } from '../misc/misc';
 import { LaborPage } from '../labor/labor';
 import { EquipmentPage } from '../equipment/equipment';
+import { MileagePage } from '../mileage/mileage';
 import { AddPhotoPage } from '../add-photo/add-photo';
 import { SafetyReviewPage } from '../safety-review/safety-review';
 import { ReapService } from '../../services/reap-service';
@@ -37,6 +38,9 @@ export class SubMenuPage {
   }
   toReview(){
     this.navCtrl.push(SafetyReviewPage);
+  }
+  toMileage(){
+    this.navCtrl.push(MileagePage);
   }
 
 }

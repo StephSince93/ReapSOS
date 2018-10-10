@@ -93,7 +93,7 @@
         <ion-select
           [(ngModel)]="orderNumber"
           name="orderNumber">
-          <ion-option value=newAFE>NEW AFE</ion-option>
+          <ion-option value=newAFE>*CREATE NEW AFE</ion-option>
           <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == '1'">{{afe.Name}}</ion-option>
         </ion-select>
       </ion-item>

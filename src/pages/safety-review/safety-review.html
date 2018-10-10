@@ -83,6 +83,59 @@
       <br>
       <br>
       <hr>
+    <ion-label>EQUIPMENT SUMMARY</ion-label>
+      <hr>
+                  <ion-grid class="formDetails" *ngFor="let equipment of equipmentDetails;index as i;">
+                      <ion-row>
+                          <ion-col>EQUIPMENT:</ion-col>
+                          <ion-col>{{equipment.Type | uppercase}}</ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col col-6>UNIT:</ion-col>
+                          <ion-col col-6>{{equipment.Equipment?.Unit | uppercase}}</ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col col-6>NUMBER OF DAYS:</ion-col>
+                          <ion-col col-6>{{equipment.days}}</ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col col-12 style="text-align:center"> <button (tap)="removeEquipment(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                      </ion-row>
+                  </ion-grid>
+
+    <ion-label>LABOR SUMMRY</ion-label>
+    <hr>
+                  <ion-grid class="formDetails" *ngFor="let labor of laborDetails;index as i;">
+                        <ion-row>
+                            <ion-col col-6>PERSONNEL:</ion-col>
+                            <ion-col col-6>{{labor.Personnel?.FullName | uppercase}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>HOURS:</ion-col>
+                            <ion-col>{{labor.hours}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12 style="text-align:center"> <button (tap)="removeLabor(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                        </ion-row>
+                 </ion-grid>
+
+  <ion-label>MILEAGE SUMMARY</ion-label>
+  <hr>
+            <ion-grid class="formDetails" *ngFor="let mileage of mileageDetails;index as i;">
+                <ion-row>
+                  <ion-col col-6>MILES:</ion-col>
+                  <ion-col col-6>{{mileage.miles | uppercase}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-6>NUMBER OF TRIPS:</ion-col>
+                  <ion-col col-6>{{mileage.trips | uppercase}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-12 style="text-align:center"> <button (tap)="removeMileage(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                </ion-row>
+            </ion-grid>
+
+
   <ion-label>MISC. SUMMARY</ion-label>
   <hr>
             <ion-grid class="formDetails" *ngFor="let misc of miscDetails;index as i;">
@@ -99,45 +152,10 @@
                   <ion-col>{{misc.quantity | uppercase}}</ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col col-12 style="text-align:center"> <button (tap)="removeMileage(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                  <ion-col col-12 style="text-align:center"> <button (tap)="removeMisc(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
                 </ion-row>
             </ion-grid>
 
-  <ion-label>LABOR SUMMRY</ion-label>
-  <hr>
-              <ion-grid class="formDetails" *ngFor="let labor of laborDetails;index as i;">
-                  <ion-row>
-                    <ion-col col-6>PERSONNEL:</ion-col>
-                    <ion-col col-6>{{labor.Personnel?.FullName | uppercase}}</ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col>HOURS:</ion-col>
-                    <ion-col>{{labor.hours}}</ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col col-12 style="text-align:center"> <button (tap)="removeLabor(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
-                  </ion-row>
-              </ion-grid>
-
-  <ion-label>EQUIPMENT SUMMARY</ion-label>
-  <hr>
-              <ion-grid class="formDetails" *ngFor="let equipment of equipmentDetails;index as i;">
-                  <ion-row>
-                      <ion-col>EQUIPMENT:</ion-col>
-                      <ion-col>{{equipment.Type | uppercase}}</ion-col>
-                  </ion-row>
-                  <ion-row>
-                      <ion-col col-6>UNIT:</ion-col>
-                      <ion-col col-6>{{equipment.Equipment?.Unit | uppercase}}</ion-col>
-                  </ion-row>
-                  <ion-row>
-                      <ion-col col-6>NUMBER OF DAYS:</ion-col>
-                      <ion-col col-6>{{equipment.days}}</ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col col-12 style="text-align:center"> <button (tap)="removeEquipment(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
-                  </ion-row>
-              </ion-grid>
 
   <ion-label>PHOTOS</ion-label>
   <hr>

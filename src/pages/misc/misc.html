@@ -16,11 +16,7 @@
           ngModel
           name="category"
           required>
-          <!-- <ion-option value={{misc.Type}} *ngFor="let misc of miscCategory" selected="misc.Type == '1'">{{misc.Type}}</ion-option> -->
-          <ion-option value="EQUIPMENT">EQUIPMENT</ion-option>
-          <ion-option value="MILEAGE">MILEAGE</ion-option>
-          <ion-option value="TRAILER">TRAILER</ion-option>
-          <ion-option value="TRUCK">TRUCK</ion-option>
+          <ion-option value={{misc.Type}} *ngFor="let misc of miscCategory" selected="misc.Type == '1'">{{misc.Type}}</ion-option>
         </ion-select>
       </ion-item>
 

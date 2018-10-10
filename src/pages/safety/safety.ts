@@ -63,13 +63,15 @@ export class SafetyPage {
         this.classArray = this.reap.getClass;
         this.rigInfoArray = this.reap.getRigInfo;
         this.updatedLocation = [];
+        //console.log(this.projectArray);
   }
 
   projectSelect(project,i){
     //console.log(i);
     this.selectedArray = this.projectArray[i];
+    //console.log(this.selectedArray['Rig_Name_And_Number']);
     for(let j=0;j<this.rigInfoArray.length;j++){
-        //console.log(this.rigInfoArray[j]["Name"]);
+        //console.log(JSON.stringify(this.rigInfoArray[j]["Name"]));
         if(this.selectedArray['Rig_Name_And_Number']===this.rigInfoArray[j]["Name"]){
           this.selectedArray['Rig_Name_And_Number'] = this.rigInfoArray[j];
           //this.projectArray[i]['Rig_Name_And_Number'] = this.rigInfoArray[j];
@@ -77,7 +79,7 @@ export class SafetyPage {
         }
     }
     for(let k=0;k<this.classArray.length;k++){
-      if(this.selectedArray['Class']===this.classArray[k]["Name"]){
+      if(this.selectedArray['Class']==this.classArray[k]["Name"]){
         this.selectedArray['Class'] = this.classArray[k];
         //this.projectArray[i]['Class'] = this.rigInfoArray[k];
         //console.log('Selected: ' + this.selectedArray['Class']);

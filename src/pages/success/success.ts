@@ -13,12 +13,15 @@ export class SuccessPage {
               public navParams: NavParams,
               public reap: ReapService) {
                 this.successMessage = this.navParams.get('success');
+                  }
+  ionViewDidLoad(){
+    this.reap.equipment = [];
+    this.reap.labor = [];
+    this.reap.misc = [];
+    this.reap.photo = [];
+    this.reap.mileage = [];
   }
     backToMenu(){
-      this.reap.equipment = [];
-      this.reap.labor = [];
-      this.reap.misc = [];
-      this.reap.photo = [];
       this.navCtrl.popTo(this.navCtrl.getByIndex(1));//pops to menu page
     }
 }

@@ -20,6 +20,7 @@ export class SafetyReviewPage {
   private miscDetails:any[] = this.reap.misc;
   private laborDetails:any[] = this.reap.labor;
   private equipmentDetails:any[] = this.reap.equipment;
+  private mileageDetails:any[] = this.reap.mileage;
   private photoDetails:any[] = this.reap.photo;
   public signatureImage: string;
   public cancelled = "false";
@@ -101,11 +102,11 @@ this.platform.ready().then(() => {
                  /*md5 hashes form data with signature and timestamp for unique guid*/
                  this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
                  /*Pushes all data to array for form submission*/
-                 this.submitData.push({'safety':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.equipmentDetails},{'Labor':this.laborDetails},{'Misc':this.miscDetails},{'Photo':this.photoDetails});
+                 this.submitData.push({'safety':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.equipmentDetails},{'Labor':this.laborDetails},{'Misc':this.miscDetails},{'Mileage':this.mileageDetails},{'Photo':this.photoDetails});
                  /*
                  *
                  */
-                 //console.log(this.submitData);
+                 console.log(this.submitData);
                  loading.present();
               /*******************TESTING***********************************/
                  if(this.reap.online=="offline"){
@@ -298,10 +299,16 @@ this.platform.ready().then(() => {
  editForm(){
   this.navCtrl.popTo(this.navCtrl.getByIndex(2));
  }
- removeMileage(index){
+ removeMisc(index){
 
      this.reap.misc.splice(index, 1);
      this.miscDetails = this.reap.misc;
+     //console.log(this.mileageDetails);
+ }
+ removeMileage(index){
+
+     this.reap.mileage.splice(index, 1);
+     this.mileageDetails = this.reap.mileage;
      //console.log(this.mileageDetails);
  }
  removeLabor(index){
