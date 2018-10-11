@@ -30,23 +30,6 @@
 <!------------------------------------------------------------------------->
 
 <div *ngIf="projectSelected">
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
-        <ion-select
-          [(ngModel)]="selectedArray['AFE_Or_Order_Number']"
-          name="orderNumber"
-          #orderNumber="ngModel">
-          <ion-option value="newAFE">*CREATE NEW AFE</ion-option>
-          <ion-option value="{{afe.Name}}" *ngFor="let afe of afeArray; let i = index">{{afe.Name}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <!-- When user types new AFE, but decides to click back
-            on a current AFE the value is not submitted -->
-      <ion-item class="formField ionField" *ngIf="selectedArray['AFE_Or_Order_Number'] == 'newAFE'">
-          <ion-label color="primary" stacked>NEW AFE</ion-label>
-          <ion-label class="warningLabel" *ngIf="orderNumber.touched" text-wrap>Note: New AFE will take up to 5 minutes to populate on forms!</ion-label>
-          <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" text-wrap></ion-input>
-      </ion-item>
 
       <ion-item  class="location">
       <ion-chip>
@@ -97,6 +80,24 @@
        </select-searchable>
     </ion-item>
 
+    <ion-item class="formField ionField">
+      <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
+      <ion-select
+        [(ngModel)]="selectedArray['AFE_Or_Order_Number']"
+        name="orderNumber"
+        #orderNumber="ngModel">
+        <ion-option value="newAFE">*CREATE NEW AFE</ion-option>
+        <ion-option value="{{afe.Name}}" *ngFor="let afe of afeArray; let i = index">{{afe.Name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <!-- When user types new AFE, but decides to click back
+          on a current AFE the value is not submitted -->
+    <ion-item class="formField ionField" *ngIf="selectedArray['AFE_Or_Order_Number'] == 'newAFE'">
+        <ion-label color="primary" stacked>NEW AFE</ion-label>
+        <ion-label class="warningLabel" *ngIf="orderNumber.touched" text-wrap>Note: You will need to sync app in settings for New AFE to apply!</ion-label>
+        <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" text-wrap></ion-input>
+    </ion-item>
+
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked >RIG NAME & NUMBER</ion-label>
           <select-searchable
@@ -138,6 +139,25 @@
         </ion-select>
       </ion-item>
 
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked >COMPANY MAN</ion-label>
+        <ion-input [(ngModel)]="selectedArray['Company_Man']" name="companyMan">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked >COMPANY MAN PHONE NUMBER</ion-label>
+        <ion-input
+        [(ngModel)]="selectedArray['Company_Man_Phone_Number']"
+        type="text"
+        (keypress)="keyPress($event)"
+        name="phoneNumber"
+        minlength="7"
+        maxlength="10"
+        placeholder="Phone Number">
+        </ion-input>
+      </ion-item>
+
         <ion-item class="formField ionField">
           <ion-label color="primary" stacked>DEPARTMENT</ion-label>
           <ion-select [(ngModel)]="selectedArray['Department']" name="department">
@@ -159,25 +179,6 @@
             <ion-option value="OTHER">OTHER</ion-option>
             <ion-option value="PRODUCTION">PRODUCTION</ion-option>
           </ion-select>
-        </ion-item>
-
-        <ion-item class="formField ionField">
-          <ion-label color="primary" stacked >COMPANY MAN</ion-label>
-          <ion-input [(ngModel)]="selectedArray['Company_Man']" name="companyMan">
-          </ion-input>
-        </ion-item>
-
-        <ion-item class="formField ionField">
-          <ion-label color="primary" stacked >COMPANY MAN PHONE NUMBER</ion-label>
-          <ion-input
-          [(ngModel)]="selectedArray['Company_Man_Phone_Number']"
-          type="text"
-          (keypress)="keyPress($event)"
-          name="phoneNumber"
-          minlength="7"
-          maxlength="10"
-          placeholder="Phone Number">
-          </ion-input>
         </ion-item>
 </div>
 <div *ngIf="!projectSelected">
@@ -231,22 +232,39 @@
        </select-searchable>
     </ion-item>
 
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >RIG NAME & NUMBER</ion-label>
-          <select-searchable
-          class="specialSelect"
-          item-content
-          [(ngModel)]="RigInfo"
-          [items]="rigInfoArray"
-          title="RigInfo"
-          itemValueField=Name
-          itemTextField=Name
-          name="RigInfo"
-          [canSearch]="true"
-          [canClear]="true"
-          (onChange)="searchableChange($event)">
-        </select-searchable>
-      </ion-item>
+    <ion-item class="formField ionField">
+      <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
+      <ion-select
+        [(ngModel)]="orderNumber"
+        name="orderNumber">
+        <ion-option value=newAFE>*CREATE NEW AFE</ion-option>
+        <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == '1'">{{afe.Name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  <!-- When user types new AFE, but decides to click back
+      on a current AFE the value is not submitted -->
+    <ion-item class="formField ionField" *ngIf="orderNumber == 'newAFE'">
+      <ion-label color="primary" stacked>NEW AFE</ion-label>
+      <ion-label class="warningLabel"*ngIf="orderNumber.touched" text-wrap>Note: You will need to sync app in settings for New AFE to apply!</ion-label>
+      <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" placeholder="" text-wrap></ion-input>
+    </ion-item>
+
+    <ion-item class="formField ionField">
+      <ion-label color="primary" stacked >RIG NAME & NUMBER</ion-label>
+        <select-searchable
+        class="specialSelect"
+        item-content
+        [(ngModel)]="RigInfo"
+        [items]="rigInfoArray"
+        title="RigInfo"
+        itemValueField=Name
+        itemTextField=Name
+        name="RigInfo"
+        [canSearch]="true"
+        [canClear]="true"
+        (onChange)="searchableChange($event)">
+      </select-searchable>
+    </ion-item>
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked >CLASS</ion-label>
@@ -278,7 +296,7 @@
         </ion-input>
       </ion-item>
 
-      <ion-item class="formField ionField">
+      <ion-item class="formField ionField" >
         <ion-label color="primary" stacked >COMPANY MAN PHONE NUMBER</ion-label>
         <ion-input
         ngModel
@@ -288,31 +306,6 @@
         minlength="7"
         maxlength="10">
         </ion-input>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
-        <ion-select
-          [(ngModel)]="orderNumber"
-          name="orderNumber">
-          <ion-option value=newAFE>*CREATE NEW AFE</ion-option>
-          <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == '1'">{{afe.Name}}</ion-option>
-        </ion-select>
-      </ion-item>
-    <!-- When user types new AFE, but decides to click back
-        on a current AFE the value is not submitted -->
-      <ion-item class="formField ionField" *ngIf="orderNumber == 'newAFE'">
-        <ion-label color="primary" stacked>New AFE</ion-label>
-        <!-- <ion-label class="warningLabel"*ngIf="orderNumber.touched" text-wrap>Note: New AFE will take up to 5 minutes to populate on forms!</ion-label> -->
-        <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" placeholder="" text-wrap></ion-input>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>RIG NAME & NUMBER</ion-label>
-        <ion-input
-        type="text"
-        name="rigName"
-        ngModel></ion-input>
       </ion-item>
 
       <ion-item class="formField ionField">

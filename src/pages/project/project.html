@@ -100,7 +100,7 @@
 
       <ion-item class="formField ionField" *ngIf="orderNumber == 'newAFE'">
         <ion-label color="primary" stacked>NEW AFE</ion-label>
-        <ion-label class="warningLabel"*ngIf="orderNumber.touched" text-wrap>Note: New AFE will take up to 5 minutes to populate on forms!</ion-label>
+        <ion-label class="warningLabel"*ngIf="orderNumber.touched" text-wrap>Note: You will need to sync app in settings for New AFE to apply!</ion-label>
         <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel"></ion-input>
       </ion-item>
 
