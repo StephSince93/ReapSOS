@@ -1,8 +1,8 @@
 {
-  "name": "ASSI",
+  "name": "REAPInvoice",
   "integrations": {
     "cordova": {}
   },
   "type": "ionic-angular",
-  "pro_id": "481f26eb"
+  "pro_id": "b65773af"
 }

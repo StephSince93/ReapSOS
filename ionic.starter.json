@@ -1,5 +1,5 @@
 {
-  "name": "Blank Starter",
+  "name": "REAPInvoice",
   "baseref": "master",
   "tarignore": [
     ".sourcemaps",
