@@ -138,8 +138,9 @@ this.platform.ready().then(() => {
                  }else{
                  //console.log(this.reap.online);
                  //creates a loading controller while user submits
-                 this.stemAPI.submitSafetyForm(this.submitData,this.reap.token).then((result) =>{
+                 this.stemAPI.submitSafetyForm(this.submitData,this.reap.token).subscribe((result) =>{
                    //converts result to array
+                   console.log(result['Status']);
                    this.res = JSON.stringify(result);
                    this.res = JSON.parse(this.res);
                    //console.log(this.res);
@@ -196,18 +197,17 @@ this.platform.ready().then(() => {
                    }
                    }, 2000);
                  }, (err) => {
+                   loading.dismiss();
+                   // console.log(err);
+                   // console.log(err.message);
                    let alert = this.alertCtrl.create({
-                   title: 'Error Submitting, ',
+                   title: 'Error: '+ err.message,
                    message: 'Try submitting again, If issues persists contact stem support!',
                    buttons: [
                             {
                               text: 'Try Submitting Again',
                                role: 'Yes',
                               handler: () => {
-                                  setTimeout(() => {
-                                  loading.dismiss();
-                                  },1000);
-
                                  this.submitClicked=false;//enables the submission button to resubmit
                                  this.submitData = [];//resets Submission so data isnt inserted twice
                               }
@@ -219,9 +219,6 @@ this.platform.ready().then(() => {
                              /* allows user to submit offline and saves form data into a form variable
                              no data will be submitted until interenet connection is made via a sync or observable call */
                              /****** TESTING    *********************/
-                             setTimeout(() => {
-                             loading.dismiss();
-                             },1000);
                              this.reap.formStart = null;
                              this.storage.remove('formStart');
                              this.storage.set('offlineSubmission',this.submitData);

@@ -1,11 +1,6 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { Observable } from 'rxjs/Observable';
-// import { interval } from 'rxjs/observable/interval';
-// import { of } from 'rxjs/observable/of';
-// import { _throw } from 'rxjs/observable/throw';
-// import { mergeMap, retry } from 'rxjs/operators';
-import {  retry } from 'rxjs/operators';
+import 'rxjs/add/operator/retry';
 
 
 @Injectable()
@@ -16,6 +11,7 @@ export class StemApiProvider {
       private apisubmitSafteyUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=SaveASIsafetyform';
       //private apisubmitSafteyUrl:string = 'http://10.0.0.140/api.php?action=SaveASIsafetyform';
       private apiGetUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=GetASIData';
+      private apiGetDemoUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=GetDemoInvoiceData';
       //private apiGetUrl:string = 'http://10.0.0.140/api.php?action=GetASIData';
       private getMd5Check:string = 'https://sandbox.stemsoftware.com/api.php?action=GetMd5Check';
       //private getMd5Check:string = 'http://10.0.0.140/api.php?action=GetMd5Check';
@@ -30,16 +26,7 @@ export class StemApiProvider {
 //POST login info
  validateUser(data) {
  //console.log(data.userName,data.passWord)
- return new Promise((resolve, reject) => {
-   this.http.post(this.apiloginUrl, data, {responseType: 'text'})
-     .subscribe(res => {
-       resolve(res);
-     }, (err) => {
-       console.log(err);
-       retry(2);
-       reject(err);
-     })
-  });
+   return this.http.post(this.apiloginUrl, data, {responseType: 'text'}).retry(3);
  }
  //POST form submitBOL
   submitSafetyForm(data,authToken){
@@ -51,20 +38,11 @@ export class StemApiProvider {
             'Authorization': authToken
           })
  };
-  return new Promise((resolve, reject) => {
-    this.http.post(this.apisubmitSafteyUrl, JSON.stringify(data), httpOptions||{reportProgress:true})
-    .subscribe(res=>  {
+  return this.http.post(this.apisubmitSafteyUrl, JSON.stringify(data), httpOptions||{reportProgress:true})
+  .retry(3); // This will retry 3 times in case there's an error
 
-      resolve(res);
-    }, (err) => {
-      console.log(err);
-      retry(2);
-      console.log(retry(2));
-      reject(err);
-    });
-  });
  }
-   //GET BOLdata details
+   //GET Data
  getData(authToken){
 
       const httpOptions = {
@@ -75,17 +53,21 @@ export class StemApiProvider {
             })
    };
    //console.log(authToken);
-   return new Promise((resolve, reject) => {
-     this.http.get(this.apiGetUrl, httpOptions)
-     .subscribe(res=>  {
-       resolve(res);
-     }, (err) => {
-       console.log(err);
-       //retry(2);
-       reject(err);
-     });
-   });
+   return this.http.get(this.apiGetUrl, httpOptions).retry(3);
  }
+ //GET DemoInvoice
+getDemoInvoiceData(authToken){
+
+    const httpOptions = {
+        headers: new HttpHeaders({
+            'Accept': 'application/json, text/plain',
+            'Content-Type':  'application/json',
+            'Authorization': authToken
+          })
+ };
+ //console.log(authToken);
+ return this.http.get(this.apiGetDemoUrl,{responseType: 'text'}).retry(3);
+}
  getMD5Check(authToken,checkMD5){
    const httpOptions = {
        headers: new HttpHeaders({
@@ -94,16 +76,7 @@ export class StemApiProvider {
            'Authorization': authToken
          })
       };
-         return new Promise((resolve, reject) => {
-           this.http.post(this.getMd5Check,{'md5':checkMD5}, httpOptions)
-           .subscribe(res=>  {
-             resolve(res);
-           }, (err) => {
-             console.log(err);
-             retry(2);
-             reject(err);
-           });
-         });
+  return this.http.post(this.getMd5Check,{'md5':checkMD5}, httpOptions).retry(3);
        }
   updateGPSLoc(data,authToken){
           const httpOptions = {
@@ -115,13 +88,6 @@ export class StemApiProvider {
        };
 
            //console.log(data,authToken);
-           return new Promise((resolve, reject) => {
-             this.http.post(this.apiUpdateGPSUrl, JSON.stringify(data), httpOptions)
-             .subscribe(res=>  {
-               resolve(res);
-             }, (err) => {
-               reject(err);
-             });
-           });
+  return  this.http.post(this.apiUpdateGPSUrl, JSON.stringify(data), httpOptions).retry(3);
       }
 }

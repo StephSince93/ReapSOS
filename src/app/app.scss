@@ -147,6 +147,7 @@ ion-input{
     // border-top: solid 1px;
     margin-left: 7px;
     margin-right:7px;
+    padding-bottom: 40px;
 }.menuButton.button-block-ios.button-large-ios.button-ios{
     width: 100% !important;
     max-width: 100%;
@@ -158,6 +159,7 @@ ion-input{
     border-bottom: solid 1px;
     margin-left: 7px;
     margin-right:7px;
+    padding-bottom: 40px;
 }
 .customToast{
   text-align: center;
@@ -174,6 +176,7 @@ ion-input{
 ion-icon.locIcon{
     font-size: 2.2em;
 }
+
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These

@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>QUEUE</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+     <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+     </ion-refresher-content>
+  </ion-refresher>
+ <div *ngIf="!isEmpty">
+  <ion-searchbar  placeholder="Search" (ionInput)="getItems($event)" showCancelButton color="danger"></ion-searchbar>
+  <ion-list no-lines>
+    <button ion-item id="customQueue" (click)="itemSelected(i)" *ngFor="let data of finalData; let i = index" [style.background-color]="data.Color | safe: 'style'"  >
+      <ion-avatar item-start>
+         <img src="{{data.Icon}}" alt="">
+      </ion-avatar>
+        <h2>{{data.Company}}</h2>
+        <h3>Lease:&nbsp;{{data.Lease}}</h3>
+        <p>Due:&nbsp;{{data.Due_Date}}</p><p item-right>Invoice:&nbsp;{{data.Invoice}}</p>
+      </button>
+  </ion-list>
+ </div>
+</ion-content>

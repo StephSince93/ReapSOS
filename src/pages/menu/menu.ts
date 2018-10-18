@@ -6,6 +6,7 @@ import { LoginPage } from '../login/login';
 import { SafetyPage } from '../safety/safety';
 import { ProjectPage } from '../project/project';
 import { WellLocationsPage } from '../well-locations/well-locations';
+import { QueuePage } from '../queue/queue';
 import { ReapService } from '../../services/reap-service';
 import { StemApiProvider } from '../../providers/stem-api/stem-api';
 import { SupportPage } from '../support/support';
@@ -50,7 +51,7 @@ export class MenuPage {
          });
         loading.present();
         this.reap.formStart = true;
-        this.stemAPI.submitSafetyForm({"formStart":this.reap.formStart},this.reap.token).then((result) =>{
+        this.stemAPI.submitSafetyForm({"formStart":this.reap.formStart},this.reap.token).subscribe((result) =>{
         this.storage.set('formStart',this.reap.formStart);//sets local storage
         setTimeout(() => {
         loading.dismiss();
@@ -86,6 +87,9 @@ export class MenuPage {
   }
   toWellLocations(){
     this.navCtrl.push(WellLocationsPage);
+  }
+  toQueue(){
+    this.navCtrl.push(QueuePage);
   }
 
 }

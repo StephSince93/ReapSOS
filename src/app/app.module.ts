@@ -32,35 +32,12 @@ import { SafetyReviewPage } from '../pages/safety-review/safety-review';
 import { ProjectReviewPage } from '../pages/project-review/project-review';
 import { SubMenuPage } from '../pages/sub-menu/sub-menu';
 import { SuccessPage } from '../pages/success/success';
+import { QueuePage } from '../pages/queue/queue';
 import { SupportPage } from '../pages/support/support';
 import { ReapService } from '../services/reap-service';
 import { StemApiProvider } from '../providers/stem-api/stem-api';
-
-Pro.init('481f26eb', {
-  appVersion: '0.6.0'
-})
-
-@Injectable()
-export class MyErrorHandler implements ErrorHandler {
-  ionicErrorHandler: IonicErrorHandler;
-
-  constructor(injector: Injector) {
-    try {
-      this.ionicErrorHandler = injector.get(IonicErrorHandler);
-    } catch(e) {
-      // Unable to get the IonicErrorHandler provider, ensure
-      // IonicErrorHandler has been added to the providers list below
-    }
-  }
-
-  handleError(err: any): void {
-    Pro.monitoring.handleNewError(err);
-    // Remove this if you want to disable Ionic's auto exception handling
-    // in development mode.
-    this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
-  }
-}
-
+import { InvoicePage } from '../pages/invoice/invoice';
+import { SafePipe } from '../pipes/safe/safe';
 @NgModule({
   declarations: [
     MyApp,
@@ -78,7 +55,10 @@ export class MyErrorHandler implements ErrorHandler {
     SafetyReviewPage,
     ProjectReviewPage,
     SuccessPage,
-    SupportPage
+    QueuePage,
+    SupportPage,
+    InvoicePage,
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -107,6 +87,8 @@ export class MyErrorHandler implements ErrorHandler {
     SafetyReviewPage,
     ProjectReviewPage,
     SuccessPage,
+    QueuePage,
+    InvoicePage,
     SupportPage
   ],
   providers: [
@@ -114,7 +96,7 @@ export class MyErrorHandler implements ErrorHandler {
     SplashScreen,
     Geolocation,
     IonicErrorHandler,
-    {provide: ErrorHandler, useClass: MyErrorHandler},
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     StemApiProvider,
     ReapService,
     Device,

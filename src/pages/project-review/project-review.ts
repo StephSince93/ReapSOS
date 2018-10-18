@@ -43,8 +43,8 @@ export class ProjectReviewPage {
     this.submitData.push({'project':this.reap.projectForm});
     //console.log(this.submitData);
     loading.present();
-    this.stemAPI.submitSafetyForm(this.submitData,this.reap.token).then((result)=>{
-    //console.log(result['Status']);
+    this.stemAPI.submitSafetyForm(this.submitData,this.reap.token).subscribe((result)=>{
+    console.log(result['Status']);
         //setTimeout(() => {
         loading.dismiss();
       //}, 2000);
@@ -70,8 +70,11 @@ export class ProjectReviewPage {
       this.navCtrl.push(SuccessPage,{'success':'Project Form Submitted!'});
     }
   },(err) => {
+    console.log(err);
+    console.log(err.message);
+    loading.dismiss();
     let alert = this.alertCtrl.create({
-    title: 'Error Submitting Project Form!',
+    title: 'Error: '+ err.message,
     message: 'Please try submitting again! If issue persists, contact Stem Support!',
     buttons: [
            {

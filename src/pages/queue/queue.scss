@@ -1,0 +1,40 @@
+page-queue {
+  ion-title {
+    color: reapHeader;
+    text-align:center;
+    font-size: 9px;
+    font-family: sans-serif;
+    }
+    ion-list{
+    padding-top: 25px;
+    }
+    h1{
+    text-align: center;
+    color:black;
+    padding-top:15px !important;
+    font-size: 30px;
+    font-family:sans-serif;
+    }
+
+
+    .list {
+      width: 100% !important;
+    }
+    .item-block{
+      margin: 0 0 0 0;
+    }
+    p{
+      color: black !important;
+    }
+    ion-list{
+      padding-top:1px;
+    }
+    .navButtons{
+      background-color: green;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    a, a div, a span, a ion-icon, a ion-label, button, button div, button span, button ion-icon, button ion-label, [tappable], [tappable] div, [tappable] span, [tappable] ion-icon, [tappable] ion-label, input, textarea{
+      white-space: nowrap!important;
+    }
+}

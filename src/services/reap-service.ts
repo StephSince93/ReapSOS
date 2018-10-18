@@ -93,7 +93,7 @@ export class ReapService {
       //console.log(this.token);
       LoginPage.initialLogin = false;//changes login variable to false after user logs in
         //imported data from API
-        this.stemAPI.getData(this.token).then((result) =>{
+        this.stemAPI.getData(this.token).subscribe((result) =>{
         this.getData = (JSON.stringify(result));
         this.getData = JSON.parse(this.getData);
         console.log(this.getData);
@@ -198,7 +198,7 @@ export class ReapService {
       loading.present();
       if(data[0]['safety']){//checks if safety form was submitted offline
         //console.log('safety form submitted');
-      this.stemAPI.submitSafetyForm(data,this.token).then((result) =>{
+      this.stemAPI.submitSafetyForm(data,this.token).subscribe((result) =>{
           this.storage.remove('formStart');
           this.storage.remove('offlineSubmission');
           this.presentToast('submission Successful');
@@ -214,7 +214,7 @@ export class ReapService {
             });
        }else if(data[0]['project']){//checks if project form was submitted offline
           //console.log('project form submitted');
-          this.stemAPI.submitSafetyForm(data,this.token).then((result) =>{
+          this.stemAPI.submitSafetyForm(data,this.token).subscribe((result) =>{
               this.storage.remove('offlineSubmission');
               this.presentToast('submission Successful');
               setTimeout(() => {
@@ -281,7 +281,7 @@ export class ReapService {
 
     checkMD5(){
       //console.log(this.getMD5);
-      this.stemAPI.getMD5Check(this.token,this.getMD5).then((result) =>{
+      this.stemAPI.getMD5Check(this.token,this.getMD5).subscribe((result) =>{
         let md5 = result;
         //console.log(result);
         //console.log(md5['downloadJson']);

@@ -88,7 +88,7 @@ export class WellLocationsPage {
 
             loading.present();
 
-            this.stemAPI.updateGPSLoc(this.newGPSLoc,this.reap.token).then((result) =>{
+            this.stemAPI.updateGPSLoc(this.newGPSLoc,this.reap.token).subscribe((result) =>{
 
               //converts result to JSON response
               this.res = JSON.stringify(result);

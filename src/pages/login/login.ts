@@ -38,7 +38,7 @@ export class LoginPage {
             //console.log(form.value);
 
             // API POST authentication
-            this.stemAPI.validateUser(form.value).then((result) =>{
+            this.stemAPI.validateUser(form.value).subscribe((result) =>{
               form.reset();//clears values of the form after data is saved to array
               this.res = JSON.parse(result.toString());//converts result to array
               //console.log(this.res);

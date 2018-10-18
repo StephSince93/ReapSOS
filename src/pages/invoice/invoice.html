@@ -1,0 +1,64 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>INVOICE</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list no-lines>
+    <ion-item class="invoiceItem">
+      <h1>{{selectedInvoice[8]}}</h1>
+        <h2>Invoice:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedInvoice[3]}}</h2>
+        <h2>Lease:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedInvoice[9]}}</h2>
+        <h2>Company Rep:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedInvoice[6]}}</h2>
+        <h2>Needs:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedInvoice[13]}}</h2>
+        <h2>Age:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedInvoice[10]}}</h2>
+        <h2>Location:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedInvoice[4]}}</h2>
+        <h2>Dept:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedInvoice[5]}}</h2>
+        <h2>Created By:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedInvoice[12]}}</h2>
+        <h2>Invoice Date:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedInvoice[7]}}</h2>
+      </ion-item>
+      <ion-item class="invoiceItem">
+        <ion-grid no-padding>
+            <ion-row>
+              <ion-col text-center>
+              <button (click)="backtoInvoice()" ion-button icon-only large >
+                 <ion-icon ios="ios-aperture" md="md-aperture"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col text-center>
+              <button ion-button icon-only large>
+                  <ion-icon ios="ios-phone-portrait" md="md-phone-portrait"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col text-center>
+              <button ion-button icon-only large>
+                <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+  </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+         <ion-item class="subInvoice">
+           <button class="cameraButton" (click)="takePicture(selectedInvoice[0])" ion-button icon-only large>
+            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+          </button>
+        </ion-item>
+       </ion-col>
+       <ion-col text-center>
+        <ion-item class="subInvoice">
+         <button class="requestButton" (click)="requestInvoice(selectedInvoice[3])" ion-button icon-only large>
+           <ion-icon ios="ios-git-pull-request" md="md-git-pull-request"></ion-icon>
+         </button>
+       </ion-item>
+      </ion-col>
+     </ion-row>
+   </ion-grid>
+ </ion-list>
+</ion-content>
