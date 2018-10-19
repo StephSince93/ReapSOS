@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.stemsoftware.REAPInvoice" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>REAPInvoice</name>
-    <description>A REAPInvoice app</description>
+<widget id="com.stemsoftware.reap" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Reap</name>
+    <description>Reap</description>
     <author email="dev@stemsoftware.com" href="https://stem.software.com/">REAP</author>
     <content src="index.html" />
     <access origin="*" />

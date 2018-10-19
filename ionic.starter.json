@@ -1,5 +1,5 @@
 {
-  "name": "REAPInvoice",
+  "name": "Reap",
   "baseref": "master",
   "tarignore": [
     ".sourcemaps",
