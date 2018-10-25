@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.stemsoftware.reap" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Reap</name>
-    <description>Reap</description>
+<widget id="com.stemsoftware.DevonianServices" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Devonian Services</name>
+    <description>Reap app for Devonian Services</description>
     <author email="dev@stemsoftware.com" href="https://stem.software.com/">REAP</author>
     <content src="index.html" />
     <access origin="*" />
@@ -108,7 +108,7 @@
     <plugin name="cordova-sqlite-storage" spec="~2.4.0" />
     <plugin name="cordova-plugin-ionic-webview" spec="^2.2.0" />
     <plugin name="cordova-plugin-ionic" spec="5.2.5">
-        <variable name="APP_ID" value="b65773af" />
+        <variable name="APP_ID" value="1bd55ea2" />
         <variable name="CHANNEL_NAME" value="Master" />
         <variable name="UPDATE_METHOD" value="none" />
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
