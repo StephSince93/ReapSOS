@@ -12,7 +12,7 @@ export class StemApiProvider {
       //private apiloginUrl:string = 'http://10.0.0.21/api.php?action=Newreaplogin';
       private apisubmitFormUrl:string = 'https://v3.stemsoftware.com/api.php?action=SaveDevonianform';
       //private apisubmitFormUrl:string = 'http://10.0.0.21/api.php?action=SaveDevonianform';
-      private apiGetUrl:string = 'https://v3.stemsoftware.com/api.php?action=GetDeovonianData';
+      private apiGetUrl:string = 'https://v3.stemsoftware.com/api.php?action=GetDevonianData';
       //private apiGetUrl:string = 'http://10.0.0.21/api.php?action=GetDevonianData';
       //private getMd5Check:string = 'https://sandbox.stemsoftware.com/api.php?action=GetMd5Check';
       //private getMd5Check:string = 'http://10.0.0.140/api.php?action=GetMd5Check';
