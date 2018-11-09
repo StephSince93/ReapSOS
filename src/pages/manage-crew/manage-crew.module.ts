@@ -4,7 +4,7 @@ import { ManageCrewPage } from './manage-crew';
 
 @NgModule({
   declarations: [
-    ManageCrewPage,
+    //ManageCrewPage,
   ],
   imports: [
     IonicPageModule.forChild(ManageCrewPage),

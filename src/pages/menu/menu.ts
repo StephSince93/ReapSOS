@@ -6,7 +6,6 @@ import { LoginPage } from '../login/login';
 import { SafetyPage } from '../safety/safety';
 import { ProjectPage } from '../project/project';
 import { WellLocationsPage } from '../well-locations/well-locations';
-import { QueuePage } from '../queue/queue';
 import { ReapService } from '../../services/reap-service';
 import { StemApiProvider } from '../../providers/stem-api/stem-api';
 import { SupportPage } from '../support/support';
@@ -85,9 +84,6 @@ export class MenuPage {
   }
   toWellLocations(){
     this.navCtrl.push(WellLocationsPage);
-  }
-  toQueue(){
-    this.navCtrl.push(QueuePage);
   }
   toManageCrew(){
     this.navCtrl.push(ManageCrewPage);

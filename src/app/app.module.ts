@@ -32,12 +32,10 @@ import { SafetyReviewPage } from '../pages/safety-review/safety-review';
 import { ProjectReviewPage } from '../pages/project-review/project-review';
 import { SubMenuPage } from '../pages/sub-menu/sub-menu';
 import { SuccessPage } from '../pages/success/success';
-import { QueuePage } from '../pages/queue/queue';
 import { SupportPage } from '../pages/support/support';
 import { ReapService } from '../services/reap-service';
 import { StemApiProvider } from '../providers/stem-api/stem-api';
 import { InvoicePage } from '../pages/invoice/invoice';
-import { SafePipe } from '../pipes/safe/safe';
 import { ManageCrewPage } from '../pages/manage-crew/manage-crew';
 
 Pro.init('1bd55ea2', {
@@ -82,10 +80,8 @@ export class MyErrorHandler implements ErrorHandler {
     SafetyReviewPage,
     ProjectReviewPage,
     SuccessPage,
-    QueuePage,
     SupportPage,
     InvoicePage,
-    SafePipe,
     ManageCrewPage
   ],
   imports: [
@@ -115,7 +111,6 @@ export class MyErrorHandler implements ErrorHandler {
     SafetyReviewPage,
     ProjectReviewPage,
     SuccessPage,
-    QueuePage,
     InvoicePage,
     SupportPage,
     ManageCrewPage

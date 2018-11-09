@@ -5,10 +5,10 @@ import { ReapService } from '../../services/reap-service';
 import { ManageCrewPage } from '../manage-crew/manage-crew';
 @NgModule({
   declarations: [
-     MenuPage,
+     //MenuPage,
   ],
   imports: [
-    IonicPageModule.forChild(ManageCrewPage),
+    IonicPageModule.forChild(MenuPage),
   ],
   providers: [
     ReapService
