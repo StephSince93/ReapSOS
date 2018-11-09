@@ -47,7 +47,7 @@ export class SafetyReviewPage {
             this.formDetails.push(this.reap.safetyForm);
             // console.log(this.formDetails);
             // console.log(this.jobDetails);
-            // console.log(this.equipmentDetails);
+            //console.log(this.equipmentDetails);
             // console.log(this.laborDetails);
             var date = new Date(this.formDetails[0]['currentDate']);
             this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
@@ -174,7 +174,7 @@ export class SafetyReviewPage {
                  //creates a loading controller while user submits
                  this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result) =>{
                    //converts result to array
-                   console.log(result['Status']);
+                   //console.log(result['Status']);
 
                    //console.log(this.res);
 

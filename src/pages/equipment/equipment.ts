@@ -24,7 +24,7 @@ export class EquipmentPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService) {
-                // console.log(this.crewEquipment);
+                 //console.log(this.crewEquipment);
           //this.equipmentType = reap.equipmentType;
           this.equipmentArray = reap.getEquipment;
             //console.log(this.equipmentArray);
