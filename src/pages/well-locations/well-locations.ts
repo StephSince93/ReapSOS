@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Platform, AlertController, Loading
 import { NgForm } from '@angular/forms';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Storage } from '@ionic/storage';
 
 import { SuccessPage } from '../success/success';
 import { ReapService } from '../../services/reap-service';
@@ -26,7 +27,6 @@ export class WellLocationsPage {
   private lon:any;
   private lat:any;
   private newGPSLoc:any [] = [];
-  res:any = {};//API submission response
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public geolocation: Geolocation,
@@ -34,7 +34,8 @@ export class WellLocationsPage {
               public reap: ReapService,
               public alertCtrl: AlertController,
               public stemAPI: StemApiProvider,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController,
+              public storage: Storage) {
               this.locationsArray = this.reap.getLocations;
   }
   ionViewDidLoad() {
@@ -90,9 +91,6 @@ export class WellLocationsPage {
 
             this.stemAPI.updateGPSLoc(this.newGPSLoc,this.reap.token).subscribe((result) =>{
 
-              //converts result to JSON response
-              this.res = JSON.stringify(result);
-              this.res = JSON.parse(this.res);
               //console.log(this.res);
               setTimeout(() => {
                               loading.dismiss();
@@ -100,7 +98,7 @@ export class WellLocationsPage {
                               setTimeout(() => {
 
                                 //this.storage.set('globalBolChemicals',this.reap.bolGlobalChemicals);// Sets local storage for chemicals user submits to BOL for future use until they confirm BOL
-                                this.navCtrl.push(SuccessPage,{'success':this.res.MSG});//goes to success page
+                                this.navCtrl.push(SuccessPage,{'Success':result['MSG']});//goes to success page
                              }, 2000);
             }, (err) => {
               //converts result to JSON response
@@ -109,24 +107,31 @@ export class WellLocationsPage {
               }, 2000);
             let alert = this.alertCtrl.create({
                   title: 'Error Submitting, ',
-                  message: 'Try submitting again, If issues persists contact stem support.',
+                  message: 'Try submitting again, or Sumbit offline.',
                   buttons: [
                            {
-                             text: 'Acknowledged',
+                             text: 'Try Submitting Again',
                               role: 'Yes',
                              handler: () => {
-                                //resets data saved in array when API call fails to prevent double submission
-                                this.newGPSLoc = [];
+                                // this.submitClicked=false;//enables the submission button to resubmit
+                                // this.submitData = [];//resets Submission so data isnt inserted twice
                              }
-                           }
-                           // ,
-                           // {
-                           //   text: 'Cancel',
-                           //    role: 'Cancel',
-                           //   handler: () => {
-                           //
-                           //   }
-                           // }
+                           },
+                           {
+                         text: 'Submit Offline and Sync later',
+                          role: 'Yes',
+                         handler: () => {
+                            /* allows user to submit offline and saves form data into a form variable
+                            no data will be submitted until interenet connection is made via a sync or observable call */
+                            /****** TESTING    *********************/
+                            this.reap.formStart = null;
+                            this.reap.offlineFormSubmissions.push({"Type":"GPS","Info":this.newGPSLoc,"Status":"Pending"});
+                            this.storage.set('offlineSubmission',this.reap.offlineFormSubmissions);
+                            this.newGPSLoc = [];
+
+                            this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
+                         }
+                       }
                         ]
                     });
                   alert.present();

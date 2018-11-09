@@ -8,19 +8,39 @@
 
 
 <ion-content>
+
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-list>
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>EQUIPMENT TYPE</ion-label>
-        <ion-select
-          [(ngModel)]="Type"
-          (ngModelChange)="typeSelected()"
-          name="Type"
-          required>
-          <ion-option value={{equipment.Type}} *ngFor="let equipment of equipmentType" selected="equipment.Type == '1'">{{equipment.Type}}</ion-option>
-        </ion-select>
-      </ion-item>
-
+      <ion-label class="gridLabel">CREW EQUIPMENT</ion-label>
+      <ion-grid class="formDetails" *ngFor="let equipment of crewEquipment;index as i;">
+            <ion-row>
+                <ion-col col-6>NAME:</ion-col>
+                <ion-col col-6>{{equipment?.Name }}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>STARTING ODOMETER:</ion-col>
+                <ion-col>{{equipment?.Odometer}}</ion-col>
+            </ion-row>
+            <ion-row>
+               <ion-col>INPUT ENDING ODOMETER:</ion-col>
+               <ion-col class="formCol" ><ion-input class="crewInput" ngModel name="endingOdometer{{i}}" type="text"></ion-input></ion-col>
+            </ion-row>
+            <ion-row>
+               <ion-col>ENDING ODOMETER:</ion-col>
+               <ion-col>{{equipment?.endingOdometer}}</ion-col>
+            </ion-row>
+            <!-- <ion-row>
+                <ion-col>INPUT HOURS:</ion-col>
+                <ion-col class="formCol"><ion-input ngModel name="hours{{i}}" type="text"></ion-input></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>HOURS:</ion-col>
+                <ion-col>{{equipment?.hours}}</ion-col>
+            </ion-row> -->
+      </ion-grid>
+      <br>
+      <ion-label class="gridLabel">ADD ADDITIONAL EQUIPMENT</ion-label>
+      <hr>
       <ion-item class="formField ionField" >
         <ion-label color="primary" stacked>EQUIPMENT</ion-label>
       <select-searchable
@@ -28,7 +48,7 @@
        [(ngModel)]="Equipment"
        title="Equipment"
        itemValueField=ID
-       itemTextField=Unit
+       itemTextField=Name
        name="Equipment"
        [items]="equipmentArray"
        [canSearch]="true"
@@ -37,12 +57,21 @@
      </select-searchable>
       </ion-item>
 
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>NUMBER OF DAYS</ion-label>
+      <!-- <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>HOURS</ion-label>
         <ion-input
         ngModel
         type="number"
-        name="days">
+        name="hours">
+        </ion-input>
+      </ion-item> -->
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>ENDING ODOMETER</ion-label>
+        <ion-input
+        ngModel
+        type="text"
+        name="endingOdometer">
         </ion-input>
       </ion-item>
 

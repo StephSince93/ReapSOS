@@ -37,7 +37,7 @@
     </ion-item>
 
       <ion-item class="formField ionField" *ngIf="!selectedClosestLoc">
-        <ion-label color="primary" stacked >PROJECT LOCATION</ion-label>
+        <ion-label color="primary" stacked >LOCATION</ion-label>
           <select-searchable
           item-content
           [(ngModel)]="location"
@@ -77,22 +77,11 @@
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >COMPANY MAN PHONE NUMBER</ion-label>
-        <ion-input
-        ngModel
-        type="text"
-        (keypress)="keyPress($event)"
-        name="phoneNumber"
-        minlength="7"
-        maxlength="10">
-        </ion-input>
-      </ion-item>
-
-      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
         <ion-select
           [(ngModel)]="orderNumber"
-          name="orderNumber">
+          name="orderNumber"
+          interface="action-sheet">
           <ion-option value=newAFE>*CREATE NEW AFE</ion-option>
           <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == '1'">{{afe.Name}}</ion-option>
         </ion-select>
@@ -104,79 +93,14 @@
         <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel"></ion-input>
       </ion-item>
 
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >RIG NAME & NUMBER</ion-label>
-          <select-searchable
-          class="specialSelect"
-          item-content
-          [(ngModel)]="riginfo"
-          [items]="rigInfoArray"
-          title="RigInfo"
-          itemValueField=ID
-          itemTextField=Name
-          name="RigInfo"
-          [canSearch]="true"
-          [canClear]="true"
-          (onChange)="searchableChange($event)">
-        </select-searchable>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" class="specialSelect" stacked >CLASS</ion-label>
-          <select-searchable
-          class="specialSelect"
-          item-content
-          [(ngModel)]="class"
-          [items]="classArray"
-          title="Class"
-          itemValueField=ID
-          itemTextField=Name
-          name="Class"
-          [canSearch]="true"
-          [canClear]="true"
-          (onChange)="searchableChange($event)">
-        </select-searchable>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>LOCATION</ion-label>
-        <ion-select [(ngModel)]="ASILocation" name="ASILocation">
-          <ion-option value="{{asi.Name}}" *ngFor="let asi of ASILocations">{{asi.Name}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>DEPARTMENT</ion-label>
-        <ion-select ngModel name="department">
-          <ion-option value="DRILLING">DRILLING</ion-option>
-          <ion-option value="PRODUCTION">PRODUCTION</ion-option>
-          <ion-option value="COMPLETION">COMPLETION</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>DIVISION</ion-label>
-        <ion-select ngModel name="division">
-          <ion-option value="COMPLETION">COMPLETION</ion-option>
-          <ion-option value="CONSTRUCTION">CONSTRUCTION</ion-option>
-          <ion-option value="DRILLING">DRILLING</ion-option>
-          <ion-option value="MAINTENANCE">MAINTENANCE</ion-option>
-          <ion-option value="NON-COMPLETION">NON-COMPLETION</ion-option>
-          <ion-option value="OTHER">OTHER</ion-option>
-          <ion-option value="PRODUCTION">PRODUCTION</ion-option>
-          <!-- <ion-option value="SAFETY SERVICES">SAFETY SERVICES</ion-option>
-          <ion-option value="ENVOIRNMENTAL SERVICES">ENVIORNMENTAL SERVICES</ion-option>
-          <ion-option value="PULLING UNIT SERVICES">PULLING UNIT SERVICES</ion-option>
-          <ion-option value="WATER SERVICES">WATER SERVICES</ion-option>
-          <ion-option value="ROUSTABOUT SERVICES">ROUSTABOUT SERVICES</ion-option>
-          <ion-option value="TRUCKING SERVICES">TRUCKING SERVICES</ion-option> -->
-        </ion-select>
-      </ion-item>
-
       <ion-item>
         <button [disabled]="!f.valid" type="submit" id="submitButton" ion-button full large>Submit</button>
      </ion-item>
    </ion-list>
   </form>
 </ion-content>
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-title>{{this.reap.devonianVersion}}</ion-title>
+  </ion-toolbar>
+</ion-footer> -->

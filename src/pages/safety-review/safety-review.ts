@@ -16,18 +16,21 @@ import { StemApiProvider } from '../../providers/stem-api/stem-api';
 })
 export class SafetyReviewPage {
   @ViewChild(SignaturePad) public signaturePad: SignaturePad;
+  //testing for Devonian
+  private crewPersonnel:any [] = this.reap.globalCrewPersonnel;//From existing CrewPersonnel
+  private crewEquipment:any [] = this.reap.globalCrewEquipment;//From existing CrewEquipment
+  private mergeEquipment:any [] = [];//merges all equipment together
   private formDetails:any[] = [];
   private miscDetails:any[] = this.reap.misc;
-  private laborDetails:any[] = this.reap.labor;
-  private equipmentDetails:any[] = this.reap.equipment;
-  private mileageDetails:any[] = this.reap.mileage;
+  private laborDetails:any[] = this.reap.labor;//When adding new Labor
+  private equipmentDetails:any[] = this.reap.equipment;//When adding new Equipment
+  private jobDetails:any[] = this.reap.job;
   private photoDetails:any[] = this.reap.photo;
   public signatureImage: string;
   public cancelled = "false";
   private submitData:any[] = [];
   private md5Data:any;
   private lonlat:any = [];
-  res:any = {};//API submission response
   private submitClicked:boolean = false;
   isDisconnected:any;
   constructor(public navCtrl: NavController,
@@ -41,24 +44,30 @@ export class SafetyReviewPage {
               public loadingCtrl: LoadingController,
               private storage: Storage,
               private toastCtrl: ToastController) {
-
             this.formDetails.push(this.reap.safetyForm);
-            //console.log(this.formDetails);
+            // console.log(this.formDetails);
+            // console.log(this.jobDetails);
+            // console.log(this.equipmentDetails);
+            // console.log(this.laborDetails);
             var date = new Date(this.formDetails[0]['currentDate']);
-            this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '-' + date.getDate() + '-' + date.getFullYear();
+            this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
             //console.log(this.laborDetails);
             //console.log(this.formDetails[0]['currentDate'])
             //console.log(this.mileageDetails);
             /* Ensure the platform is ready */
-this.platform.ready().then(() => {
-    /* Perform initial geolocation */
-    this.geolocation.getCurrentPosition().then((resp) => {
-        this.lonlat = [resp.coords.latitude,resp.coords.longitude];
-        //console.log(this.lonlat);
-      }).catch((error) => {
-        this.presentToast(error);
-      });//end of error
-    });//end of platform
+  }
+  ionViewWillEnter(){
+    this.platform.ready().then(() => {
+        /* Perform initial geolocation */
+        this.geolocation.getCurrentPosition().then((resp) => {
+            this.lonlat = [resp.coords.latitude,resp.coords.longitude];
+            //console.log(this.lonlat);
+          }).catch((error) => {
+            this.presentToast(error);
+          });//end of error
+        });//end of platform
+    //fixes issue with signature swiping back.
+  this.navCtrl.swipeBackEnabled = false;
   }
 
   canvasResize(){
@@ -71,6 +80,31 @@ this.platform.ready().then(() => {
     this.signaturePad.clear();
   }
   sigSubmit(){
+    if(this.reap.globalCrewPersonnel==null){
+      this.reap.globalCrewPersonnel = [];
+    }
+    if(this.reap.globalCrewEquipment==null){
+      this.reap.globalCrewEquipment = [];
+    }
+    //this.mergeEquipment = this.reap.globalCrewEquipment;
+    if(this.reap.globalCrewEquipment){
+    for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
+      this.mergeEquipment.push({'ID':this.reap.globalCrewEquipment[i]['ID'],
+                        'Name':this.reap.globalCrewEquipment[i]['Name'],
+                        'Odometer':this.reap.globalCrewEquipment[i]['Odometer'],
+                        'endingOdometer':this.reap.globalCrewEquipment[i]['endingOdometer']});
+      }
+    }
+    if(this.equipmentDetails){
+    for(let i=0;i<this.equipmentDetails.length;i++){
+      this.mergeEquipment.push({'ID':this.equipmentDetails[i]['ID'],
+                      'Name':this.equipmentDetails[i]['Name'],
+                      'Odometer':this.equipmentDetails[i]['Odometer'],
+                      'endingOdometer':this.equipmentDetails[i]['endingOdometer']});
+                    }
+                  }
+    // console.log(this.equipmentDetails);
+    // console.log(this.mergeEquipment);
     //console.log(this.formDetails);
     this.submitClicked = true;
     var md5 = new Md5();//md5 hash for custom guid
@@ -102,11 +136,11 @@ this.platform.ready().then(() => {
                  /*md5 hashes form data with signature and timestamp for unique guid*/
                  this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
                  /*Pushes all data to array for form submission*/
-                 this.submitData.push({'safety':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.equipmentDetails},{'Labor':this.laborDetails},{'Misc':this.miscDetails},{'Mileage':this.mileageDetails},{'Photo':this.photoDetails});
+                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'JobDescription':this.jobDetails},{'Photo':this.photoDetails});
                  /*
                  *
                  */
-                 console.log(this.submitData);
+                 //console.log(this.submitData);
                  loading.present();
               /*******************TESTING***********************************/
                  if(this.reap.online=="offline"){
@@ -138,52 +172,40 @@ this.platform.ready().then(() => {
                  }else{
                  //console.log(this.reap.online);
                  //creates a loading controller while user submits
-                 this.stemAPI.submitSafetyForm(this.submitData,this.reap.token).subscribe((result) =>{
+                 this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result) =>{
                    //converts result to array
                    console.log(result['Status']);
-                   this.res = JSON.stringify(result);
-                   this.res = JSON.parse(this.res);
+
                    //console.log(this.res);
 
                     // setTimeout(() => {
                   // }, 3000);
                     setTimeout(() => {
-              if(this.res.Status == false){
+              if(result['Status'] == false){
               loading.dismiss();
               let alert = this.alertCtrl.create({
               title: 'Error Submitting, ',
-              message: 'Try submitting again, If issues persists contact stem support.',
+              message: result['MSG'],
               buttons: [
-                       {
-                         text: 'Try Submitting Again',
+                           {
+                         text: 'Check location and try submitting again!',
                           role: 'Yes',
                          handler: () => {
-                           setTimeout(() => {
-                           loading.dismiss();
-                           },1000);
-
+                            /* allows user to submit offline and saves form data into a form variable
+                            no data will be submitted until interenet connection is made via a sync or observable call */
+                            /****** TESTING    *********************/
+                            setTimeout(() => {
+                            loading.dismiss();
+                            },1000);
+                            //this.reap.formStart==null
+                            this.mergeEquipment = [];//resets equipment array
+                            // this.storage.remove('formStart');
+                            //this.storage.set('offlineSubmission',this.submitData);
                             this.submitClicked=false;//enables the submission button to resubmit
                             this.submitData = [];//resets Submission so data isnt inserted twice
+                            //this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
                          }
-                       },
-                       {
-                     text: 'Check location and try submitting again!',
-                      role: 'Yes',
-                     handler: () => {
-                        /* allows user to submit offline and saves form data into a form variable
-                        no data will be submitted until interenet connection is made via a sync or observable call */
-                        /****** TESTING    *********************/
-                        setTimeout(() => {
-                        loading.dismiss();
-                        },1000);
-                        //this.reap.formStart==null
-                        this.storage.remove('formStart');
-                        //this.storage.set('offlineSubmission',this.submitData);
-                        this.submitClicked=false;//enables the submission button to resubmit
-                        this.submitData = [];//resets Submission so data isnt inserted twice
-                        //this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
-                     }
-                   }
+                       }
                     ]
                 });
               alert.present();
@@ -193,7 +215,7 @@ this.platform.ready().then(() => {
                      loading.dismiss();
                      this.reap.formStart = null;
                      this.storage.remove('formStart');
-                     this.navCtrl.push(SuccessPage,{'success':this.res.MSG});
+                     this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
                    }
                    }, 2000);
                  }, (err) => {
@@ -201,13 +223,14 @@ this.platform.ready().then(() => {
                    // console.log(err);
                    // console.log(err.message);
                    let alert = this.alertCtrl.create({
-                   title: 'Error: '+ err.message,
-                   message: 'Try submitting again, If issues persists contact stem support!',
+                   title: 'Error: ',
+                   message: 'Try submitting again,or Submit Form Offline!',
                    buttons: [
                             {
                               text: 'Try Submitting Again',
                                role: 'Yes',
                               handler: () => {
+                                 this.mergeEquipment = [];
                                  this.submitClicked=false;//enables the submission button to resubmit
                                  this.submitData = [];//resets Submission so data isnt inserted twice
                               }
@@ -221,7 +244,8 @@ this.platform.ready().then(() => {
                              /****** TESTING    *********************/
                              this.reap.formStart = null;
                              this.storage.remove('formStart');
-                             this.storage.set('offlineSubmission',this.submitData);
+                             this.reap.offlineFormSubmissions.push({"Type":"WO","Info":this.submitData,"Status":"Pending"});
+                             this.storage.set('offlineSubmission',this.reap.offlineFormSubmissions);
                              this.submitData = [];
 
                              this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
@@ -238,6 +262,7 @@ this.platform.ready().then(() => {
               text: 'No',
               role: 'cancel',
               handler: () => {
+                 this.mergeEquipment = [];
                  this.submitClicked=false;//enables the submission button to resubmit
                 //console.log('No clicked');
               }
@@ -251,13 +276,14 @@ this.platform.ready().then(() => {
     text: 'No',
     role: 'cancel',
     handler: () => {
+    this.mergeEquipment = [];
     this.submitClicked=false;//enables the submission button to resubmit
        }
       },
      ]
    });
  alert.present();
-}
+ }
 
 
 
@@ -302,10 +328,10 @@ this.platform.ready().then(() => {
      this.miscDetails = this.reap.misc;
      //console.log(this.mileageDetails);
  }
- removeMileage(index){
+ removeDescription(index){
 
-     this.reap.mileage.splice(index, 1);
-     this.mileageDetails = this.reap.mileage;
+     this.reap.job.splice(index, 1);
+     this.jobDetails = this.reap.job;
      //console.log(this.mileageDetails);
  }
  removeLabor(index){

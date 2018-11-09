@@ -29,4 +29,24 @@ page-labor {
     font-size: 1.5em;
     text-align: center;
   }
+  ion-col{
+    border: 1px solid;
+  }
+  .formCol{
+    background-color:#D2F27C;
+  }
+  ion-input{
+    height:5px;
+  }
+  .text-input-md{
+    margin:0;
+  }
+  .text-input-ios{
+    margin:0;
+  }
+  .gridLabel{
+    text-align:center;
+    font-weight:bold;
+    margin-top:5px;
+  }
 }

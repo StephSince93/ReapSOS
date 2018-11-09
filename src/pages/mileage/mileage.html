@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>MILEAGE</ion-title>
+    <ion-title>DESCRIPTION</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,19 +11,36 @@
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-list>
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>MILES</ion-label>
+        <ion-label stacked>JOB DESCRIPTION</ion-label>
+          <select-searchable
+           item-content
+           ngModel
+           title="jobDescription"
+           itemValueField=JobID
+           itemTextField=ItemDescription
+           name="jobDescription"
+           [items]="jobDescription"
+           [canSearch]="true"
+           [canClear]="true"
+           [focusSearchbar]="true"
+           (onChange)="searchableChange($event)">
+         </select-searchable>
+    </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>QUANTITY</ion-label>
         <ion-input
           ngModel
-          name="miles"
+          name="quantity"
           type="number">
         </ion-input>
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>NUMBER OF TRIPS</ion-label>
+        <ion-label color="primary" stacked>HOURS/DAYS/COST</ion-label>
         <ion-input
           ngModel
-          name="trips"
+          name="each"
           type="number">
         </ion-input>
       </ion-item>

@@ -30,31 +30,7 @@ export class QueuePage {
   try{
   // API POST authentication
 
-  this.stemAPI.getDemoInvoiceData(this.token).subscribe((result) =>{
-    //console.log(result);
-    //console.log(result.toString().replace(/\s/g,''));
-    this.queueData = result.toString().replace(/\s/g,'');
-    this.finalData = JSON.parse(this.queueData);
 
-    if(this.finalData['data']){
-      console.log(this.finalData['data'])
-        this.isEmpty = true;
-        console.log('empty data');
-      console.log(this.finalData);
-
-  }else{
-    //console.log('not empty data');
-    this.isEmpty = false;
-    for(var i =0;i<this.finalData.length-1;i++){
-    this.safePipe.transform(this.finalData[i]['Color']);
-    //console.log(this.finalData[i]['Color']);
-      }
-    }
-    //console.log(this.finalData);
-      this.initializeItems();
-          }, (err) => {
-        console.log(err);
-        });
     //catches import of data if the queue is empty
     } catch(e){
     //empties array

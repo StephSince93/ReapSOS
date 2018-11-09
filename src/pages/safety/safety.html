@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>SAFETY FORM</ion-title>
+    <ion-title>WORK ORDER</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -23,7 +23,8 @@
         <ion-select
           #projectName
           ngModel
-          name="project">
+          name="project"
+          interface="action-sheet">
           <ion-option (ionSelect)="projectSelect(project.ProjectName,i)" [value]={ID:project.ID,Name:project.ProjectName} *ngFor="let project of projectArray; let i = index" >{{project.ProjectName}}</ion-option>
         </ion-select>
       </ion-item>
@@ -83,7 +84,7 @@
     <ion-item class="formField ionField">
       <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
       <ion-select
-        [(ngModel)]="selectedArray['AFE_Or_Order_Number']"
+        [(ngModel)]="selectedArray['AFE_Number']"
         name="orderNumber"
         #orderNumber="ngModel">
         <ion-option value="newAFE">*CREATE NEW AFE</ion-option>
@@ -92,52 +93,12 @@
     </ion-item>
     <!-- When user types new AFE, but decides to click back
           on a current AFE the value is not submitted -->
-    <ion-item class="formField ionField" *ngIf="selectedArray['AFE_Or_Order_Number'] == 'newAFE'">
+    <ion-item class="formField ionField" *ngIf="selectedArray['AFE_Number'] == 'newAFE'">
         <ion-label color="primary" stacked>NEW AFE</ion-label>
         <ion-label class="warningLabel" *ngIf="orderNumber.touched" text-wrap>Note: You will need to sync app in settings for New AFE to apply!</ion-label>
         <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" text-wrap></ion-input>
     </ion-item>
 
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >RIG NAME & NUMBER</ion-label>
-          <select-searchable
-          class="specialSelect"
-          item-content
-          [(ngModel)]="selectedArray['Rig_Name_And_Number']"
-          [items]="rigInfoArray"
-          title="RigInfo"
-          itemValueField=Name
-          itemTextField=Name
-          name="RigInfo"
-          [canSearch]="true"
-          [canClear]="true"
-          (onChange)="searchableChange($event)">
-        </select-searchable>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >CLASS</ion-label>
-          <select-searchable
-          class="specialSelect"
-          item-content
-          [(ngModel)]="selectedArray['Class']"
-          [items]="classArray"
-          title="Class"
-          itemValueField=ID
-          itemTextField=Name
-          name="Class"
-          [canSearch]="true"
-          [canClear]="true"
-          (onChange)="searchableChange($event)">
-        </select-searchable>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>LOCATION</ion-label>
-        <ion-select [(ngModel)]="selectedArray['ASILocation']" name="ASILocation">
-          <ion-option value="{{asi.Name}}" *ngFor="let asi of ASILocations">{{asi.Name}}</ion-option>
-        </ion-select>
-      </ion-item>
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked >COMPANY MAN</ion-label>
@@ -145,41 +106,6 @@
         </ion-input>
       </ion-item>
 
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >COMPANY MAN PHONE NUMBER</ion-label>
-        <ion-input
-        [(ngModel)]="selectedArray['Company_Man_Phone_Number']"
-        type="text"
-        (keypress)="keyPress($event)"
-        name="phoneNumber"
-        minlength="7"
-        maxlength="10"
-        placeholder="Phone Number">
-        </ion-input>
-      </ion-item>
-
-        <ion-item class="formField ionField">
-          <ion-label color="primary" stacked>DEPARTMENT</ion-label>
-          <ion-select [(ngModel)]="selectedArray['Department']" name="department">
-            <ion-option value="DRILLING">DRILLING</ion-option>
-            <ion-option value="PRODUCTION">PRODUCTION</ion-option>
-            <ion-option value="COMPLETION">COMPLETION</ion-option>
-          </ion-select>
-        </ion-item>
-
-
-        <ion-item class="formField ionField">
-          <ion-label color="primary" stacked>DIVISION</ion-label>
-          <ion-select [(ngModel)]="selectedArray['Division']" name="division">
-            <ion-option value="COMPLETION">COMPLETION</ion-option>
-            <ion-option value="CONSTRUCTION">CONSTRUCTION</ion-option>
-            <ion-option value="DRILLING">DRILLING</ion-option>
-            <ion-option value="MAINTENANCE">MAINTENANCE</ion-option>
-            <ion-option value="NON-COMPLETION">NON-COMPLETION</ion-option>
-            <ion-option value="OTHER">OTHER</ion-option>
-            <ion-option value="PRODUCTION">PRODUCTION</ion-option>
-          </ion-select>
-        </ion-item>
 </div>
 <div *ngIf="!projectSelected">
 
@@ -236,8 +162,9 @@
       <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
       <ion-select
         [(ngModel)]="orderNumber"
-        name="orderNumber">
-        <ion-option value=newAFE>*CREATE NEW AFE</ion-option>
+        name="orderNumber"
+        interface="action-sheet">
+        <ion-option value=newAFE style="font-weight:bold;text-align:center;">*CREATE NEW AFE*</ion-option>
         <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == '1'">{{afe.Name}}</ion-option>
       </ion-select>
     </ion-item>
@@ -249,165 +176,53 @@
       <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" placeholder="" text-wrap></ion-input>
     </ion-item>
 
-    <ion-item class="formField ionField">
-      <ion-label color="primary" stacked >RIG NAME & NUMBER</ion-label>
-        <select-searchable
-        class="specialSelect"
-        item-content
-        [(ngModel)]="RigInfo"
-        [items]="rigInfoArray"
-        title="RigInfo"
-        itemValueField=Name
-        itemTextField=Name
-        name="RigInfo"
-        [canSearch]="true"
-        [canClear]="true"
-        (onChange)="searchableChange($event)">
-      </select-searchable>
-    </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >CLASS</ion-label>
-          <select-searchable
-          class="specialSelect"
-          item-content
-          [(ngModel)]="Class"
-          [items]="classArray"
-          title="Class"
-          itemValueField=Name
-          itemTextField=Name
-          name="Class"
-          [canSearch]="true"
-          [canClear]="true"
-          (onChange)="searchableChange($event)">
-        </select-searchable>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>ASSI LOCATION</ion-label>
-        <ion-select [(ngModel)]="ASILocation" name="ASILocation">
-          <ion-option value="{{asi.Name}}" *ngFor="let asi of ASILocations">{{asi.Name}}</ion-option>
-        </ion-select>
-      </ion-item>
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked >COMPANY MAN</ion-label>
         <ion-input ngModel name="companyMan">
         </ion-input>
       </ion-item>
-
-      <ion-item class="formField ionField" >
-        <ion-label color="primary" stacked >COMPANY MAN PHONE NUMBER</ion-label>
-        <ion-input
-        ngModel
-        type="text"
-        (keypress)="keyPress($event)"
-        name="phoneNumber"
-        minlength="7"
-        maxlength="10">
-        </ion-input>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>DEPARTMENT</ion-label>
-        <ion-select ngModel name="department">
-          <ion-option value="DRILLING">DRILLING</ion-option>
-          <ion-option value="PRODUCTION">PRODUCTION</ion-option>
-          <ion-option value="COMPLETION">COMPLETION</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>DIVISION</ion-label>
-        <ion-select [(ngModel)]="selectedArray['Division']" name="division">
-          <ion-option value="COMPLETION">COMPLETION</ion-option>
-          <ion-option value="CONSTRUCTION">CONSTRUCTION</ion-option>
-          <ion-option value="DRILLING">DRILLING</ion-option>
-          <ion-option value="MAINTENANCE">MAINTENANCE</ion-option>
-          <ion-option value="NON-COMPLETION">NON-COMPLETION</ion-option>
-          <ion-option value="OTHER">OTHER</ion-option>
-          <ion-option value="PRODUCTION">PRODUCTION</ion-option>
-        </ion-select>
-      </ion-item>
 </div>
 
-      <!-- <ion-chip *ngIf="startDate.touched" class="removeText" >
-        <ion-label>Clear Start Date</ion-label>
-          <button ion-button type="button" clear color="danger" (click)="delete(startDate)">
-              <ion-icon name="close-circle"></ion-icon>
-          </button>
-      </ion-chip> -->
+      <!-- autofilled by API  based on user login-->
+      <ion-item class="formField ionField">
+        <ion-label stacked>FOREMAN</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="foreman"
+          name="foreman"
+          value="{{this.foreman}}"
+          [disabled]="personnelArray"></ion-input>
+      </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>START DATE</ion-label>
+        <ion-label color="primary" stacked>WO/CHARGE CODE NUMBER</ion-label>
+        <ion-input
+        type="text"
+        name="workOrder"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>START TIME</ion-label>
         <ion-datetime
         type="date"
-        name="startDate"
-        id="startDate"
-        displayFormat="MM/DD/YYYY"
-        ngModel
-        #startDate="ngModel">
+        name="startTime"
+        displayFormat="H:mm"
+        pickerFormat="H:mm"
+        ngModel>
         </ion-datetime>
       </ion-item>
 
-      <!-- <ion-chip *ngIf="endDate.touched" class="removeText" #chip1>
-        <ion-label>Clear End Date</ion-label>
-          <button ion-button clear color="danger" (click)="delete(endDate)">
-              <ion-icon name="close-circle"></ion-icon>
-          </button>
-      </ion-chip> -->
-
-      <!-- <div>
-      <ion-label class="warningLabel"*ngIf="startDate.touched && endDate.pristine">Please Select An End Date!</ion-label>
-    </div> -->
-
-
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>END DATE</ion-label>
+        <ion-label color="primary" stacked>END TIME</ion-label>
         <ion-datetime
         type="date"
-        name="endDate"
-        displayFormat="MM/DD/YYYY"
-        ngModel
-        #endDate="ngModel"></ion-datetime>
+        name="endTime"
+        displayFormat="H:mm"
+        pickerFormat="H:mm"
+        ngModel></ion-datetime>
       </ion-item>
-
-<!-- [disabled]="startDate.touched || endDate.touched" -->
-      <!-- <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>QUANTITY OF HOURS</ion-label>
-        <ion-input
-        type="number"
-        name="hours"
-        id="hours"
-        ngModel>
-        </ion-input>
-    </ion-item> -->
-
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>JOB DESCRIPTION</ion-label>
-        <ion-textarea
-        type="textarea"
-        name="description"
-        ngModel></ion-textarea>
-      </ion-item>
-
-      <!-- <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>NUMBER OF TRIPS</ion-label>
-        <ion-input
-        type="number"
-        name="trips"
-        placeholder=""
-        ngModel></ion-input>
-      </ion-item> -->
-
-      <!-- <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>NUMBER OF MILES</ion-label>
-        <ion-input
-        type="number"
-        name="miles"
-        placeholder=""
-        ngModel></ion-input>
-      </ion-item> -->
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>REPRESENTATIVE TO SIGN</ion-label>
@@ -418,11 +233,10 @@
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>COMMENTS</ion-label>
+        <ion-label color="primary" stacked>WORK DESCRIPTION</ion-label>
         <ion-textarea
-        type="text"
-        name="comments"
-        placeholder=""
+        type="textarea"
+        name="description"
         ngModel></ion-textarea>
       </ion-item>
 

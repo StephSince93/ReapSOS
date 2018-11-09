@@ -1,17 +1,12 @@
-page-equipment {
-  .select-searchable-value-item{
-    overflow:inherit;
-    font-size: 20px;
-    font-weight: bold;
-
-  }
+page-manage-crew {
   ion-title {
       color: reapHeader;
+      text-align: center;
       font-size: 9px;
       font-family: sans-serif;
       }
   .label-md[stacked]{
-    height:50px;
+    height:25px;
     font-size:1.2em;
     font-weight:bold;
     color:primary;
@@ -26,28 +21,27 @@ page-equipment {
     // margin-top:5px;
     // margin-bottom:5px;
   }
+
   ion-input{
     font-size: 1.5em;
     text-align: center;
   }
-  ion-col{
-    border: 1px solid;
+  .trashButton{
+    color:black;
+    background-color: red;
   }
-  .formCol{
-    background-color:#D2F27C;
+  ion-row{
+    border-bottom:solid 1px;
   }
-  .crewInput{
-    height:5px;
+  ion-label.headerLabel.label.label-md{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
   }
-  .text-input-md{
-    margin:0;
-  }
-  .text-input-ios{
-    margin:0;
-  }
-  .gridLabel{
-    text-align:center;
-    font-weight:bold;
-    margin-top:5px;
+  ion-label.headerLabel.label.label-ios{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    
   }
 }

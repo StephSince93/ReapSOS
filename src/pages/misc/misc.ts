@@ -14,7 +14,7 @@ export class MiscPage {
               public navParams: NavParams,
               public reap: ReapService) {
                 //temporary
-                this.miscCategory = reap.equipmentType;
+                //this.miscCategory = reap.equipmentType;
   }
 
   onSubmit(form: NgForm){

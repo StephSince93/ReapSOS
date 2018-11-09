@@ -16,14 +16,6 @@ class updatedLocation {
   public ID: number;
   public Location: string;
 }
-class Class {
-  public ID: number;
-  public Name: string;
-}
-class RigInfo {
-  public ID: number;
-  public Name: string;
-}
 @IonicPage()
 @Component({
   selector: 'page-safety',
@@ -33,10 +25,6 @@ class RigInfo {
 export class SafetyPage {
   private locationsArray: Location[];
   location: Location;
-  private classArray: Class[];
-  class: Class;
-  private rigInfoArray: RigInfo[];
-  riginfo: RigInfo;
   updatedLocation: updatedLocation[];
   updatedlocation: updatedLocation;
 /**************************************************************/
@@ -45,66 +33,56 @@ export class SafetyPage {
   private selectedClosestLoc:boolean = false;
   private afeArray:any[] = this.reap.getAFE;
   private projectArray:any[] = this.reap.getProject;
-  private ASILocations:any[] = this.reap.getASILocations;
-  private selectedArray:any[] = [];
+  private personnelArray:any[] = [];
+  private selectedArray:any[] = [];//saves array selected from projects
   private projectSelected:boolean = false;
-  private afeString:string;
-  private classString:string;
+  private afeString:string;//stores AFE from selected project number
   private startDate:any;
+  private foreman:string;//current user logged in
+  private personnelSelected:boolean = false;//check to see if user selected exists
   currentDate:any = new Date().toISOString();
+  //currentTime:any = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().slice(0, -1);
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
               public toastCtrl: ToastController,
               private geolocation: Geolocation,
               private platform: Platform) {
-
+        this.personnelArray = this.reap.getPersonnel;
         this.locationsArray = reap.getLocations;
-        this.classArray = this.reap.getClass;
-        this.rigInfoArray = this.reap.getRigInfo;
         this.updatedLocation = [];
         //console.log(this.projectArray);
+        /**************** Catch Error ************/
   }
-
+  ionViewWillEnter(){
+    for(let i=0;i< this.personnelArray.length;i++){//grabs current username logged in
+        if(this.personnelArray[i]['default'] === "true"){
+          this.foreman = this.personnelArray[i]['FullName'];
+          //console.log(this.personnel);
+        }
+      }
+  }
   projectSelect(project,i){
     //console.log(i);
     this.selectedArray = this.projectArray[i];
-    //console.log(this.selectedArray['Rig_Name_And_Number']);
-    for(let j=0;j<this.rigInfoArray.length;j++){
-        //console.log(JSON.stringify(this.rigInfoArray[j]["Name"]));
-        if(this.selectedArray['Rig_Name_And_Number']===this.rigInfoArray[j]["Name"]){
-          this.selectedArray['Rig_Name_And_Number'] = this.rigInfoArray[j];
-          //this.projectArray[i]['Rig_Name_And_Number'] = this.rigInfoArray[j];
-          //console.log('Selected: ' + this.selectedArray['Rig_Name_And_Number']);
-        }
-    }
-    for(let k=0;k<this.classArray.length;k++){
-      if(this.selectedArray['Class']==this.classArray[k]["Name"]){
-        this.selectedArray['Class'] = this.classArray[k];
-        //this.projectArray[i]['Class'] = this.rigInfoArray[k];
-        //console.log('Selected: ' + this.selectedArray['Class']);
-      }
-    }
-      //console.log(this.selectedArray);
-
-    this.afeString = JSON.stringify(this.selectedArray['AFE_Or_Order_Number']);
+    this.afeString = this.selectedArray['AFE_Number'];
     //console.log(this.afeString)
     this.projectSelected = true;
   }
 
-  keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
-
-    let inputChar = String.fromCharCode(event.charCode);
-    if (event.keyCode != 8 && !pattern.test(inputChar)) {
-      event.preventDefault();
-    }
-  }
   onSubmit(Form: NgForm){
+    //Created form value as foreman
+    Form.value.foreman = this.foreman;
+    //console.log(Form.value);
     if(!Form.value.Location){//If user grabs nearest location
       Form.value.Location = Form.value.updatedLocation;
-      //console.log(Form.value.Location);
+      if(Form.value.Location){
+        this.reap.selectedCompany = Form.value.Location['CID'];
+      }
       //Form.value.remove.updatedLocation;
+    }
+    if(Form.value.Location){
+      this.reap.selectedCompany = Form.value.Location['CID'];
     }
     this.reap.safetyForm = Form.value;
     //console.log(this.reap.safetyForm);
@@ -136,13 +114,7 @@ export class SafetyPage {
   searchableChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
     }
-  //
-  // delete(chip){
-  //   chip.control.touched = false;
-  //   chip.valueAccessor._text = "";
-  //   console.log(chip);
-  //
-  // }
+
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,

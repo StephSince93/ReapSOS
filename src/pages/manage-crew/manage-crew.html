@@ -1,0 +1,88 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>MANAGE CREW</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked >CHANGE PERSONNEL</ion-label>
+          <select-searchable
+          class="specialSelect"
+          item-content
+          [(ngModel)]="globalPersonnel"
+          [items]="personnelArray"
+          title="Personnel"
+          itemValueField=ID
+          itemTextField=FullName
+          name="Personnel"
+          [canSearch]="true"
+          [canClear]="true"
+          [isMultiple]="true"
+          (onChange)="personnelChange($event)">
+        </select-searchable>
+      </ion-item>
+<br>
+      <ion-label class="headerLabel" stacked>CURRENT PERSONNEL</ion-label>
+        <div *ngIf="globalPersonnel?.length != 0; else empty">
+        <ion-grid  *ngFor="let personnel of globalPersonnel;let i = index">
+          <ion-row>
+            <ion-col>Name:</ion-col>
+            <ion-col>{{personnel?.FullName}}</ion-col>
+            <ion-col><button type="button" (tap)="removePersonnel(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <ng-template #empty>
+      <ion-label class="headerLabel" stacked>NO PERSONNEL SELECTED</ion-label>
+      </ng-template>
+<br>
+<hr>
+<br>
+<br>
+      <ion-item class="formField ionField" >
+          <ion-label color="primary" stacked>EQUIPMENT</ion-label>
+            <select-searchable
+            class="specialSelect"
+             item-content
+             [(ngModel)]="globalEquipment"
+             title="Equipment"
+             itemValueField=ID
+             itemTextField=Name
+             name="Equipment"
+             [items]="equipmentArray"
+             [canSearch]="true"
+             [canClear]="true"
+             [isMultiple]="true"
+             (onChange)="equipmentChange($event)">
+            </select-searchable>
+        </ion-item>
+<br>
+        <ion-label class="headerLabel" stacked>CURRENT EQUIPMENT</ion-label>
+          <div *ngIf="globalEquipment?.length != 0; else empty">
+          <ion-grid *ngFor="let equipment of globalEquipment;let i = index">
+            <ion-row>
+              <ion-col>Name:</ion-col>
+              <ion-col>{{equipment?.Name}}</ion-col>
+              <ion-col><button type="button" (tap)="removeEquipment(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+        <ng-template #empty>
+        <ion-label class="headerLabel" stacked>NO EQUIPMENT SELECTED</ion-label>
+        </ng-template>
+<br>
+<br>
+
+      <ion-item>
+        <button [disabled]="!f.valid" type="submit" id="submitButton" ion-button full large>Submit</button>
+     </ion-item>
+   </ion-list>
+  </form>
+</ion-content>

@@ -10,7 +10,7 @@
 <ion-content>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-list>
-      <ion-item class="formField ionField">
+      <!-- <ion-item class="formField ionField">
         <ion-label color="primary" stacked>CATEGORY</ion-label>
         <ion-select
           ngModel
@@ -18,7 +18,7 @@
           required>
           <ion-option value={{misc.Type}} *ngFor="let misc of miscCategory" selected="misc.Type == '1'">{{misc.Type}}</ion-option>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>DESCRIPTION</ion-label>

@@ -43,7 +43,7 @@ export class ProjectReviewPage {
     this.submitData.push({'project':this.reap.projectForm});
     //console.log(this.submitData);
     loading.present();
-    this.stemAPI.submitSafetyForm(this.submitData,this.reap.token).subscribe((result)=>{
+    this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result)=>{
     console.log(result['Status']);
         //setTimeout(() => {
         loading.dismiss();
@@ -67,36 +67,34 @@ export class ProjectReviewPage {
     }
     //only Submit if form field are correct
     else if(result['Status']==true){
-      this.navCtrl.push(SuccessPage,{'success':'Project Form Submitted!'});
+      this.navCtrl.push(SuccessPage,{'Success':'Project Form Submitted!'});
     }
   },(err) => {
-    console.log(err);
-    console.log(err.message);
     loading.dismiss();
     let alert = this.alertCtrl.create({
-    title: 'Error: '+ err.message,
-    message: 'Please try submitting again! If issue persists, contact Stem Support!',
+    title: 'Error: ',
+    message: 'Try Again Or Submit Offline!',
     buttons: [
            {
-             text: 'Acknowledged',
+             text: 'Try Again',
               role: 'Yes',
              handler: () => {
               this.submitClicked = false;
              }
            },
-                   {
-                     text: 'Submit Offline and Sync later',
-                      role: 'Yes',
-                     handler: () => {
-                        /* allows user to submit offline and saves form data into a form variable
-                        no data will be submitted until interenet connection is made via a sync or observable call */
-                        /****** TESTING    *********************/
-                        this.storage.set('offlineSubmission',this.submitData);
-                        this.submitData = [];
-
-                        this.navCtrl.push(SuccessPage,{'success':'Please go to support page and manually submit current form before submitting any new forms!'});
-                     }
-                   }
+           {
+              text: 'Submit Offline and Sync later',
+                role: 'Yes',
+                handler: () => {
+                /* allows user to submit offline and saves form data into a form variable
+                no data will be submitted until interenet connection is made via a sync or observable call */
+                /****** TESTING    *********************/
+                this.reap.offlineFormSubmissions.push({"Type":"Project","Info":this.submitData,"Status":"Pending"});
+                this.storage.set('offlineSubmission',this.reap.offlineFormSubmissions);
+                this.submitData = [];
+                this.navCtrl.push(SuccessPage,{'Success':'Form submitted offline, please go to support page and re-submit!'});
+            }
+          }
         ]
     });
  alert.present();

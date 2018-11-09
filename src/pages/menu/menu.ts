@@ -10,6 +10,7 @@ import { QueuePage } from '../queue/queue';
 import { ReapService } from '../../services/reap-service';
 import { StemApiProvider } from '../../providers/stem-api/stem-api';
 import { SupportPage } from '../support/support';
+import { ManageCrewPage } from '../manage-crew/manage-crew';
 @IonicPage()
 @Component({
   selector: 'page-menu',
@@ -51,12 +52,11 @@ export class MenuPage {
          });
         loading.present();
         this.reap.formStart = true;
-        this.stemAPI.submitSafetyForm({"formStart":this.reap.formStart},this.reap.token).subscribe((result) =>{
+        this.stemAPI.submitDevonianForm({"formStart":this.reap.formStart},this.reap.token).subscribe((result) =>{
         this.storage.set('formStart',this.reap.formStart);//sets local storage
-        setTimeout(() => {
+
         loading.dismiss();
         this.navCtrl.push(SafetyPage);
-          }, 2000);
         }, (err) => {
         let alert = this.alertCtrl.create({
             title: 'Error Grabbing Data.. ',
@@ -66,9 +66,7 @@ export class MenuPage {
                    text: 'Acknowledged',
                     role: 'Yes',
                    handler: () => {
-                     setTimeout(() => {
                      loading.dismiss();
-                     }, 2000);
                    }
                  }
                 ]
@@ -90,6 +88,9 @@ export class MenuPage {
   }
   toQueue(){
     this.navCtrl.push(QueuePage);
+  }
+  toManageCrew(){
+    this.navCtrl.push(ManageCrewPage);
   }
 
 }

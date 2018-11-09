@@ -13,9 +13,9 @@ import { ReapService } from '../../services/reap-service';
   templateUrl: 'support.html',
 })
 export class SupportPage {
-  omegaPlatform:any;
+  devonianPlatform:any;
   deviceVersion:any;
-  omegaVersion:any;
+  devonianVersion:any = this.reap.devonianVersion;
   //private networkType:string = this.reap.networkType;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -27,15 +27,15 @@ export class SupportPage {
               private storage: Storage,
               private network: Network,
               private alertCtrl: AlertController) {
-                this.omegaPlatform = this.device.platform;
+                this.devonianPlatform = this.device.platform;
                 this.deviceVersion = this.device.version;
 
-                this.appVersion.getVersionNumber().then((version) => {
-                      this.omegaVersion = version;
-                      console.log(JSON.stringify(this.omegaVersion));
-                    },(error)=>{
-                        console.log(error);
-                      })
+                // this.appVersion.getVersionNumber().then((version) => {
+                //       this.omegaVersion = version;
+                //       console.log(JSON.stringify(this.omegaVersion));
+                //     },(error)=>{
+                //         console.log(error);
+                //       })
                   }
 
   toSync(){
@@ -68,6 +68,7 @@ export class SupportPage {
           //pops back to the login page
           this.navCtrl.popToRoot();
      }
+     /*** TESTING *****/
      toSubmitOffline(){
      this.storage.get('offlineSubmission').then((data)=>{
        if(data==null){
@@ -79,7 +80,39 @@ export class SupportPage {
           alert.present();
        }
        else{
-         this.reap.submitOfflineForm(data);
+         var length = data.length;
+         while(length--){
+           //console.log(length);
+           //console.log(data[length]["Status"]);
+           if(data[length]["Status"]=="Submitted"){
+             data.splice(length,1);
+             //console.log(data);
+           }
+         }
+         //initializes storage to data after splicing data
+         this.storage.set('offlineSubmission',data);
+         this.reap.offlineFormSubmissions = data;
+
+         if(data.length==0){
+           let alert = this.alertCtrl.create({
+                title: 'No data',
+               subTitle: 'No data was submitted offline',
+                buttons: ['Dismiss']
+              });
+            alert.present();
+         }
+         else{
+           let alert = this.alertCtrl.create({
+                title: 'Submitting offline...',
+               subTitle: 'No. of forms saved offline: '+ data.length,
+                buttons: ['Dismiss']
+              });
+            alert.present();
+
+            data = data.reverse();
+            //console.log(data[0]["Info"][0]);
+            this.reap.submitOfflineForm(data);
+         }
        }
      });
    }

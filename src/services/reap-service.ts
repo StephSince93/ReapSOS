@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import { Subscription } from 'rxjs/Subscription';
 import {ToastController, LoadingController } from 'ionic-angular';
+import { AppVersion } from '@ionic-native/app-version';
 
 import { LoginPage } from '../pages/login/login';
 import { StemApiProvider } from '../providers/stem-api/stem-api';
@@ -13,20 +14,20 @@ export class ReapService {
     //data exported and saved into service values
     public getData:any;
     public getLocations:any[]=[];
-    public getASILocations:any[]=[];
-    public getClass:any[]=[];
-    public getRigInfo:any[]=[];
-    public equipmentType:any[]=[];
+    // public equipmentType:any[]=[];
     public getEquipment:any[]=[];
     public getPersonnel:any[]=[];
     public getProject:any[]=[];
+    public getExtras:any[]=[];
     public getAFE:any[]=[];
+    public getJobs:any[]=[];
     public getMD5:string;
+    public devonianVersion:string;//app version string
   /********************************************/
     public misc:any[]=[];
-    public equipment:any[]=[];
-    public labor:any[]=[];
-    public mileage:any[]=[];
+    public equipment:any[]=[];//Only For new Equipment
+    public labor:any[]=[];//Only For new Personnel
+    public job:any[]=[];
     public photo:any[]=[];
     public safetyForm:any[]=[];
     public projectForm:any[]=[];
@@ -34,6 +35,13 @@ export class ReapService {
     public storeFormData:any[]=[];
     public updatedLocation:any [] = [];
     public wellLocation:any [] = [];
+    //Set crew for Devonian
+    public globalCrewPersonnel: any [] = [];
+    public globalCrewEquipment: any [] = [];
+    //Offline Form Submission
+    public offlineFormSubmissions:any [] = [];
+    //Connecting Main and Description Form
+    public selectedCompany:any;
     public token:any;
     public formStart:any;
     public networkType:any;
@@ -42,7 +50,12 @@ export class ReapService {
     disconnected: Subscription;
     getAndPost: Subscription;
     checkConnection: Subscription;
-    constructor(public loadingCtrl:LoadingController,public toast: ToastController,public network: Network,private stemAPI: StemApiProvider,public storage: Storage){
+    constructor(public loadingCtrl:LoadingController,
+                public toast: ToastController,
+                public network: Network,
+                private stemAPI: StemApiProvider,
+                public storage: Storage,
+                public appVersion: AppVersion){
     //May have to unsubscribe from Observable
     //console.log('here in service Constructor');
     /* Time Interval checking for network connection */
@@ -83,6 +96,16 @@ export class ReapService {
         });
       },error => console.error(error));
     }
+    getVersionNumber(){
+     this.appVersion.getVersionNumber().then((version) => {
+          this.devonianVersion = version;
+          this.storage.set('AppVersion',this.devonianVersion);
+          //console.log(JSON.stringify(this.devonianVersion));
+            },(error)=>{
+          this.devonianVersion = "Could not Grab App Version!";
+          //console.log('Cannot Grab App Version!');
+        });
+      }
 
     grabAPIData(token){
       /* Initialize Observables */
@@ -96,7 +119,7 @@ export class ReapService {
         this.stemAPI.getData(this.token).subscribe((result) =>{
         this.getData = (JSON.stringify(result));
         this.getData = JSON.parse(this.getData);
-        console.log(this.getData);
+        //console.log(this.getData);
 
         this.getMD5 = this.getData['md5'];
         this.storage.set('MD5',this.getMD5);
@@ -104,10 +127,8 @@ export class ReapService {
         this.getLocations = this.getData['Locations'];
         this.storage.set('Locations',this.getLocations);
 
-        this.equipmentType = this.getData['EquipmentType'];
-        this.storage.set('EquipmentType',this.equipmentType);
-
-        this.getEquipment = this.getData['Equipment'];
+        //Devonian EquipmentList
+        this.getEquipment = this.getData['EquipmentList'];
         this.storage.set('Equipment',this.getEquipment);
 
         this.getPersonnel = this.getData['Personnel'];
@@ -119,19 +140,18 @@ export class ReapService {
         this.getProject = this.getData['Project'];
         this.storage.set('Project',this.getProject);
 
-        this.getASILocations = this.getData['ASILocations'];
-        this.storage.set('ASILocations',this.getASILocations);
+        this.getExtras = this.getData['Extras'];
+        this.storage.set('Extras',this.getExtras);
 
-        this.getClass = this.getData['Class'];
-        this.storage.set('Class',this.getClass);
-
-        this.getRigInfo = this.getData['RigInfo'];
-        this.storage.set('RigInfo',this.getRigInfo);
-        //console.log(this.getProject);
-        //console.log(this.getEquipment);
-
+        this.getJobs = this.getData['Jobs'];
+        this.storage.set('Jobs',this.getJobs);
+        //console.log(this.getJobs);
+        //calls method to store App Version to local storage globally
+        this.getVersionNumber();
+        this.presentToast('Sync Successful');
         }, (err) => {
-          console.log(err);
+          this.presentToast('Sync Unsuccessful');
+          //console.log(err);
         });
     }
       getLocalStorage(){
@@ -154,10 +174,6 @@ export class ReapService {
         this.getLocations = data;
         });
 
-        this.storage.get('EquipmentType').then((data)=>{
-        this.equipmentType = data;
-        });
-
         this.storage.get('Equipment').then((data)=>{
         this.getEquipment = data;
         });
@@ -175,66 +191,177 @@ export class ReapService {
         this.getAFE = data;
         });
 
-        this.storage.get('ASILocations').then((data)=>{
-        this.getASILocations = data;
+        this.storage.get('Jobs').then((data)=>{
+        this.getJobs = data;
         });
 
-        this.storage.get('Class').then((data)=>{
-        this.getClass = data;
+        //Set Crew Global data devonian
+        this.storage.get('globalCrewPersonnel').then((data)=>{
+        this.globalCrewPersonnel = data;
         });
 
-        this.storage.get('RigInfo').then((data)=>{
-        this.getRigInfo = data;
+        this.storage.get('globalCrewEquipment').then((data)=>{
+        this.globalCrewEquipment = data;
         });
-      }
-//submits form user saved offline When they click the button in Support Page
-    submitOfflineForm(data){
-      // console.log(data);
-      // console.log(data[0]);
 
-      const loading = this.loadingCtrl.create({
-        content: 'Retrying Form Submission...'
+        this.storage.get('AppVersion').then((data)=>{
+        this.devonianVersion = data;
       });
-      loading.present();
-      if(data[0]['safety']){//checks if safety form was submitted offline
-        //console.log('safety form submitted');
-      this.stemAPI.submitSafetyForm(data,this.token).subscribe((result) =>{
-          this.storage.remove('formStart');
-          this.storage.remove('offlineSubmission');
-          this.presentToast('submission Successful');
-          setTimeout(() => {
-          loading.dismiss();
-        }, 5000);
-        },(err)=>{
-                setTimeout(() => {
-                loading.dismiss();
-              }, 5000);
-              this.presentToast(err);
-              console.log(err);
-            });
-       }else if(data[0]['project']){//checks if project form was submitted offline
-          //console.log('project form submitted');
-          this.stemAPI.submitSafetyForm(data,this.token).subscribe((result) =>{
-              this.storage.remove('offlineSubmission');
-              this.presentToast('submission Successful');
-              setTimeout(() => {
-              loading.dismiss();
-            }, 5000);
-            },(err)=>{
-                    setTimeout(() => {
-                    loading.dismiss();
-                  }, 5000);
-                  this.presentToast(err);
-                  console.log(err);
-                });
+
+      //grabs the locally stored form submissions offline
+      this.storage.get('offlineSubmission').then((data)=>{
+      if(data!=null){
+        this.offlineFormSubmissions = data;
+        //console.log(this.offlineFormSubmissions);
+       }
+       else{
+         this.offlineFormSubmissions = [];
+         //console.log(this.offlineFormSubmissions);
+       }
+      });
+
+      //Checks for app update and updates storage with newest version of app
+      this.getVersionNumber();
       }
-      else{
-        setTimeout(() => {
-        loading.dismiss();
-      }, 5000);
-      this.presentToast('Error Submittiing Offline Form!');
+/** TESTING ****/
+//submits form user saved offline When they click the button in Support Page
+  submitOfflineForm(data){
+      var data = data;
+      var length:number = data.length;
+      var secondLength = data.length;
+      var testLength = data.length;
+      var count=0;
+    //console.log(formLength);
+    /*** Need to create function per form
+         submittion to go to right  API call **/
+    while(length--){
+    if(data[length]["Type"]=="Project"){
+    const loading = this.loadingCtrl.create({
+     content: 'Retrying Form Submission...'
+    });
+     loading.present();
+      //console.log("Here in BOL");
+    if(data[length]["Status"]=="Pending"){
+    this.stemAPI.submitDevonianForm(data[length]["Info"][0],this.token).subscribe((result) =>{
+     //console.log(result["Status"]);
+           if(result["Status"]==true){
+              data[length]["Status"]="Submitted";
+              console.log(data[length]["Status"]);
+             isEmpty(length,data,this.storage,this.offlineFormSubmissions,loading);
+           }
+           else{
+              this.presentToast('Project not submitted with location!');
+           }
+         },(err)=>{
+           console.log(err.message);
+           this.presentToast('Project not Submitted! Try again!');
+         });
+    }
+    else{
+      this.presentToast('Project should be already submitted!');
+    }
+    loading.dismiss();
+    }
+    else{
+      count++;
+        //console.log(count);
+    }
+    }
+    if(count==secondLength){
+      while(secondLength--){
+        //console.log(secondLength);
+        //console.log(count);
+          this.callAPI(testLength,secondLength,data[secondLength],data);
       }
     }
+    }
+    callAPI(testLength,i,data,allData) {
+    const loading = this.loadingCtrl.create({
+    content: 'Retrying Form Submission...'
+    });
+    loading.present();
+    var submit = this.stemAPI;
+    var token = this.token;
+    var offline = this.offlineFormSubmissions;
+    var storage = this.storage;
+    var submitted:boolean;
+    var i = i;
+    //setTimeout(function() {
+    switch(data["Type"]){
+     case "WO": {
+        // console.log("Here in Batch");
+        if(data["Status"]=="Pending"){
+
+         submit.submitDevonianForm(data["Info"][0],token).subscribe((result)=>{
+           //console.log(result["Status"]);
+             if(result["Status"]==true){
+               data["Status"]="Submitted";
+               allData[i]["Status"]="Submitted";
+              isEmpty(i,allData,storage,offline,loading);
+             }
+             else{
+                this.presentToast('Work Order not submitted with location!');
+             }
+
+         }, (err)=>{
+            this.presentToast('Could not submit Work Order Location!');
+        });
+      }
+      else{
+        this.presentToast('Work Order Data should be already submitted!');
+      }
+        break;
+     }
+     case "GPS": {
+      if(data["Status"]=="Pending"){
+
+       submit.updateGPSLoc(data["Info"][0],token).subscribe((result) =>{
+
+         if(result["Status"]==true){
+           data["Status"]="Submitted";
+           allData[i]["Status"]="Submitted";
+           isEmpty(i,allData,storage,offline,loading);
+         }
+         else{
+            this.presentToast('Batch Treatment not submitted with location!');
+         }
+         },(err)=>{
+           //console.log(err.message);
+
+        });
+        }else{
+          this.presentToast('GPS Data should be already submitted!');
+        }
+        break;
+     }
+     // case "ConfirmBOL": {
+     //  if(data["Status"]=="Pending"){
+     //   submit.confirmBOLData(data["Info"],token).subscribe((result) =>{
+     //
+     //     if(result["Status"]==true){
+     //       data["Status"]="Submitted";
+     //       allData[i]["Status"]="Submitted";
+     //       isEmpty(i,allData,storage,offline,loading);
+     //     }
+     //     else{
+     //        this.presentToast('Batch Treatment not submitted with location!');
+     //     }
+     //   },(err)=>{
+     //     console.log(err.message);
+     //
+     //    });
+     //    }else{
+     //     this.presentToast('ConfirmBOL Data should be already submitted!');
+     //    }
+     //    break;
+     // }
+     default:
+        this.presentToast('Something Went Wrong!');
+       break;
+    }
+    //},((i) * 1000) + 1000);
+    loading.dismiss();
+  }
     //Compared UserLocation to Well Locations and gives user nearest location within 5 miles
   grabUserLoc(lat,lon){
         //Resets arrays for every time the user alternates buttons
@@ -279,34 +406,36 @@ export class ReapService {
       return Value * Math.PI / 180;
     }
 
-    checkMD5(){
-      //console.log(this.getMD5);
-      this.stemAPI.getMD5Check(this.token,this.getMD5).subscribe((result) =>{
-        let md5 = result;
-        //console.log(result);
-        //console.log(md5['downloadJson']);
-        if(md5['downloadJson']==true){
-            this.grabAPIData(this.token);
-            this.presentToast('Data Updated!');
-        }else{
-          this.presentToast('Data Not Updated!');
-        }
-          },(err)=>{
-            console.log(err);
-            this.presentToast('Error getting updated data!');
-      });
-    }
+    // checkMD5(){
+    //   //console.log(this.getMD5);
+    //   this.stemAPI.getMD5Check(this.token,this.getMD5).subscribe((result) =>{
+    //     let md5 = result;
+    //     //console.log(result);
+    //     //console.log(md5['downloadJson']);
+    //     if(md5['downloadJson']==true){
+    //         this.grabAPIData(this.token);
+    //         this.presentToast('Data Updated!');
+    //     }else{
+    //       this.presentToast('Data Not Updated!');
+    //     }
+    //       },(err)=>{
+    //         console.log(err);
+    //         this.presentToast('Error getting updated data!');
+    //   });
+    // }
 
     //creates and pushes mileage array
     totalMisc(data){
       this.misc.push(data);
       //console.log(this.mileage);
     }
+    /*Devonian Custom*/
     //creates and pushes labor array
     totalLabor(data){
       this.labor.push(data);
       //console.log(this.labor);
     }
+    /*Devonian Custom*/
     //creates and pushes equipment array
     totalEquipment(data){
       this.equipment.push(data);
@@ -317,7 +446,7 @@ export class ReapService {
       //console.log(this.photo);
     }
     totalMileage(data){
-      this.mileage.push(data);
+      this.job.push(data);
     }
 
     removeConnections(){
@@ -342,3 +471,9 @@ export class ReapService {
       toast.present();
       }
 }
+function isEmpty(i,allData,storage,offline,loading){
+    console.log(allData[i]);
+    storage.set('offlineSubmission',allData);
+    offline = allData;
+    loading.dismiss();
+  }

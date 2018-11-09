@@ -14,14 +14,7 @@ class updatedLocation {
   public ID: number;
   public Location: string;
 }
-class Class {
-  public ID: number;
-  public Name: string;
-}
-class RigInfo {
-  public ID: number;
-  public Name: string;
-}
+
 @IonicPage()
 @Component({
   selector: 'page-project',
@@ -30,10 +23,6 @@ class RigInfo {
 export class ProjectPage {
   private locationsArray: Location[];
   location: Location;
-  private classArray: Class[];
-  class: Class;
-  private rigInfoArray: RigInfo[];
-  riginfo: RigInfo;
   updatedLocation: updatedLocation[];
   updatedlocation: updatedLocation;
 /**************************************************************/
@@ -41,7 +30,7 @@ export class ProjectPage {
   private wellLocation: any [] = [];
   private selectedClosestLoc:boolean = false;
   private afeArray:any[] = this.reap.getAFE;
-  private ASILocations:any[] = this.reap.getASILocations;
+  //private ASILocations:any[] = this.reap.getASILocations;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
@@ -49,19 +38,9 @@ export class ProjectPage {
               private geolocation: Geolocation,
               private platform: Platform) {
     this.locationsArray = reap.getLocations;
-    this.classArray = this.reap.getClass;
-    this.rigInfoArray = this.reap.getRigInfo;
     this.updatedLocation = [];
   }
 
-  keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
-
-    let inputChar = String.fromCharCode(event.charCode);
-    if (event.keyCode != 8 && !pattern.test(inputChar)) {
-      event.preventDefault();
-    }
-  }
   grabLocation(){
         this.selectedClosestLoc = true;
         /* Ensure the platform is ready */

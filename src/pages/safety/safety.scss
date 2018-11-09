@@ -25,17 +25,24 @@ page-safety {
     text-align: center;
   }
 
-  .warningLabel{
-    text-align: center;
-    text-decoration: underline;
-    color:red;
-    font-weight:bold;
-  }
   .removeText{
     float:right;
   }
   .specialSelect{
     font-size: 20px;
-    
+
+  }
+//refers to last value of div to correlate same border
+  .list-md .item-input:last-child{
+    border-bottom: solid 3px;
+    border-style: groove;
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
+  .list-ios .item-input:last-child{
+    border-bottom: solid 3px;
+    border-style: groove;
+    padding-bottom: 0px;
+    padding-left: 0px;
   }
 }

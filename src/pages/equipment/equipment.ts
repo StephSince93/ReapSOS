@@ -5,10 +5,9 @@ import { SelectSearchableComponent } from 'ionic-select-searchable';
 
 import { ReapService } from '../../services/reap-service';
 
-class Equipment {
+class EquipmentList {
   public ID: number;
-  public EquipmentType: string;
-  public Unit:string;
+  public Name:string;
 }
 @IonicPage()
 @Component({
@@ -17,42 +16,53 @@ class Equipment {
 })
 export class EquipmentPage {
   private equipmentType:any[] = [];
-  private equipmentArray: Equipment[];
+  private equipmentArray: EquipmentList[];
   private test:any = [];
-  equipment: Equipment;
+  equipment: EquipmentList;
   private Type:any;
-
+  private crewEquipment = this.reap.globalCrewEquipment;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService) {
-
-          this.equipmentType = reap.equipmentType;
+                // console.log(this.crewEquipment);
+          //this.equipmentType = reap.equipmentType;
           this.equipmentArray = reap.getEquipment;
             //console.log(this.equipmentArray);
 
 
   }
-  typeSelected(){
-    this.equipmentArray = this.reap.getEquipment;
-    this.test = [];
-    //console.log('test');
-    for(var i=0; i <this.equipmentArray.length;i++){
-      //console.log(this.equipmentArray[i]['EquipmentType']);
-      //console.log(this.Type);
-      if(this.equipmentArray[i]['EquipmentType']===this.Type){
-          //console.log('here');
-          this.test.push(this.equipmentArray[i]);
-      }
-
-    }
-    this.equipmentArray = this.test;
-    //console.log(this.test);
-    //console.log(this.equipmentArray);
-  }
   onSubmit(form: NgForm){
-    //console.log(form.value);
-    this.reap.totalEquipment(form.value);
-    this.navCtrl.pop();
+    //console.log(form);
+    let test =  [];
+    let hours:any = 'hours';
+    let endingOdometer:any = 'endingOdometer';
+    if(this.reap.globalCrewEquipment||this.crewEquipment){
+    for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
+      if((this.crewEquipment[i]['endingOdometer']&&(form.value[endingOdometer+[i]]==""))){
+          //Filler for data alreday in system
+      }else{
+      this.crewEquipment[i]={'ID':this.reap.globalCrewEquipment[i]['ID']
+                ,'Name':this.reap.globalCrewEquipment[i]['Name']
+                ,'Odometer':this.reap.globalCrewEquipment[i]['Odometer']
+                ,'endingOdometer':form.value[endingOdometer+[i]]
+                // ,'each':form.value[hours+[i]]};
+              }
+          }
+       }
+     }
+  this.reap.globalCrewEquipment = this.crewEquipment;
+  // console.log(form.value);
+  // console.log(this.reap.globalCrewEquipment);
+
+  if(form.value.Equipment){
+  let equipment = {'ID':form.value.Equipment.ID,
+                    'Name':form.value.Equipment.Name,
+                    'Odometer':form.value.Equipment.Odometer,
+                    'endingOdometer':form.value.endingOdometer};
+                    //console.log(equipment);
+  this.reap.totalEquipment(equipment);
+    }
+  this.navCtrl.pop();
   }
   equipmentChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
