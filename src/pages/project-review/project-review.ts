@@ -44,7 +44,7 @@ export class ProjectReviewPage {
     //console.log(this.submitData);
     loading.present();
     this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result)=>{
-    console.log(result['Status']);
+    //console.log(result['Status']);
         //setTimeout(() => {
         loading.dismiss();
       //}, 2000);

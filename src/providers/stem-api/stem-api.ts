@@ -18,7 +18,6 @@ export class StemApiProvider {
       //private getMd5Check:string = 'http://10.0.0.140/api.php?action=GetMd5Check';
       private apiUpdateGPSUrl:string = 'https://v3.stemsoftware.com/api.php?action=DevonianGPSUpdate';
       //private apiUpdateGPSUrl:string = 'http://10.0.0.21/api.php?action=DevonianGPSUpdate';
-      //private apiUpdateGPSUrl:string = 'https://sandbox.stemsoftware.com/api.php?action=ASIGPSUpdate';
   constructor(public http: HttpClient) {
     //console.log('Hello RestProvider Provider');
   }

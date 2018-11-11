@@ -39,15 +39,14 @@ export class LaborPage {
 
   onSubmit(form: NgForm){
     //console.log(form.value);
-    this.reap.totalEquipment(form.value);
     let test =  [];
     let hours:any = 'hours';
-    if(this.reap.globalCrewEquipment!=[]||this.crewPersonnel!=[]){
-    for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
+    if(this.reap.globalCrewPersonnel!=[]||this.crewPersonnel!=[]){
+    for(let i=0;i<this.reap.globalCrewPersonnel.length;i++){
       if((this.crewPersonnel[i]['hours']||(form.value[hours+[i]]===""))){
           //Filler for data already in system
       }else{
-      this.crewPersonnel[i]={'ID':this.reap.globalCrewEquipment[i]['ID']
+      this.crewPersonnel[i]={'ID':this.reap.globalCrewPersonnel[i]['ID']
                 ,'FullName':this.reap.globalCrewPersonnel[i]['FullName']
                 ,'Hours':form.value[hours+[i]]};
               }

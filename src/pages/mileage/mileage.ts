@@ -29,7 +29,7 @@ export class MileagePage {
     //console.log(this.reap.getJobs);
     if(this.reap.selectedCompany){
     for(let i=0;i<this.reap.getJobs.length;i++){
-      console.log(this.reap.getJobs[i]['CompanyID']);
+      //console.log(this.reap.getJobs[i]['CompanyID']);
       if(this.reap.getJobs[i]['CompanyID']==this.reap.selectedCompany){
         this.test.push(this.reap.getJobs[i]);
       }
@@ -39,7 +39,7 @@ export class MileagePage {
   else{
     this.jobDescription = this.reap.getJobs;
   }
-    console.log(this.jobDescription);
+    //console.log(this.jobDescription);
   }
 
   searchableChange(event: { component: SelectSearchableComponent, value: any }) {

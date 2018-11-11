@@ -39,7 +39,7 @@ import { InvoicePage } from '../pages/invoice/invoice';
 import { ManageCrewPage } from '../pages/manage-crew/manage-crew';
 
 Pro.init('1bd55ea2', {
-  appVersion: '1.0.0'
+  appVersion: '1.0.1'
 })
 
 @Injectable()

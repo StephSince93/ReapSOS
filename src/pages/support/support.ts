@@ -30,12 +30,12 @@ export class SupportPage {
                 this.devonianPlatform = this.device.platform;
                 this.deviceVersion = this.device.version;
 
-                // this.appVersion.getVersionNumber().then((version) => {
-                //       this.omegaVersion = version;
-                //       console.log(JSON.stringify(this.omegaVersion));
-                //     },(error)=>{
-                //         console.log(error);
-                //       })
+                this.appVersion.getVersionNumber().then((version) => {
+                      this.devonianVersion = version;
+                      //console.log(JSON.stringify(this.devonianVersion));
+                    },(error)=>{
+                        //console.log(error);
+                      })
                   }
 
   toSync(){
@@ -110,6 +110,7 @@ export class SupportPage {
             alert.present();
 
             data = data.reverse();
+            //console.log(data);
             //console.log(data[0]["Info"][0]);
             this.reap.submitOfflineForm(data);
          }

@@ -42,23 +42,23 @@ export class ManageCrewPage {
   personnelChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
         this.globalPersonnel = event.value;
-        console.log(this.globalPersonnel);
+        //console.log(this.globalPersonnel);
     }
     equipmentChange(event: { component: SelectSearchableComponent, value: any }) {
           //console.log('value:', event.value);
           this.globalEquipment = event.value;
-          console.log(this.globalEquipment);
+          //console.log(this.globalEquipment);
       }
-    removePersonnel(index){
-        this.globalPersonnel.splice(index, 1);
-        this.personnelArray.splice(index, 1);
-      }
-    removeEquipment(index){
-      //console.log(this.globalEquipment);
-    //  console.log(this.equipmentArray);
-        this.globalEquipment.splice(index, 1);
-        this.equipmentArray.splice(index, 1);
-      }
+    // removePersonnel(index){
+    //     this.globalPersonnel.splice(index, 1);
+    //     this.personnelArray.splice(index, 1);
+    //   }
+    // removeEquipment(index){
+    //   //console.log(this.globalEquipment);
+    // //  console.log(this.equipmentArray);
+    //     this.globalEquipment.splice(index, 1);
+    //     this.equipmentArray.splice(index, 1);
+    //   }
   onSubmit(form: NgForm){
     //console.log(form.value);
     this.reap.globalCrewPersonnel = form.value.Personnel;

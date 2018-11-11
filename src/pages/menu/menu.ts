@@ -18,7 +18,6 @@ import { ManageCrewPage } from '../manage-crew/manage-crew';
 export class MenuPage {
   public importedData:any;
 
-
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public stemAPI: StemApiProvider,
@@ -51,9 +50,11 @@ export class MenuPage {
          });
         loading.present();
         this.reap.formStart = true;
+        var getTimeStart:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
         this.stemAPI.submitDevonianForm({"formStart":this.reap.formStart},this.reap.token).subscribe((result) =>{
         this.storage.set('formStart',this.reap.formStart);//sets local storage
-
+        //console.log(getTimeStart);
+        this.storage.set('getTimeStart',getTimeStart);
         loading.dismiss();
         this.navCtrl.push(SafetyPage);
         }, (err) => {

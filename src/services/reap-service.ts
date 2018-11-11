@@ -44,6 +44,7 @@ export class ReapService {
     public selectedCompany:any;
     public token:any;
     public formStart:any;
+    public formStartTime:any;//testing with Devonian
     public networkType:any;
     public online:any = true;
     connected: Subscription;
@@ -170,6 +171,12 @@ export class ReapService {
         this.formStart = data;
         //console.log(this.formStart);
         });
+        /* Testing formStartTime with Devonian*/
+        this.storage.get('getTimeStart').then((data)=>{
+        this.formStartTime = data;
+        //console.log(this.formStartTime);
+        });
+
         this.storage.get('Locations').then((data)=>{
         this.getLocations = data;
         });
@@ -242,14 +249,17 @@ export class ReapService {
      loading.present();
       //console.log("Here in BOL");
     if(data[length]["Status"]=="Pending"){
-    this.stemAPI.submitDevonianForm(data[length]["Info"][0],this.token).subscribe((result) =>{
+      //console.log(data[length]["Info"]);
+      //console.log(data[length]["Status"]);
+    this.stemAPI.submitDevonianForm(data[length]["Info"],this.token).subscribe((result) =>{
      //console.log(result["Status"]);
+           var length = testLength;
            if(result["Status"]==true){
-              data[length]["Status"]="Submitted";
-              console.log(data[length]["Status"]);
+              /* WILL NEED TO TEST MORE FOR THIS ISSUE OF OFFLINE*/
+              //data[length]["Status"]="Submitted";
              isEmpty(length,data,this.storage,this.offlineFormSubmissions,loading);
            }
-           else{
+           else if(result["Status"]==false){
               this.presentToast('Project not submitted with location!');
            }
          },(err)=>{
@@ -292,7 +302,7 @@ export class ReapService {
         // console.log("Here in Batch");
         if(data["Status"]=="Pending"){
 
-         submit.submitDevonianForm(data["Info"][0],token).subscribe((result)=>{
+         submit.submitDevonianForm(data["Info"],token).subscribe((result)=>{
            //console.log(result["Status"]);
              if(result["Status"]==true){
                data["Status"]="Submitted";
@@ -315,7 +325,7 @@ export class ReapService {
      case "GPS": {
       if(data["Status"]=="Pending"){
 
-       submit.updateGPSLoc(data["Info"][0],token).subscribe((result) =>{
+       submit.updateGPSLoc(data["Info"],token).subscribe((result) =>{
 
          if(result["Status"]==true){
            data["Status"]="Submitted";
@@ -439,6 +449,7 @@ export class ReapService {
     //creates and pushes equipment array
     totalEquipment(data){
       this.equipment.push(data);
+      //console.log('Here in totalEquipment');
       //console.log(this.equipment);
     }
     totalPhotos(data){
@@ -471,8 +482,10 @@ export class ReapService {
       toast.present();
       }
 }
-function isEmpty(i,allData,storage,offline,loading){
-    console.log(allData[i]);
+function isEmpty(legth,allData,storage,offline,loading){
+    allData[length]["Status"]="Submitted";
+    // console.log(length);
+    // console.log(allData[length]);
     storage.set('offlineSubmission',allData);
     offline = allData;
     loading.dismiss();

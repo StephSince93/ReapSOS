@@ -51,10 +51,9 @@ export class EquipmentPage {
        }
      }
   this.reap.globalCrewEquipment = this.crewEquipment;
-  // console.log(form.value);
   // console.log(this.reap.globalCrewEquipment);
-
-  if(form.value.Equipment){
+  if(form.value.Equipment!=undefined){
+  //console.log(form.value.Equipment);
   let equipment = {'ID':form.value.Equipment.ID,
                     'Name':form.value.Equipment.Name,
                     'Odometer':form.value.Equipment.Odometer,

@@ -214,8 +214,13 @@ export class SafetyReviewPage {
                       else{
                      loading.dismiss();
                      this.reap.formStart = null;
+                     var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
+                     //console.log(getTimeEnd);
+                     this.storage.remove('getTimeStart');//Probably going to start form with time start
                      this.storage.remove('formStart');
-                     this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
+                     //Can fix message on API Side
+                     //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
+                     this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS SUBMITTED SUCCESSFULLY'});
                    }
                    }, 2000);
                  }, (err) => {
@@ -244,6 +249,7 @@ export class SafetyReviewPage {
                              /****** TESTING    *********************/
                              this.reap.formStart = null;
                              this.storage.remove('formStart');
+                             this.storage.remove('getTimeStart');//Probably going to start form with time start
                              this.reap.offlineFormSubmissions.push({"Type":"WO","Info":this.submitData,"Status":"Pending"});
                              this.storage.set('offlineSubmission',this.reap.offlineFormSubmissions);
                              this.submitData = [];
