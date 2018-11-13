@@ -41,7 +41,7 @@ import { ManageCrewPage } from '../pages/manage-crew/manage-crew';
 import { OfflineDataPage } from '../pages/offline-data/offline-data';
 
 Pro.init('1bd55ea2', {
-  appVersion: '1.0.1'
+  appVersion: '1.0.2'
 })
 
 @Injectable()

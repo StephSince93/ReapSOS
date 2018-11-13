@@ -40,7 +40,7 @@ export class StemApiProvider {
           })
  };
   return this.http.post(this.apisubmitFormUrl, JSON.stringify(data), httpOptions||{reportProgress:true})
-  .retry(3).timeout(15000).delay(2000);// This will retry 3 times in case there's an error
+  .retry(3).timeout(20000).delay(2000);// This will retry 3 times in case there's an error
 
   }
 

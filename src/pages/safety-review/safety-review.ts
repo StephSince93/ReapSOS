@@ -176,21 +176,43 @@ export class SafetyReviewPage {
                    //converts result to array
                    //console.log(result['Status']);
 
-                   //console.log(this.res);
+                   //console.log(result);
 
                     // setTimeout(() => {
                   // }, 3000);
                     setTimeout(() => {
               if(result['Status'] == false){
+                if (result['MSG']=='Field Form Was Not Saved!\nThis is a duplicate form.'){
+                  this.presentToast('Work Ticket Form has already been submitted!');
+                  var response = "Work Ticket Form has already been submitted! Will Exit Form!"
+                  var reRoute = true;
+                }
+                else{
+                  var response = "Please Select Location in Main Form!";
+                  var reRoute = false;
+                }
               loading.dismiss();
               let alert = this.alertCtrl.create({
               title: 'Error Submitting, ',
               message: result['MSG'],
               buttons: [
                            {
-                         text: 'Check location and try submitting again!',
+
+                         text: response,
                           role: 'Yes',
                          handler: () => {
+                            //If the system notices there is a duplicate form it wil push user to success page and let them know to contact the office
+                            if(reRoute){
+                              loading.dismiss();
+                              this.reap.formStart = null;
+                              var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
+                              //console.log(getTimeEnd);
+                              this.storage.remove('getTimeStart');//Probably going to start form with time start
+                              this.storage.remove('formStart');
+                              //Can fix message on API Side
+                              //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
+                              this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS ALREADY SUBMITTED, PLEASE CONTACT THE OFFICE TO CONFIRM!'});
+                            }
                             /* allows user to submit offline and saves form data into a form variable
                             no data will be submitted until interenet connection is made via a sync or observable call */
                             /****** TESTING    *********************/
@@ -225,8 +247,8 @@ export class SafetyReviewPage {
                    }, 2000);
                  }, (err) => {
                    loading.dismiss();
-                   // console.log(err);
-                   // console.log(err.message);
+                    //console.log(err);
+                    //console.log(err.message);
                    let alert = this.alertCtrl.create({
                    title: 'Error: ',
                    message: 'Try submitting again,or Submit Form Offline!',
