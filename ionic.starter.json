@@ -1,6 +1,6 @@
 {
   "name": "Devonian",
-  "baseref": "master",
+  "baseref": "Production",
   "tarignore": [
     ".sourcemaps",
     "node_modules",
