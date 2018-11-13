@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>OFFLINE FORMS</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text showWhen="ios">Back</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-label class="noData" *ngIf="!isData">NO OFFLINE DATA SUBMITTED</ion-label>
+  <ion-card *ngFor="let data of offlineData;let i = index">
+
+    <ion-card-content *ngIf="data?.Type=='GPS'">
+      <h1>{{i+1}}</h1>
+      <h2 class="bold">Form - {{data?.Type}}</h2>
+      <p>Well ID - {{data?.Info[0].ID}}</p>
+      <p>Lat - {{data?.Info[1]['Lat']}}</p>
+      <p>Lon - {{data?.Info[2].Lon}}</p>
+    </ion-card-content>
+
+
+    <ion-card-content *ngIf="data?.Type=='Project'">
+      <h1>{{i+1}}</h1>
+      <h2 class="bold">Form - {{data?.Type}}</h2>
+      <p>Project Name - {{data?.Info[0].project.projectName}}</p>
+      <p>Location - {{data?.Info[0].project.Location.Location}}</p>
+      <p>Company Man - {{data?.Info[0].project.companyMan}}</p>
+      <p>AFE - {{data?.Info[0].project.orderNumber}}</p>
+    </ion-card-content>
+
+    <ion-card-content *ngIf="data?.Type=='WO'">
+      <h1>{{i+1}}</h1>
+      <h2 class="bold">Form - Work Order</h2>
+      <p>Project - {{data?.Info[0].wo[0].project.Name}}</p>
+      <p>Location - {{data?.Info[0].wo[0].Location.Location}}</p>
+      <p>Company Man - {{data?.Info[0].wo[0].companyMan}}</p>
+      <p>Current Date - {{data?.Info[0].wo[0].currentDate}}</p>
+      <p>AFE - {{data?.Info[0].wo[0].workOrder}}</p>
+      <p>Foreman - {{data?.Info[0].wo[0].foreman}}</p>
+      <p>Start Time - {{data?.Info[0].wo[0].startTime}}</p>
+      <p>End Time - {{data?.Info[0].wo[0].endTime}}</p>
+      <p>Representative - {{data?.Info[0].wo[0].representative}}</p>
+      <p>Job Description - {{data?.Info[0].wo[0].description}}</p>
+
+      <br>
+      <h2 class="bold">Sub Form - Equipment</h2>
+      <br>
+      <div *ngFor="let subData of data.Info[4].Equipment">
+      <p>Name - {{subData?.Name}}</p>
+      <p>Starting Odometer - {{subData?.Odometer}}</p>
+      <p>Ending Odometer - {{subData?.endingOdometer}}</p>
+      <br>
+      </div>
+
+      <br>
+      <h2 class="bold">Sub Form - Labor</h2>
+      <br>
+      <div *ngFor="let subData of data.Info[5].Labor">
+      <p>Empoloyee - {{subData?.FullName}}</p>
+      <p>Hours - {{subData?.Hours}}</p>
+      <br>
+      </div>
+
+      <br>
+      <h2 class="bold">Sub Form - Extra Labor</h2>
+      <br>
+      <div *ngFor="let subData of data.Info[9].extraLabor">
+      <p>Name - {{subData?.Name}}</p>
+      <p>Hours - {{subData?.Hours}}</p>
+      <br>
+      </div>
+
+      <br>
+      <h2 class="bold">Sub Form - Misc.</h2>
+      <br>
+      <div *ngFor="let subData of data.Info[6].Misc">
+      <p>Description - {{subData?.description}}</p>
+      <p>Quantity - {{subData?.quantity}}</p>
+      <br>
+      </div>
+
+      <br>
+      <h2 class="bold">Sub Form - Job Description</h2>
+      <br>
+      <div *ngFor="let subData of data.Info[7].JobDescription">
+      <p>Job Description - {{subData?.jobDescription.ItemDescription}}</p>
+      <p>Quantity - {{subData?.quantity}}</p>
+      <p>Hours/Days/Cost - {{subData?.each}}</p>
+      <br>
+      </div>
+      </ion-card-content>
+  </ion-card>
+  <!-- <ion-item>
+    <button  type="button" id="submitButton" (click)="sendEmail()" ion-button full large>Email Data</button>
+ </ion-item> -->
+</ion-content>

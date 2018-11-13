@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController,LoadingController,AlertController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController,LoadingController,AlertController,ToastController,ModalController , NavParams } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { AppVersion } from '@ionic-native/app-version';
 import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
+import { Pro } from '@ionic/pro';
 
 import { ReapService } from '../../services/reap-service';
-
+import { OfflineDataPage }  from '../offline-data/offline-data';
 @IonicPage()
 @Component({
   selector: 'page-support',
@@ -16,6 +17,7 @@ export class SupportPage {
   devonianPlatform:any;
   deviceVersion:any;
   devonianVersion:any = this.reap.devonianVersion;
+  public downloadProgress = 0;
   //private networkType:string = this.reap.networkType;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -26,7 +28,9 @@ export class SupportPage {
               private reap: ReapService,
               private storage: Storage,
               private network: Network,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController,
+              private toast: ToastController,
+              private modalCtrl: ModalController) {
                 this.devonianPlatform = this.device.platform;
                 this.deviceVersion = this.device.version;
 
@@ -117,4 +121,32 @@ export class SupportPage {
        }
      });
    }
+    //  async performManualUpdate() {
+    //   try {
+    //
+    //     const update = await Pro.deploy.checkForUpdate();
+    //
+    //     if (update.available){
+    //       this.downloadProgress = 0;
+    //
+    //       await Pro.deploy.downloadUpdate((progress) => {
+    //         this.downloadProgress = progress;
+    //         console.log(this.downloadProgress);
+    //       })
+    //       await Pro.deploy.extractUpdate();
+    //       await Pro.deploy.reloadApp();
+    //
+    //     }
+    //   } catch (err) {
+    //     // We encountered an error.
+    //     // Here's how we would log it to Ionic Pro Monitoring while also catching:
+    //       this.reap.presentToast('Error Grabbing Update');
+    //      Pro.monitoring.exception(err);
+    //      //console.log(err);
+    //   }
+    // }
+    toviewData(){
+      const modal = this.modalCtrl.create(OfflineDataPage);
+      modal.present();
+    }
   }

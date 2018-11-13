@@ -16,6 +16,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
 import { Network } from '@ionic-native/network';
 import { Pro } from '@ionic/pro';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -37,6 +38,7 @@ import { ReapService } from '../services/reap-service';
 import { StemApiProvider } from '../providers/stem-api/stem-api';
 import { InvoicePage } from '../pages/invoice/invoice';
 import { ManageCrewPage } from '../pages/manage-crew/manage-crew';
+import { OfflineDataPage } from '../pages/offline-data/offline-data';
 
 Pro.init('1bd55ea2', {
   appVersion: '1.0.1'
@@ -82,7 +84,8 @@ export class MyErrorHandler implements ErrorHandler {
     SuccessPage,
     SupportPage,
     InvoicePage,
-    ManageCrewPage
+    ManageCrewPage,
+    OfflineDataPage
   ],
   imports: [
     BrowserModule,
@@ -113,7 +116,8 @@ export class MyErrorHandler implements ErrorHandler {
     SuccessPage,
     InvoicePage,
     SupportPage,
-    ManageCrewPage
+    ManageCrewPage,
+    OfflineDataPage
   ],
   providers: [
     StatusBar,
@@ -127,7 +131,8 @@ export class MyErrorHandler implements ErrorHandler {
     AppVersion,
     Network,
     //File,
-    Camera
+    Camera,
+    EmailComposer
   ]
 })
 export class AppModule {}

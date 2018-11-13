@@ -21,13 +21,21 @@ export class EquipmentPage {
   equipment: EquipmentList;
   private Type:any;
   private crewEquipment = this.reap.globalCrewEquipment;
+  private doeshaveCrew:boolean = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService) {
                  //console.log(this.crewEquipment);
           //this.equipmentType = reap.equipmentType;
           this.equipmentArray = reap.getEquipment;
-            //console.log(this.equipmentArray);
+          if(!Array.isArray(this.crewEquipment) || !this.crewEquipment.length){
+            this.doeshaveCrew = false;
+            //console.log(this.doeshaveCrew);
+          }
+          else{
+            this.doeshaveCrew = true;
+            //console.log(this.doeshaveCrew);
+          }
 
 
   }

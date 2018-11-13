@@ -20,18 +20,18 @@ export class SafetyReviewPage {
   private crewPersonnel:any [] = this.reap.globalCrewPersonnel;//From existing CrewPersonnel
   private crewEquipment:any [] = this.reap.globalCrewEquipment;//From existing CrewEquipment
   private mergeEquipment:any [] = [];//merges all equipment together
-  private formDetails:any[] = [];
-  private miscDetails:any[] = this.reap.misc;
-  private laborDetails:any[] = this.reap.labor;//When adding new Labor
+  private formDetails:any[] = [];//from main Work Order form
+  private miscDetails:any[] = this.reap.misc;// stores misc form
+  private laborDetails:any[] = this.reap.extraLabor;//When adding new Labor
   private equipmentDetails:any[] = this.reap.equipment;//When adding new Equipment
-  private jobDetails:any[] = this.reap.job;
-  private photoDetails:any[] = this.reap.photo;
-  public signatureImage: string;
-  public cancelled = "false";
-  private submitData:any[] = [];
-  private md5Data:any;
-  private lonlat:any = [];
-  private submitClicked:boolean = false;
+  private jobDetails:any[] = this.reap.job;//stores job form
+  private photoDetails:any[] = this.reap.photo;//stores photo globally
+  public signatureImage: string;//stores signature
+  public cancelled = "false";//boolean to see if user cancelled form submisison
+  private submitData:any[] = [];//Main array to submit everything
+  private md5Data:any;//md5 variable
+  private lonlat:any = [];//stores gps coords
+  private submitClicked:boolean = false;//boolean to see if submit button is clicked
   isDisconnected:any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -136,7 +136,7 @@ export class SafetyReviewPage {
                  /*md5 hashes form data with signature and timestamp for unique guid*/
                  this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
                  /*Pushes all data to array for form submission*/
-                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'JobDescription':this.jobDetails},{'Photo':this.photoDetails});
+                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'JobDescription':this.jobDetails},{'Photo':this.photoDetails},{'extraLabor':this.laborDetails});
                  /*
                  *
                  */
@@ -342,8 +342,8 @@ export class SafetyReviewPage {
  }
  removeLabor(index){
 
-     this.reap.labor.splice(index, 1);
-     this.laborDetails = this.reap.labor;
+     this.reap.extraLabor.splice(index, 1);
+     this.laborDetails = this.reap.extraLabor;
      //console.log(this.laborDetails);
  }
  removeEquipment(index){

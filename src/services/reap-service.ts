@@ -26,7 +26,7 @@ export class ReapService {
   /********************************************/
     public misc:any[]=[];
     public equipment:any[]=[];//Only For new Equipment
-    public labor:any[]=[];//Only For new Personnel
+    public extraLabor:any[]=[];//Only For new Personnel
     public job:any[]=[];
     public photo:any[]=[];
     public safetyForm:any[]=[];
@@ -196,6 +196,10 @@ export class ReapService {
 
         this.storage.get('AFE').then((data)=>{
         this.getAFE = data;
+        });
+
+        this.storage.get('Extras').then((data)=>{
+        this.getExtras = data;
         });
 
         this.storage.get('Jobs').then((data)=>{
@@ -441,9 +445,9 @@ export class ReapService {
     }
     /*Devonian Custom*/
     //creates and pushes labor array
-    totalLabor(data){
-      this.labor.push(data);
-      //console.log(this.labor);
+    addLabor(data){
+      this.extraLabor.push(data);
+      //console.log(this.extraLabor);
     }
     /*Devonian Custom*/
     //creates and pushes equipment array
