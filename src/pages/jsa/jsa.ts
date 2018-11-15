@@ -14,13 +14,12 @@ class updatedLocation {
   public ID: number;
   public Location: string;
 }
-
 @IonicPage()
 @Component({
-  selector: 'page-project',
-  templateUrl: 'project.html',
+  selector: 'page-jsa',
+  templateUrl: 'jsa.html',
 })
-export class ProjectPage {
+export class JsaPage {
   private locationsArray: Location[];
   location: Location;
   updatedLocation: updatedLocation[];
@@ -40,7 +39,6 @@ export class ProjectPage {
     this.locationsArray = reap.getLocations;
     this.updatedLocation = [];
   }
-
   grabLocation(){
         this.selectedClosestLoc = true;
         /* Ensure the platform is ready */
@@ -65,23 +63,23 @@ export class ProjectPage {
         });
       }
 
-  onSubmit(Form: NgForm){
-    if(!Form.value.Location){//If user grabs nearest location
-      Form.value.Location = Form.value.updatedLocation;
-      // console.log(Form.value.Location);
-      // Form.removeControl['updatedLocation'];
-      // console.log(Form.controls)
-    }
-    this.reap.projectForm = Form.value;
-    //console.log(this.reap.projectForm);
-    this.navCtrl.push(ProjectReviewPage);
-  }
-  searchableChange(event: { component: SelectSearchableComponent, value: any }) {
-        //console.log('value:', event.value);
-    }
-      resetLocation(){
-          this.wellLocation = [];
-          this.updatedLocation = [];
-          this.selectedClosestLoc = false;
+      onSubmit(Form: NgForm){
+        if(!Form.value.Location){//If user grabs nearest location
+          Form.value.Location = Form.value.updatedLocation;
+          // console.log(Form.value.Location);
+          // Form.removeControl['updatedLocation'];
+          // console.log(Form.controls)
+        }
+        this.reap.projectForm = Form.value;
+        //console.log(this.reap.projectForm);
+//this.navCtrl.push(ProjectReviewPage);
       }
+      searchableChange(event: { component: SelectSearchableComponent, value: any }) {
+            //console.log('value:', event.value);
+        }
+          resetLocation(){
+              this.wellLocation = [];
+              this.updatedLocation = [];
+              this.selectedClosestLoc = false;
+          }
 }

@@ -73,7 +73,8 @@ export class SafetyPage {
   onSubmit(Form: NgForm){
     //Created form value as foreman
     Form.value.foreman = this.foreman;
-    //console.log(Form.value);
+    Form.value.formStartTime = this.reap.formStartTime;    
+    console.log(Form.value);
     if(!Form.value.Location){//If user grabs nearest location
       Form.value.Location = Form.value.updatedLocation;
       if(Form.value.Location){

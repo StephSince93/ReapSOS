@@ -14,47 +14,48 @@
                 </ion-row>
                 <ion-row>
                   <ion-col>PROJECT:</ion-col>
-                  <ion-col>{{details.project?.Name | uppercase}}</ion-col>
+                  <ion-col>{{details.project?.Name}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>PROJECT LOCATION:</ion-col>
-                  <ion-col>{{details.Location?.Location | uppercase}}</ion-col>
+                  <ion-col>{{details.Location?.Location}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>COMPANY MAN:</ion-col>
-                  <ion-col>{{details?.companyMan | uppercase}}</ion-col>
+                  <ion-col>{{details?.companyMan}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>AFE/ORDER NUMBER:</ion-col>
-                  <ion-col>{{details?.orderNumber | uppercase}}</ion-col>
+                  <ion-col>{{details?.orderNumber}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>FORM START TIME:</ion-col>
+                  <ion-col>{{details?.formStartTime}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>START TIME:</ion-col>
-                  <ion-col>{{details?.startTime }}</ion-col>
+                  <ion-col>{{details?.startTime}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>END TIME:</ion-col>
-                  <ion-col>{{details?.endTime }}</ion-col>
+                  <ion-col>{{details?.endTime}}</ion-col>
+                  <!-- <ng-template  #noTime><ion-col>End Time Will be recorded once form is submitted!</ion-col></ng-template> -->
                 </ion-row>
                 <ion-row>
                   <ion-col>FOREMAN:</ion-col>
-                  <ion-col>{{details?.foreman | uppercase}}</ion-col>
+                  <ion-col>{{details?.foreman}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>WO/CHARGE CODE NUMBER:</ion-col>
-                  <ion-col>{{details?.workOrder | uppercase}}</ion-col>
+                  <ion-col>{{details?.workOrder}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>WORK DESCRIPTION:</ion-col>
-                  <ion-col>{{details?.description | uppercase}}</ion-col>
+                  <ion-col>{{details?.description}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>REPRESENTATIVE TO SIGN:</ion-col>
-                  <ion-col>{{details?.representative | uppercase}}</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col>COMMENTS:</ion-col>
-                  <ion-col>{{details?.description | uppercase}}</ion-col>
+                  <ion-col>{{details?.representative}}</ion-col>
                 </ion-row>
               </ion-grid>
                <ion-grid>

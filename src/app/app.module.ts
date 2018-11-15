@@ -39,7 +39,8 @@ import { StemApiProvider } from '../providers/stem-api/stem-api';
 import { InvoicePage } from '../pages/invoice/invoice';
 import { ManageCrewPage } from '../pages/manage-crew/manage-crew';
 import { OfflineDataPage } from '../pages/offline-data/offline-data';
-
+import { EmployeeSignaturesPage } from '../pages/employee-signatures/employee-signatures';
+import { JsaPage } from '../pages/jsa/jsa';
 Pro.init('1bd55ea2', {
   appVersion: '1.0.2'
 })
@@ -85,7 +86,9 @@ export class MyErrorHandler implements ErrorHandler {
     SupportPage,
     InvoicePage,
     ManageCrewPage,
-    OfflineDataPage
+    OfflineDataPage,
+    EmployeeSignaturesPage,
+    JsaPage
   ],
   imports: [
     BrowserModule,
@@ -117,7 +120,9 @@ export class MyErrorHandler implements ErrorHandler {
     InvoicePage,
     SupportPage,
     ManageCrewPage,
-    OfflineDataPage
+    OfflineDataPage,
+    EmployeeSignaturesPage,
+    JsaPage
   ],
   providers: [
     StatusBar,

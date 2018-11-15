@@ -92,7 +92,7 @@ export class ReapService {
         //console.log('here every 5 minutes');
         if(data!=null){
           console.log(data);
-          this.submitOfflineForm(data);
+          //this.submitOfflineForm(data);
             }
         });
       },error => console.error(error));

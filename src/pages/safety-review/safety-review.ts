@@ -45,10 +45,10 @@ export class SafetyReviewPage {
               private storage: Storage,
               private toastCtrl: ToastController) {
             this.formDetails.push(this.reap.safetyForm);
-            // console.log(this.formDetails);
-            // console.log(this.jobDetails);
+            console.log(this.formDetails);
+            //console.log(this.jobDetails);
             //console.log(this.equipmentDetails);
-            // console.log(this.laborDetails);
+            //console.log(this.laborDetails);
             var date = new Date(this.formDetails[0]['currentDate']);
             this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
             //console.log(this.laborDetails);
@@ -109,6 +109,12 @@ export class SafetyReviewPage {
     this.submitClicked = true;
     var md5 = new Md5();//md5 hash for custom guid
     var time = new Date();//timestamp
+    //console.log(this.formDetails[0]['endTime']);
+    //If user didn't select end time, the time stamp will grab it for them
+      if(this.formDetails[0]['endTime'] == ""){
+        var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");//timeEnd
+        this.formDetails[0]['endTime'] = getTimeEnd;//Grabs when user hits submit on Form
+      }
     let alert = this.alertCtrl.create({
    title: 'Confirm Submission',
    message: 'Are you sure you want to submit?',
@@ -140,36 +146,8 @@ export class SafetyReviewPage {
                  /*
                  *
                  */
-                 //console.log(this.submitData);
                  loading.present();
-              /*******************TESTING***********************************/
-                 if(this.reap.online=="offline"){
-                   //console.log('user is offline while submitting, will store data and submit later');
-                   //console.log(this.reap.online);
-
-                   this.storage.set('offlineSubmission',this.submitData);
-                   let alert = this.alertCtrl.create({
-                   title: 'Submitted Form Offline',
-                   message: 'Please go to support page an re-submit form once back online!',
-                   buttons: [
-                            {
-                              text: 'Acknowledged',
-                               role: 'Yes',
-                              handler: () => {
-                                setTimeout(() => {
-                                loading.dismiss();
-                                },1000);
-
-                                 this.navCtrl.push(SuccessPage,{'Success':'Please go to support page an re-submit form once back online!'});
-                                  loading.dismiss();
-                                 this.submitData = [];//resets Submission so data isnt inserted twice
-                              }
-                            }
-                         ]
-                     });
-                   alert.present();
-
-                 }else{
+                //console.log(this.submitData);
                  //console.log(this.reap.online);
                  //creates a loading controller while user submits
                  this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result) =>{
@@ -208,7 +186,8 @@ export class SafetyReviewPage {
                               var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
                               //console.log(getTimeEnd);
                               this.storage.remove('getTimeStart');//Probably going to start form with time start
-                              this.storage.remove('formStart');
+                              this.reap.formStart = false;
+                              this.storage.set('formStart',this.reap.formStart);
                               //Can fix message on API Side
                               //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
                               this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS ALREADY SUBMITTED, PLEASE CONTACT THE OFFICE TO CONFIRM!'});
@@ -238,8 +217,9 @@ export class SafetyReviewPage {
                      this.reap.formStart = null;
                      var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
                      //console.log(getTimeEnd);
-                     this.storage.remove('getTimeStart');//Probably going to start form with time start
-                     this.storage.remove('formStart');
+                     this.storage.remove('getTimeStart');
+                     this.reap.formStart = false;
+                     this.storage.set('formStart',this.reap.formStart);
                      //Can fix message on API Side
                      //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
                      this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS SUBMITTED SUCCESSFULLY'});
@@ -269,9 +249,10 @@ export class SafetyReviewPage {
                              /* allows user to submit offline and saves form data into a form variable
                              no data will be submitted until interenet connection is made via a sync or observable call */
                              /****** TESTING    *********************/
-                             this.reap.formStart = null;
-                             this.storage.remove('formStart');
-                             this.storage.remove('getTimeStart');//Probably going to start form with time start
+
+                             this.storage.remove('getTimeStart');
+                             this.reap.formStart = false;
+                             this.storage.set('formStart',this.reap.formStart);
                              this.reap.offlineFormSubmissions.push({"Type":"WO","Info":this.submitData,"Status":"Pending"});
                              this.storage.set('offlineSubmission',this.reap.offlineFormSubmissions);
                              this.submitData = [];
@@ -284,7 +265,6 @@ export class SafetyReviewPage {
                    alert.present();
                   //console.log(err);
                  });
-              }
             }
          },{//Second alert asking about submission
               text: 'No',

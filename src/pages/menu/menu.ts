@@ -10,6 +10,8 @@ import { ReapService } from '../../services/reap-service';
 import { StemApiProvider } from '../../providers/stem-api/stem-api';
 import { SupportPage } from '../support/support';
 import { ManageCrewPage } from '../manage-crew/manage-crew';
+import { EmployeeSignaturesPage } from '../employee-signatures/employee-signatures'
+import { JsaPage } from '../jsa/jsa';
 @IonicPage()
 @Component({
   selector: 'page-menu',
@@ -41,42 +43,37 @@ export class MenuPage {
       //console.log('Initial Login is:',LoginPage.initialLogin);
     }
   }
+  ionViewWillEnter(){
+    //fixes issue with signature swiping back.
+    this.navCtrl.swipeBackEnabled = false;
+  }
 
-  toSaftey(){
+  toWO(){
     //console.log(this.reap.formStart);
       if(this.reap.formStart==null){//checks if there is not a variable stored in local storage
         let loading = this.loadingCtrl.create({
-          content: 'Grabbing information from server..'
+          content: 'Starting New Work Order'
          });
         loading.present();
-        this.reap.formStart = true;
-        var getTimeStart:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
-        this.stemAPI.submitDevonianForm({"formStart":this.reap.formStart},this.reap.token).subscribe((result) =>{
-        this.storage.set('formStart',this.reap.formStart);//sets local storage
-        //console.log(getTimeStart);
-        this.storage.set('getTimeStart',getTimeStart);
-        loading.dismiss();
-        this.navCtrl.push(SafetyPage);
-        }, (err) => {
-        let alert = this.alertCtrl.create({
-            title: 'Error Grabbing Data.. ',
-            message: 'Try Again! If issues persists, please contact Stem Support!',
-            buttons: [
-                 {
-                   text: 'Acknowledged',
-                    role: 'Yes',
-                   handler: () => {
-                     loading.dismiss();
-                   }
-                 }
-                ]
-              });//end alert
-            });//end api call
-          }
+            this.reap.formStart = true;//starts the new Form
+            //Creates Time Stamp for form
+            var getTimeStart:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
+            //saves start time and formstart in local storage
+            this.storage.set('formStart',this.reap.formStart);//sets local storage
+            this.storage.set('getTimeStart',getTimeStart);
+            this.reap.formStartTime = getTimeStart;
+        setTimeout(() => {
+          loading.dismiss();
+          this.navCtrl.push(SafetyPage);
+        }, 3000);
+      }
       else{// pushed straight to Safety Page if user had previously submitted an initial Safety Form
         this.navCtrl.push(SafetyPage);
       }
   }//end function
+  toJSA(){
+    this.navCtrl.push(JsaPage);
+  }
   toProject(){
     this.navCtrl.push(ProjectPage);
   }
@@ -88,6 +85,9 @@ export class MenuPage {
   }
   toManageCrew(){
     this.navCtrl.push(ManageCrewPage);
+  }
+  toEmployeeSignatures(){
+    this.navCtrl.push(EmployeeSignaturesPage);
   }
 
 }
