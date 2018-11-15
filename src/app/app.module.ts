@@ -42,7 +42,7 @@ import { OfflineDataPage } from '../pages/offline-data/offline-data';
 import { EmployeeSignaturesPage } from '../pages/employee-signatures/employee-signatures';
 import { JsaPage } from '../pages/jsa/jsa';
 Pro.init('1bd55ea2', {
-  appVersion: '1.0.2'
+  appVersion: '1.0.3'
 })
 
 @Injectable()

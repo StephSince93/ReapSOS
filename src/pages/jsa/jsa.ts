@@ -29,7 +29,7 @@ export class JsaPage {
   private wellLocation: any [] = [];
   private selectedClosestLoc:boolean = false;
   private afeArray:any[] = this.reap.getAFE;
-  //private ASILocations:any[] = this.reap.getASILocations;
+  currentDate:any = new Date().toISOString();
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,

@@ -222,7 +222,7 @@ export class SafetyReviewPage {
                      this.storage.set('formStart',this.reap.formStart);
                      //Can fix message on API Side
                      //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
-                     this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS SUBMITTED SUCCESSFULLY'});
+                     this.navCtrl.push(SuccessPage,{'Success':'FIELD TICKET WAS SUBMITTED SUCCESSFULLY'});
                    }
                    }, 2000);
                  }, (err) => {

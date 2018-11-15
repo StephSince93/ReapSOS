@@ -27,28 +27,25 @@ export class MenuPage {
               public storage: Storage,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController) {
-     /* calls local storage once user hits menupage*/
 
-     if(LoginPage.initialLogin==true){
-        //console.log('Initial Login is:',LoginPage.initialLogin);
-       this.storage.get('authToken').then((data)=>{
-       if(data!=null){
-       //console.log('GET request happened');
-       this.reap.grabAPIData(data);//calls service to grab API data on initial login
-        }
-     });
-    }
-    else{
-      this.reap.getLocalStorage();
-      //console.log('Initial Login is:',LoginPage.initialLogin);
-    }
   }
   ionViewWillEnter(){
+      this.storage.get('authToken').then((data)=>{
+      if(data!=null){
+        this.reap.token = data;
+        //console.log(this.reap.token)
+        this.reap.grabAPIData(this.reap.token);
+        this.reap.getLocalStorage();
+       }
+       else{
+         this.reap.presentToast('Sync Unsuccessful');
+       }
+    });
     //fixes issue with signature swiping back.
     this.navCtrl.swipeBackEnabled = false;
   }
 
-  toWO(){
+  toFieldTicket(){
     //console.log(this.reap.formStart);
       if(this.reap.formStart==null){//checks if there is not a variable stored in local storage
         let loading = this.loadingCtrl.create({
@@ -65,7 +62,7 @@ export class MenuPage {
         setTimeout(() => {
           loading.dismiss();
           this.navCtrl.push(SafetyPage);
-        }, 3000);
+        }, 2000);
       }
       else{// pushed straight to Safety Page if user had previously submitted an initial Safety Form
         this.navCtrl.push(SafetyPage);
@@ -89,5 +86,4 @@ export class MenuPage {
   toEmployeeSignatures(){
     this.navCtrl.push(EmployeeSignaturesPage);
   }
-
 }
