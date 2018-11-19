@@ -143,7 +143,7 @@ export class FieldTicketReviewPage {
                  /*md5 hashes form data with signature and timestamp for unique guid*/
                  this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
                  /*Pushes all data to array for form submission*/
-                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'JobDescription':this.crewItems},{'Photo':this.photoDetails},{'extraLabor':this.laborDetails});
+                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'ItemDescription':this.crewItems},{'Photo':this.photoDetails},{'extraLabor':this.laborDetails});
                  /*
                  *
                  */
