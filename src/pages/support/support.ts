@@ -67,10 +67,11 @@ export class SupportPage {
           loading.present();
              setTimeout(() => {
                 this.reap.removeConnections();
+                this.reap.presentToast('Logged Out');
+                //pops back to the login page
+                this.navCtrl.popToRoot();
                loading.dismiss();
             }, 2000);
-          //pops back to the login page
-          this.navCtrl.popToRoot();
      }
      /*** TESTING *****/
      toSubmitOffline(){

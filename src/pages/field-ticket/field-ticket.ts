@@ -40,11 +40,10 @@ export class FieldTicketPage {
   private startDate:any;
   private foreman:string;//current user logged in
   private personnelSelected:boolean = false;//check to see if user selected exists
+  private totalTime:any;
   currentDate:any = new Date().toISOString();
-  defaultStartTime:string = new Date(new Date().setHours(-1, 0, 0)).toISOString();
-  defaultEndTime:string = new Date(new Date().setHours(13, 0, 0)).toISOString();
-  // defaultStartTime:any = new Date (new Date().toDateString() + ' ' + '11:00 PM').toISOString();
-  // defaultEndTime:any = new Date (new Date().toDateString() + ' ' + '1:00 PM').toISOString();
+  defaultStartTime:string;
+  defaultEndTime:string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -60,6 +59,9 @@ export class FieldTicketPage {
         /**************** Catch Error ************/
   }
   ionViewWillEnter(){
+    //If user backtracks to main form, the variables are re-initialized
+    this.defaultStartTime = new Date(new Date().setHours(-1, 0, 0)).toISOString();
+    this.defaultEndTime = new Date(new Date().setHours(13, 0, 0)).toISOString();
     for(let i=0;i< this.personnelArray.length;i++){//grabs current username logged in
         if(this.personnelArray[i]['default'] === "true"){
           this.foreman = this.personnelArray[i]['FullName'];
@@ -76,6 +78,8 @@ export class FieldTicketPage {
   }
 
   onSubmit(Form: NgForm){
+    //console.log(Form.value);
+    //var t0 = performance.now();
     var sT = new Date(Form.value.startTime);
     var eT = new Date(Form.value.endTime);
     var sTHours = sT.getUTCHours();
@@ -106,11 +110,11 @@ export class FieldTicketPage {
     var totalMinutes = ((eTMinutes - sTMinutes) /60);
     // console.log('hours: ' + totalHours);
     // console.log('minutes: ' + (totalMinutes / 60));
-    var totalTime = (totalHours + totalMinutes);
+    this.totalTime = (totalHours + totalMinutes);
     // console.log(totalHours + totalMinutes);
     // console.log('total time: ' + totalTime);
     //this.reap.totalTime = totalTime;
-    if(totalTime < 0){
+    if(this.totalTime < 0){
       //console.log('Starting Time is greater than Ending Time');
       this.presentAlert();
     }
@@ -121,7 +125,7 @@ export class FieldTicketPage {
          for(let i=0;i<this.reap.globalCrewPersonnel.length;i++){
            this.reap.globalCrewPersonnel[i]={'ID':this.reap.globalCrewPersonnel[i]['ID']
                      ,'FullName':this.reap.globalCrewPersonnel[i]['FullName']
-                     ,'Hours':totalTime.toString()};
+                     ,'Hours':this.totalTime.toString()};
             }
          }
     //console.log(this.reap.globalCrewPersonnel);
@@ -140,6 +144,9 @@ export class FieldTicketPage {
       this.reap.selectedCompany = Form.value.Location['CID'];
     }
     this.reap.safetyForm = Form.value;
+    //var t1 = performance.now();
+    //console.log("Formatting time took " + (t1 - t0) + " milliseconds.");
+    //alert("Formatting time took " + (t1 - t0) + " milliseconds.");
     //console.log(this.reap.safetyForm);
     this.navCtrl.push(SubMenuPage);
     }

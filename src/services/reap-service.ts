@@ -122,7 +122,7 @@ export class ReapService {
         this.stemAPI.getData(this.token).subscribe((result) =>{
         this.getData = (JSON.stringify(result));
         this.getData = JSON.parse(this.getData);
-        console.log(this.getData);
+        //console.log(this.getData);
 
         this.getMD5 = this.getData['md5'];
         this.storage.set('MD5',this.getMD5);
@@ -458,7 +458,7 @@ export class ReapService {
     /*Devonian Custom*/
     //creates and pushes equipment array
     totalEquipment(data){
-      this.equipment.push(data);
+      this.equipment = data;
       //console.log('Here in totalEquipment');
       //console.log(this.equipment);
     }

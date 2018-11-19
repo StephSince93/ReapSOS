@@ -25,7 +25,7 @@ export class FieldTicketReviewPage {
   private miscDetails:any[] = this.reap.misc;// stores misc form
   private laborDetails:any[] = this.reap.extraLabor;//When adding new Labor
   private equipmentDetails:any[] = this.reap.equipment;//When adding new Equipment
-  private jobDetails:any[] = this.reap.job;//stores job form
+  //private jobDetails:any[] = this.reap.job;//stores job form
   private photoDetails:any[] = this.reap.photo;//stores photo globally
   public signatureImage: string;//stores signature
   public cancelled = "false";//boolean to see if user cancelled form submisison
@@ -46,7 +46,7 @@ export class FieldTicketReviewPage {
               private storage: Storage,
               private toastCtrl: ToastController) {
             this.formDetails.push(this.reap.safetyForm);
-            console.log(this.formDetails);
+            //console.log(this.formDetails);
             //console.log(this.jobDetails);
             //console.log(this.equipmentDetails);
             //console.log(this.laborDetails);
@@ -143,12 +143,12 @@ export class FieldTicketReviewPage {
                  /*md5 hashes form data with signature and timestamp for unique guid*/
                  this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
                  /*Pushes all data to array for form submission*/
-                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'JobDescription':this.jobDetails},{'Photo':this.photoDetails},{'extraLabor':this.laborDetails});
+                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'JobDescription':this.crewItems},{'Photo':this.photoDetails},{'extraLabor':this.laborDetails});
                  /*
                  *
                  */
                  loading.present();
-                console.log(this.submitData);
+                //console.log(this.submitData);
                  //creates a loading controller while user submits
                  this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result) =>{
 
@@ -331,12 +331,12 @@ export class FieldTicketReviewPage {
      this.miscDetails = this.reap.misc;
      //console.log(this.mileageDetails);
  }
- removeDescription(index){
-
-     this.reap.job.splice(index, 1);
-     this.jobDetails = this.reap.job;
-     //console.log(this.mileageDetails);
- }
+ // removeDescription(index){
+ //
+ //     this.reap.job.splice(index, 1);
+ //     this.jobDetails = this.reap.job;
+ //     //console.log(this.mileageDetails);
+ // }
  removeLabor(index){
 
      this.reap.extraLabor.splice(index, 1);

@@ -42,6 +42,7 @@ import { OfflineDataPage } from '../pages/offline-data/offline-data';
 import { EmployeeSignaturesPage } from '../pages/employee-signatures/employee-signatures';
 import { JsaPage } from '../pages/jsa/jsa';
 import { AddExtraPersonnelPage } from '../pages/add-extra-personnel/add-extra-personnel';
+import { AddExtraEquipmentPage } from '../pages/add-extra-equipment/add-extra-equipment';
 Pro.init('1bd55ea2', {
   appVersion: '1.0.4'
 })
@@ -90,7 +91,8 @@ export class MyErrorHandler implements ErrorHandler {
     OfflineDataPage,
     EmployeeSignaturesPage,
     JsaPage,
-    AddExtraPersonnelPage
+    AddExtraPersonnelPage,
+    AddExtraEquipmentPage
   ],
   imports: [
     BrowserModule,
@@ -125,7 +127,8 @@ export class MyErrorHandler implements ErrorHandler {
     OfflineDataPage,
     EmployeeSignaturesPage,
     JsaPage,
-    AddExtraPersonnelPage
+    AddExtraPersonnelPage,
+    AddExtraEquipmentPage
   ],
   providers: [
     StatusBar,

@@ -109,7 +109,7 @@
             </ion-row>
             <ion-row>
                 <ion-col>Input Quantity:</ion-col>
-                <ion-col class="formCol"><ion-input class="gridInput" ngModel name="quantity{{i}}" type="number"></ion-input></ion-col>
+                <ion-col class="formCol"><ion-input class="gridInput" (keypress)="keyPress($event)" ngModel name="quantity{{i}}" type="number"></ion-input></ion-col>
             </ion-row>
             <ion-row>
                 <ion-col>Quantity:</ion-col>
@@ -117,7 +117,7 @@
             </ion-row>
             <ion-row>
                 <ion-col>Input Hours/Days/Cost:</ion-col>
-                <ion-col class="formCol"><ion-input class="gridInput" ngModel name="each{{i}}" type="number"></ion-input></ion-col>
+                <ion-col class="formCol"><ion-input class="gridInput" (keypress)="keyPress($event)" ngModel name="each{{i}}" type="number"></ion-input></ion-col>
             </ion-row>
             <ion-row>
                 <ion-col>Hours/Days/Cost:</ion-col>

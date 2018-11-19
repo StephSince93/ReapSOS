@@ -19,7 +19,7 @@
               </ion-row>
               <ion-row>
                   <ion-col>INPUT HOURS:</ion-col>
-                  <ion-col class="formCol"><ion-input class="gridInput" ngModel name="hours{{i}}" type="text"></ion-input></ion-col>
+                  <ion-col class="formCol"><ion-input class="gridInput" (keypress)="keyPress($event)" ngModel name="hours{{i}}" type="text"></ion-input></ion-col>
               </ion-row>
               <ion-row>
                   <ion-col>HOURS:</ion-col>

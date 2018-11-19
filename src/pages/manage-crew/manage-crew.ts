@@ -48,7 +48,7 @@ export class ManageCrewPage {
     this.personnelArray = this.reap.getPersonnel;
     this.equipmentArray = this.reap.getEquipment;
     //Pre-Setting variables for Item Type
-    console.log(this.globalItems);
+    //console.log(this.globalItems);
     this.itemArray = this.reap.getJobs;
   }
 
@@ -66,7 +66,15 @@ export class ManageCrewPage {
           //console.log('value:', event.value);
           this.globalItems = event.value;
           this.reap.globalCrewItems = this.globalItems;
-          console.log(this.globalItems);
+          //console.log(this.globalItems);
+  }
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
     // removePersonnel(index){
     //     this.globalPersonnel.splice(index, 1);
@@ -79,18 +87,18 @@ export class ManageCrewPage {
     //     this.equipmentArray.splice(index, 1);
     //   }
   onSubmit(form: NgForm){
-    console.log(form.value);
+    //console.log(form.value);
 
     let quantity:any = 'quantity';
     let each:any = 'each';
 
     if((Array.isArray(this.reap.globalCrewItems) || (this.reap.globalCrewItems!=null))){
-    console.log(this.reap.globalCrewItems);
+    //console.log(this.reap.globalCrewItems);
     for(let i=0;i<this.reap.globalCrewItems.length;i++){
 
         //If user inputs new data on each
         if((this.reap.globalCrewItems[i]['each']==undefined||(form.value[each+[i]]!=""))&&(this.reap.globalCrewItems[i]['quantity']==undefined||(form.value[quantity+[i]]!=""))){
-          console.log("1");
+          //console.log("1");
         this.reap.globalCrewItems[i]={'JobID':form.value.Items[i].JobID
                   ,'ItemDescription':form.value.Items[i].ItemDescription
                   ,'quantity':form.value[quantity+[i]]
@@ -98,7 +106,7 @@ export class ManageCrewPage {
         }
         //If user had previous data in fields, the previous failed still stay
         else if((this.reap.globalCrewItems[i].quantity!=undefined&&(form.value[quantity+[i]]==""))&&(this.reap.globalCrewItems[i].each!=undefined&&(form.value[each+[i]]==""))){
-        console.log("2");
+        //console.log("2");
         this.reap.globalCrewItems[i]={'JobID':form.value.Items[i].JobID
                   ,'ItemDescription':form.value.Items[i].ItemDescription
                   ,'quantity':this.reap.globalCrewItems[i].quantity
@@ -106,7 +114,7 @@ export class ManageCrewPage {
         }
       }
     }
-    console.log(this.reap.globalCrewItems);
+    //console.log(this.reap.globalCrewItems);
     //this.reap.globalCrewItems = this.crewItems;
     this.reap.globalCrewPersonnel = form.value.Personnel;
     this.reap.globalCrewEquipment = form.value.Equipment;
@@ -124,5 +132,5 @@ export class ManageCrewPage {
   });
   alert.present();
   this.navCtrl.pop();
-}
+  }
 }

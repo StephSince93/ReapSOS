@@ -38,7 +38,7 @@ export class LaborPage {
   }
 
   onSubmit(form: NgForm){
-    console.log(form.value);
+    //console.log(form.value);
     let hours:any = 'hours';
     if((Array.isArray(this.reap.globalCrewPersonnel) || (this.reap.globalCrewPersonnel!=null))||(Array.isArray(this.crewPersonnel) || this.crewPersonnel!=null)){
     for(let i=0;i<this.reap.globalCrewPersonnel.length;i++){
@@ -90,5 +90,12 @@ export class LaborPage {
     this.personnelInfo.splice(index, 1);
     //console.log(this.equipmentDetails);
   }
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
 
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 }
