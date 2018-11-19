@@ -38,6 +38,8 @@ export class ReapService {
     //Set crew for Devonian
     public globalCrewPersonnel: any [] = [];
     public globalCrewEquipment: any [] = [];
+    public globalCrewItems: any [] = [];
+    public totalTime: any;
     //Offline Form Submission
     public offlineFormSubmissions:any [] = [];
     //Connecting Main and Description Form
@@ -92,7 +94,7 @@ export class ReapService {
         //console.log('here every 5 minutes');
         if(data!=null){
           console.log(data);
-          this.submitOfflineForm(data);
+          //this.submitOfflineForm(data);
             }
         });
       },error => console.error(error));
@@ -213,6 +215,10 @@ export class ReapService {
 
         this.storage.get('globalCrewEquipment').then((data)=>{
         this.globalCrewEquipment = data;
+        });
+
+        this.storage.get('globalCrewItems').then((data)=>{
+        this.globalCrewItems = data;
         });
 
         this.storage.get('AppVersion').then((data)=>{
@@ -446,13 +452,13 @@ export class ReapService {
     /*Devonian Custom*/
     //creates and pushes labor array
     addLabor(data){
-      this.extraLabor.push(data);
+      this.extraLabor = data;
       //console.log(this.extraLabor);
     }
     /*Devonian Custom*/
     //creates and pushes equipment array
     totalEquipment(data){
-      this.equipment.push(data);
+      this.equipment = data;
       //console.log('Here in totalEquipment');
       //console.log(this.equipment);
     }

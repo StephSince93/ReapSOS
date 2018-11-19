@@ -32,6 +32,7 @@ page-equipment {
   }
   ion-col{
     border: 1px solid;
+    text-align: center;
   }
   .formCol{
     background-color:#D2F27C;
@@ -49,5 +50,22 @@ page-equipment {
     text-align:center;
     font-weight:bold;
     margin-top:5px;
+  }
+  .custEquipment{
+    margin-bottom:25px;
+    height:165px;
+  }
+  #equipmentButton{
+    font-size: 2.5em;
+    color: $toolbar-background;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+  }
+  .trashButton{
+    color:black;
+    background-color: red;
+  }
+  .noBorder{
+    border:none;
   }
 }

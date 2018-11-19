@@ -1,4 +1,4 @@
-page-mileage {
+page-item-type {
   ion-title {
       color: reapHeader;
       font-size: 9px;
@@ -23,5 +23,25 @@ page-mileage {
   ion-input{
     font-size: 1.5em;
     text-align: center;
+  }
+  ion-col{
+    border: 1px solid;
+  }
+  .formCol{
+    background-color:#D2F27C;
+  }
+  .gridInput{
+    height:6px;
+  }
+  .text-input-md{
+    margin:0;
+  }
+  .text-input-ios{
+    margin:0;
+  }
+  .gridLabel{
+    text-align:center;
+    font-weight:bold;
+    margin-top:5px;
   }
 }

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { MileagePage } from './mileage';
+import { JsaPage } from './jsa';
 
 @NgModule({
   declarations: [
-    //MileagePage,
+    //JsaPage,
   ],
   imports: [
-    IonicPageModule.forChild(MileagePage),
+    IonicPageModule.forChild(JsaPage),
   ],
 })
-export class MileagePageModule {}
+export class JsaPageModule {}

@@ -19,40 +19,44 @@
               </ion-row>
               <ion-row>
                   <ion-col>INPUT HOURS:</ion-col>
-                  <ion-col class="formCol"><ion-input class="gridInput" ngModel name="hours{{i}}" type="text"></ion-input></ion-col>
+                  <ion-col class="formCol"><ion-input class="gridInput" (keypress)="keyPress($event)" ngModel name="hours{{i}}" type="text"></ion-input></ion-col>
               </ion-row>
               <ion-row>
                   <ion-col>HOURS:</ion-col>
                   <ion-col>{{personnel?.Hours}}</ion-col>
               </ion-row>
         </ion-grid>
+        <!-- autofilled by sub form data-->
         <br>
         <br>
         <ion-label class="gridLabel">ADD ADDITIONAL PERSONNEL</ion-label>
-      <ion-item class="formField ionField">
-      <ion-label color="primary" stacked >PERSONNEL</ion-label>
-        <select-searchable
-         item-content
-         [(ngModel)]="extrapersonnel"
-         title="extraPersonnel"
-         itemValueField=ID
-         itemTextField=Extras
-         name="extraPersonnel"
-         [items]="extraPersonnelArray"
-         [canSearch]="true"
-         [canClear]="true"
-         (onChange)="personnelChange($event)">
-       </select-searchable>
-      </ion-item>
+          <ion-grid class="custPersonnel" *ngFor="let personnel of personnelInfo;let i = index">
+             <!-- <button type="button" name="editPersonnel" id='hidden-button' (tap)="editPersonnel()"> -->
+               <ion-row>
+                 <ion-col>Personnel Description:</ion-col>
+                 <ion-col>{{personnel?.extraPersonnel.Extras}}</ion-col>
+               </ion-row>
+                <ion-row>
+                  <ion-col>Extra Personnel Name:</ion-col>
+                  <ion-col>{{personnel?.personnelName}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>Hours:</ion-col>
+                  <ion-col>{{personnel?.hours}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col><button (tap)="removePersonnel(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                </ion-row>
+              <!-- </button> -->
+          </ion-grid>
+       <ion-grid>
+        <ion-row>
+          <ion-col  class="noBorder" col-6 offset-3 text-center>
+            <button id="personnelButton" type="button"  (tap)="addPersonnel()" ion-button icon-only clear large><ion-icon name="add-circle"></ion-icon></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-      <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>HOURS</ion-label>
-        <ion-input
-        ngModel
-        type="number"
-        name="hours">
-        </ion-input>
-      </ion-item>
 <br>
 <br>
       <ion-item>

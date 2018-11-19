@@ -1,0 +1,54 @@
+page-jsa {
+  ion-title {
+      color: reapHeader;
+      font-size: 9px;
+      font-family: sans-serif;
+      }
+  .label-md[stacked]{
+    height:50px;
+    font-size:1.2em;
+    font-weight:bold;
+    color:primary;
+  }
+  .label-md{
+    margin:0;
+    // margin-top:5px;
+    // margin-bottom:5px;
+  }
+  .label-ios{
+    margin:0;
+    // margin-top:5px;
+    // margin-bottom:5px;
+  }
+  ion-input{
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  .removeText{
+    float:right;
+  }
+  .specialSelect{
+    font-size: 20px;
+
+  }
+  .item-input .label-md, .item-select .label-md, .item-datetime .label-md{
+    color: #404040;
+    height: 70px;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .item-input .label-ios, .item-select .label-ios, .item-datetime .label-ios{
+    color: #404040;
+    height: 70px;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  .selectBox{
+    height:70px;
+  }
+  .select-text{
+    white-space: pre-line;
+    font-weight: bold;
+  }
+}

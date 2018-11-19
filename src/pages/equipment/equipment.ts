@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { NgForm, FormsModule } from '@angular/forms';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
 
 import { ReapService } from '../../services/reap-service';
+import { AddExtraEquipmentPage } from '../add-extra-equipment/add-extra-equipment';
 
 class EquipmentList {
   public ID: number;
@@ -22,22 +23,17 @@ export class EquipmentPage {
   private Type:any;
   private crewEquipment = this.reap.globalCrewEquipment;
   private doeshaveCrew:boolean = false;
+  private equipmentInfo:any [] = [];
+  private totalExtraEquipment:any [] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public reap: ReapService) {
-                 //console.log(this.crewEquipment);
+              public reap: ReapService,
+              public modalCtrl: ModalController) {
           //this.equipmentType = reap.equipmentType;
           this.equipmentArray = reap.getEquipment;
-          if(!Array.isArray(this.crewEquipment) || !this.crewEquipment.length){
-            this.doeshaveCrew = false;
-            //console.log(this.doeshaveCrew);
-          }
-          else{
-            this.doeshaveCrew = true;
-            //console.log(this.doeshaveCrew);
-          }
-
-
+          //console.log(this.equipmentArray);
+          if(!Array.isArray(this.crewEquipment) || !this.crewEquipment.length)
+          {this.doeshaveCrew = false;}  else{this.doeshaveCrew = true;}
   }
   onSubmit(form: NgForm){
     //console.log(form);
@@ -60,19 +56,47 @@ export class EquipmentPage {
      }
   this.reap.globalCrewEquipment = this.crewEquipment;
   // console.log(this.reap.globalCrewEquipment);
-  if(form.value.Equipment!=undefined){
-  //console.log(form.value.Equipment);
-  let equipment = {'ID':form.value.Equipment.ID,
-                    'Name':form.value.Equipment.Name,
-                    'Odometer':form.value.Equipment.Odometer,
-                    'endingOdometer':form.value.endingOdometer};
+  if(this.equipmentInfo!=undefined){
+  for(let i=0;i<this.equipmentInfo.length;i++){
+  this.totalExtraEquipment.push({'ID':this.equipmentInfo[i].Equipment.ID,
+                          'Name':this.equipmentInfo[i].Equipment.Name,
+                          'Odometer':this.equipmentInfo[i].Equipment.Odometer,
+                          'endingOdometer':this.equipmentInfo[i].endingOdometer});
                     //console.log(equipment);
-  this.reap.totalEquipment(equipment);
+  }
+  this.reap.totalEquipment(this.totalExtraEquipment);
     }
   this.navCtrl.pop();
   }
   equipmentChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
     }
+  addEquipment(){
+      const modal = this.modalCtrl.create(AddExtraEquipmentPage);
 
+          modal.present();//presents the signature modal
+
+           modal.onDidDismiss((returnParam: any) => {
+             if(returnParam!=true){
+               this.equipmentInfo.push(returnParam);
+               //console.log(this.equipmentInfo);
+
+             }
+             else{
+               //console.log('backed out of no chemical!');
+            }
+           });
+  }
+  removeEquipment(index){
+    this.equipmentInfo.splice(index, 1);
+    //console.log(this.equipmentDetails);
+  }
+  keyPress(event: any) {
+      const pattern = /[0-9\+\-\ ]/;
+
+      let inputChar = String.fromCharCode(event.charCode);
+      if (event.keyCode != 8 && !pattern.test(inputChar)) {
+        event.preventDefault();
+    }
+  }
 }

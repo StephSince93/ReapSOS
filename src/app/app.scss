@@ -187,6 +187,19 @@ ion-icon.locIcon{
   color:red !important;
   font-weight:bold;
 }
+//refers to last value of div to correlate same border
+  .list-md .item-input:last-child{
+    border-bottom: solid 3px;
+    border-style: groove;
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
+  .list-ios .item-input:last-child{
+    border-bottom: solid 3px;
+    border-style: groove;
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
