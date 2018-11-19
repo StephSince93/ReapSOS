@@ -79,7 +79,7 @@ export class EquipmentPage {
            modal.onDidDismiss((returnParam: any) => {
              if(returnParam!=true){
                this.equipmentInfo.push(returnParam);
-               console.log(this.equipmentInfo);
+               //console.log(this.equipmentInfo);
 
              }
              else{

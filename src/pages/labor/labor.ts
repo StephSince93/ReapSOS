@@ -61,7 +61,7 @@ export class LaborPage {
                       'Name':this.personnelInfo[i].personnelName,
                       'Hours':this.personnelInfo[i].hours});
         }
-        console.log(this.totalExtraPersonnel);
+        //console.log(this.totalExtraPersonnel);
         this.reap.addLabor(this.totalExtraPersonnel);
       }
     this.navCtrl.pop();
