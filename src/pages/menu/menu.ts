@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../login/login';
-import { SafetyPage } from '../safety/safety';
+import { FieldTicketPage } from '../field-ticket/field-ticket';
 import { ProjectPage } from '../project/project';
 import { WellLocationsPage } from '../well-locations/well-locations';
 import { ReapService } from '../../services/reap-service';
@@ -47,9 +47,9 @@ export class MenuPage {
 
   toFieldTicket(){
     //console.log(this.reap.formStart);
-      if(this.reap.formStart==null){//checks if there is not a variable stored in local storage
+      if(this.reap.formStart==false){//checks if there is not a variable stored in local storage
         let loading = this.loadingCtrl.create({
-          content: 'Starting New Work Order'
+          content: 'Starting New Field Ticket'
          });
         loading.present();
             this.reap.formStart = true;//starts the new Form
@@ -61,11 +61,11 @@ export class MenuPage {
             this.reap.formStartTime = getTimeStart;
         setTimeout(() => {
           loading.dismiss();
-          this.navCtrl.push(SafetyPage);
+          this.navCtrl.push(FieldTicketPage);
         }, 2000);
       }
       else{// pushed straight to Safety Page if user had previously submitted an initial Safety Form
-        this.navCtrl.push(SafetyPage);
+        this.navCtrl.push(FieldTicketPage);
       }
   }//end function
   toJSA(){

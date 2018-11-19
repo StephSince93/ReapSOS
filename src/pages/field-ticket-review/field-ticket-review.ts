@@ -11,14 +11,15 @@ import { ReapService } from '../../services/reap-service';
 import { StemApiProvider } from '../../providers/stem-api/stem-api';
 @IonicPage()
 @Component({
-  selector: 'page-safety-review',
-  templateUrl: 'safety-review.html',
+  selector: 'page-field-ticket-review',
+  templateUrl: 'field-ticket-review.html',
 })
-export class SafetyReviewPage {
+export class FieldTicketReviewPage {
   @ViewChild(SignaturePad) public signaturePad: SignaturePad;
   //testing for Devonian
   private crewPersonnel:any [] = this.reap.globalCrewPersonnel;//From existing CrewPersonnel
   private crewEquipment:any [] = this.reap.globalCrewEquipment;//From existing CrewEquipment
+  private crewItems:any [] = this.reap.globalCrewItems;
   private mergeEquipment:any [] = [];//merges all equipment together
   private formDetails:any[] = [];//from main Work Order form
   private miscDetails:any[] = this.reap.misc;// stores misc form
@@ -147,137 +148,131 @@ export class SafetyReviewPage {
                  *
                  */
                  loading.present();
-                //console.log(this.submitData);
-                 //console.log(this.reap.online);
+                console.log(this.submitData);
                  //creates a loading controller while user submits
                  this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result) =>{
-                   //converts result to array
-                   //console.log(result['Status']);
 
-                   //console.log(result);
+                  //setTimeout(() => {
+                  if(result['Status'] == false){
+                    if (result['MSG']=='Field Form Was Not Saved!\nThis is a duplicate form.'){
+                      this.presentToast('Work Ticket Form has already been submitted!');
+                      var response = "Work Ticket Form has already been submitted! Will Exit Form!"
+                      var reRoute = true;
+                    }
+                    else{
+                      var response = "Please Select Location in Main Form!";
+                      var reRoute = false;
+                    }
+                  loading.dismiss();
+                  let alert = this.alertCtrl.create({
+                  title: 'Error Submitting, ',
+                  message: result['MSG'],
+                  buttons: [
+                               {
 
-                    // setTimeout(() => {
-                  // }, 3000);
-                    setTimeout(() => {
-              if(result['Status'] == false){
-                if (result['MSG']=='Field Form Was Not Saved!\nThis is a duplicate form.'){
-                  this.presentToast('Work Ticket Form has already been submitted!');
-                  var response = "Work Ticket Form has already been submitted! Will Exit Form!"
-                  var reRoute = true;
-                }
-                else{
-                  var response = "Please Select Location in Main Form!";
-                  var reRoute = false;
-                }
-              loading.dismiss();
-              let alert = this.alertCtrl.create({
-              title: 'Error Submitting, ',
-              message: result['MSG'],
-              buttons: [
-                           {
-
-                         text: response,
-                          role: 'Yes',
-                         handler: () => {
-                            //If the system notices there is a duplicate form it wil push user to success page and let them know to contact the office
-                            if(reRoute){
-                              loading.dismiss();
-                              this.reap.formStart = null;
-                              var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
-                              //console.log(getTimeEnd);
-                              this.storage.remove('getTimeStart');//Probably going to start form with time start
-                              this.reap.formStart = false;
-                              this.storage.set('formStart',this.reap.formStart);
-                              //Can fix message on API Side
-                              //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
-                              this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS ALREADY SUBMITTED, PLEASE CONTACT THE OFFICE TO CONFIRM!'});
-                            }
-                            /* allows user to submit offline and saves form data into a form variable
-                            no data will be submitted until interenet connection is made via a sync or observable call */
-                            /****** TESTING    *********************/
-                            setTimeout(() => {
-                            loading.dismiss();
-                            },1000);
-                            //this.reap.formStart==null
-                            this.mergeEquipment = [];//resets equipment array
-                            // this.storage.remove('formStart');
-                            //this.storage.set('offlineSubmission',this.submitData);
-                            this.submitClicked=false;//enables the submission button to resubmit
-                            this.submitData = [];//resets Submission so data isnt inserted twice
-                            //this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
-                         }
+                             text: response,
+                              role: 'Yes',
+                             handler: () => {
+                                //If the system notices there is a duplicate form it wil push user to success page and let them know to contact the office
+                                if(reRoute){
+                                  loading.dismiss();
+                                  this.reap.formStart = null;
+                                  var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
+                                  //console.log(getTimeEnd);
+                                  this.storage.remove('getTimeStart');//Probably going to start form with time start
+                                  this.reap.formStart = false;
+                                  this.storage.set('formStart',this.reap.formStart);
+                                  //Can fix message on API Side
+                                  //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
+                                  this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS ALREADY SUBMITTED, PLEASE CONTACT THE OFFICE TO CONFIRM!'});
+                                }
+                                /* allows user to submit offline and saves form data into a form variable
+                                no data will be submitted until interenet connection is made via a sync or observable call */
+                                /****** TESTING    *********************/
+                                setTimeout(() => {
+                                loading.dismiss();
+                                },1000);
+                                //this.reap.formStart==null
+                                this.mergeEquipment = [];//resets equipment array
+                                // this.storage.remove('formStart');
+                                //this.storage.set('offlineSubmission',this.submitData);
+                                this.submitClicked=false;//enables the submission button to resubmit
+                                this.submitData = [];//resets Submission so data isnt inserted twice
+                                //this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
+                             }
+                           }
+                        ]
+                    });
+                  alert.present();
+                  //console.log(this.res.MSG);
+                          }
+                          else{
+                         loading.dismiss();
+                         this.reap.formStart = null;
+                         var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
+                         //console.log(getTimeEnd);
+                         //Updates Local storage upon form success
+                         this.storage.remove('getTimeStart');
+                         this.reap.formStart = false;
+                         this.storage.set('formStart',this.reap.formStart);
+                         //Can fix message on API Side
+                         //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
+                         this.navCtrl.push(SuccessPage,{'Success':'FIELD TICKET WAS SUBMITTED SUCCESSFULLY'});
                        }
-                    ]
-                });
-              alert.present();
-              //console.log(this.res.MSG);
-                      }
-                      else{
-                     loading.dismiss();
-                     this.reap.formStart = null;
-                     var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
-                     //console.log(getTimeEnd);
-                     this.storage.remove('getTimeStart');
-                     this.reap.formStart = false;
-                     this.storage.set('formStart',this.reap.formStart);
-                     //Can fix message on API Side
-                     //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
-                     this.navCtrl.push(SuccessPage,{'Success':'FIELD TICKET WAS SUBMITTED SUCCESSFULLY'});
-                   }
-                   }, 2000);
-                 }, (err) => {
-                   loading.dismiss();
-                    //console.log(err);
-                    //console.log(err.message);
-                   let alert = this.alertCtrl.create({
-                   title: 'Error: ',
-                   message: 'Try submitting again,or Submit Form Offline!',
-                   buttons: [
-                            {
-                              text: 'Try Submitting Again',
+                      // }, 2000);
+                     }, (err) => {
+                       loading.dismiss();
+                        //console.log(err);
+                        //console.log(err.message);
+                       let alert = this.alertCtrl.create({
+                       title: 'Error: ',
+                       message: 'Try submitting again,or Submit Form Offline!',
+                       buttons: [
+                                {
+                                  text: 'Try Submitting Again',
+                                   role: 'Yes',
+                                  handler: () => {
+                                     this.mergeEquipment = [];
+                                     this.submitClicked=false;//enables the submission button to resubmit
+                                     this.submitData = [];//resets Submission so data isnt inserted twice
+                                  }
+                                },
+                                {
+                              text: 'Submit Offline and Sync later',
                                role: 'Yes',
                               handler: () => {
-                                 this.mergeEquipment = [];
-                                 this.submitClicked=false;//enables the submission button to resubmit
-                                 this.submitData = [];//resets Submission so data isnt inserted twice
+                                 /* allows user to submit offline and saves form data into a form variable
+                                 no data will be submitted until interenet connection is made via a sync or observable call */
+                                 /****** TESTING    *********************/
+
+                                 this.storage.remove('getTimeStart');
+                                 this.reap.formStart = false;
+                                 this.storage.set('formStart',this.reap.formStart);
+                                 this.reap.offlineFormSubmissions.push({"Type":"WO","Info":this.submitData,"Status":"Pending"});
+                                 this.storage.set('offlineSubmission',this.reap.offlineFormSubmissions);
+                                 this.submitData = [];
+
+                                 this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
                               }
-                            },
-                            {
-                          text: 'Submit Offline and Sync later',
-                           role: 'Yes',
-                          handler: () => {
-                             /* allows user to submit offline and saves form data into a form variable
-                             no data will be submitted until interenet connection is made via a sync or observable call */
-                             /****** TESTING    *********************/
-
-                             this.storage.remove('getTimeStart');
-                             this.reap.formStart = false;
-                             this.storage.set('formStart',this.reap.formStart);
-                             this.reap.offlineFormSubmissions.push({"Type":"WO","Info":this.submitData,"Status":"Pending"});
-                             this.storage.set('offlineSubmission',this.reap.offlineFormSubmissions);
-                             this.submitData = [];
-
-                             this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
-                          }
-                        }
-                         ]
+                            }
+                             ]
+                         });
+                       alert.present();
+                      //console.log(err);
                      });
-                   alert.present();
-                  //console.log(err);
-                 });
-            }
-         },{//Second alert asking about submission
-              text: 'No',
-              role: 'cancel',
-              handler: () => {
-                 this.mergeEquipment = [];
-                 this.submitClicked=false;//enables the submission button to resubmit
-                //console.log('No clicked');
-              }
-            },
-          ]
-     });
-    alert.present();
+                }
+             },{//Second alert asking about submission
+                  text: 'No',
+                  role: 'cancel',
+                  handler: () => {
+                     this.mergeEquipment = [];
+                     this.submitClicked=false;//enables the submission button to resubmit
+                    //console.log('No clicked');
+                  }
+                },
+              ]
+         });
+        alert.present();
 /**********************************************************************/
    }
  },{//First alert asking about submission

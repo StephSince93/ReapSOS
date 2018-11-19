@@ -1,29 +1,28 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
+import { Storage } from '@ionic/storage';
 
 import { ReapService } from '../../services/reap-service';
+import { AddExtraPersonnelPage } from '../add-extra-personnel/add-extra-personnel';
 
-class extraPersonnel {
-  public ID: number;
-  public Extras: string;
-}
 @IonicPage()
 @Component({
   selector: 'page-labor',
   templateUrl: 'labor.html',
 })
 export class LaborPage {
-  private extraPersonnelArray: extraPersonnel[];
-  extrapersonnel: extraPersonnel;
   private crewPersonnel:any[]=[];
   private doeshaveCrew:boolean = false;
+  private personnelInfo:any [] = [];
+  private totalExtraPersonnel:any [] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public reap: ReapService) {
+              public reap: ReapService,
+              public storage: Storage,
+              public modalCtrl: ModalController) {
                 this.crewPersonnel = this.reap.globalCrewPersonnel;
-                this.extraPersonnelArray = this.reap.getExtras;
                 //console.log(this.crewPersonnel);
                 if(!Array.isArray(this.crewPersonnel) || !this.crewPersonnel.length){
                   this.doeshaveCrew = false;
@@ -35,11 +34,11 @@ export class LaborPage {
                 }
                 //console.log(this.reap.globalCrewPersonnel);
                 //console.log(this.personnelArray);
+
   }
 
   onSubmit(form: NgForm){
-    //console.log(form.value);
-    let test =  [];
+    console.log(form.value);
     let hours:any = 'hours';
     if((Array.isArray(this.reap.globalCrewPersonnel) || (this.reap.globalCrewPersonnel!=null))||(Array.isArray(this.crewPersonnel) || this.crewPersonnel!=null)){
     for(let i=0;i<this.reap.globalCrewPersonnel.length;i++){
@@ -55,18 +54,41 @@ export class LaborPage {
     //console.log(this.reap.globalCrewPersonnel);
     this.reap.globalCrewPersonnel = this.crewPersonnel;
     //this.reap.totalLabor(form.value);
-    if(form.value.extraPersonnel!=undefined){
-  //  console.log(form.value.extraPersonnel);
-    let labor = {'ID':form.value.extraPersonnel.ID,
-                      'Name':form.value.extraPersonnel.Extras,
-                      'Hours':form.value.hours};
-                      //console.log(labor);
-    this.reap.addLabor(labor);
+    if(this.personnelInfo!=undefined){
+      for(let i=0;i<this.personnelInfo.length;i++){
+    this.totalExtraPersonnel.push({'ID':this.personnelInfo[i].extraPersonnel.ID,
+                      'Title':this.personnelInfo[i].extraPersonnel.Extras,
+                      'Name':this.personnelInfo[i].personnelName,
+                      'Hours':this.personnelInfo[i].hours});
+        }
+        console.log(this.totalExtraPersonnel);
+        this.reap.addLabor(this.totalExtraPersonnel);
       }
     this.navCtrl.pop();
     }
   personnelChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
     }
+    addPersonnel(){
+      const modal = this.modalCtrl.create(AddExtraPersonnelPage);
+
+          modal.present();//presents the signature modal
+
+           modal.onDidDismiss((returnParam: any) => {
+             if(returnParam!=true){
+               this.personnelInfo.push(returnParam);
+               console.log(this.personnelInfo);
+
+             }
+             else{
+               //console.log('backed out of no chemical!');
+            }
+           });
+    }
+
+  removePersonnel(index){
+    this.personnelInfo.splice(index, 1);
+    //console.log(this.equipmentDetails);
+  }
 
 }

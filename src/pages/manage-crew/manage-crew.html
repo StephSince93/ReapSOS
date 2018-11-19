@@ -29,8 +29,8 @@
         </select-searchable>
       </ion-item>
 <br>
-      <ion-label class="headerLabel" stacked>CURRENT PERSONNEL</ion-label>
-        <div *ngIf="globalPersonnel?.length != 0; else empty">
+      <ion-label *ngIf="globalPersonnel; else emptyPersonnel" class="headerLabel" stacked>CURRENT PERSONNEL</ion-label>
+        <!-- <div *ngIf="globalPersonnel; else emptyPersonnel"> -->
         <ion-grid  *ngFor="let personnel of globalPersonnel;let i = index">
           <ion-row>
             <ion-col>Name:</ion-col>
@@ -38,8 +38,8 @@
             <!-- <ion-col><button type="button" (tap)="removePersonnel(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col> -->
           </ion-row>
         </ion-grid>
-      </div>
-      <ng-template #empty>
+      <!-- </div> -->
+      <ng-template #emptyPersonnel>
       <ion-label class="headerLabel" stacked>NO PERSONNEL SELECTED</ion-label>
       </ng-template>
 <br>
@@ -64,8 +64,8 @@
             </select-searchable>
         </ion-item>
 <br>
-        <ion-label class="headerLabel" stacked>CURRENT EQUIPMENT</ion-label>
-          <div *ngIf="globalEquipment?.length != 0; else empty">
+        <ion-label class="headerLabel" *ngIf="globalEquipment || globalEquipment?.length; else emptyEquipment" stacked>CURRENT EQUIPMENT</ion-label>
+          <!-- <div *ngIf="globalEquipment; else emptyEquipment"> -->
           <ion-grid *ngFor="let equipment of globalEquipment;let i = index">
             <ion-row>
               <ion-col>Name:</ion-col>
@@ -73,13 +73,63 @@
               <!-- <ion-col><button type="button" (tap)="removeEquipment(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col> -->
             </ion-row>
           </ion-grid>
-        </div>
-        <ng-template #empty>
+        <!-- </div> -->
+        <ng-template #emptyEquipment>
         <ion-label class="headerLabel" stacked>NO EQUIPMENT SELECTED</ion-label>
+        </ng-template>
+
+<br>
+<hr>
+<br>
+<br>
+      <ion-item class="formField ionField" >
+          <ion-label color="primary" stacked>CHANGE ITEM TYPE</ion-label>
+            <select-searchable
+            class="specialSelect"
+             item-content
+             [(ngModel)]="globalItems"
+             title="Items"
+             itemValueField=JobID
+             itemTextField=ItemDescription
+             name="Items"
+             [items]="itemArray"
+             [canSearch]="true"
+             [canClear]="true"
+             [isMultiple]="true"
+             (onChange)="itemChange($event)">
+            </select-searchable>
+        </ion-item>
+<br>
+        <ion-label class="headerLabel" *ngIf="globalItems; else emptyItems" stacked>CURRENT ITEM</ion-label>
+          <!-- <div *ngIf="globalItems; else empty"> -->
+          <ion-grid *ngFor="let items of globalItems;let i = index">
+            <ion-row>
+              <ion-col class="bold">Description:</ion-col>
+              <ion-col class="bold">{{items?.ItemDescription}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>Input Quantity:</ion-col>
+                <ion-col class="formCol"><ion-input class="gridInput" ngModel name="quantity{{i}}" type="number"></ion-input></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>Quantity:</ion-col>
+                <ion-col>{{items?.quantity}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>Input Hours/Days/Cost:</ion-col>
+                <ion-col class="formCol"><ion-input class="gridInput" ngModel name="each{{i}}" type="number"></ion-input></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>Hours/Days/Cost:</ion-col>
+                <ion-col>{{items?.each}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        <!-- </div> -->
+        <ng-template #emptyItems>
+        <ion-label class="headerLabel" stacked>NO ITEMS SELECTED</ion-label>
         </ng-template>
 <br>
 <br>
-
       <ion-item>
         <button [disabled]="!f.valid" type="submit" id="submitButton" ion-button full large>Submit</button>
      </ion-item>

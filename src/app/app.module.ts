@@ -21,15 +21,15 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
-import { SafetyPage } from '../pages/safety/safety';
+import { FieldTicketPage } from '../pages/field-ticket/field-ticket';
 import { ProjectPage } from '../pages/project/project';
 import { WellLocationsPage } from '../pages/well-locations/well-locations';
 import { MiscPage } from '../pages/misc/misc';
 import { EquipmentPage } from '../pages/equipment/equipment';
 import { LaborPage } from '../pages/labor/labor';
-import { MileagePage } from '../pages/mileage/mileage';
+import { ItemTypePage } from '../pages/item-type/item-type';
 import { AddPhotoPage } from '../pages/add-photo/add-photo';
-import { SafetyReviewPage } from '../pages/safety-review/safety-review';
+import { FieldTicketReviewPage } from '../pages/field-ticket-review/field-ticket-review';
 import { ProjectReviewPage } from '../pages/project-review/project-review';
 import { SubMenuPage } from '../pages/sub-menu/sub-menu';
 import { SuccessPage } from '../pages/success/success';
@@ -41,8 +41,9 @@ import { ManageCrewPage } from '../pages/manage-crew/manage-crew';
 import { OfflineDataPage } from '../pages/offline-data/offline-data';
 import { EmployeeSignaturesPage } from '../pages/employee-signatures/employee-signatures';
 import { JsaPage } from '../pages/jsa/jsa';
+import { AddExtraPersonnelPage } from '../pages/add-extra-personnel/add-extra-personnel';
 Pro.init('1bd55ea2', {
-  appVersion: '1.0.3'
+  appVersion: '1.0.4'
 })
 
 @Injectable()
@@ -71,16 +72,16 @@ export class MyErrorHandler implements ErrorHandler {
     MyApp,
     LoginPage,
     MenuPage,
-    SafetyPage,
+    FieldTicketPage,
     ProjectPage,
     WellLocationsPage,
     MiscPage,
     EquipmentPage,
     LaborPage,
-    MileagePage,
+    ItemTypePage,
     AddPhotoPage,
     SubMenuPage,
-    SafetyReviewPage,
+    FieldTicketReviewPage,
     ProjectReviewPage,
     SuccessPage,
     SupportPage,
@@ -88,7 +89,8 @@ export class MyErrorHandler implements ErrorHandler {
     ManageCrewPage,
     OfflineDataPage,
     EmployeeSignaturesPage,
-    JsaPage
+    JsaPage,
+    AddExtraPersonnelPage
   ],
   imports: [
     BrowserModule,
@@ -105,16 +107,16 @@ export class MyErrorHandler implements ErrorHandler {
     MyApp,
     LoginPage,
     MenuPage,
-    SafetyPage,
+    FieldTicketPage,
     ProjectPage,
     WellLocationsPage,
     MiscPage,
     EquipmentPage,
     LaborPage,
-    MileagePage,
+    ItemTypePage,
     AddPhotoPage,
     SubMenuPage,
-    SafetyReviewPage,
+    FieldTicketReviewPage,
     ProjectReviewPage,
     SuccessPage,
     InvoicePage,
@@ -122,7 +124,8 @@ export class MyErrorHandler implements ErrorHandler {
     ManageCrewPage,
     OfflineDataPage,
     EmployeeSignaturesPage,
-    JsaPage
+    JsaPage,
+    AddExtraPersonnelPage
   ],
   providers: [
     StatusBar,

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { SafetyPage } from './safety';
+import { FieldTicketPage } from './field-ticket';
 
 @NgModule({
   declarations: [
     // SafetyPage,
   ],
   imports: [
-    IonicPageModule.forChild(SafetyPage),
+    IonicPageModule.forChild(FieldTicketPage),
   ],
 })
-export class SafetyPageModule {}
+export class FieldTicketPageModule {}

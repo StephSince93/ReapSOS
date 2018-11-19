@@ -76,7 +76,6 @@
          [items]="updatedLocation"
          [canSearch]="true"
          [canClear]="true"
-         [focusSearchbar]="true"
          (onChange)="searchableChange($event)">
        </select-searchable>
     </ion-item>
@@ -153,7 +152,6 @@
          [items]="updatedLocation"
          [canSearch]="true"
          [canClear]="true"
-         [focusSearchbar]="true"
          (onChange)="searchableChange($event)">
        </select-searchable>
     </ion-item>
@@ -208,9 +206,10 @@
         <ion-datetime
         type="date"
         name="startTime"
-        displayFormat="H:mm"
-        pickerFormat="H:mm"
-        ngModel>
+        displayFormat="h:mm A"
+        pickerFormat="h:mm A"
+        minuteValues="0,15,30,45"
+        [(ngModel)]="defaultStartTime">
         </ion-datetime>
       </ion-item>
 
@@ -219,9 +218,10 @@
         <ion-datetime
         type="date"
         name="endTime"
-        displayFormat="H:mm"
-        pickerFormat="H:mm"
-        ngModel></ion-datetime>
+        displayFormat="h:mm A"
+        pickerFormat="h:mm A"
+        minuteValues="0,15,30,45"
+        [(ngModel)]="defaultEndTime"></ion-datetime>
       </ion-item>
 
       <ion-item class="formField ionField">

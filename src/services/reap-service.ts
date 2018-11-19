@@ -38,6 +38,8 @@ export class ReapService {
     //Set crew for Devonian
     public globalCrewPersonnel: any [] = [];
     public globalCrewEquipment: any [] = [];
+    public globalCrewItems: any [] = [];
+    public totalTime: any;
     //Offline Form Submission
     public offlineFormSubmissions:any [] = [];
     //Connecting Main and Description Form
@@ -120,7 +122,7 @@ export class ReapService {
         this.stemAPI.getData(this.token).subscribe((result) =>{
         this.getData = (JSON.stringify(result));
         this.getData = JSON.parse(this.getData);
-        //console.log(this.getData);
+        console.log(this.getData);
 
         this.getMD5 = this.getData['md5'];
         this.storage.set('MD5',this.getMD5);
@@ -213,6 +215,10 @@ export class ReapService {
 
         this.storage.get('globalCrewEquipment').then((data)=>{
         this.globalCrewEquipment = data;
+        });
+
+        this.storage.get('globalCrewItems').then((data)=>{
+        this.globalCrewItems = data;
         });
 
         this.storage.get('AppVersion').then((data)=>{
@@ -446,7 +452,7 @@ export class ReapService {
     /*Devonian Custom*/
     //creates and pushes labor array
     addLabor(data){
-      this.extraLabor.push(data);
+      this.extraLabor = data;
       //console.log(this.extraLabor);
     }
     /*Devonian Custom*/
