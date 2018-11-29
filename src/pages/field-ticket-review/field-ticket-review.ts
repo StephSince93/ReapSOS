@@ -33,7 +33,6 @@ export class FieldTicketReviewPage {
   private md5Data:any;//md5 variable
   private lonlat:any = [];//stores gps coords
   private submitClicked:boolean = false;//boolean to see if submit button is clicked
-  isDisconnected:any;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private alertCtrl: AlertController,
@@ -45,7 +44,7 @@ export class FieldTicketReviewPage {
               public loadingCtrl: LoadingController,
               private storage: Storage,
               private toastCtrl: ToastController) {
-            this.formDetails.push(this.reap.safetyForm);
+            this.formDetails.push(this.reap.fieldTicketForm);
             //console.log(this.formDetails);
             //console.log(this.jobDetails);
             //console.log(this.equipmentDetails);
@@ -148,7 +147,7 @@ export class FieldTicketReviewPage {
                  *
                  */
                  loading.present();
-                //console.log(this.submitData);
+                console.log(this.submitData);
                  //creates a loading controller while user submits
                  this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result) =>{
 
@@ -186,9 +185,6 @@ export class FieldTicketReviewPage {
                                   //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
                                   this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS ALREADY SUBMITTED, PLEASE CONTACT THE OFFICE TO CONFIRM!'});
                                 }
-                                /* allows user to submit offline and saves form data into a form variable
-                                no data will be submitted until interenet connection is made via a sync or observable call */
-                                /****** TESTING    *********************/
                                 setTimeout(() => {
                                 loading.dismiss();
                                 },1000);

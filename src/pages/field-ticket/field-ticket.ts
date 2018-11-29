@@ -143,7 +143,7 @@ export class FieldTicketPage {
     if(Form.value.Location){
       this.reap.selectedCompany = Form.value.Location['CID'];
     }
-    this.reap.safetyForm = Form.value;
+    this.reap.fieldTicketForm = Form.value;
     //var t1 = performance.now();
     //console.log("Formatting time took " + (t1 - t0) + " milliseconds.");
     //alert("Formatting time took " + (t1 - t0) + " milliseconds.");

@@ -32,23 +32,42 @@ page-jsa {
     font-size: 20px;
 
   }
-  .item-input .label-md, .item-select .label-md, .item-datetime .label-md{
+  .item-input .label-md, .item-datetime .label-md{
     color: #404040;
     height: 70px;
     font-size: 1.2em;
     font-weight: bold;
   }
-  .item-input .label-ios, .item-select .label-ios, .item-datetime .label-ios{
+  .item-input .label-ios, .item-datetime .label-ios{
     color: #404040;
     height: 70px;
     font-size: 1.2em;
     font-weight: bold;
   }
-  .selectBox{
-    height:70px;
+  .item-select .label-md{
+    color: #404040;
+    height: 70px;
+    font-size: 1em;
+    font-weight: bold;
   }
+  .item-select .label-ios{
+    color: #404040;
+    height: 70px;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
   .select-text{
     white-space: pre-line;
     font-weight: bold;
+  }
+  .specialLabel{
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.5em;
+    border-bottom: 2px solid grey;
+  }
+  .item-select.label-md{
+    font-size: 1em;
   }
 }

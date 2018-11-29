@@ -213,7 +213,7 @@
           <button ion-button full color="danger" (click)="sigBack()" large>CANCEL</button>
         </ion-col>
         <ion-col col-12>
-          <button ion-button full color="secondary" [disabled]='submitClicked===true'(click)="sigSubmit()" large>SUBMIT</button>
+          <button ion-button full id="submitButton" [disabled]='submitClicked===true'(click)="sigSubmit()" large>SUBMIT</button>
         </ion-col>
       </ion-row>
     </ion-grid>

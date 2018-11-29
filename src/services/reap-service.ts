@@ -29,7 +29,9 @@ export class ReapService {
     public extraLabor:any[]=[];//Only For new Personnel
     public job:any[]=[];
     public photo:any[]=[];
-    public safetyForm:any[]=[];
+    /* 3 forms for Devonian */
+    public fieldTicketForm:any[]=[];
+    public jsaForm:any[]=[];
     public projectForm:any[]=[];
     public completeForm:any[]=[];
     public storeFormData:any[]=[];
