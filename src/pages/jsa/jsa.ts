@@ -110,7 +110,7 @@ export class JsaPage {
         }
         //console.log(Form.value);
         this.reap.jsaForm = Form.value;
-        console.log(this.reap.jsaForm);
+        //console.log(this.reap.jsaForm);
         this.navCtrl.push(JsaReviewPage);
       }
       searchableChange(event: { component: SelectSearchableComponent, value: any }) {

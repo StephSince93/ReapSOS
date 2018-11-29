@@ -40,7 +40,7 @@ export class JsaReviewPage {
     this.formDetails.push(this.reap.jsaForm);
     //Re-configures time and replaces it
     this.formDetails[0]["currentTime"] = this.currentTime;
-    console.log(this.formDetails);
+    //console.log(this.formDetails);
     this.platform.ready().then(() => {
         /* Perform initial geolocation */
         this.geolocation.getCurrentPosition().then((resp) => {
@@ -79,7 +79,7 @@ export class JsaReviewPage {
     /*
     *
       */
-    console.log(this.submitData);
+    //console.log(this.submitData);
     loading.present();
     this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result)=>{
       if(result['Status'] == false){
@@ -130,7 +130,7 @@ export class JsaReviewPage {
              text: 'Try Again',
               role: 'Yes',
              handler: () => {
-              this.submitData = []; 
+              this.submitData = [];
               this.submitClicked = false;
              }
            },
