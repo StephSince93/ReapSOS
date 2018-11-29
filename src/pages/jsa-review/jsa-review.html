@@ -1,0 +1,185 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>JSA REVIEW</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-label>JSA SUMMARY</ion-label>
+          <ion-grid class="formDetails" *ngFor="let details of formDetails; let index = i">
+                <ion-row>
+                  <ion-col>DATE:</ion-col>
+                  <ion-col>{{details.currentDate | date: 'MM/dd/yyyy' }}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>PROJECT NAME:</ion-col>
+                  <ion-col>{{details?.project?.Name}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>LOCATION:</ion-col>
+                  <ion-col>{{details.Location?.Location}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>COMPANY MAN:</ion-col>
+                  <ion-col>{{details?.companyMan}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>AFE/ORDER NUMBER:</ion-col>
+                  <ion-col>{{details?.orderNumber}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>FOREMAN:</ion-col>
+                  <ion-col>{{details?.foreman}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>TIME:</ion-col>
+                  <ion-col>{{details?.currentTime | date: 'h:mm a'}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="employees">EMPLOYEES SIGNING</ion-col>
+                  <!-- <ion-col *ngFor="let employee of details?.employees">{{employee?.FullName}}</ion-col> -->
+                </ion-row>
+                <ion-row>
+                  <ion-col *ngFor="let employee of details?.employees">{{employee?.FullName}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>HAZARDS TO CONSIDER:</ion-col>
+                  <ion-col>{{details?.hazards}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>WIND DIRECTION:</ion-col>
+                  <ion-col>{{details?.windDirection}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>WIND SOCK:</ion-col>
+                  <ion-col>{{details?.windSock}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>FIRE EXTINGUISHER:</ion-col>
+                  <ion-col>{{details.fireExtinguisher}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>ALARM:</ion-col>
+                  <ion-col>{{details?.alarm}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>NEAREST MEDICAL FACILITY:</ion-col>
+                  <ion-col>{{details?.medicalFacility}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>EMERGENCY RESPONSE:</ion-col>
+                  <ion-col>{{details?.emergencyResponse}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>IMMEDIATE SUPERVISOR:</ion-col>
+                  <ion-col>{{details?.immediateSupervisor}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>CUSTOMER REP:</ion-col>
+                  <ion-col>{{details?.customerRep}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>JOB/TASK DESCRIPTION:</ion-col>
+                  <ion-col>{{details?.jobDescription}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>JOB STEP 1:</ion-col>
+                  <ion-col>{{details?.jobStep1}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>JOB STEP 2:</ion-col>
+                  <ion-col>{{details?.jobStep2}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>JOB STEP 3:</ion-col>
+                  <ion-col>{{details?.jobStep3}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>JOB STEP 4:</ion-col>
+                  <ion-col>{{details?.jobStep4}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>JOB STEP 5:</ion-col>
+                  <ion-col>{{details?.jobStep5}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>JOB STEP 6:</ion-col>
+                  <ion-col>{{details?.jobStep6}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>HAZARD 1:</ion-col>
+                  <ion-col>{{details?.hazard1}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>HAZARD 2:</ion-col>
+                  <ion-col>{{details?.hazard2}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>HAZARD 3:</ion-col>
+                  <ion-col>{{details?.hazard3}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>HAZARD 4:</ion-col>
+                  <ion-col>{{details?.hazard4}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>HAZARD 5:</ion-col>
+                  <ion-col>{{details?.hazard5}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>HAZARD 6:</ion-col>
+                  <ion-col>{{details?.hazard6}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>PPE REQUIRED FOR TASK:</ion-col>
+                  <ion-col>{{details?.ppe}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>OTHER PPE:</ion-col>
+                  <ion-col>{{details?.otherPPE}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>PERMITS REQUIRED:</ion-col>
+                  <ion-col>{{details?.permits}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>OTHER PERMIT:</ion-col>
+                  <ion-col>{{details?.otherPermit}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>PERMIT FACILITATOR:</ion-col>
+                  <ion-col>{{details?.facilitator}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>DISCUSSION:</ion-col>
+                  <ion-col>{{details?.discussion}}</ion-col>
+                </ion-row>
+              </ion-grid>
+               <ion-grid>
+                 <ion-row>
+                  <ion-col>
+                     <button type="button" ion-button full name="editForm" (click)="editForm()">EDIT JSA</button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+      <br>
+      <br>
+      <hr>
+
+
+  <div class="box">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button full color="danger" (click)="toCancel()" large>CANCEL</button>
+        </ion-col>
+        <ion-col col-12>
+          <button ion-button full id="submitButton" [disabled]='submitClicked===true' (click)="onSubmit()" large>SUBMIT</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

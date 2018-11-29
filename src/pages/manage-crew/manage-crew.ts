@@ -99,7 +99,7 @@ export class ManageCrewPage {
         //If user inputs new data on each
         if((this.reap.globalCrewItems[i]['each']==undefined||(form.value[each+[i]]!=""))&&(this.reap.globalCrewItems[i]['quantity']==undefined||(form.value[quantity+[i]]!=""))){
           //console.log("1");
-        this.reap.globalCrewItems[i]={'JobID':form.value.Items[i].JobID
+        this.reap.globalCrewItems[i]={'ItemID':form.value.Items[i].JobID
                   ,'ItemDescription':form.value.Items[i].ItemDescription
                   ,'quantity':form.value[quantity+[i]]
                   ,'each':form.value[each+[i]]};
@@ -107,7 +107,7 @@ export class ManageCrewPage {
         //If user had previous data in fields, the previous failed still stay
         else if((this.reap.globalCrewItems[i].quantity!=undefined&&(form.value[quantity+[i]]==""))&&(this.reap.globalCrewItems[i].each!=undefined&&(form.value[each+[i]]==""))){
         //console.log("2");
-        this.reap.globalCrewItems[i]={'JobID':form.value.Items[i].JobID
+        this.reap.globalCrewItems[i]={'ItemID':form.value.Items[i].JobID
                   ,'ItemDescription':form.value.Items[i].ItemDescription
                   ,'quantity':this.reap.globalCrewItems[i].quantity
                   ,'each':this.reap.globalCrewItems[i].each};

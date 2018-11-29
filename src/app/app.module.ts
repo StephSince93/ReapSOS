@@ -43,8 +43,9 @@ import { EmployeeSignaturesPage } from '../pages/employee-signatures/employee-si
 import { JsaPage } from '../pages/jsa/jsa';
 import { AddExtraPersonnelPage } from '../pages/add-extra-personnel/add-extra-personnel';
 import { AddExtraEquipmentPage } from '../pages/add-extra-equipment/add-extra-equipment';
+import { JsaReviewPage } from '../pages/jsa-review/jsa-review';
 Pro.init('1bd55ea2', {
-  appVersion: '1.0.4'
+  appVersion: '1.0.5'
 })
 
 @Injectable()
@@ -92,7 +93,8 @@ export class MyErrorHandler implements ErrorHandler {
     EmployeeSignaturesPage,
     JsaPage,
     AddExtraPersonnelPage,
-    AddExtraEquipmentPage
+    AddExtraEquipmentPage,
+    JsaReviewPage
   ],
   imports: [
     BrowserModule,
@@ -128,7 +130,8 @@ export class MyErrorHandler implements ErrorHandler {
     EmployeeSignaturesPage,
     JsaPage,
     AddExtraPersonnelPage,
-    AddExtraEquipmentPage
+    AddExtraEquipmentPage,
+    JsaReviewPage
   ],
   providers: [
     StatusBar,

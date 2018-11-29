@@ -67,7 +67,7 @@ export class SupportPage {
           loading.present();
              setTimeout(() => {
                 this.reap.removeConnections();
-                this.reap.presentToast('Logged Out');
+                //this.reap.presentToast('Logged Out');
                 //pops back to the login page
                 this.navCtrl.popToRoot();
                loading.dismiss();

@@ -197,41 +197,43 @@
           [disabled]="personnelArray"></ion-input>
       </ion-item>
 
-
-
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>TIME</ion-label>
         <ion-datetime
-        type="date"
-        name="time"
-        displayFormat="H:mm"
-        pickerFormat="H:mm"
-        ngModel>
+        type="datetime-local"
+        name="currentTime"
+        displayFormat="h:mm A"
+        pickerFormat="h:mm A"
+        [(ngModel)]="currentTime">
         </ion-datetime>
       </ion-item>
 
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked >EMPLOYEES SIGNING</ion-label>
+          <select-searchable
+          class="specialSelect"
+          item-content
+          ngModel
+          [items]="employeeArray"
+          title="Personnel"
+          itemValueField=ID
+          itemTextField=FullName
+          name="employees"
+          [canSearch]="true"
+          [canClear]="true"
+          [isMultiple]="true"
+          (onChange)="searchableChange($event)">
+        </select-searchable>
+      </ion-item>
 
-      <ion-item class="selectBox">
+      <ion-item>
         <ion-label>HAZARDS</ion-label>
           <ion-select ngModel name="hazards" multiple="true">
-            <ion-option>Heat Stress</ion-option>
-            <ion-option>Heavy Lifting</ion-option>
-            <ion-option>Electricity</ion-option>
-            <ion-option>Heavy Traffic</ion-option>
-            <ion-option>Road Hazards</ion-option>
-            <ion-option>Biological</ion-option>
-            <ion-option>Sharp Objects</ion-option>
-            <ion-option>Noise</ion-option>
-            <ion-option>Weather</ion-option>
-            <ion-option>Pinch Points</ion-option>
-            <ion-option>Pressures</ion-option>
-            <ion-option>Slip/Trip Fall</ion-option>
-            <ion-option>Weather</ion-option>
-            <ion-option>Hot/Cold Surface</ion-option>
+            <ion-option value={{hazards}} *ngFor="let hazards of totalHazards">{{hazards}}</ion-option>
           </ion-select>
       </ion-item>
 
-      <ion-item class="selectBox">
+      <ion-item>
         <ion-label>WIND DIRECTION</ion-label>
           <ion-select ngModel name="windDirection" interface="action-sheet">
             <ion-option>N</ion-option>
@@ -308,36 +310,121 @@
         name="jobDescription"
         ngModel></ion-textarea>
       </ion-item>
-
+<ion-label class="specialLabel">JOB STEPS</ion-label>
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>DISCUSSION</ion-label>
+        <ion-label color="primary" stacked>JOB STEP 1</ion-label>
         <ion-textarea
         type="textarea"
-        name="description"
+        name="jobStep1"
         ngModel></ion-textarea>
       </ion-item>
 
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>JOB STEP 2</ion-label>
+        <ion-textarea
+        type="textarea"
+        name="jobStep2"
+        ngModel></ion-textarea>
+      </ion-item>
 
-      <ion-item class="selectBox">
-        <ion-label>PPE REQUIRED FOR TASK</ion-label>
-          <ion-select ngModel name="ppe" multiple="true">
-            <ion-option>Gloves</ion-option>
-            <ion-option>Glasses/Goggles/Face-Shield</ion-option>
-            <ion-option>Hard Hat</ion-option>
-            <ion-option>Hearing Protection</ion-option>
-            <ion-option>FR Attire</ion-option>
-            <ion-option>Steel Toe Boots</ion-option>
-            <ion-option>Fall Protection</ion-option>
-            <ion-option>H2S Monitor</ion-option>
-            <ion-option>Respiratory Protection</ion-option>
-            <ion-option>Other</ion-option>
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>JOB STEP 3</ion-label>
+        <ion-textarea
+        type="textarea"
+        name="jobStep3"
+        ngModel></ion-textarea>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>JOB STEP 4</ion-label>
+        <ion-textarea
+        type="textarea"
+        name="jobStep4"
+        ngModel></ion-textarea>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>JOB STEP 5</ion-label>
+        <ion-textarea
+        type="textarea"
+        name="jobStep5"
+        ngModel></ion-textarea>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>JOB STEP 6</ion-label>
+        <ion-textarea
+        type="textarea"
+        name="jobStep6"
+        ngModel></ion-textarea>
+      </ion-item>
+<ion-label class="specialLabel">POTENTIAL HAZARDS</ion-label>
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>HAZARD 1</ion-label>
+        <ion-input
+        type="input"
+        name="hazard1"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>HAZARD 2</ion-label>
+        <ion-input
+        type="input"
+        name="hazard2"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>HAZARD 3</ion-label>
+        <ion-input
+        type="input"
+        name="hazard3"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>HAZARD 4</ion-label>
+        <ion-input
+        type="input"
+        name="hazard4"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>HAZARD 5</ion-label>
+        <ion-input
+        type="input"
+        name="hazard5"
+        ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>HAZARD 6</ion-label>
+        <ion-input
+        type="input"
+        name="hazard6"
+        ngModel></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label class="ppe">PPE REQUIRED FOR TASK</ion-label>
+          <ion-select [(ngModel)]="defaultPPE" name="ppe" multiple="true">
+            <ion-option *ngFor="let ppe of totalPPE" value={{ppe}} >{{ppe}}</ion-option>
           </ion-select>
       </ion-item>
 
-      <ion-item class="selectBox">
+      <ion-item class="formField ionField" *ngIf="defaultPPE.indexOf('Other') > -1">
+        <ion-label color="primary" stacked>OTHER PPE REQUIRED FOR TASK</ion-label>
+        <ion-label class="warningLabel"  text-wrap>Type Other PPE!</ion-label>
+        <ion-input type="text" ngModel name="otherPPE"   text-wrap></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label>PERMITS REQUIRED</ion-label>
-          <ion-select ngModel name="permits" multiple="true">
-            <ion-option>Hot Work</ion-option>
+          <ion-select [(ngModel)]="permits"  (ionChange)="onSelectChange($event)" name="permits" multiple="true">
+            <ion-option >Hot Work</ion-option>
             <ion-option>Confined Space</ion-option>
             <ion-option>Excavation</ion-option>
             <ion-option>LOTO</ion-option>
@@ -345,12 +432,26 @@
           </ion-select>
       </ion-item>
 
+        <ion-item class="formField ionField" *ngIf="permits.indexOf('Other')!== -1">
+          <ion-label color="primary" stacked>OTHER PERMITS REQUIRED</ion-label>
+          <ion-label class="warningLabel"  text-wrap>Type Other Permit!</ion-label>
+          <ion-input type="text" ngModel name="otherPermit"   text-wrap></ion-input>
+        </ion-item>
+
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>PERSON FACILITATING PERMITS</ion-label>
         <ion-input
         type="input"
         name="facilitator"
         ngModel></ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked>DISCUSSION</ion-label>
+        <ion-textarea
+        type="textarea"
+        name="discussion"
+        ngModel></ion-textarea>
       </ion-item>
 
       <ion-item>
