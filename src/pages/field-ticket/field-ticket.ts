@@ -133,12 +133,18 @@ export class FieldTicketPage {
     Form.value.foreman = this.foreman;
     Form.value.formStartTime = this.reap.formStartTime;
     //console.log(Form.value);
-    if(!Form.value.Location){//If user grabs nearest location
+    if(!Form.value.Location && Form.value.updatedLocation){//If user grabs nearest location
       Form.value.Location = Form.value.updatedLocation;
+      //Removes breaks from JSON string
+      Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
       if(Form.value.Location){
         this.reap.selectedCompany = Form.value.Location['CID'];
       }
       //Form.value.remove.updatedLocation;
+    }
+    else if(Form.value.Location){
+      //Removes breaks from JSON string
+      Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
     }
     if(Form.value.Location){
       this.reap.selectedCompany = Form.value.Location['CID'];

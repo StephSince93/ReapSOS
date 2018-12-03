@@ -66,11 +66,13 @@ export class ProjectPage {
       }
 
   onSubmit(Form: NgForm){
-    if(!Form.value.Location){//If user grabs nearest location
+    if(!Form.value.Location && Form.value.updatedLocation){//If user grabs nearest location
       Form.value.Location = Form.value.updatedLocation;
-      // console.log(Form.value.Location);
-      // Form.removeControl['updatedLocation'];
-      // console.log(Form.controls)
+      //replaces breaks with spaces
+      Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
+    }else if(Form.value.Location){
+      //replaces breaks with spaces
+      Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
     }
     this.reap.projectForm = Form.value;
     //console.log(this.reap.projectForm);

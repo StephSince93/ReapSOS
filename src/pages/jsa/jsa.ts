@@ -103,10 +103,13 @@ export class JsaPage {
       onSubmit(Form: NgForm){
         //Created form value as foreman
         Form.value.foreman = this.foreman;
-        if(!Form.value.Location){//If user grabs nearest location
+        if(!Form.value.Location && Form.value.updatedLocation){//If user grabs nearest location
           Form.value.Location = Form.value.updatedLocation;
+          Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
           // console.log(Form.value.Location);
           // Form.removeControl['updatedLocation'];
+        }else if(Form.value.Location){
+          Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
         }
         //console.log(Form.value);
         this.reap.jsaForm = Form.value;
