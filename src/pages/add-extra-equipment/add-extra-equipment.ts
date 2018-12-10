@@ -20,11 +20,22 @@ export class AddExtraEquipmentPage {
   private extraEquipmentArray: EquipmentList[];
   equipment: EquipmentList;
   private noSubmission:boolean = true;
+  private projectCost:any;
+  private tempEquipment:any [] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
               public viewCtrl: ViewController) {
-      this.extraEquipmentArray = this.reap.getEquipment;
+                if(this.reap.globalCrewProject!=null){
+                  this.projectCost=this.reap.globalCrewProject['CostCenter'];
+                }
+      for(let i=0;i<this.reap.getEquipment.length;i++){
+          if(this.reap.getEquipment[i]['CostCenter']==this.projectCost){
+          console.log(this.reap.getEquipment[i]);
+          this.tempEquipment.push(this.reap.getEquipment[i]);
+        }
+      }
+      this.extraEquipmentArray = this.tempEquipment;
   }
 
   submitEquipment(form: NgForm){
@@ -39,5 +50,4 @@ export class AddExtraEquipmentPage {
   dismissModal(){
      this.viewCtrl.dismiss(this.noSubmission);
   }
-
 }

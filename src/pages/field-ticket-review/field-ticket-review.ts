@@ -45,7 +45,10 @@ export class FieldTicketReviewPage {
               private storage: Storage,
               private toastCtrl: ToastController) {
             this.formDetails.push(this.reap.fieldTicketForm);
-            //console.log(this.formDetails);
+            //console.log(this.formDetails[0]['project']);
+            if(this.reap.globalCrewProject!=null){
+              this.formDetails[0]['project'] = this.reap.globalCrewProject;
+            }
             //console.log(this.jobDetails);
             //console.log(this.equipmentDetails);
             //console.log(this.laborDetails);

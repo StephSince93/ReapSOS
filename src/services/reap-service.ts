@@ -37,7 +37,8 @@ export class ReapService {
     public storeFormData:any[]=[];
     public updatedLocation:any [] = [];
     public wellLocation:any [] = [];
-    //Set crew for Devonian
+    //Set crew
+    public globalCrewProject: any [] = [];
     public globalCrewPersonnel: any [] = [];
     public globalCrewEquipment: any [] = [];
     public globalCrewItems: any [] = [];
@@ -124,7 +125,7 @@ export class ReapService {
         this.stemAPI.getData(this.token).subscribe((result) =>{
         this.getData = (JSON.stringify(result));
         this.getData = JSON.parse(this.getData);
-        //console.log(this.getData);
+        console.log(this.getData);
 
         this.getMD5 = this.getData['md5'];
         this.storage.set('MD5',this.getMD5);
@@ -221,6 +222,10 @@ export class ReapService {
 
         this.storage.get('globalCrewItems').then((data)=>{
         this.globalCrewItems = data;
+        });
+
+        this.storage.get('globalCrewProject').then((data)=>{
+        this.globalCrewProject = data;
         });
 
         this.storage.get('AppVersion').then((data)=>{

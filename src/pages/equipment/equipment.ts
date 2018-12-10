@@ -38,30 +38,31 @@ export class EquipmentPage {
   onSubmit(form: NgForm){
     //console.log(form);
     let test =  [];
-    let hours:any = 'hours';
-    let endingOdometer:any = 'endingOdometer';
-    if(this.reap.globalCrewEquipment||this.crewEquipment){
-    for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
-      if((this.crewEquipment[i]['endingOdometer']&&(form.value[endingOdometer+[i]]==""))){
-          //Filler for data alreday in system
-      }else{
-      this.crewEquipment[i]={'ID':this.reap.globalCrewEquipment[i]['ID']
-                ,'Name':this.reap.globalCrewEquipment[i]['Name']
-                ,'Odometer':this.reap.globalCrewEquipment[i]['Odometer']
-                ,'endingOdometer':form.value[endingOdometer+[i]]
-                // ,'each':form.value[hours+[i]]};
-              }
-          }
-       }
-     }
+    //let hours:any = 'hours';
+    //let endingOdometer:any = 'endingOdometer';
+    //if(this.reap.globalCrewEquipment||this.crewEquipment){
+    //for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
+      // if((this.crewEquipment[i]['endingOdometer']&&(form.value[endingOdometer+[i]]==""))){
+      //     //Filler for data alreday in system
+      // }else{
+      // this.crewEquipment[i]={'ID':this.reap.globalCrewEquipment[i]['ID']
+      //           ,'Name':this.reap.globalCrewEquipment[i]['Name']
+      //           // ,'Odometer':this.reap.globalCrewEquipment[i]['Odometer']
+      //           // ,'endingOdometer':form.value[endingOdometer+[i]]
+      //           // ,'each':form.value[hours+[i]]};
+      //         }
+      //     }
+      //   }
+      // }
   this.reap.globalCrewEquipment = this.crewEquipment;
   // console.log(this.reap.globalCrewEquipment);
   if(this.equipmentInfo!=undefined){
   for(let i=0;i<this.equipmentInfo.length;i++){
   this.totalExtraEquipment.push({'ID':this.equipmentInfo[i].Equipment.ID,
                           'Name':this.equipmentInfo[i].Equipment.Name,
-                          'Odometer':this.equipmentInfo[i].Equipment.Odometer,
-                          'endingOdometer':this.equipmentInfo[i].endingOdometer});
+                          // 'Odometer':this.equipmentInfo[i].Equipment.Odometer,
+                          // 'endingOdometer':this.equipmentInfo[i].endingOdometer
+                          });
                     //console.log(equipment);
   }
   this.reap.totalEquipment(this.totalExtraEquipment);

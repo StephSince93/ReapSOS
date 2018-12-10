@@ -20,17 +20,16 @@
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>PROJECT</ion-label>
-        <ion-select
+        <ion-input
           #projectName
-          ngModel
-          name="project"
-          interface="action-sheet">
-          <ion-option (ionSelect)="projectSelect(project.ProjectName,i)" [value]={ID:project.ID,Name:project.ProjectName} *ngFor="let project of projectArray; let i = index" >{{project.ProjectName}}</ion-option>
-        </ion-select>
+          [(ngModel)]="globalProject['Project_Name_Description']"
+          name="project">
+          <!-- <ion-option (ionSelect)="projectSelect(project.ProjectName,i)" [value]={ID:project.ID,Name:project.ProjectName} *ngFor="let project of projectArray; let i = index" >{{project.ProjectName}}</ion-option> -->
+        </ion-input>
       </ion-item>
 <!------------------------------------------------------------------------->
 
-<div *ngIf="projectSelected">
+<!-- <div *ngIf="projectSelected">
 
       <ion-item  class="location">
       <ion-chip>
@@ -65,7 +64,7 @@
 
       <ion-item class="formField ionField" *ngIf="selectedClosestLoc">
       <!-- data thrown into dropdown from API -->
-      <ion-label stacked>NEAREST PROJECT LOCATION</ion-label>
+      <!-- <ion-label stacked>NEAREST PROJECT LOCATION</ion-label>
         <select-searchable
          item-content
          ngModel
@@ -78,9 +77,9 @@
          [canClear]="true"
          (onChange)="searchableChange($event)">
        </select-searchable>
-    </ion-item>
+    </ion-item> -->
 
-    <ion-item class="formField ionField">
+    <!-- <ion-item class="formField ionField">
       <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
       <ion-select
         [(ngModel)]="selectedArray['AFE_Number']"
@@ -89,26 +88,26 @@
         <ion-option value="newAFE">*CREATE NEW AFE</ion-option>
         <ion-option value="{{afe.Name}}" *ngFor="let afe of afeArray; let i = index">{{afe.Name}}</ion-option>
       </ion-select>
-    </ion-item>
+    </ion-item> -->
     <!-- When user types new AFE, but decides to click back
           on a current AFE the value is not submitted -->
-    <ion-item class="formField ionField" *ngIf="selectedArray['AFE_Number'] == 'newAFE'">
+    <!-- <ion-item class="formField ionField" *ngIf="selectedArray['AFE_Number'] == 'newAFE'">
         <ion-label color="primary" stacked>NEW AFE</ion-label>
         <ion-label class="warningLabel" *ngIf="orderNumber.touched" text-wrap>Note: You will need to sync app in settings for New AFE to apply!</ion-label>
         <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" text-wrap></ion-input>
-    </ion-item>
+    </ion-item> -->
 
 
-      <ion-item class="formField ionField">
+      <!-- <ion-item class="formField ionField">
         <ion-label color="primary" stacked >COMPANY MAN</ion-label>
         <ion-input [(ngModel)]="selectedArray['Company_Man']" name="companyMan">
         </ion-input>
-      </ion-item>
+      </ion-item>  -->
 
-</div>
-<div *ngIf="!projectSelected">
+<!-- </div> -->
+<!-- <div *ngIf="!projectSelected"> -->
 
-        <ion-item  class="location">
+        <!-- <ion-item  class="location">
         <ion-chip>
             <p>Grab nearest locations</p>
             <button ion-button type="button" [disabled]="selectedClosestLoc" clear color="primary" (click)="grabLocation()">
@@ -141,7 +140,7 @@
 
       <ion-item class="formField ionField" *ngIf="selectedClosestLoc">
       <!-- data thrown into dropdown from API -->
-      <ion-label stacked>NEAREST PROJECT LOCATION</ion-label>
+      <!-- <ion-label stacked>NEAREST PROJECT LOCATION</ion-label>
         <select-searchable
          item-content
          ngModel
@@ -154,9 +153,9 @@
          [canClear]="true"
          (onChange)="searchableChange($event)">
        </select-searchable>
-    </ion-item>
+    </ion-item> -->
 
-    <ion-item class="formField ionField">
+    <!-- <ion-item class="formField ionField">
       <ion-label color="primary" stacked>AFE/ORDER NUMBER</ion-label>
       <ion-select
         [(ngModel)]="orderNumber"
@@ -165,25 +164,25 @@
         <ion-option value=newAFE style="font-weight:bold;text-align:center;">*CREATE NEW AFE*</ion-option>
         <ion-option value={{afe.Name}} *ngFor="let afe of afeArray" selected="afe.Name == '1'">{{afe.Name}}</ion-option>
       </ion-select>
-    </ion-item>
+    </ion-item> -->
   <!-- When user types new AFE, but decides to click back
       on a current AFE the value is not submitted -->
-    <ion-item class="formField ionField" *ngIf="orderNumber == 'newAFE'">
+    <!-- <ion-item class="formField ionField" *ngIf="orderNumber == 'newAFE'">
       <ion-label color="primary" stacked>NEW AFE</ion-label>
       <ion-label class="warningLabel"*ngIf="orderNumber.touched" text-wrap>Note: You will need to sync app in settings for New AFE to apply!</ion-label>
       <ion-input type="text" ngModel name="orderNumber" #orderNumber="ngModel" placeholder="" text-wrap></ion-input>
-    </ion-item>
+    </ion-item> -->
 
 
-      <ion-item class="formField ionField">
+      <!-- <ion-item class="formField ionField">
         <ion-label color="primary" stacked >COMPANY MAN</ion-label>
         <ion-input ngModel name="companyMan">
         </ion-input>
-      </ion-item>
-</div>
+      </ion-item> -->
+<!-- </div> -->
 
       <!-- autofilled by API  based on user login-->
-      <ion-item class="formField ionField">
+      <!-- <ion-item class="formField ionField">
         <ion-label stacked>FOREMAN</ion-label>
         <ion-input
           type="text"
@@ -199,7 +198,7 @@
         type="text"
         name="workOrder"
         ngModel></ion-input>
-      </ion-item>
+      </ion-item> -->
 
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>START TIME</ion-label>

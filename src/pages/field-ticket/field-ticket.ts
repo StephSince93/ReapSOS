@@ -6,16 +6,16 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { SubMenuPage } from '../sub-menu/sub-menu';
 import { ReapService } from '../../services/reap-service';
-import { FieldTicketReviewPage } from '../field-ticket-review/field-ticket-review';
+//import { FieldTicketReviewPage } from '../field-ticket-review/field-ticket-review';
 
-class Location {
-  public ID: number;
-  public Location: string;
-}
-class updatedLocation {
-  public ID: number;
-  public Location: string;
-}
+// class Location {
+//   public ID: number;
+//   public Location: string;
+// }
+// class updatedLocation {
+//   public ID: number;
+//   public Location: string;
+// }
 @IonicPage()
 @Component({
   selector: 'page-field-ticket',
@@ -23,10 +23,10 @@ class updatedLocation {
 })
 
 export class FieldTicketPage {
-  private locationsArray: Location[];
-  location: Location;
-  updatedLocation: updatedLocation[];
-  updatedlocation: updatedLocation;
+  // private locationsArray: Location[];
+  // location: Location;
+  // updatedLocation: updatedLocation[];
+  // updatedlocation: updatedLocation;
 /**************************************************************/
   private userLocation:any = [];
   private wellLocation: any [] = [];
@@ -41,6 +41,7 @@ export class FieldTicketPage {
   private foreman:string;//current user logged in
   private personnelSelected:boolean = false;//check to see if user selected exists
   private totalTime:any;
+  globalProject:any [] = [];
   currentDate:any = new Date().toISOString();
   defaultStartTime:string;
   defaultEndTime:string;
@@ -52,10 +53,17 @@ export class FieldTicketPage {
               private geolocation: Geolocation,
               private platform: Platform,
               private alertCtrl: AlertController) {
+                console.log(this.reap.globalCrewProject);
+                if(this.reap.globalCrewProject!=null){
+                  this.globalProject = this.reap.globalCrewProject;
+                }
+                else{
+                  this.globalProject['Project_Name_Description']="No Project Selected";
+                }
         this.personnelArray = this.reap.getPersonnel;
-        this.locationsArray = reap.getLocations;
-        this.updatedLocation = [];
-        //console.log(this.projectArray);
+        // this.locationsArray = reap.getLocations;
+        // this.updatedLocation = [];
+        console.log(this.reap.globalCrewProject);
         /**************** Catch Error ************/
   }
   ionViewWillEnter(){
@@ -133,22 +141,22 @@ export class FieldTicketPage {
     Form.value.foreman = this.foreman;
     Form.value.formStartTime = this.reap.formStartTime;
     //console.log(Form.value);
-    if(!Form.value.Location && Form.value.updatedLocation){//If user grabs nearest location
-      Form.value.Location = Form.value.updatedLocation;
-      //Removes breaks from JSON string
-      Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
-      if(Form.value.Location){
-        this.reap.selectedCompany = Form.value.Location['CID'];
-      }
-      //Form.value.remove.updatedLocation;
-    }
-    else if(Form.value.Location){
-      //Removes breaks from JSON string
-      Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
-    }
-    if(Form.value.Location){
-      this.reap.selectedCompany = Form.value.Location['CID'];
-    }
+    // if(!Form.value.Location && Form.value.updatedLocation){//If user grabs nearest location
+    //   Form.value.Location = Form.value.updatedLocation;
+    //   //Removes breaks from JSON string
+    //   Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
+    //   if(Form.value.Location){
+    //     this.reap.selectedCompany = Form.value.Location['CID'];
+    //   }
+    //   //Form.value.remove.updatedLocation;
+    // }
+    // else if(Form.value.Location){
+    //   //Removes breaks from JSON string
+    //   Form.value.Location.Location = Form.value.Location.Location.replace(/\n|\r/g, " ");
+    // }
+    // if(Form.value.Location){
+    //   this.reap.selectedCompany = Form.value.Location['CID'];
+    // }
     this.reap.fieldTicketForm = Form.value;
     //var t1 = performance.now();
     //console.log("Formatting time took " + (t1 - t0) + " milliseconds.");
@@ -171,7 +179,7 @@ export class FieldTicketPage {
             this.reap.grabUserLoc(resp.coords.latitude,resp.coords.longitude);
             //var t1 = performance.now();
             //console.log("Call to grabUserLoc took " + (t1 - t0) + " milliseconds.");
-            this.updatedLocation = this.reap.updatedLocation;
+            //this.updatedLocation = this.reap.updatedLocation;
 
             //console.log(this.updatedLocation);
           }).catch((error) => {
@@ -183,11 +191,11 @@ export class FieldTicketPage {
   searchableChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
     }
-    resetLocation(){
-        this.wellLocation = [];
-        this.updatedLocation = [];
-        this.selectedClosestLoc = false;
-    }
+    // resetLocation(){
+    //     this.wellLocation = [];
+    //     this.updatedLocation = [];
+    //     this.selectedClosestLoc = false;
+    // }
 
     presentAlert() {
       let alert = this.alertCtrl.create({

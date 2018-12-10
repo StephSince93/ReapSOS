@@ -4,7 +4,7 @@ import { Device } from '@ionic-native/device';
 import { AppVersion } from '@ionic-native/app-version';
 import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
-import { Pro } from '@ionic/pro';
+//import { Pro } from '@ionic/pro';
 
 import { ReapService } from '../../services/reap-service';
 import { OfflineDataPage }  from '../offline-data/offline-data';
@@ -27,9 +27,9 @@ export class SupportPage {
               private appVersion: AppVersion,
               private reap: ReapService,
               private storage: Storage,
-              private network: Network,
+              //private network: Network,
               private alertCtrl: AlertController,
-              private toast: ToastController,
+            //  private toast: ToastController,
               private modalCtrl: ModalController) {
                 this.devonianPlatform = this.device.platform;
                 this.deviceVersion = this.device.version;

@@ -13,16 +13,16 @@ export class StemApiProvider {
 
 
   //api urls will change according to which build is being tested
-      private apiloginUrl:string = this.v3URL+'Newreaplogin';
+      private apiloginUrl:string = this.DanielsDevURL+'Newreaplogin';
       //private apiloginUrl:string = this.DanielsDevURL+'Newreaplogin';
-      private apisubmitFormUrl:string = this.v3URL+'SaveDevonianform';
+      private apisubmitFormUrl:string = this.DanielsDevURL+'SaveSaulsburyform';
       //private apisubmitFormUrl:string = this.DanielsDevURL+'SaveDevonianform';
-      private apiGetUrl:string = this.v3URL+'GetDevonianData';
+      private apiGetUrl:string = this.DanielsDevURL+'GetSaulsburyData';
       //private apiGetUrl:string = this.DanielsDevURL+'GetDevonianData';
-      private apiUpdateGPSUrl:string = this.v3URL+'DevonianGPSUpdate';
       //private apiUpdateGPSUrl:string = this.DanielsDevURL+'DevonianGPSUpdate';
-      private apiUpdateSigUrl:string = this.v3URL+'DevonianSigUpdate';
+      private apiUpdateGPSUrl:string = this.DanielsDevURL+'DevonianGPSUpdate';
       //private apiUpdateSigUrl:string = this.DanielsDevURL+'DevonianSigUpdate';
+      private apiUpdateSigUrl:string = this.DanielsDevURL+'DevonianSigUpdate';
   constructor(public http: HttpClient) {
     //console.log('Hello RestProvider Provider');
   }

@@ -18,11 +18,22 @@ export class AddExtraPersonnelPage {
   private extraPersonnelArray: extraPersonnel[];
   extrapersonnel: extraPersonnel;
   private noSubmission:boolean = true;
+  private projectPersonnel:any;
+  private tempPersonnel:any [] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
               public viewCtrl: ViewController) {
-      this.extraPersonnelArray = this.reap.getExtras;
+                if(this.reap.globalCrewProject!=null){
+                  this.projectPersonnel=this.reap.globalCrewProject['ProjectName'];
+                }
+                for(let i=0;i<this.reap.getExtras.length;i++){
+                    if(this.reap.getExtras[i]['Job_Number']==this.projectPersonnel){
+                    console.log(this.reap.getExtras[i]);
+                    this.tempPersonnel.push(this.reap.getExtras[i]);
+                  }
+                }
+      this.extraPersonnelArray = this.tempPersonnel;
   }
 
   submitChemical(form: NgForm){
@@ -36,5 +47,4 @@ export class AddExtraPersonnelPage {
   dismissModal(){
      this.viewCtrl.dismiss(this.noSubmission);
   }
-
 }
