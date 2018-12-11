@@ -29,7 +29,7 @@ export class AddExtraPersonnelPage {
                 }
                 for(let i=0;i<this.reap.getExtras.length;i++){
                     if(this.reap.getExtras[i]['Job_Number']==this.projectPersonnel){
-                    console.log(this.reap.getExtras[i]);
+                    //console.log(this.reap.getExtras[i]);
                     this.tempPersonnel.push(this.reap.getExtras[i]);
                   }
                 }

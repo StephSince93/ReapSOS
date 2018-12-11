@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
 
 import { ReapService } from '../../services/reap-service';
+import { StemApiProvider } from '../../providers/stem-api/stem-api';
 @IonicPage()
 @Component({
   selector: 'page-offline-data',
@@ -18,20 +19,25 @@ export class OfflineDataPage {
               public storage: Storage,
               public viewCtrl: ViewController,
               private emailComposer: EmailComposer,
-              public reap: ReapService) {
+              public reap: ReapService,
+              public stemAPI: StemApiProvider,
+              public alertCtrl: AlertController,
+              public loadingCtrl: LoadingController) {
 
   }
   ionViewDidLoad(){
     this.storage.get('offlineSubmission').then((data)=>{
         this.offlineData=data;
-        console.log(data);
-        console.log(JSON.stringify(data));
+        // console.log(data);
+        // console.log(JSON.stringify(data));
         this.emailJSONData = JSON.stringify(data);
+        this.anyData();
     });
-
-    if(this.offlineData==[]){
+  }
+  anyData(){
+    if(this.offlineData.length==0||this.offlineData==null){
       this.isData = false;
-      console.log(this.isData);
+      //console.log(this.isData);
     }
     else{
       this.isData = true;
@@ -51,7 +57,7 @@ export class OfflineDataPage {
 
     let email = {
       to: 'support@stemsoftware.com',
-      cc: 'stephen@stemsoftware.com',
+      //cc: '',
       //bcc: ['john@doe.com', 'jane@doe.com'],
       attachments: [
         //'file://img/logo.png',
@@ -66,5 +72,62 @@ export class OfflineDataPage {
 
     // Send a text message using default options
     this.emailComposer.open(email);
+    }
+    retrySubmit(data,type,index){
+      console.log(data,type,index);
+      var API;
+      switch(type){
+        case "WO":
+          API = this.stemAPI.submitDevonianForm(data,this.reap.token);
+          //console.log(API);
+          break;
+
+        // case "GPS":
+        //   API = this.stemAPI.updateGPSLoc(data,this.reap.token);
+        //   console.log(API);
+        //   break;
+        //
+        // case "Batch":
+        // case "Special":
+        // case "LoadandTest":
+        //   API = this.stemAPI.submitBatchData(data,this.reap.token);
+        //   //console.log(API);
+        //   break;
+        //
+        // case "ConfirmBOL":
+        //   API = this.stemAPI.confirmBOLData(data,this.reap.token);
+        //   //console.log(API);
+        //   break;
+      }
+
+      let loading = this.loadingCtrl.create({
+                    content: 'Submitting...'
+                   });
+              loading.present();
+      //submits BOL to API
+      API.subscribe((result) =>{
+          this.reap.presentToast(result['MSG']);
+          this.offlineData.splice(index,1);//removes form submission
+          this.storage.set('offlineSubmission',this.offlineData);//stores local updates
+          this.anyData();
+          loading.dismiss();
+       }, (err) => {
+             loading.dismiss();
+            let alert = this.alertCtrl.create({
+            title: 'Error: ',
+            message: 'Could not Submit!',
+            buttons: [
+            {
+            text: 'Acknowledged',
+             role: 'Yes',
+            handler: () => {
+            //resets data saved in array when API call fails to prevent double submission
+            }
+          }
+        ]
+      });
+      alert.present();
+      console.log(err);
+      });
     }
 }

@@ -31,7 +31,7 @@ export class AddExtraEquipmentPage {
                 }
       for(let i=0;i<this.reap.getEquipment.length;i++){
           if(this.reap.getEquipment[i]['CostCenter']==this.projectCost){
-          console.log(this.reap.getEquipment[i]);
+          //console.log(this.reap.getEquipment[i]);
           this.tempEquipment.push(this.reap.getEquipment[i]);
         }
       }

@@ -77,7 +77,7 @@ export class LaborPage {
            modal.onDidDismiss((returnParam: any) => {
              if(returnParam!=true){
                this.personnelInfo.push(returnParam);
-               console.log(this.personnelInfo);
+               //console.log(this.personnelInfo);
 
              }
              else{

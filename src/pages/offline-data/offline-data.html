@@ -33,14 +33,15 @@
     </ion-card-content>
 
     <ion-card-content *ngIf="data?.Type=='WO'">
+      <button ion-button round class="submitButton" (click)="retrySubmit(data?.Info,data?.Type,i)">Re-Try Submission</button>
       <h1>{{i+1}}</h1>
       <h2 class="bold">Form - Work Order</h2>
-      <p>Project - {{data?.Info[0].wo[0].project.Name}}</p>
+      <p>Project - {{data?.Info[0].wo[0].project?.Project_Name_Description}}</p>
       <p>Company Man - {{data?.Info[0].wo[0].companyMan}}</p>
       <p>Current Date - {{data?.Info[0].wo[0].currentDate}}</p>
       <p>Start Time - {{data?.Info[0].wo[0].startTime}}</p>
       <p>End Time - {{data?.Info[0].wo[0].endTime}}</p>
-      <p>Representative - {{data?.Info[0].wo[0].representative}}</p>
+      <p>Company Man Signing - {{data?.Info[0].wo[0].companyMan}}</p>
       <p>Job Description - {{data?.Info[0].wo[0].description}}</p>
 
       <br>
@@ -48,8 +49,8 @@
       <br>
       <div *ngFor="let subData of data.Info[4].Equipment">
       <p>Name - {{subData?.Name}}</p>
-      <p>Starting Odometer - {{subData?.Odometer}}</p>
-      <p>Ending Odometer - {{subData?.endingOdometer}}</p>
+      <!-- <p>Starting Odometer - {{subData?.Odometer}}</p>
+      <p>Ending Odometer - {{subData?.endingOdometer}}</p> -->
       <br>
       </div>
 
@@ -92,6 +93,6 @@
       </ion-card-content>
   </ion-card>
   <ion-item>
-    <button  type="button" id="submitButton" (click)="sendEmail()" ion-button full large>Email Data</button>
+    <button  type="button" id="submitButton" [disabled]="!isData" (click)="sendEmail()" ion-button full large>Email Data</button>
  </ion-item>
 </ion-content>

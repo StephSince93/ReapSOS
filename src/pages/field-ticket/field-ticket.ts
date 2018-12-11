@@ -28,12 +28,12 @@ export class FieldTicketPage {
   // updatedLocation: updatedLocation[];
   // updatedlocation: updatedLocation;
 /**************************************************************/
-  private userLocation:any = [];
-  private wellLocation: any [] = [];
-  private selectedClosestLoc:boolean = false;
+  //private userLocation:any = [];
+  //private wellLocation: any [] = [];
+  //private selectedClosestLoc:boolean = false;
   private afeArray:any[] = this.reap.getAFE;
   private projectArray:any[] = this.reap.getProject;
-  private personnelArray:any[] = [];
+  //private personnelArray:any[] = [];
   private selectedArray:any[] = [];//saves array selected from projects
   private projectSelected:boolean = false;
   private afeString:string;//stores AFE from selected project number
@@ -53,29 +53,29 @@ export class FieldTicketPage {
               private geolocation: Geolocation,
               private platform: Platform,
               private alertCtrl: AlertController) {
-                console.log(this.reap.globalCrewProject);
+                //console.log(this.reap.globalCrewProject);
                 if(this.reap.globalCrewProject!=null){
                   this.globalProject = this.reap.globalCrewProject;
                 }
                 else{
                   this.globalProject['Project_Name_Description']="No Project Selected";
                 }
-        this.personnelArray = this.reap.getPersonnel;
+        //this.personnelArray = this.reap.getPersonnel;
         // this.locationsArray = reap.getLocations;
         // this.updatedLocation = [];
-        console.log(this.reap.globalCrewProject);
+        //console.log(this.reap.globalCrewProject);
         /**************** Catch Error ************/
   }
   ionViewWillEnter(){
     //If user backtracks to main form, the variables are re-initialized
     this.defaultStartTime = new Date(new Date().setHours(-1, 0, 0)).toISOString();
     this.defaultEndTime = new Date(new Date().setHours(13, 0, 0)).toISOString();
-    for(let i=0;i< this.personnelArray.length;i++){//grabs current username logged in
-        if(this.personnelArray[i]['default'] === "true"){
-          this.foreman = this.personnelArray[i]['FullName'];
-          //console.log(this.personnel);
-        }
-      }
+    // for(let i=0;i< this.personnelArray.length;i++){//grabs current username logged in
+    //     if(this.personnelArray[i]['default'] === "true"){
+    //       this.foreman = this.personnelArray[i]['FullName'];
+    //     }
+    //   }
+    //   console.log(this.personnelArray);
   }
   projectSelect(project,i){
     //console.log(i);
@@ -165,29 +165,29 @@ export class FieldTicketPage {
     this.navCtrl.push(SubMenuPage);
     }
   }
-  grabLocation(){
-        this.selectedClosestLoc = true;
-        /* Ensure the platform is ready */
-        this.platform.ready().then(() => {
-        /* Grabs user geolocation */
-        this.geolocation.getCurrentPosition().then((resp) => {
-            // 4 decimal places
-            this.userLocation = [parseFloat(resp.coords.latitude.toFixed(4)),parseFloat(resp.coords.longitude.toFixed(4))];
-            //100% accurate
-            this.userLocation = [resp.coords.latitude,resp.coords.longitude];
-            //var t0 = performance.now();
-            this.reap.grabUserLoc(resp.coords.latitude,resp.coords.longitude);
-            //var t1 = performance.now();
-            //console.log("Call to grabUserLoc took " + (t1 - t0) + " milliseconds.");
-            //this.updatedLocation = this.reap.updatedLocation;
-
-            //console.log(this.updatedLocation);
-          }).catch((error) => {
-            //console.log('Error getting location', error);
-            this.reap.presentToast(error);
-          });
-        });
-      }
+  // grabLocation(){
+  //       this.selectedClosestLoc = true;
+  //       /* Ensure the platform is ready */
+  //       this.platform.ready().then(() => {
+  //       /* Grabs user geolocation */
+  //       this.geolocation.getCurrentPosition().then((resp) => {
+  //           // 4 decimal places
+  //           this.userLocation = [parseFloat(resp.coords.latitude.toFixed(4)),parseFloat(resp.coords.longitude.toFixed(4))];
+  //           //100% accurate
+  //           this.userLocation = [resp.coords.latitude,resp.coords.longitude];
+  //           //var t0 = performance.now();
+  //           this.reap.grabUserLoc(resp.coords.latitude,resp.coords.longitude);
+  //           //var t1 = performance.now();
+  //           //console.log("Call to grabUserLoc took " + (t1 - t0) + " milliseconds.");
+  //           //this.updatedLocation = this.reap.updatedLocation;
+  //
+  //           //console.log(this.updatedLocation);
+  //         }).catch((error) => {
+  //           //console.log('Error getting location', error);
+  //           this.reap.presentToast(error);
+  //         });
+  //       });
+  //     }
   searchableChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
     }
