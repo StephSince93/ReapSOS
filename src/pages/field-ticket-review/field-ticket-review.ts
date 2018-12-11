@@ -93,17 +93,19 @@ export class FieldTicketReviewPage {
     if(this.reap.globalCrewEquipment){
     for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
       this.mergeEquipment.push({'ID':this.reap.globalCrewEquipment[i]['ID'],
-                        'Name':this.reap.globalCrewEquipment[i]['Name'],
-                        'Odometer':this.reap.globalCrewEquipment[i]['Odometer'],
-                        'endingOdometer':this.reap.globalCrewEquipment[i]['endingOdometer']});
+                        // 'Name':this.reap.globalCrewEquipment[i]['Name'],
+                        // 'Odometer':this.reap.globalCrewEquipment[i]['Odometer'],
+                        // 'endingOdometer':this.reap.globalCrewEquipment[i]['endingOdometer']
+                      });
       }
     }
     if(this.equipmentDetails){
     for(let i=0;i<this.equipmentDetails.length;i++){
       this.mergeEquipment.push({'ID':this.equipmentDetails[i]['ID'],
-                      'Name':this.equipmentDetails[i]['Name'],
-                      'Odometer':this.equipmentDetails[i]['Odometer'],
-                      'endingOdometer':this.equipmentDetails[i]['endingOdometer']});
+                      // 'Name':this.equipmentDetails[i]['Name'],
+                      // 'Odometer':this.equipmentDetails[i]['Odometer'],
+                      // 'endingOdometer':this.equipmentDetails[i]['endingOdometer']
+                    });
                     }
                   }
     // console.log(this.equipmentDetails);
