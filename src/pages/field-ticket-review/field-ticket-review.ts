@@ -108,6 +108,13 @@ export class FieldTicketReviewPage {
                     });
                     }
                   }
+    for(let i=0;i<this.reap.globalCrewItems.length;i++){
+        this.reap.globalCrewItems[i]={'JobID':this.reap.globalCrewItems[i].JobID
+                            // ,'BillCodeDescription':this.reap.globalCrewItems[i].BillCodeDescription
+                            ,'JobNumber':this.reap.globalCrewItems[i].JobNumber
+                            // ,'each':this.reap.globalCrewItems[i].each
+                          };
+                  }
     // console.log(this.equipmentDetails);
     // console.log(this.mergeEquipment);
     //console.log(this.formDetails);

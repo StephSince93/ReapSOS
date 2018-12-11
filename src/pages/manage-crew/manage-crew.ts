@@ -167,17 +167,13 @@ export class ManageCrewPage {
     //               // ,'each':form.value[each+[i]]
     //             };
     //     }
-    //     //If user had previous data in fields, the previous failed still stay
-    //     else if((this.reap.globalCrewItems[i].quantity!=undefined&&(form.value[quantity+[i]]==""))&&(this.reap.globalCrewItems[i].each!=undefined&&(form.value[each+[i]]==""))){
-    //     //console.log("2");
-    //     this.reap.globalCrewItems[i]={'ItemID':form.value.Items[i].JobID
-    //               ,'BillCodeDescription':form.value.Items[i].BillCodeDescription
-    //               // ,'quantity':this.reap.globalCrewItems[i].quantity
-    //               // ,'each':this.reap.globalCrewItems[i].each
-    //             };
-    //     }
-    //   }
+        //If user had previous data in fields, the previous failed still stay
+        // else if((this.reap.globalCrewItems[i].quantity!=undefined&&(form.value[quantity+[i]]==""))&&(this.reap.globalCrewItems[i].each!=undefined&&(form.value[each+[i]]==""))){
+        // //console.log("2");
+
+    // }
     //}
+
     //console.log(this.reap.globalCrewItems);
     this.reap.globalCrewItems = this.globalItems;
     this.reap.globalCrewProject = form.value.Project;
