@@ -154,9 +154,9 @@ export class ReapService {
         //console.log(this.getJobs);
         //calls method to store App Version to local storage globally
         this.getVersionNumber();
-        this.presentToast('Sync Successful');
+        //this.presentToast('Sync Successful');
         }, (err) => {
-          this.presentToast('Sync Unsuccessful');
+          //this.presentToast('Sync Unsuccessful');
           //console.log(err);
         });
     }

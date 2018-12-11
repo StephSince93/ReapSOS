@@ -67,7 +67,7 @@ export class ManageCrewPage {
     this.equipmentArray = this.reap.getEquipment;
     this.projectArray = this.reap.getProject;
     //Pre-Setting variables for Item Type
-    console.log(this.reap.getEquipment);
+    //console.log(this.reap.getEquipment);
     this.itemArray = this.reap.getJobs;
   }
 
@@ -75,7 +75,7 @@ export class ManageCrewPage {
           this.globalItems = [];
           this.globalPersonnel = [];
           this.globalEquipment = [];
-          console.log('value:', event.value);
+          //console.log('value:', event.value);
           this.globalProject = event.value;
           if(event.value==null){
             this.noProject = true;
@@ -83,27 +83,27 @@ export class ManageCrewPage {
           else{
             this.noProject = false;
 
-          console.log(this.globalProject);
+          //console.log(this.globalProject);
           var projectCost = this.globalProject['CostCenter'];
           var projectNumber =  this.globalProject['ProjectName'];
-          console.log(projectCost);
+          //console.log(projectCost);
           for(let i=0;i<this.reap.getEquipment.length;i++){
             if(this.reap.getEquipment[i]['CostCenter']==projectCost){
-              console.log(this.reap.getEquipment[i]);
+              //console.log(this.reap.getEquipment[i]);
               this.tempEquipment.push(this.reap.getEquipment[i]);
             }
 
           }
-          console.log(this.tempEquipment);
+          //console.log(this.tempEquipment);
           this.equipmentArray = this.tempEquipment;
 
           for(let i=0;i<this.reap.getJobs.length;i++){
             if(this.reap.getJobs[i]['JobNumber']==projectNumber){
-              console.log(this.reap.getEquipment[i]);
+              //console.log(this.reap.getEquipment[i]);
               this.tempJobs.push(this.reap.getJobs[i]);
             }
           }
-          console.log(this.tempJobs);
+          //console.log(this.tempJobs);
           this.itemArray = this.tempJobs;
         }
   }
@@ -122,13 +122,13 @@ export class ManageCrewPage {
   equipmentChange(event: { component: SelectSearchableComponent, value: any }) {
           //console.log('value:', event.value);
           this.globalEquipment = event.value;
-          console.log(this.globalEquipment);
+          //console.log(this.globalEquipment);
   }
   itemChange(event: { component: SelectSearchableComponent, value: any }) {
           //console.log('value:', event.value);
           this.globalItems = event.value;
           this.reap.globalCrewItems = this.globalItems;
-          console.log(this.globalItems);
+          //console.log(this.globalItems);
   }
   // keyPress(event: any) {
   //   const pattern = /[0-9\+\-\ ]/;
@@ -178,7 +178,7 @@ export class ManageCrewPage {
     //     }
     //   }
     //}
-    console.log(this.reap.globalCrewItems);
+    //console.log(this.reap.globalCrewItems);
     this.reap.globalCrewItems = this.globalItems;
     this.reap.globalCrewProject = form.value.Project;
     this.reap.globalCrewPersonnel = form.value.Personnel;

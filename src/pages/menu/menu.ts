@@ -62,7 +62,7 @@ export class MenuPage {
         setTimeout(() => {
           loading.dismiss();
           this.navCtrl.push(FieldTicketPage);
-        }, 2000);
+        }, 1000);
       }
       else{// pushed straight to Safety Page if user had previously submitted an initial Safety Form
         this.navCtrl.push(FieldTicketPage);

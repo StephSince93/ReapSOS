@@ -37,7 +37,7 @@ export class OfflineDataPage {
       this.isData = true;
     }
   }
-  dismiss() {
+  dismissModal() {
     this.viewCtrl.dismiss();
   }
   sendEmail(){
@@ -60,7 +60,7 @@ export class OfflineDataPage {
         'file://'+this.emailJSONData.toString()+'.json'
       ],
       subject: 'Offline Data Submissions',
-      // body: this.emailJSONData.toString(),
+       body: this.emailJSONData.toString(),
       isHtml: false
     };
 

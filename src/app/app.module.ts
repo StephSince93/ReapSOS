@@ -44,6 +44,7 @@ import { JsaPage } from '../pages/jsa/jsa';
 import { AddExtraPersonnelPage } from '../pages/add-extra-personnel/add-extra-personnel';
 import { AddExtraEquipmentPage } from '../pages/add-extra-equipment/add-extra-equipment';
 import { JsaReviewPage } from '../pages/jsa-review/jsa-review';
+import { TermsOfServicePage } from '../pages/terms-of-service/terms-of-service';
 Pro.init('9df6dd99', {
   appVersion: '1.0.0'
 })
@@ -94,7 +95,8 @@ export class MyErrorHandler implements ErrorHandler {
     JsaPage,
     AddExtraPersonnelPage,
     AddExtraEquipmentPage,
-    JsaReviewPage
+    JsaReviewPage,
+    TermsOfServicePage
   ],
   imports: [
     BrowserModule,
@@ -131,7 +133,8 @@ export class MyErrorHandler implements ErrorHandler {
     JsaPage,
     AddExtraPersonnelPage,
     AddExtraEquipmentPage,
-    JsaReviewPage
+    JsaReviewPage,
+    TermsOfServicePage
   ],
   providers: [
     StatusBar,

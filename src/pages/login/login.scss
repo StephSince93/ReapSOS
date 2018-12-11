@@ -44,4 +44,22 @@ page-login {
       .text-input-ios{
       text-align: center;
       }
+      #TOS{
+        text-decoration: underline;
+        font-size: 20px;
+        background: none !important;
+        background-color: none !important;
+        box-shadow: none !important;
+        margin-left: 0;
+        padding-left: 3px;
+      }
+      .TOS{
+        margin-top: 25px;
+        text-align: center;
+      }
+      .check{
+        margin-right: 0;
+        padding-right: 0;
+      }
+
   }

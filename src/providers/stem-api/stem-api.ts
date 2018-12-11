@@ -7,17 +7,17 @@ import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class StemApiProvider {
-      private v3URL:string = 'https://v3.stemsoftware.com/api.php?action=';
-      //private sandboxURL:string = 'https://sandbox.stemsoftware.com/api.php?action=';
+      //private v3URL:string = 'https://v3.stemsoftware.com/api.php?action=';
+      private sandboxURL:string = 'https://sandbox.stemsoftware.com/api.php?action=';
       private DanielsDevURL:string = 'http://10.0.0.21/api.php?action=';
 
 
   //api urls will change according to which build is being tested
-      private apiloginUrl:string = this.DanielsDevURL+'Newreaplogin';
+      private apiloginUrl:string = this.sandboxURL+'Newreaplogin';
       //private apiloginUrl:string = this.DanielsDevURL+'Newreaplogin';
-      private apisubmitFormUrl:string = this.DanielsDevURL+'SaveSaulsburyform';
+      private apisubmitFormUrl:string = this.sandboxURL+'SaveSaulsburyform';
       //private apisubmitFormUrl:string = this.DanielsDevURL+'SaveDevonianform';
-      private apiGetUrl:string = this.DanielsDevURL+'GetSaulsburyData';
+      private apiGetUrl:string = this.sandboxURL+'GetSaulsburyData';
       //private apiGetUrl:string = this.DanielsDevURL+'GetDevonianData';
       //private apiUpdateGPSUrl:string = this.DanielsDevURL+'DevonianGPSUpdate';
       private apiUpdateGPSUrl:string = this.DanielsDevURL+'DevonianGPSUpdate';

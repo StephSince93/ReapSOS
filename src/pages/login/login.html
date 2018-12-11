@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      SAULSBURY 
+      SAULSBURY
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -28,13 +28,17 @@
       ngModel
       required></ion-input>
     </ion-item>
+    <div class="TOS">
+    <ion-checkbox item-left  class="check" [(ngModel)]="didAcceptTOS" name="acceptTOF" required></ion-checkbox>
+    <button  type="button" (click)="viewTOS()" id="TOS">I Accept Terms of Service</button>
+    </div>
     <button
     id="loginButton"
     ion-button
     type="submit"
     block
     large
-    [disabled]="!f.valid">Login</button>
+    [disabled]="!f.valid || !didAcceptTOS">Login</button>
   </ion-list>
 </form>
 
