@@ -25,14 +25,18 @@
                   <ion-col>HOURS:</ion-col>
                   <ion-col>{{personnel?.Hours}}</ion-col>
               </ion-row>
+              <ion-row>
+                  <ion-col>EMPLOYEE ID:</ion-col>
+                  <ion-col>{{personnel?.ID}}</ion-col>
+              </ion-row>
         </ion-grid>
         <!-- autofilled by sub form data-->
         <br>
         <br>
-        <ion-label class="gridLabel">ADD ADDITIONAL PERSONNEL</ion-label>
+        <!-- <ion-label class="gridLabel">ADD ADDITIONAL PERSONNEL</ion-label>
           <ion-grid class="custPersonnel" *ngFor="let personnel of personnelInfo;let i = index">
              <!-- <button type="button" name="editPersonnel" id='hidden-button' (tap)="editPersonnel()"> -->
-               <ion-row>
+               <!-- <ion-row>
                  <ion-col>Personnel Description:</ion-col>
                  <ion-col>{{personnel?.extraPersonnel.Extras}}</ion-col>
                </ion-row>
@@ -46,16 +50,16 @@
                 </ion-row>
                 <ion-row>
                   <ion-col><button (tap)="removePersonnel(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
-                </ion-row>
+                </ion-row> -->
               <!-- </button> -->
-          </ion-grid>
-       <ion-grid>
+          <!-- </ion-grid> -->
+       <!-- <ion-grid>
         <ion-row>
           <ion-col  class="noBorder" col-6 offset-3 text-center>
             <button id="personnelButton" type="button"  (tap)="addPersonnel()" ion-button icon-only clear large><ion-icon name="add-circle"></ion-icon></button>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
 
 <br>
 <br>

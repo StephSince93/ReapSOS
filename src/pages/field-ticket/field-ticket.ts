@@ -16,6 +16,16 @@ import { ReapService } from '../../services/reap-service';
 //   public ID: number;
 //   public Location: string;
 // }
+class ProjectList{
+  public ID:number;
+  public ProjectName:number;
+  public Project_Name_Description:string;
+  public CostCenter:number;
+}
+class PhaseCodeList{
+  public PhaseCode:number;
+  public Description:string;
+}
 @IonicPage()
 @Component({
   selector: 'page-field-ticket',
@@ -27,12 +37,16 @@ export class FieldTicketPage {
   // location: Location;
   // updatedLocation: updatedLocation[];
   // updatedlocation: updatedLocation;
+  private projectArray: ProjectList[];
+  project: ProjectList;
+  private phaseArray: PhaseCodeList[];
+  phase: PhaseCodeList;
 /**************************************************************/
   //private userLocation:any = [];
   //private wellLocation: any [] = [];
   //private selectedClosestLoc:boolean = false;
-  private afeArray:any[] = this.reap.getAFE;
-  private projectArray:any[] = this.reap.getProject;
+  //private afeArray:any[] = this.reap.getAFE;
+  private tempPhase:any []=[];
   //private personnelArray:any[] = [];
   private selectedArray:any[] = [];//saves array selected from projects
   private projectSelected:boolean = false;
@@ -42,6 +56,7 @@ export class FieldTicketPage {
   private personnelSelected:boolean = false;//check to see if user selected exists
   private totalTime:any;
   globalProject:any [] = [];
+  globalPhaseCode:any[]=[];
   currentDate:any = new Date().toISOString();
   defaultStartTime:string;
   defaultEndTime:string;
@@ -53,13 +68,37 @@ export class FieldTicketPage {
               private geolocation: Geolocation,
               private platform: Platform,
               private alertCtrl: AlertController) {
+                // this.phaseArray = this.reap.getPhaseCodes;
+                // this.projectArray= this.reap.getProject;
                 //console.log(this.reap.globalCrewProject);
                 if(this.reap.globalCrewProject!=null){
                   this.globalProject = this.reap.globalCrewProject;
+                  this.projectArray= this.reap.getProject;
+                  console.log('here')
+                  if(this.reap.globalCrewPhaseCodes!=null){
+                    this.globalPhaseCode = this.reap.globalCrewPhaseCodes;
+                    this.phaseArray= this.reap.getPhaseCodes;
+                    console.log('here')
+                    var projectNumber =  this.globalProject['ProjectName'];
+
+                    for(let i=0;i<this.reap.getPhaseCodes.length;i++){
+                      if(this.reap.getPhaseCodes[i]['JobNumber']==projectNumber){
+                        //console.log(this.reap.getEquipment[i]);
+                        this.tempPhase.push(this.reap.getPhaseCodes[i]);
+                      }
+                      this.phaseArray = this.tempPhase;
+                      this.tempPhase = [];
+                    }
+                  }
+                  else{
+                    this.phaseArray= this.reap.getPhaseCodes;
+                  }
                 }
                 else{
-                  this.globalProject['Project_Name_Description']="No Project Selected";
+                  this.projectArray= this.reap.getProject;
                 }
+                //console.log(this.globalProject);
+                //console.log(this.globalPhaseCode);
         //this.personnelArray = this.reap.getPersonnel;
         // this.locationsArray = reap.getLocations;
         // this.updatedLocation = [];
@@ -77,16 +116,28 @@ export class FieldTicketPage {
     //   }
     //   console.log(this.personnelArray);
   }
-  projectSelect(project,i){
+  projectChange(event: { component: SelectSearchableComponent, value: any }) {
     //console.log(i);
-    this.selectedArray = this.projectArray[i];
-    this.afeString = this.selectedArray['AFE_Number'];
+    //this.selectedArray = this.projectArray[i];
+    //this.afeString = this.selectedArray['AFE_Number'];
     //console.log(this.afeString)
-    this.projectSelected = true;
+    //this.projectSelected = true;
+    var projectNumber =  this.globalProject['ProjectName'];
+    console.log(projectNumber);
+
+    for(let i=0;i<this.reap.getPhaseCodes.length;i++){
+      if(this.reap.getPhaseCodes[i]['JobNumber']==projectNumber){
+        //console.log(this.reap.getEquipment[i]);
+        this.tempPhase.push(this.reap.getPhaseCodes[i]);
+      }
+    }
+    console.log(this.tempPhase);
+    this.phaseArray = this.tempPhase;
+    this.tempPhase = [];
   }
 
   onSubmit(Form: NgForm){
-    //console.log(Form.value);
+    console.log(Form.value);
     //var t0 = performance.now();
     var sT = new Date(Form.value.startTime);
     var eT = new Date(Form.value.endTime);
@@ -138,8 +189,8 @@ export class FieldTicketPage {
          }
     //console.log(this.reap.globalCrewPersonnel);
     //Created form value as foreman
-    Form.value.foreman = this.foreman;
-    Form.value.formStartTime = this.reap.formStartTime;
+    //Form.value.foreman = this.foreman;
+    //Form.value.formStartTime = this.reap.formStartTime;
     //console.log(Form.value);
     // if(!Form.value.Location && Form.value.updatedLocation){//If user grabs nearest location
     //   Form.value.Location = Form.value.updatedLocation;

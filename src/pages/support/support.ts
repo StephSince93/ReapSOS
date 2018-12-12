@@ -74,54 +74,54 @@ export class SupportPage {
             }, 2000);
      }
      /*** TESTING *****/
-     toSubmitOffline(){
-     this.storage.get('offlineSubmission').then((data)=>{
-       if(data==null){
-         let alert = this.alertCtrl.create({
-              title: 'No data',
-             subTitle: 'No data was submitted offline',
-              buttons: ['Dismiss']
-            });
-          alert.present();
-       }
-       else{
-         var length = data.length;
-         while(length--){
-           //console.log(length);
-           //console.log(data[length]["Status"]);
-           if(data[length]["Status"]=="Submitted"){
-             data.splice(length,1);
-             //console.log(data);
-           }
-         }
-         //initializes storage to data after splicing data
-         this.storage.set('offlineSubmission',data);
-         this.reap.offlineFormSubmissions = data;
-
-         if(data.length==0){
-           let alert = this.alertCtrl.create({
-                title: 'No data',
-               subTitle: 'No data was submitted offline',
-                buttons: ['Dismiss']
-              });
-            alert.present();
-         }
-         else{
-           let alert = this.alertCtrl.create({
-                title: 'Submitting offline...',
-               subTitle: 'No. of forms saved offline: '+ data.length,
-                buttons: ['Dismiss']
-              });
-            alert.present();
-
-            data = data.reverse();
-            //console.log(data);
-            //console.log(data[0]["Info"][0]);
-            this.reap.submitOfflineForm(data);
-         }
-       }
-     });
-   }
+   //   toSubmitOffline(){
+   //   this.storage.get('offlineSubmission').then((data)=>{
+   //     if(data==null){
+   //       let alert = this.alertCtrl.create({
+   //            title: 'No data',
+   //           subTitle: 'No data was submitted offline',
+   //            buttons: ['Dismiss']
+   //          });
+   //        alert.present();
+   //     }
+   //     else{
+   //       var length = data.length;
+   //       while(length--){
+   //         //console.log(length);
+   //         //console.log(data[length]["Status"]);
+   //         if(data[length]["Status"]=="Submitted"){
+   //           data.splice(length,1);
+   //           //console.log(data);
+   //         }
+   //       }
+   //       //initializes storage to data after splicing data
+   //       this.storage.set('offlineSubmission',data);
+   //       this.reap.offlineFormSubmissions = data;
+   //
+   //       if(data.length==0){
+   //         let alert = this.alertCtrl.create({
+   //              title: 'No data',
+   //             subTitle: 'No data was submitted offline',
+   //              buttons: ['Dismiss']
+   //            });
+   //          alert.present();
+   //       }
+   //       else{
+   //         let alert = this.alertCtrl.create({
+   //              title: 'Submitting offline...',
+   //             subTitle: 'No. of forms saved offline: '+ data.length,
+   //              buttons: ['Dismiss']
+   //            });
+   //          alert.present();
+   //
+   //          data = data.reverse();
+   //          //console.log(data);
+   //          //console.log(data[0]["Info"][0]);
+   //          this.reap.submitOfflineForm(data);
+   //       }
+   //     }
+   //   });
+   // }
     //  async performManualUpdate() {
     //   try {
     //

@@ -19,13 +19,39 @@
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked>PROJECT</ion-label>
-        <ion-input
-          #projectName
-          [(ngModel)]="globalProject['Project_Name_Description']"
-          name="project">
-          <!-- <ion-option (ionSelect)="projectSelect(project.ProjectName,i)" [value]={ID:project.ID,Name:project.ProjectName} *ngFor="let project of projectArray; let i = index" >{{project.ProjectName}}</ion-option> -->
-        </ion-input>
+        <ion-label color="primary" stacked >SELECT PROJECT</ion-label>
+          <select-searchable
+          class="specialSelect"
+          item-content
+          [(ngModel)]="globalProject"
+          [items]="projectArray"
+          title="Project"
+          itemValueField=ID
+          itemTextField=Project_Name_Description
+          name="Project"
+          [canSearch]="true"
+          [canClear]="true"
+          [isMultiple]="false"
+          (onChange)="projectChange($event)">
+        </select-searchable>
+      </ion-item>
+
+      <ion-item class="formField ionField">
+        <ion-label color="primary" stacked >SELECT PHASE CODE</ion-label>
+          <select-searchable
+          class="specialSelect"
+          item-content
+          [(ngModel)]="globalPhaseCode"
+          [items]="phaseArray"
+          title="PhaseCode"
+          itemValueField=PhaseCode
+          itemTextField=Description
+          name="PhaseCode"
+          [canSearch]="true"
+          [canClear]="true"
+          [isMultiple]="false"
+          (onChange)="searchableChange($event)">
+        </select-searchable>
       </ion-item>
 <!------------------------------------------------------------------------->
 

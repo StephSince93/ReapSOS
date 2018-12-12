@@ -30,7 +30,12 @@ export class EquipmentPage {
               public reap: ReapService,
               public modalCtrl: ModalController) {
           //this.equipmentType = reap.equipmentType;
+          try{
           this.equipmentArray = reap.getEquipment;
+          }catch{
+          this.reap.presentAlert('Error','Error Grabbing API data, please re-sync in settings','Dismiss')
+          this.navCtrl.pop();
+          }
           //console.log(this.equipmentArray);
           if(!Array.isArray(this.crewEquipment) || !this.crewEquipment.length)
           {this.doeshaveCrew = false;}  else{this.doeshaveCrew = true;}

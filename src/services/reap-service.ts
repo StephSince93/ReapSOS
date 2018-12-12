@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import { Subscription } from 'rxjs/Subscription';
-import {ToastController, LoadingController } from 'ionic-angular';
+import {ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { AppVersion } from '@ionic-native/app-version';
 
 import { LoginPage } from '../pages/login/login';
@@ -21,6 +21,7 @@ export class ReapService {
     public getExtras:any[]=[];
     public getAFE:any[]=[];
     public getJobs:any[]=[];
+    public getPhaseCodes:any[]=[];
     public getMD5:string;
     public devonianVersion:string;//app version string
   /********************************************/
@@ -42,6 +43,7 @@ export class ReapService {
     public globalCrewPersonnel: any [] = [];
     public globalCrewEquipment: any [] = [];
     public globalCrewItems: any [] = [];
+    public globalCrewPhaseCodes: any [] = [];
     public totalTime: any;
     //Offline Form Submission
     public offlineFormSubmissions:any [] = [];
@@ -61,7 +63,8 @@ export class ReapService {
                 public network: Network,
                 private stemAPI: StemApiProvider,
                 public storage: Storage,
-                public appVersion: AppVersion){
+                public appVersion: AppVersion,
+                public alertCtrl: AlertController){
     //May have to unsubscribe from Observable
     //console.log('here in service Constructor');
     /* Time Interval checking for network connection */
@@ -151,6 +154,9 @@ export class ReapService {
 
         this.getJobs = this.getData['Jobs'];
         this.storage.set('Jobs',this.getJobs);
+
+        this.getPhaseCodes = this.getData['PhaseCode'];
+        this.storage.set('PhaseCodes',this.getPhaseCodes);
         //console.log(this.getJobs);
         //calls method to store App Version to local storage globally
         this.getVersionNumber();
@@ -228,6 +234,10 @@ export class ReapService {
         this.globalCrewProject = data;
         });
 
+        this.storage.get('globalCrewPhaseCodes').then((data)=>{
+        this.globalCrewPhaseCodes = data;
+        });
+
         this.storage.get('AppVersion').then((data)=>{
         this.devonianVersion = data;
       });
@@ -249,118 +259,118 @@ export class ReapService {
       }
 /** TESTING ****/
 //submits form user saved offline When they click the button in Support Page
-  submitOfflineForm(data){
-      var data = data;
-      var length:number = data.length;
-      var secondLength = data.length;
-      var testLength = data.length;
-      var count=0;
-    //console.log(formLength);
-    /*** Need to create function per form
-         submittion to go to right  API call **/
-    while(length--){
-    if(data[length]["Type"]=="Project"){
-    const loading = this.loadingCtrl.create({
-     content: 'Retrying Form Submission...'
-    });
-     loading.present();
-      //console.log("Here in BOL");
-    if(data[length]["Status"]=="Pending"){
-      //console.log(data[length]["Info"]);
-      //console.log(data[length]["Status"]);
-    this.stemAPI.submitDevonianForm(data[length]["Info"],this.token).subscribe((result) =>{
-     //console.log(result["Status"]);
-           var length = testLength;
-           if(result["Status"]==true){
-              /* WILL NEED TO TEST MORE FOR THIS ISSUE OF OFFLINE*/
-              //data[length]["Status"]="Submitted";
-             isEmpty(length,data,this.storage,this.offlineFormSubmissions,loading);
-           }
-           else if(result["Status"]==false){
-              this.presentToast('Project not submitted with location!');
-           }
-         },(err)=>{
-           console.log(err.message);
-           this.presentToast('Project not Submitted! Try again!');
-         });
-    }
-    else{
-      this.presentToast('Project should be already submitted!');
-    }
-    loading.dismiss();
-    }
-    else{
-      count++;
-        //console.log(count);
-    }
-    }
-    if(count==secondLength){
-      while(secondLength--){
-        //console.log(secondLength);
-        //console.log(count);
-          this.callAPI(testLength,secondLength,data[secondLength],data);
-      }
-    }
-    }
-    callAPI(testLength,i,data,allData) {
-    const loading = this.loadingCtrl.create({
-    content: 'Retrying Form Submission...'
-    });
-    loading.present();
-    var submit = this.stemAPI;
-    var token = this.token;
-    var offline = this.offlineFormSubmissions;
-    var storage = this.storage;
-    var submitted:boolean;
-    var i = i;
-    //setTimeout(function() {
-    switch(data["Type"]){
-     case "WO": {
-        // console.log("Here in Batch");
-        if(data["Status"]=="Pending"){
-
-         submit.submitDevonianForm(data["Info"],token).subscribe((result)=>{
-           //console.log(result["Status"]);
-             if(result["Status"]==true){
-               data["Status"]="Submitted";
-               allData[i]["Status"]="Submitted";
-              isEmpty(i,allData,storage,offline,loading);
-             }
-             else{
-                this.presentToast('Work Order not submitted with location!');
-             }
-
-         }, (err)=>{
-            this.presentToast('Could not submit Work Order Location!');
-        });
-      }
-      else{
-        this.presentToast('Work Order Data should be already submitted!');
-      }
-        break;
-     }
-     case "GPS": {
-      if(data["Status"]=="Pending"){
-
-       submit.updateGPSLoc(data["Info"],token).subscribe((result) =>{
-
-         if(result["Status"]==true){
-           data["Status"]="Submitted";
-           allData[i]["Status"]="Submitted";
-           isEmpty(i,allData,storage,offline,loading);
-         }
-         else{
-            this.presentToast('Batch Treatment not submitted with location!');
-         }
-         },(err)=>{
-           //console.log(err.message);
-
-        });
-        }else{
-          this.presentToast('GPS Data should be already submitted!');
-        }
-        break;
-     }
+  // submitOfflineForm(data){
+  //     var data = data;
+  //     var length:number = data.length;
+  //     var secondLength = data.length;
+  //     var testLength = data.length;
+  //     var count=0;
+  //   //console.log(formLength);
+  //   /*** Need to create function per form
+  //        submittion to go to right  API call **/
+  //   while(length--){
+  //   if(data[length]["Type"]=="Project"){
+  //   const loading = this.loadingCtrl.create({
+  //    content: 'Retrying Form Submission...'
+  //   });
+  //    loading.present();
+  //     //console.log("Here in BOL");
+  //   if(data[length]["Status"]=="Pending"){
+  //     //console.log(data[length]["Info"]);
+  //     //console.log(data[length]["Status"]);
+  //   this.stemAPI.submitDevonianForm(data[length]["Info"],this.token).subscribe((result) =>{
+  //    //console.log(result["Status"]);
+  //          var length = testLength;
+  //          if(result["Status"]==true){
+  //             /* WILL NEED TO TEST MORE FOR THIS ISSUE OF OFFLINE*/
+  //             //data[length]["Status"]="Submitted";
+  //            isEmpty(length,data,this.storage,this.offlineFormSubmissions,loading);
+  //          }
+  //          else if(result["Status"]==false){
+  //             this.presentToast('Project not submitted with location!');
+  //          }
+  //        },(err)=>{
+  //          console.log(err.message);
+  //          this.presentToast('Project not Submitted! Try again!');
+  //        });
+  //   }
+  //   else{
+  //     this.presentToast('Project should be already submitted!');
+  //   }
+  //   loading.dismiss();
+  //   }
+  //   else{
+  //     count++;
+  //       //console.log(count);
+  //   }
+  //   }
+  //   if(count==secondLength){
+  //     while(secondLength--){
+  //       //console.log(secondLength);
+  //       //console.log(count);
+  //         this.callAPI(testLength,secondLength,data[secondLength],data);
+  //     }
+  //   }
+  //   }
+    // callAPI(testLength,i,data,allData) {
+    // const loading = this.loadingCtrl.create({
+    // content: 'Retrying Form Submission...'
+    // });
+    // loading.present();
+    // var submit = this.stemAPI;
+    // var token = this.token;
+    // var offline = this.offlineFormSubmissions;
+    // var storage = this.storage;
+    // var submitted:boolean;
+    // var i = i;
+    // //setTimeout(function() {
+    // switch(data["Type"]){
+    //  case "WO": {
+    //     // console.log("Here in Batch");
+    //     if(data["Status"]=="Pending"){
+    //
+    //      submit.submitDevonianForm(data["Info"],token).subscribe((result)=>{
+    //        //console.log(result["Status"]);
+    //          if(result["Status"]==true){
+    //            data["Status"]="Submitted";
+    //            allData[i]["Status"]="Submitted";
+    //           isEmpty(i,allData,storage,offline,loading);
+    //          }
+    //          else{
+    //             this.presentToast('Work Order not submitted with location!');
+    //          }
+    //
+    //      }, (err)=>{
+    //         this.presentToast('Could not submit Work Order Location!');
+    //     });
+    //   }
+    //   else{
+    //     this.presentToast('Work Order Data should be already submitted!');
+    //   }
+    //     break;
+    //  }
+    //  case "GPS": {
+    //   if(data["Status"]=="Pending"){
+    //
+    //    submit.updateGPSLoc(data["Info"],token).subscribe((result) =>{
+    //
+    //      if(result["Status"]==true){
+    //        data["Status"]="Submitted";
+    //        allData[i]["Status"]="Submitted";
+    //        isEmpty(i,allData,storage,offline,loading);
+    //      }
+    //      else{
+    //         this.presentToast('Batch Treatment not submitted with location!');
+    //      }
+    //      },(err)=>{
+    //        //console.log(err.message);
+    //
+    //     });
+    //     }else{
+    //       this.presentToast('GPS Data should be already submitted!');
+    //     }
+    //     break;
+    //  }
      // case "ConfirmBOL": {
      //  if(data["Status"]=="Pending"){
      //   submit.confirmBOLData(data["Info"],token).subscribe((result) =>{
@@ -382,13 +392,13 @@ export class ReapService {
      //    }
      //    break;
      // }
-     default:
-        this.presentToast('Something Went Wrong!');
-       break;
-    }
+    //  default:
+    //     this.presentToast('Something Went Wrong!');
+    //    break;
+    // }
     //},((i) * 1000) + 1000);
-    loading.dismiss();
-  }
+  //   loading.dismiss();
+  // }
     //Compared UserLocation to Well Locations and gives user nearest location within 5 miles
   grabUserLoc(lat,lon){
         //Resets arrays for every time the user alternates buttons
@@ -498,12 +508,22 @@ export class ReapService {
 
       toast.present();
       }
+
+    presentAlert(title,subTitle,button){
+
+      let alert = this.alertCtrl.create({
+           title: title,
+          subTitle: subTitle,
+           buttons: [button]
+         });
+       alert.present();
+    }
 }
-function isEmpty(legth,allData,storage,offline,loading){
-    allData[length]["Status"]="Submitted";
-    // console.log(length);
-    // console.log(allData[length]);
-    storage.set('offlineSubmission',allData);
-    offline = allData;
-    loading.dismiss();
-  }
+// function isEmpty(legth,allData,storage,offline,loading){
+//     allData[length]["Status"]="Submitted";
+//     // console.log(length);
+//     // console.log(allData[length]);
+//     storage.set('offlineSubmission',allData);
+//     offline = allData;
+//     loading.dismiss();
+//   }

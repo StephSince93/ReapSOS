@@ -26,6 +26,7 @@ export class AddExtraEquipmentPage {
               public navParams: NavParams,
               public reap: ReapService,
               public viewCtrl: ViewController) {
+                try{
                 if(this.reap.globalCrewProject!=null){
                   this.projectCost=this.reap.globalCrewProject['CostCenter'];
                 }
@@ -36,6 +37,10 @@ export class AddExtraEquipmentPage {
         }
       }
       this.extraEquipmentArray = this.tempEquipment;
+    }catch{
+    this.reap.presentAlert('Error','Error Grabbing API data, please re-sync in settings','Dismiss')
+      this.viewCtrl.dismiss(this.noSubmission);
+    }
   }
 
   submitEquipment(form: NgForm){
