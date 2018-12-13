@@ -12,7 +12,7 @@ import { AppVersion } from '@ionic-native/app-version';
 import { SelectSearchableModule } from 'ionic-select-searchable';//deprecated
 //import { IonicSelectableModule } from 'ionic-selectable';
 import { IonicStorageModule } from '@ionic/storage';
-//import { File } from '@ionic-native/file';
+import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 import { Network } from '@ionic-native/network';
 import { Pro } from '@ionic/pro';
@@ -147,7 +147,7 @@ export class MyErrorHandler implements ErrorHandler {
     Device,
     AppVersion,
     Network,
-    //File,
+    File,
     Camera,
     EmailComposer
   ]

@@ -2,9 +2,17 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { File } from '@ionic-native/file';
 
 import { ReapService } from '../../services/reap-service';
 import { StemApiProvider } from '../../providers/stem-api/stem-api';
+
+export interface WriteOptions {
+  create?: boolean;
+  replace?: boolean;
+  append?: boolean;
+  truncate?: number;
+}
 @IonicPage()
 @Component({
   selector: 'page-offline-data',
@@ -22,27 +30,112 @@ export class OfflineDataPage {
               public reap: ReapService,
               public stemAPI: StemApiProvider,
               public alertCtrl: AlertController,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController,
+              private file: File) {
 
   }
   ionViewDidLoad(){
-    this.storage.get('offlineSubmission').then((data)=>{
-        this.offlineData=data;
-        // console.log(data);
-        // console.log(JSON.stringify(data));
-        this.emailJSONData = JSON.stringify(data);
-        this.anyData();
-    });
+      this.storage.get('offlineSubmission').then((data)=>{
+          this.offlineData=data;
+          // console.log(data);
+          // var test = JSON.stringify(data[0]["Info"])
+          //  console.log(test);
+          this.emailJSONData = JSON.stringify(data);
+          //this.saveAsCsv();
+          this.anyData();
+      });
   }
   anyData(){
-    if(this.offlineData.length==0||this.offlineData==null){
-      this.isData = false;
-      //console.log(this.isData);
-    }
-    else{
-      this.isData = true;
-    }
+    console.log(this.offlineData);
+    try{
+        if(this.offlineData==[]||this.offlineData==null){
+          this.isData = false;
+          //console.log(this.isData);
+        }
+        else{
+          this.isData = true;
+        }
+    }catch(e){
+        this.reap.presentAlert('Error','Error Grabbing API data, please re-sync in settings','Dismiss')
+        this.navCtrl.pop();
+      }
   }
+
+  saveAsCsv() {
+    var csv: any = this.convertToCSV(JSON.stringify(this.offlineData))
+    var fileName: any = "data.csv"
+    this.file.writeFile(this.file.tempDirectory,fileName, csv)
+      .then(
+      _ => {
+        alert('Success ;-)')
+      }
+      )
+      .catch(
+      err => {
+          this.reap.presentToast('Data no workie');
+        //    this.file.writeExistingFile(this.file.externalRootDirectory, fileName, csv)
+        //   .then(
+        //   _ => {
+        // alert('Success ;-)')
+        //   }
+        //   )
+        //   .catch(
+        //   err => {
+        //     alert('Failure')
+        //   }
+        //   )
+      }
+      )
+
+  }
+
+  convertToCSV(data) {
+    var json = data.wo
+    var fields = Object.keys(json[0])
+    var replacer = function(key, value) { return value === null ? '' : value }
+    var csv = json.map(function(row){
+  return fields.map(function(fieldName){
+      return JSON.stringify(row[fieldName], replacer)
+    }).join(',')
+  })
+  csv.unshift(fields.join(',')) // add header column
+
+console.log(csv.join('\r\n'))
+    // console.log(data)
+    //
+    // var formCount = data.length
+    // console.log(formCount)
+    // //Header
+    // for (var i = 0; i < formCount; i++) {
+    //   var innerData = data[i]["Info"][i]
+    //   console.log(innerData);
+    //   if(innerData['wo']){
+
+    //   }
+    // }
+
+    // //Teams
+    // for (var i = 0; i < innerData; i++) {
+    //   line = ''
+    //   for (var j = 0; j < formCount; j++) {
+    //     if (line != '') line += ';'
+    //
+    //     line += data[j][i]
+    //
+    //   }
+    //   csv += line + '\r\n'
+    // }
+    // console.log(csv);
+
+    return csv
+  }
+
+
+
+
+
+
+
   dismissModal() {
     this.viewCtrl.dismiss();
   }

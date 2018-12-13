@@ -192,7 +192,7 @@ export class FieldTicketPage {
     //Created form value as foreman
     //Form.value.foreman = this.foreman;
     //Form.value.formStartTime = this.reap.formStartTime;
-    console.log(Form.value);
+    //console.log(Form.value);
     var selectedProject = Form.value.Project;
     this.reap.selectedProject = selectedProject;
     // if(!Form.value.Location && Form.value.updatedLocation){//If user grabs nearest location

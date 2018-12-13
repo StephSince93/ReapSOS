@@ -90,7 +90,7 @@
                   <ion-grid class="formDetails" *ngFor="let equipment of equipmentDetails;index as i;">
                       <ion-row>
                         <ion-col col-6>EQUIPMENT:</ion-col>
-                        <ion-col col-6>{{equipment?.Name}}</ion-col>
+                        <ion-col col-6>{{equipment?.Name2}}</ion-col>
                       </ion-row>
                       <!-- <ion-row>
                         <ion-col col-6>STARTING ODOMETER:</ion-col>
@@ -174,9 +174,9 @@
                 </ion-row>
             </ion-grid> -->
   <!-- <hr> -->
-
-  <ion-label>MISC. SUMMARY</ion-label>
-  <hr>
+<div *ngIf="!isMisc">
+    <ion-label>MISC. SUMMARY</ion-label>
+    <hr>
             <ion-grid class="formDetails" *ngFor="let misc of miscDetails;index as i;">
                 <ion-row>
                   <ion-col col-6>DESCRIPTION:</ion-col>
@@ -190,8 +190,8 @@
                   <ion-col col-12 style="text-align:center"> <button (tap)="removeMisc(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
                 </ion-row>
             </ion-grid>
-
-
+</div>
+<div *ngIf="!isPhoto">
   <ion-label>PHOTOS</ion-label>
   <hr>
   <ion-grid class="formDetails" *ngFor="let photo of photoDetails;index as i;">
@@ -203,6 +203,7 @@
                 </ion-row>
               </ion-grid>
   <hr>
+  </div>
   <ion-label color="primary" stacked>SIGNATURE</ion-label>
   <div class="box">
     <signature-pad
@@ -211,10 +212,10 @@
     <ion-grid>
       <ion-row>
         <ion-col col-12>
-          <button type="button" ion-button full color="light" (click)="sigClear()" large>CLEAR</button>
+          <button type="button" ion-button full style="background-color:teal" (click)="sigClear()" large>CLEAR</button>
         </ion-col>
         <ion-col col-12>
-          <button ion-button full color="warning" (click)="sigBack()" large>CANCEL</button>
+          <button ion-button full  (click)="sigBack()" large>CANCEL</button>
         </ion-col>
         <ion-col col-12>
           <button ion-button full id="submitButton" [disabled]='submitClicked===true'(click)="sigSubmit()" large>SUBMIT</button>

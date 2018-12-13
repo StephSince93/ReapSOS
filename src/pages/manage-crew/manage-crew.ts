@@ -162,7 +162,7 @@ export class ManageCrewPage {
           //console.log(this.globalProject);
           var projectCost = this.globalProject['CostCenter'];
           var projectNumber =  this.globalProject['ProjectName'];
-          console.log(projectNumber);
+          //console.log(projectNumber);
           for(let i=0;i<this.reap.getEquipment.length;i++){
             if(this.reap.getEquipment[i]['CostCenter']==projectCost){
               //console.log(this.reap.getEquipment[i]);
@@ -170,7 +170,7 @@ export class ManageCrewPage {
             }
 
           }
-          console.log(this.tempEquipment);
+          //console.log(this.tempEquipment);
           this.equipmentArray = this.tempEquipment;
           this.tempEquipment = [];
 
@@ -277,7 +277,7 @@ export class ManageCrewPage {
 
     //console.log(this.reap.globalCrewItems);
     //this.reap.globalCrewItems = this.globalItems;
-    console.log(form.value);
+    //console.log(form.value);
     this.reap.globalCrewProject = form.value.Project;
     this.reap.globalCrewPersonnel = form.value.Personnel;
     this.reap.globalCrewEquipment = form.value.Equipment;

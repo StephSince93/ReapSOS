@@ -93,9 +93,6 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>need location access to find assets nearby</string>
     </edit-config>
-    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
-        <string>need photo library access to save pictures</string>
-    </edit-config>
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
@@ -122,4 +119,5 @@
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.1.1" />
     <engine name="ios" spec="4.5.5" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
 </widget>

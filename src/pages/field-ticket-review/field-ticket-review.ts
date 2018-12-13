@@ -23,6 +23,8 @@ export class FieldTicketReviewPage {
   private mergeEquipment:any [] = [];//merges all equipment together
   private formDetails:any[] = [];//from main Work Order form
   private miscDetails:any[] = this.reap.misc;// stores misc form
+  private isMisc:boolean = false;
+  private isPhoto:boolean = false;
   private laborDetails:any[] = this.reap.extraLabor;//When adding new Labor
   private equipmentDetails:any[] = this.reap.equipment;//When adding new Equipment
   //private jobDetails:any[] = this.reap.job;//stores job form
@@ -44,13 +46,20 @@ export class FieldTicketReviewPage {
               public loadingCtrl: LoadingController,
               private storage: Storage,
               private toastCtrl: ToastController) {
+                console.log(this.reap.misc);
+                if(this.reap.misc!=[]||this.reap.misc!=null){
+                  this.isMisc = true;
+                }
+                if(this.reap.photo!=[]||this.reap.photo!=null){
+                  this.isPhoto= true;
+                }
             this.formDetails.push(this.reap.fieldTicketForm);
             //console.log(this.formDetails[0]['project']);
             if(this.reap.globalCrewProject!=null){
               this.formDetails[0]['project'] = this.reap.globalCrewProject;
             }
             //console.log(this.jobDetails);
-            console.log(this.equipmentDetails);
+            //console.log(this.equipmentDetails);
             //console.log(this.laborDetails);
             var date = new Date(this.formDetails[0]['currentDate']);
             this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
