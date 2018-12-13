@@ -50,7 +50,7 @@ export class FieldTicketReviewPage {
               this.formDetails[0]['project'] = this.reap.globalCrewProject;
             }
             //console.log(this.jobDetails);
-            //console.log(this.equipmentDetails);
+            console.log(this.equipmentDetails);
             //console.log(this.laborDetails);
             var date = new Date(this.formDetails[0]['currentDate']);
             this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
@@ -159,7 +159,7 @@ export class FieldTicketReviewPage {
                  *
                  */
                  loading.present();
-                //console.log(this.submitData);
+                console.log(this.submitData);
                  //creates a loading controller while user submits
                  this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result) =>{
 

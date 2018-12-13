@@ -90,7 +90,7 @@
                   <ion-grid class="formDetails" *ngFor="let equipment of equipmentDetails;index as i;">
                       <ion-row>
                         <ion-col col-6>EQUIPMENT:</ion-col>
-                        <ion-col col-6>{{equipment?.Name2}}</ion-col>
+                        <ion-col col-6>{{equipment?.Name}}</ion-col>
                       </ion-row>
                       <!-- <ion-row>
                         <ion-col col-6>STARTING ODOMETER:</ion-col>
@@ -203,7 +203,7 @@
                 </ion-row>
               </ion-grid>
   <hr>
-  <ion-label color="primary" stacked>FOREMAN SIGNATURE</ion-label>
+  <ion-label color="primary" stacked>SIGNATURE</ion-label>
   <div class="box">
     <signature-pad
       name="Signature"
@@ -214,7 +214,7 @@
           <button type="button" ion-button full color="light" (click)="sigClear()" large>CLEAR</button>
         </ion-col>
         <ion-col col-12>
-          <button ion-button full color="danger" (click)="sigBack()" large>CANCEL</button>
+          <button ion-button full color="warning" (click)="sigBack()" large>CANCEL</button>
         </ion-col>
         <ion-col col-12>
           <button ion-button full id="submitButton" [disabled]='submitClicked===true'(click)="sigSubmit()" large>SUBMIT</button>

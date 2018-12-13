@@ -80,15 +80,15 @@ export class FieldTicketPage {
                     this.phaseArray= this.reap.getPhaseCodes;
 
                     var projectNumber =  this.globalProject['ProjectName'];
-
+                    console.log(projectNumber)
                     for(let i=0;i<this.reap.getPhaseCodes.length;i++){
                       if(this.reap.getPhaseCodes[i]['JobNumber']==projectNumber){
                         //console.log(this.reap.getEquipment[i]);
                         this.tempPhase.push(this.reap.getPhaseCodes[i]);
                       }
-                      this.phaseArray = this.tempPhase;
-                      this.tempPhase = [];
                     }
+                    this.phaseArray = this.tempPhase;
+                    this.tempPhase = [];
                   }
                   else{
                     this.phaseArray= this.reap.getPhaseCodes;
@@ -117,6 +117,7 @@ export class FieldTicketPage {
     //   console.log(this.personnelArray);
   }
   projectChange(event: { component: SelectSearchableComponent, value: any }) {
+    this.globalPhaseCode = [];
     //console.log(i);
     //this.selectedArray = this.projectArray[i];
     //this.afeString = this.selectedArray['AFE_Number'];
@@ -191,7 +192,9 @@ export class FieldTicketPage {
     //Created form value as foreman
     //Form.value.foreman = this.foreman;
     //Form.value.formStartTime = this.reap.formStartTime;
-    //console.log(Form.value);
+    console.log(Form.value);
+    var selectedProject = Form.value.Project;
+    this.reap.selectedProject = selectedProject;
     // if(!Form.value.Location && Form.value.updatedLocation){//If user grabs nearest location
     //   Form.value.Location = Form.value.updatedLocation;
     //   //Removes breaks from JSON string

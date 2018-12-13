@@ -8,7 +8,7 @@ import { ReapService } from '../../services/reap-service';
 class EquipmentList {
   public ID: number;
   public Name:string;
-
+  public Name2: string;
 }
 
 @IonicPage()
@@ -27,13 +27,14 @@ export class AddExtraEquipmentPage {
               public reap: ReapService,
               public viewCtrl: ViewController) {
                 try{
-                if(this.reap.globalCrewProject!=null){
-                  this.projectCost=this.reap.globalCrewProject['CostCenter'];
-                }
+                if(this.reap.selectedProject!=null){
+                  this.projectCost=this.reap.selectedProject['CostCenter'];
+
       for(let i=0;i<this.reap.getEquipment.length;i++){
           if(this.reap.getEquipment[i]['CostCenter']==this.projectCost){
           //console.log(this.reap.getEquipment[i]);
           this.tempEquipment.push(this.reap.getEquipment[i]);
+          }
         }
       }
       this.extraEquipmentArray = this.tempEquipment;

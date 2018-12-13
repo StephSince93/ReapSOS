@@ -91,7 +91,7 @@ export class ManageCrewPage {
             //console.log(this.tempEquipment);
               this.equipmentArray = this.tempEquipment;
               this.tempEquipment = [];
-              
+
               for(let i=0;i<this.reap.getPhaseCodes.length;i++){
                 if(this.reap.getPhaseCodes[i]['JobNumber']==projectNumber){
                   //console.log(this.reap.getEquipment[i]);
@@ -144,6 +144,9 @@ export class ManageCrewPage {
 
   projectChange(event: { component: SelectSearchableComponent, value: any }) {
           //this.globalItems = [];
+          this.noPhaseCode = true;
+          this.noEquipment = true;
+          this.noPersonnel = true;
           this.globalPersonnel = [];
           this.globalEquipment = [];
           this.globalPhaseCode = [];
@@ -151,6 +154,7 @@ export class ManageCrewPage {
           this.globalProject = event.value;
           if(event.value==null){
             this.noProject = true;
+
           }
           else{
             this.noProject = false;
@@ -166,7 +170,7 @@ export class ManageCrewPage {
             }
 
           }
-          //console.log(this.tempEquipment);
+          console.log(this.tempEquipment);
           this.equipmentArray = this.tempEquipment;
           this.tempEquipment = [];
 

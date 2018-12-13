@@ -44,6 +44,7 @@ export class ReapService {
     public globalCrewEquipment: any [] = [];
     public globalCrewItems: any [] = [];
     public globalCrewPhaseCodes: any [] = [];
+    public selectedProject: any [] =[];//For Field Ticket to Extra Equipment
     public totalTime: any;
     //Offline Form Submission
     public offlineFormSubmissions:any [] = [];
