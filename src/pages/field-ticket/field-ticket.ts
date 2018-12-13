@@ -74,11 +74,11 @@ export class FieldTicketPage {
                 if(this.reap.globalCrewProject!=null){
                   this.globalProject = this.reap.globalCrewProject;
                   this.projectArray= this.reap.getProject;
-                  console.log('here')
+
                   if(this.reap.globalCrewPhaseCodes!=null){
                     this.globalPhaseCode = this.reap.globalCrewPhaseCodes;
                     this.phaseArray= this.reap.getPhaseCodes;
-                    console.log('here')
+
                     var projectNumber =  this.globalProject['ProjectName'];
 
                     for(let i=0;i<this.reap.getPhaseCodes.length;i++){
@@ -131,13 +131,13 @@ export class FieldTicketPage {
         this.tempPhase.push(this.reap.getPhaseCodes[i]);
       }
     }
-    console.log(this.tempPhase);
+  //  console.log(this.tempPhase);
     this.phaseArray = this.tempPhase;
     this.tempPhase = [];
   }
 
   onSubmit(Form: NgForm){
-    console.log(Form.value);
+    //console.log(Form.value);
     //var t0 = performance.now();
     var sT = new Date(Form.value.startTime);
     var eT = new Date(Form.value.endTime);

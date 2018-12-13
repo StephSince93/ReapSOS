@@ -23,7 +23,7 @@ export class LaborPage {
               public storage: Storage,
               public modalCtrl: ModalController) {
                 this.crewPersonnel = this.reap.globalCrewPersonnel;
-                console.log(this.crewPersonnel);
+                //console.log(this.crewPersonnel);
                 if(!Array.isArray(this.crewPersonnel) || !this.crewPersonnel.length){
                   this.doeshaveCrew = false;
                   //console.log(this.doeshaveCrew);

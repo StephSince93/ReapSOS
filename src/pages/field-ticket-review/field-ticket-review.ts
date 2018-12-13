@@ -159,7 +159,7 @@ export class FieldTicketReviewPage {
                  *
                  */
                  loading.present();
-                console.log(this.submitData);
+                //console.log(this.submitData);
                  //creates a loading controller while user submits
                  this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result) =>{
 
