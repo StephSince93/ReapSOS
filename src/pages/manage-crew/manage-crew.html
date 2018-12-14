@@ -33,7 +33,7 @@
         <ion-grid>
           <ion-row *ngIf="!noProject">
             <ion-col>Name:</ion-col>
-            <ion-col>{{globalProject?.Project_Name_Description}}</ion-col>
+            <ion-col col-10>{{globalProject?.Project_Name_Description}}</ion-col>
             <!-- <ion-col><button type="button" (tap)="removePersonnel(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col> -->
           </ion-row>
         </ion-grid>
@@ -67,8 +67,8 @@
         <!-- <div *ngIf="globalPersonnel; else emptyPersonnel"> -->
         <ion-grid *ngIf="!noPhaseCode">
           <ion-row>
-            <ion-col>Phase Code:</ion-col>
-            <ion-col>{{globalPhaseCode?.Description}}</ion-col>
+            <ion-col >Phase Code:</ion-col>
+            <ion-col col-10>{{globalPhaseCode?.Description}}</ion-col>
             <!-- <ion-col><button type="button" (tap)="removePersonnel(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col> -->
           </ion-row>
         </ion-grid>
@@ -103,7 +103,7 @@
         <ion-grid  *ngFor="let personnel of globalPersonnel;let i = index">
           <ion-row>
             <ion-col>Name:</ion-col>
-            <ion-col>{{personnel?.FullName}}</ion-col>
+            <ion-col col-10>{{personnel?.FullName}}</ion-col>
             <!-- <ion-col><button type="button" (tap)="removePersonnel(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col> -->
           </ion-row>
         </ion-grid>
@@ -138,7 +138,7 @@
           <ion-grid *ngFor="let equipment of globalEquipment;let i = index">
             <ion-row>
               <ion-col>Name:</ion-col>
-              <ion-col>{{equipment?.Name2}}</ion-col>
+              <ion-col col-10>{{equipment?.Name2}}</ion-col>
               <!-- <ion-col><button type="button" (tap)="removeEquipment(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col> -->
             </ion-row>
           </ion-grid>
