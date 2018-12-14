@@ -65,7 +65,7 @@ export class EquipmentPage {
   for(let i=0;i<this.equipmentInfo.length;i++){
   this.totalExtraEquipment.push({'ID':this.equipmentInfo[i].Equipment.ID,
                           'Name':this.equipmentInfo[i].Equipment.Name,
-                          // 'Odometer':this.equipmentInfo[i].Equipment.Odometer,
+                          'Name2':this.equipmentInfo[i].Equipment.Name2,
                           // 'endingOdometer':this.equipmentInfo[i].endingOdometer
                           });
                     //console.log(equipment);

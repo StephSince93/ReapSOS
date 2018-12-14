@@ -39,13 +39,12 @@
                 <ion-col>{{equipment?.hours}}</ion-col>
             </ion-row> -->
       </ion-grid>
-      <br>
       <ion-label class="gridLabel">ADD ADDITIONAL EQUIPMENT</ion-label>
         <ion-grid class="custEquipment" *ngFor="let equipment of equipmentInfo;let i = index">
            <!-- <button type="button" name="editPersonnel" id='hidden-button' (tap)="editPersonnel()"> -->
              <ion-row>
                <ion-col>Equipment Description:</ion-col>
-               <ion-col>{{equipment?.Equipment.Name}}</ion-col>
+               <ion-col>{{equipment?.Equipment.Name2}}</ion-col>
              </ion-row>
               <!-- <ion-row>
                 <ion-col>Starting Odometer:</ion-col>
@@ -68,7 +67,6 @@
       </ion-row>
     </ion-grid>
 
-<br>
       <ion-item>
         <button id="submitButton" ion-button full large>SUBMIT</button>
      </ion-item>
