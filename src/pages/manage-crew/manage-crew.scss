@@ -7,7 +7,13 @@ page-manage-crew {
       }
   .label-md[stacked]{
     height:25px;
-    font-size:1.2em;
+    font-size:20px;
+    font-weight:bold;
+    color:primary;
+  }
+  .label-ios[stacked]{
+    height:25px;
+    font-size:20px;
     font-weight:bold;
     color:primary;
   }
@@ -83,5 +89,8 @@ page-manage-crew {
 
     padding:8px;
     text-align: left;
+  }
+  .select-searchable-value-item{
+    display:none !important;
   }
 }
