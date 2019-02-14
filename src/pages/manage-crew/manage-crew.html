@@ -123,7 +123,7 @@
              [(ngModel)]="globalEquipment"
              title="Equipment"
              itemValueField=ID
-             itemTextField=Name2
+             itemTextField=Name
              name="Equipment"
              [items]="equipmentArray"
              [canSearch]="true"
@@ -138,7 +138,7 @@
           <ion-grid *ngFor="let equipment of globalEquipment;let i = index">
             <ion-row>
               <ion-col>Name:</ion-col>
-              <ion-col col-10>{{equipment?.Name2}}</ion-col>
+              <ion-col col-10>{{equipment?.Name}}</ion-col>
               <!-- <ion-col><button type="button" (tap)="removeEquipment(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col> -->
             </ion-row>
           </ion-grid>

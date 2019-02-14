@@ -16,7 +16,7 @@
       <ion-grid class="formDetails" *ngFor="let equipment of crewEquipment;index as i;">
             <ion-row>
                 <ion-col col-6>NAME:</ion-col>
-                <ion-col col-6>{{equipment?.Name2}}</ion-col>
+                <ion-col col-6>{{equipment?.Name}}</ion-col>
             </ion-row>
             <!-- <ion-row>
                 <ion-col>STARTING ODOMETER:</ion-col>
@@ -44,7 +44,7 @@
            <!-- <button type="button" name="editPersonnel" id='hidden-button' (tap)="editPersonnel()"> -->
              <ion-row>
                <ion-col>Equipment Description:</ion-col>
-               <ion-col>{{equipment?.Equipment.Name2}}</ion-col>
+               <ion-col>{{equipment?.Equipment.Name}}</ion-col>
              </ion-row>
               <!-- <ion-row>
                 <ion-col>Starting Odometer:</ion-col>

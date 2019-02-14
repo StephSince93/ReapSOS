@@ -12,7 +12,7 @@ class Personnel {
 }
 class EquipmentList {
   public ID: number;
-  public Name2:string;
+  public Name:string;
   public CostCenter:number;
 
 }
@@ -165,7 +165,7 @@ export class ManageCrewPage {
           //console.log(projectNumber);
           for(let i=0;i<this.reap.getEquipment.length;i++){
             if(this.reap.getEquipment[i]['CostCenter']==projectCost){
-              //console.log(this.reap.getEquipment[i]);
+              console.log(this.reap.getEquipment[i]);
               this.tempEquipment.push(this.reap.getEquipment[i]);
             }
 
@@ -198,7 +198,7 @@ export class ManageCrewPage {
         //console.log(this.globalPersonnel);
   }
   equipmentChange(event: { component: SelectSearchableComponent, value: any }) {
-          //console.log('value:', event.value);
+          console.log('value:', event.value);
           if(event.value==null){
             this.noEquipment =true;
           }

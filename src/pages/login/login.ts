@@ -68,7 +68,7 @@ export class LoginPage {
               buttons: ['Dismiss']
             });
             alert.present();
-            console.log(err);
+            //console.log(err);
       });
     }
     viewTOS(){

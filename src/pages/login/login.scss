@@ -1,14 +1,4 @@
 page-login {
-    // .background {
-    //   background: linear-gradient(to top,	#2F4F4F 0%, #fff 100% )
-    //   background-image: url('../assets/imgs/Roberts logo.png');
-    //   background-repeat:no-repeat;
-    //   background-position: bottom;
-    //   background-size: contain;
-    // }
-    // .bg-form{
-    //   background: linear-gradient(to left,	#2F4F4F 0%, #fff 100% )
-    // }
     ion-title {
             color: reapHeader;
             text-align:center;
@@ -61,6 +51,16 @@ page-login {
         margin-right: 0;
         padding-right: 0;
         vertical-align: middle;
+      }
+      .checkbox-md .checkbox-checked{
+        color: $toolbar-background;
+        background-color: red;
+        border-color: red;
+      }
+      .checkbox-ios .checkbox-checked{
+        color: $toolbar-background;
+        background-color: red;
+        border-color: red;
       }
 
   }
