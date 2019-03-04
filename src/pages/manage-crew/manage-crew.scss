@@ -38,6 +38,7 @@ page-manage-crew {
   }
   ion-row{
     border-bottom:solid 1px;
+    font-weight: bold;
   }
   ion-label.headerLabel.label.label-md{
     text-align: center;
@@ -92,5 +93,17 @@ page-manage-crew {
   }
   .select-searchable-value-item{
     display:none !important;
+  }
+  div.item-inner{
+    background: grey;
+  }
+  .select-searchable-ios .select-searchable-icon-inner{
+    color:black;
+  }
+  p{
+    font-size: 12px;
+    text-align: center;
+    font-weight:bold;
+    color: red;
   }
 }

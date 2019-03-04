@@ -7,13 +7,22 @@ import { Storage } from '@ionic/storage';
 import { ReapService } from '../../services/reap-service';
 import { AddExtraPersonnelPage } from '../add-extra-personnel/add-extra-personnel';
 
+class BillCodesList {
+  public ID: number;
+  public Job_Number: string;
+  public Bill_Code: string;
+  public BillCodeDescription: string;
+}
 @IonicPage()
 @Component({
   selector: 'page-labor',
   templateUrl: 'labor.html',
 })
 export class LaborPage {
-  private crewPersonnel:any[]=[];
+  private LaborBillCodes : BillCodesList[];
+  laborbillcodes: BillCodesList;
+
+  crewPersonnel:any[]=[];
   private doeshaveCrew:boolean = false;
   private personnelInfo:any [] = [];
   private totalExtraPersonnel:any [] = [];
@@ -22,8 +31,10 @@ export class LaborPage {
               public reap: ReapService,
               public storage: Storage,
               public modalCtrl: ModalController) {
+                this.LaborBillCodes = this.reap.LaborBC;
+                console.log(this.LaborBillCodes);
                 this.crewPersonnel = this.reap.globalCrewPersonnel;
-                //console.log(this.crewPersonnel);
+                console.log(this.crewPersonnel);
                 if(!Array.isArray(this.crewPersonnel) || !this.crewPersonnel.length){
                   this.doeshaveCrew = false;
                   //console.log(this.doeshaveCrew);
@@ -91,11 +102,13 @@ export class LaborPage {
     //console.log(this.equipmentDetails);
   }
   keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
+    const pattern = /[0-9\.\ ]/;
 
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
       event.preventDefault();
     }
   }
+  laborbillcodeChange(event: { component: SelectSearchableComponent, value: any }) {
+   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpHeaders,HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/delay';
@@ -50,14 +50,19 @@ export class StemApiProvider {
   }
 
    //GET Data
- getData(authToken){
+ getData(authToken,groupName){
       const httpOptions = {
           headers: new HttpHeaders({
               'Accept': 'application/json, text/plain',
               'Content-Type':  'application/json',
-              'Authorization': authToken
+              'Authorization': authToken,
+              'GroupName':groupName
             })
    };
+
+   // let params = new HttpParams();
+   // params = params.append('groupName',groupName);
+   // params = params.append('authToken',authToken);
    //console.log(authToken);
    return this.http.get(this.apiGetUrl, httpOptions)
    .retry(3).timeout(15000)// This will retry 3 times in case there's an error

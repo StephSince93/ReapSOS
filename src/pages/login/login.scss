@@ -21,18 +21,23 @@ page-login {
       }
       .bg-form{
         background-color: white;
+        font-size: 18px;
+        font-weight: bold;
       }
       .item-md{
-        height:65px;
+        height:80px;
       }
       .item-ios{
-        height:65px;
+        height:80px;
       }
-      .text-input-md{
-      text-align: center;
+      .item-label-floating .text-input-md{
+      text-align: left;
       }
-      .text-input-ios{
-      text-align: center;
+      .item-label-floating .text-input-ios{
+      text-align: left;
+      }
+      ion-label[floating]{
+        color:red;
       }
       #TOS{
         text-decoration: underline;
@@ -61,6 +66,12 @@ page-login {
         color: $toolbar-background;
         background-color: red;
         border-color: red;
+      }
+      .list-ios > .item-block:first-child{
+        border-top: none;
+      }
+      .list-md > .item-block:first-child{
+        border-top: none;
       }
 
   }

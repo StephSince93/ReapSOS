@@ -33,13 +33,26 @@ export class MenuPage {
       this.storage.get('authToken').then((data)=>{
       if(data!=null){
         this.reap.token = data;
-        //console.log(this.reap.token)
-        this.reap.grabAPIData(this.reap.token);
-        this.reap.getLocalStorage();
+          this.storage.get('groupName').then((data)=>{
+            this.reap.groupName = data
+            if(data!=null){//grabs groupId login
+              this.reap.grabAPIData(this.reap.token,this.reap.groupName);
+              this.reap.getLocalStorage();
+            }
+            else{//If no Group name is saved from login
+              this.reap.groupName = "";
+              this.reap.grabAPIData(this.reap.token,this.reap.groupName);
+              this.reap.getLocalStorage();
+            }
+         },err=>{
+           console.log('How`d you get here?'+err);
+         });
        }
        else{
          this.reap.presentToast('Sync Unsuccessful');
        }
+    },err=>{
+      console.log('How`d you get here?'+err);
     });
     //fixes issue with signature swiping back.
     this.navCtrl.swipeBackEnabled = false;

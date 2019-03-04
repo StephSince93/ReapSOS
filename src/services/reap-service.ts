@@ -14,23 +14,21 @@ export class ReapService {
     //data exported and saved into service values
     public getData:any;
     public getLocations:any[]=[];
-    // public equipmentType:any[]=[];
     public getEquipment:any[]=[];
     public getPersonnel:any[]=[];
-    public getProject:any[]=[];
+    public getJobLaborBR:any[]=[];
     public getExtras:any[]=[];
     public getAFE:any[]=[];
     public getJobs:any[]=[];
     public getPhaseCodes:any[]=[];
     public getMD5:string;
-    public devonianVersion:string;//app version string
+    public saulsburyVersion:string;//app version string
   /********************************************/
     public misc:any[]=[];
     public equipment:any[]=[];//Only For new Equipment
     public extraLabor:any[]=[];//Only For new Personnel
     public job:any[]=[];
     public photo:any[]=[];
-    /* 3 forms for Devonian */
     public fieldTicketForm:any[]=[];
     public jsaForm:any[]=[];
     public projectForm:any[]=[];
@@ -39,7 +37,7 @@ export class ReapService {
     public updatedLocation:any [] = [];
     public wellLocation:any [] = [];
     //Set crew
-    public globalCrewProject: any [] = [];
+    public globalCrewJob: any [] = [];
     public globalCrewPersonnel: any [] = [];
     public globalCrewEquipment: any [] = [];
     public globalCrewItems: any [] = [];
@@ -49,10 +47,13 @@ export class ReapService {
     //Offline Form Submission
     public offlineFormSubmissions:any [] = [];
     //Connecting Main and Description Form
-    public selectedCompany:any;
+    public selectedJob:any;
+    public selectedJobNumber:any;
+    public LaborBC:any []=[];
+    public groupName:any;
     public token:any;
     public formStart:any;
-    public formStartTime:any;//testing with Devonian
+    public formStartTime:any;//testing with Saulsbury
     public networkType:any;
     public online:any = true;
     connected: Subscription;
@@ -108,25 +109,26 @@ export class ReapService {
     }
     getVersionNumber(){
      this.appVersion.getVersionNumber().then((version) => {
-          this.devonianVersion = version;
-          this.storage.set('AppVersion',this.devonianVersion);
-          //console.log(JSON.stringify(this.devonianVersion));
+          this.saulsburyVersion = version;
+          this.storage.set('AppVersion',this.saulsburyVersion);
+          //console.log(JSON.stringify(this.saulsburyVersion));
             },(error)=>{
-          this.devonianVersion = "Could not Grab App Version!";
+          this.saulsburyVersion = "Could not Grab App Version!";
           //console.log('Cannot Grab App Version!');
         });
       }
 
-    grabAPIData(token){
+    grabAPIData(token,groupName){
       /* Initialize Observables */
       this.getAndPost;
       this.checkConnection;
       //console.log('GET request happened');
       this.token = token;
+      this.groupName = groupName;
       //console.log(this.token);
       LoginPage.initialLogin = false;//changes login variable to false after user logs in
         //imported data from API
-        this.stemAPI.getData(this.token).subscribe((result) =>{
+        this.stemAPI.getData(this.token,this.groupName).subscribe((result) =>{
         this.getData = (JSON.stringify(result));
         this.getData = JSON.parse(this.getData);
         console.log(this.getData);
@@ -144,17 +146,17 @@ export class ReapService {
         this.getPersonnel = this.getData['Personnel'];
         this.storage.set('Personnel',this.getPersonnel);
 
+        this.getJobLaborBR = this.getData['JobLaborBR'];
+        this.storage.set('JobLaborBR',this.getJobLaborBR);
+
         this.getAFE = this.getData['AFE'];
         this.storage.set('AFE',this.getAFE);
 
-        this.getProject = this.getData['Project'];
-        this.storage.set('Project',this.getProject);
+        this.getJobs = this.getData['Jobs'];
+        this.storage.set('Jobs',this.getJobs);
 
         this.getExtras = this.getData['Extras'];
         this.storage.set('Extras',this.getExtras);
-
-        this.getJobs = this.getData['Jobs'];
-        this.storage.set('Jobs',this.getJobs);
 
         this.getPhaseCodes = this.getData['PhaseCode'];
         this.storage.set('PhaseCodes',this.getPhaseCodes);
@@ -183,7 +185,7 @@ export class ReapService {
         this.formStart = data;
         //console.log(this.formStart);
         });
-        /* Testing formStartTime with Devonian*/
+        /* Testing formStartTime with Saulsbury*/
         this.storage.get('getTimeStart').then((data)=>{
         this.formStartTime = data;
         //console.log(this.formStartTime);
@@ -201,9 +203,8 @@ export class ReapService {
         this.getPersonnel = data;
         });
 
-        this.storage.get('Project').then((data)=>{
-        this.getProject = data;
-        //console.log(this.getProject);
+        this.storage.get('JobLaborBR').then((data)=>{
+        this.getJobLaborBR = data;
         });
 
         this.storage.get('AFE').then((data)=>{
@@ -231,16 +232,16 @@ export class ReapService {
         this.globalCrewItems = data;
         });
 
-        this.storage.get('globalCrewProject').then((data)=>{
-        this.globalCrewProject = data;
+        this.storage.get('globalCrewJob').then((data)=>{
+        this.globalCrewJob = data;
         });
-
+        console.log(this.globalCrewJob);
         this.storage.get('globalCrewPhaseCodes').then((data)=>{
         this.globalCrewPhaseCodes = data;
         });
 
         this.storage.get('AppVersion').then((data)=>{
-        this.devonianVersion = data;
+        this.saulsburyVersion = data;
       });
 
       //grabs the locally stored form submissions offline

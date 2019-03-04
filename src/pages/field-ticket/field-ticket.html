@@ -19,20 +19,20 @@
       </ion-item>
 
       <ion-item class="formField ionField">
-        <ion-label color="primary" stacked >SELECT PROJECT</ion-label>
+        <ion-label color="primary" stacked >SELECT JOB</ion-label>
           <select-searchable
           class="specialSelect"
           item-content
-          [(ngModel)]="globalProject"
-          [items]="projectArray"
-          title="Project"
+          [(ngModel)]="globalJob"
+          [items]="jobArray"
+          title="Job"
           itemValueField=ID
-          itemTextField=Project_Name_Description
-          name="Project"
+          itemTextField=JobName
+          name="Job"
           [canSearch]="true"
           [canClear]="true"
           [isMultiple]="false"
-          (onChange)="projectChange($event)">
+          (onChange)="jobChange($event)">
         </select-searchable>
       </ion-item>
 
@@ -50,7 +50,7 @@
           [canSearch]="true"
           [canClear]="true"
           [isMultiple]="false"
-          (onChange)="searchableChange($event)">
+          (onChange)="phasecodeChange($event)">
         </select-searchable>
       </ion-item>
 <!------------------------------------------------------------------------->
@@ -227,6 +227,12 @@
       </ion-item> -->
 
       <ion-item class="formField ionField">
+        <ion-label color="primary" stacked >CLIENT PM</ion-label>
+        <ion-input [(ngModel)]="clientPM" name="clientPM" disabled>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="formField ionField">
         <ion-label color="primary" stacked>START TIME</ion-label>
         <ion-datetime
         type="date"
@@ -248,13 +254,7 @@
         minuteValues="0,15,30,45"
         [(ngModel)]="defaultEndTime"></ion-datetime>
       </ion-item>
-
-      <ion-item class="formField ionField">
-       <ion-label color="primary" stacked >COMPANY MAN TO SIGN</ion-label>
-       <ion-input ngModel name="companyMan">
-       </ion-input>
-     </ion-item>
-
+      
       <ion-item class="formField ionField">
         <ion-label color="primary" stacked>WORK DESCRIPTION</ion-label>
         <ion-textarea

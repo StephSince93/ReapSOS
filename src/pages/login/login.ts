@@ -44,6 +44,9 @@ export class LoginPage {
     if(this.res.token!=""){//sets authtoken to local storage
       this.storage.set('authToken',this.res.token)
       }
+    if(this.res.groupName!=""){//sets groupName directed to GET data
+      this.storage.set('groupName',this.res.groupName)
+    }
       //console.log(localStorage);
       if(this.res.status == true){
         setTimeout(() => {
