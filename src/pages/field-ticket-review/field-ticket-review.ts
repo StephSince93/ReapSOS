@@ -16,15 +16,15 @@ import { StemApiProvider } from '../../providers/stem-api/stem-api';
 })
 export class FieldTicketReviewPage {
   @ViewChild(SignaturePad) public signaturePad: SignaturePad;
-  //testing for Devonian
-  private crewPersonnel:any [] = this.reap.globalCrewPersonnel;//From existing CrewPersonnel
-  private crewEquipment:any [] = this.reap.globalCrewEquipment;//From existing CrewEquipment
-  private crewItems:any [] = this.reap.globalCrewItems;
+
+  public crewPersonnel:any [] = this.reap.globalCrewPersonnel;//From existing CrewPersonnel
+  public crewEquipment:any [] = this.reap.globalCrewEquipment;//From existing CrewEquipment
+  public crewItems:any [] = this.reap.globalCrewItems;
   private mergeEquipment:any [] = [];//merges all equipment together
   private formDetails:any[] = [];//from main Work Order form
   private miscDetails:any[] = this.reap.misc;// stores misc form
-  private isMisc:boolean = false;
-  private isPhoto:boolean = false;
+  public isMisc:boolean = false;
+  public isPhoto:boolean = false;
   private laborDetails:any[] = this.reap.extraLabor;//When adding new Labor
   private equipmentDetails:any[] = this.reap.equipment;//When adding new Equipment
   //private jobDetails:any[] = this.reap.job;//stores job form
@@ -34,7 +34,7 @@ export class FieldTicketReviewPage {
   private submitData:any[] = [];//Main array to submit everything
   private md5Data:any;//md5 variable
   private lonlat:any = [];//stores gps coords
-  private submitClicked:boolean = false;//boolean to see if submit button is clicked
+  public submitClicked:boolean = false;//boolean to see if submit button is clicked
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private alertCtrl: AlertController,
@@ -132,10 +132,10 @@ export class FieldTicketReviewPage {
     var time = new Date();//timestamp
     //console.log(this.formDetails[0]['endTime']);
     //If user didn't select end time, the time stamp will grab it for them
-      if(this.formDetails[0]['endTime'] == ""){
-        var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");//timeEnd
-        this.formDetails[0]['endTime'] = getTimeEnd;//Grabs when user hits submit on Form
-      }
+      //if(this.formDetails[0]['endTime'] == ""){
+        //var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");//timeEnd
+        //this.formDetails[0]['endTime'] = getTimeEnd;//Grabs when user hits submit on Form
+      //}
     let alert = this.alertCtrl.create({
    title: 'Confirm Submission',
    message: 'Are you sure you want to submit?',
@@ -163,7 +163,7 @@ export class FieldTicketReviewPage {
                  /*md5 hashes form data with signature and timestamp for unique guid*/
                  this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
                  /*Pushes all data to array for form submission*/
-                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'ItemDescription':[]},{'Photo':this.photoDetails},{'extraLabor':this.laborDetails});
+                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'ItemDescription':[]},{'Photo':this.photoDetails},{'extraLabor':this.laborDetails},{'AppVersion':this.reap.saulsburyVersion});
                  /*
                  *
                  */

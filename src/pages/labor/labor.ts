@@ -5,7 +5,6 @@ import { SelectSearchableComponent } from 'ionic-select-searchable';
 import { Storage } from '@ionic/storage';
 
 import { ReapService } from '../../services/reap-service';
-import { AddExtraPersonnelPage } from '../add-extra-personnel/add-extra-personnel';
 
 class BillCodesList {
   public ID: number;
@@ -65,7 +64,7 @@ export class LaborPage {
       }else{
       this.crewPersonnel[i]={'ID':this.reap.globalCrewPersonnel[i]['ID']
                 ,'Name':this.reap.globalCrewPersonnel[i]['Name']
-                ,'Hours':form.value[hours+[i]]
+                ,'Hours':this.reap.globalCrewPersonnel[i]['Hours']
                 ,'Title':form.value[laborBillCodes+[i]]['BillCodeDescription']
                 ,'BillingCode':form.value[laborBillCodes+[i]]['Bill_Code']};
       }
@@ -88,22 +87,6 @@ export class LaborPage {
     }
   personnelChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
-    }
-    addPersonnel(){
-      const modal = this.modalCtrl.create(AddExtraPersonnelPage);
-
-          modal.present();//presents the signature modal
-
-           modal.onDidDismiss((returnParam: any) => {
-             if(returnParam!=true){
-               this.personnelInfo.push(returnParam);
-               //console.log(this.personnelInfo);
-
-             }
-             else{
-               //console.log('backed out of no chemical!');
-            }
-           });
     }
 
   removePersonnel(index){

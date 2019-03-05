@@ -46,6 +46,11 @@ export class LoginPage {
       }
     if(this.res.groupName!=""){//sets groupName directed to GET data
       this.storage.set('groupName',this.res.groupName)
+      const alert = this.alertCtrl.create({
+        title: this.res.groupName,
+        buttons: ['Dismiss']
+        });
+    alert.present();
     }
       //console.log(localStorage);
       if(this.res.status == true){

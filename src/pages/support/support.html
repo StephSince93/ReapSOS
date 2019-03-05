@@ -37,12 +37,12 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <h1>Connection: {{this.reap.networkType}}</h1>
+      <h1>Connection: {{this.networkType}}</h1>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      <h1>Platform Type: {{this.devonianPlatform}}</h1>
+      <h1>Platform Type: {{this.saulsburyPlatform}}</h1>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -53,35 +53,20 @@
   <ion-row>
     <ion-col>
       <h1>App Version:
-         {{this.devonianVersion}}
+         {{this.saulsburyVersion}}
       </h1>
     </ion-col>
   </ion-row>
-  <!-- <ion-row>
-    <ion-col>
-    Field Ticket Active? {{this.reap.formStart}}
-    </ion-col>
-  </ion-row> -->
   <ion-row>
     <ion-col>
       <button ion button id="supportButton" (click)="toSync()" block large>Sync Data</button>
     </ion-col>
   </ion-row>
-  <!-- <ion-row>
-    <ion-col>
-      <button ion button id="supportButton" (click)="toSubmitOffline()" block large>Submit Offline Forms</button>
-    </ion-col>
-  </ion-row> -->
   <ion-row>
     <ion-col>
       <button ion button id="supportButton" (click)="toviewData()" block large>View Offline Data</button>
     </ion-col>
   </ion-row>
-  <!-- <ion-row>
-    <ion-col>
-      <button ion button id="supportButton" (click)="performManualUpdate()" block large>Check For App Update</button>
-    </ion-col>
-  </ion-row> -->
 </ion-grid>
 
 </ion-content>

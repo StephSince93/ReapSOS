@@ -22,15 +22,12 @@ import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
 import { FieldTicketPage } from '../pages/field-ticket/field-ticket';
-import { ProjectPage } from '../pages/project/project';
-import { WellLocationsPage } from '../pages/well-locations/well-locations';
 import { MiscPage } from '../pages/misc/misc';
 import { EquipmentPage } from '../pages/equipment/equipment';
 import { LaborPage } from '../pages/labor/labor';
 import { ItemTypePage } from '../pages/item-type/item-type';
 import { AddPhotoPage } from '../pages/add-photo/add-photo';
 import { FieldTicketReviewPage } from '../pages/field-ticket-review/field-ticket-review';
-import { ProjectReviewPage } from '../pages/project-review/project-review';
 import { SubMenuPage } from '../pages/sub-menu/sub-menu';
 import { SuccessPage } from '../pages/success/success';
 import { SupportPage } from '../pages/support/support';
@@ -39,11 +36,7 @@ import { StemApiProvider } from '../providers/stem-api/stem-api';
 import { InvoicePage } from '../pages/invoice/invoice';
 import { ManageCrewPage } from '../pages/manage-crew/manage-crew';
 import { OfflineDataPage } from '../pages/offline-data/offline-data';
-import { EmployeeSignaturesPage } from '../pages/employee-signatures/employee-signatures';
-import { JsaPage } from '../pages/jsa/jsa';
-import { AddExtraPersonnelPage } from '../pages/add-extra-personnel/add-extra-personnel';
 import { AddExtraEquipmentPage } from '../pages/add-extra-equipment/add-extra-equipment';
-import { JsaReviewPage } from '../pages/jsa-review/jsa-review';
 import { TermsOfServicePage } from '../pages/terms-of-service/terms-of-service';
 Pro.init('9df6dd99', {
   appVersion: '1.0.0'
@@ -76,8 +69,6 @@ export class MyErrorHandler implements ErrorHandler {
     LoginPage,
     MenuPage,
     FieldTicketPage,
-    ProjectPage,
-    WellLocationsPage,
     MiscPage,
     EquipmentPage,
     LaborPage,
@@ -85,17 +76,12 @@ export class MyErrorHandler implements ErrorHandler {
     AddPhotoPage,
     SubMenuPage,
     FieldTicketReviewPage,
-    ProjectReviewPage,
     SuccessPage,
     SupportPage,
     InvoicePage,
     ManageCrewPage,
     OfflineDataPage,
-    EmployeeSignaturesPage,
-    JsaPage,
-    AddExtraPersonnelPage,
     AddExtraEquipmentPage,
-    JsaReviewPage,
     TermsOfServicePage
   ],
   imports: [
@@ -114,8 +100,6 @@ export class MyErrorHandler implements ErrorHandler {
     LoginPage,
     MenuPage,
     FieldTicketPage,
-    ProjectPage,
-    WellLocationsPage,
     MiscPage,
     EquipmentPage,
     LaborPage,
@@ -123,17 +107,12 @@ export class MyErrorHandler implements ErrorHandler {
     AddPhotoPage,
     SubMenuPage,
     FieldTicketReviewPage,
-    ProjectReviewPage,
     SuccessPage,
     InvoicePage,
     SupportPage,
     ManageCrewPage,
     OfflineDataPage,
-    EmployeeSignaturesPage,
-    JsaPage,
-    AddExtraPersonnelPage,
     AddExtraEquipmentPage,
-    JsaReviewPage,
     TermsOfServicePage
   ],
   providers: [

@@ -17,8 +17,6 @@ export class ReapService {
     public getEquipment:any[]=[];
     public getPersonnel:any[]=[];
     public getJobLaborBR:any[]=[];
-    public getExtras:any[]=[];
-    public getAFE:any[]=[];
     public getJobs:any[]=[];
     public getPhaseCodes:any[]=[];
     public getMD5:string;
@@ -31,7 +29,6 @@ export class ReapService {
     public photo:any[]=[];
     public fieldTicketForm:any[]=[];
     public jsaForm:any[]=[];
-    public projectForm:any[]=[];
     public completeForm:any[]=[];
     public storeFormData:any[]=[];
     public updatedLocation:any [] = [];
@@ -42,8 +39,6 @@ export class ReapService {
     public globalCrewEquipment: any [] = [];
     public globalCrewItems: any [] = [];
     public globalCrewPhaseCodes: any [] = [];
-    public selectedProject: any [] =[];//For Field Ticket to Extra Equipment
-    public totalTime: any;
     //Offline Form Submission
     public offlineFormSubmissions:any [] = [];
     //Connecting Main and Description Form
@@ -52,8 +47,8 @@ export class ReapService {
     public LaborBC:any []=[];
     public groupName:any;
     public token:any;
-    public formStart:any;
-    public formStartTime:any;//testing with Saulsbury
+    //public formStart:any;
+    //public formStartTime:any;//testing with Saulsbury
     public networkType:any;
     public online:any = true;
     connected: Subscription;
@@ -68,7 +63,6 @@ export class ReapService {
                 public appVersion: AppVersion,
                 public alertCtrl: AlertController){
     //May have to unsubscribe from Observable
-    //console.log('here in service Constructor');
     /* Time Interval checking for network connection */
     this.checkConnection = Observable.interval(250 * 60).subscribe(x => {
       //console.log('here every 15 seconds');
@@ -139,7 +133,7 @@ export class ReapService {
         this.getLocations = this.getData['Locations'];
         this.storage.set('Locations',this.getLocations);
 
-        //Devonian EquipmentList
+        //Saulsbury EquipmentList
         this.getEquipment = this.getData['EquipmentList'];
         this.storage.set('Equipment',this.getEquipment);
 
@@ -149,24 +143,21 @@ export class ReapService {
         this.getJobLaborBR = this.getData['JobLaborBR'];
         this.storage.set('JobLaborBR',this.getJobLaborBR);
 
-        this.getAFE = this.getData['AFE'];
-        this.storage.set('AFE',this.getAFE);
-
         this.getJobs = this.getData['Jobs'];
         this.storage.set('Jobs',this.getJobs);
-
-        this.getExtras = this.getData['Extras'];
-        this.storage.set('Extras',this.getExtras);
 
         this.getPhaseCodes = this.getData['PhaseCode'];
         this.storage.set('PhaseCodes',this.getPhaseCodes);
         //console.log(this.getJobs);
         //calls method to store App Version to local storage globally
-        this.getVersionNumber();
-        //this.presentToast('Sync Successful');
+        if(this.saulsburyVersion==null||this.saulsburyVersion=="Could not Grab App Version!"){
+          this.getVersionNumber();
+        }
+
+        this.presentToast('Sync Successful');
         }, (err) => {
-          //this.presentToast('Sync Unsuccessful');
-          //console.log(err);
+          this.presentToast(err['message']);
+          console.log(err);
         });
     }
       getLocalStorage(){
@@ -180,16 +171,6 @@ export class ReapService {
         this.getMD5 = data;
         //console.log(this.getMD5);
         });
-
-        // this.storage.get('formStart').then((data)=>{
-        // this.formStart = data;
-        // //console.log(this.formStart);
-        // });
-        // /* Testing formStartTime with Saulsbury*/
-        // this.storage.get('getTimeStart').then((data)=>{
-        // this.formStartTime = data;
-        // //console.log(this.formStartTime);
-        // });
 
         this.storage.get('Locations').then((data)=>{
         this.getLocations = data;
@@ -205,14 +186,6 @@ export class ReapService {
 
         this.storage.get('JobLaborBR').then((data)=>{
         this.getJobLaborBR = data;
-        });
-
-        this.storage.get('AFE').then((data)=>{
-        this.getAFE = data;
-        });
-
-        this.storage.get('Extras').then((data)=>{
-        this.getExtras = data;
         });
 
         this.storage.get('Jobs').then((data)=>{

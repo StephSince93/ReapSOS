@@ -20,18 +20,18 @@ export class AddExtraEquipmentPage {
   private extraEquipmentArray: EquipmentList[];
   equipment: EquipmentList;
   private noSubmission:boolean = true;
-  private projectCost:any;
+  private jobCost:any;
   private tempEquipment:any [] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
               public viewCtrl: ViewController) {
                 try{
-                if(this.reap.selectedProject!=null){
-                  this.projectCost=this.reap.selectedProject['CostCenter'];
+                if(this.reap.selectedJob!=null){
+                  this.jobCost=this.reap.selectedJob['CostCenter'];
 
       for(let i=0;i<this.reap.getEquipment.length;i++){
-          if(this.reap.getEquipment[i]['CostCenter']==this.projectCost){
+          if(this.reap.getEquipment[i]['CostCenter']==this.jobCost){
           //console.log(this.reap.getEquipment[i]);
           this.tempEquipment.push(this.reap.getEquipment[i]);
           }
