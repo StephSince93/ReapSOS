@@ -40,10 +40,10 @@ export class ItemTypePage {
                 //console.log(this.doeshaveCrew);
               }
 
-    if(this.reap.selectedCompany){
+    if(this.reap.selectedJob){
     for(let i=0;i<this.reap.getJobs.length;i++){
       //console.log(this.reap.getJobs[i]['CompanyID']);
-      if(this.reap.getJobs[i]['CompanyID']==this.reap.selectedCompany){
+      if(this.reap.getJobs[i]['CompanyID']==this.reap.selectedJob){
         this.test.push(this.reap.getJobs[i]);
       }
     }

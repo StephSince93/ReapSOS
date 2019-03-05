@@ -35,7 +35,7 @@ export class StemApiProvider {
    .retry(3).timeout(15000)// This will retry 3 times in case there's an error
  }
  //POST form submitBOL
-  submitDevonianForm(data,authToken){
+  submitSaulsburyForm(data,authToken){
     //console.log(data,authToken);
     const httpOptions = {
         headers: new HttpHeaders({

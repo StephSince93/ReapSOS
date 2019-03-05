@@ -18,17 +18,17 @@ export class AddExtraPersonnelPage {
   private extraPersonnelArray: extraPersonnel[];
   extrapersonnel: extraPersonnel;
   private noSubmission:boolean = true;
-  private projectPersonnel:any;
+  private jobPersonnel:any;
   private tempPersonnel:any [] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
               public viewCtrl: ViewController) {
-                if(this.reap.globalCrewProject!=null){
-                  this.projectPersonnel=this.reap.globalCrewProject['ProjectName'];
+                if(this.reap.globalCrewJob!=null){
+                  this.jobPersonnel=this.reap.globalCrewJob['JobName'];
                 }
                 for(let i=0;i<this.reap.getExtras.length;i++){
-                    if(this.reap.getExtras[i]['Job_Number']==this.projectPersonnel){
+                    if(this.reap.getExtras[i]['Job_Number']==this.jobPersonnel){
                     //console.log(this.reap.getExtras[i]);
                     this.tempPersonnel.push(this.reap.getExtras[i]);
                   }

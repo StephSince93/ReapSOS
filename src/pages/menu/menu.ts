@@ -60,26 +60,26 @@ export class MenuPage {
 
   toFieldTicket(){
     //console.log(this.reap.formStart);
-      if(this.reap.formStart==false){//checks if there is not a variable stored in local storage
-        let loading = this.loadingCtrl.create({
-          content: 'Starting New Field Ticket'
-         });
-        loading.present();
-            this.reap.formStart = true;//starts the new Form
-            //Creates Time Stamp for form
-            var getTimeStart:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
-            //saves start time and formstart in local storage
-            this.storage.set('formStart',this.reap.formStart);//sets local storage
-            this.storage.set('getTimeStart',getTimeStart);
-            this.reap.formStartTime = getTimeStart;
-        setTimeout(() => {
-          loading.dismiss();
-          this.navCtrl.push(FieldTicketPage);
-        }, 1000);
-      }
-      else{// pushed straight to Safety Page if user had previously submitted an initial Safety Form
+      // if(this.reap.formStart==false){//checks if there is not a variable stored in local storage
+      //   let loading = this.loadingCtrl.create({
+      //     content: 'Starting New Field Ticket'
+      //    });
+      //   loading.present();
+      //       this.reap.formStart = true;//starts the new Form
+      //       //Creates Time Stamp for form
+      //       var getTimeStart:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
+      //       //saves start time and formstart in local storage
+      //       this.storage.set('formStart',this.reap.formStart);//sets local storage
+      //       this.storage.set('getTimeStart',getTimeStart);
+      //       this.reap.formStartTime = getTimeStart;
+      //   setTimeout(() => {
+      //     loading.dismiss();
+      //     this.navCtrl.push(FieldTicketPage);
+      //   }, 1000);
+      // }
+      // else{// pushed straight to Safety Page if user had previously submitted an initial Safety Form
         this.navCtrl.push(FieldTicketPage);
-      }
+     // }
   }//end function
   toJSA(){
     this.navCtrl.push(JsaPage);

@@ -6,17 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { SubMenuPage } from '../sub-menu/sub-menu';
 import { ReapService } from '../../services/reap-service';
-import { AnyMxRecord } from 'dns';
-//import { FieldTicketReviewPage } from '../field-ticket-review/field-ticket-review';
 
-// class Location {
-//   public ID: number;
-//   public Location: string;
-// }
-// class updatedLocation {
-//   public ID: number;
-//   public Location: string;
-// }
 class JobList {
   public ID: number;
   public JobNumber: number;
@@ -34,21 +24,12 @@ class PhaseCodeList {
 })
 
 export class FieldTicketPage {
-  // private locationsArray: Location[];
-  // location: Location;
-  // updatedLocation: updatedLocation[];
-  // updatedlocation: updatedLocation;
-  private jobArray: JobList[];
+  public jobArray: JobList[];
   Job: JobList;
-  private phaseArray: PhaseCodeList[];
+  public phaseArray: PhaseCodeList[];
   phase: PhaseCodeList;
   /**************************************************************/
-  //private userLocation:any = [];
-  //private wellLocation: any [] = [];
-  //private selectedClosestLoc:boolean = false;
-  //private afeArray:any[] = this.reap.getAFE;
   private tempPhase: any[] = [];
-  //private personnelArray:any[] = [];
   private selectedArray: any[] = [];//saves array selected from jobs
   private jobSelected: boolean = false;
   private afeString: string;//stores AFE from selected job number
@@ -56,7 +37,7 @@ export class FieldTicketPage {
   private foreman: string;//current user logged in
   private personnelSelected: boolean = false;//check to see if user selected exists
   private totalTime: any;
-  private clientPM: any;
+  public clientPM: any;
   globalJob: any[] = [];
   globalPhaseCode: any[] = [];
   currentDate: any = new Date().toISOString();
@@ -70,16 +51,14 @@ export class FieldTicketPage {
     private geolocation: Geolocation,
     private platform: Platform,
     private alertCtrl: AlertController) {
-    // this.phaseArray = this.reap.getPhaseCodes;
-    // this.jobArray= this.reap.getjob;
-    //console.log(this.reap.globalCrewjob);
+
     if (this.reap.globalCrewJob != null) {
       this.globalJob = this.reap.globalCrewJob;
       this.jobArray = this.reap.getJobs;
 
       if (this.reap.globalCrewPhaseCodes != null) {
         this.globalPhaseCode = this.reap.globalCrewPhaseCodes;
-        if(this.globalPhaseCode['Client_PM']==""){
+        if(this.globalPhaseCode['Client_PM']==""||this.globalPhaseCode['Client_PM']==null){
           this.clientPM="No Client PM for this Phase Code";
         }
         else{
@@ -87,8 +66,8 @@ export class FieldTicketPage {
         }
         this.phaseArray = this.reap.getPhaseCodes;
 
-        var jobNumber = this.globalJob['job_Number'];
-        console.log(jobNumber)
+        var jobNumber = this.globalJob['Job_Number'];
+        //console.log(jobNumber)
         for (let i = 0; i < this.reap.getPhaseCodes.length; i++) {
           if (this.reap.getPhaseCodes[i]['JobNumber'] == jobNumber) {
             //console.log(this.reap.getEquipment[i]);
@@ -105,35 +84,19 @@ export class FieldTicketPage {
     else {
       this.jobArray = this.reap.getJobs;
     }
-    //console.log(this.globaljob);
-    //console.log(this.globalPhaseCode);
-    //this.personnelArray = this.reap.getPersonnel;
-    // this.locationsArray = reap.getLocations;
-    // this.updatedLocation = [];
-    //console.log(this.reap.globalCrewjob);
+
     /**************** Catch Error ************/
   }
   ionViewWillEnter() {
     //If user backtracks to main form, the variables are re-initialized
     this.defaultStartTime = new Date(new Date().setHours(-1, 0, 0)).toISOString();
     this.defaultEndTime = new Date(new Date().setHours(13, 0, 0)).toISOString();
-    // for(let i=0;i< this.personnelArray.length;i++){//grabs current username logged in
-    //     if(this.personnelArray[i]['default'] === "true"){
-    //       this.foreman = this.personnelArray[i]['FullName'];
-    //     }
-    //   }
-    //   console.log(this.personnelArray);
   }
   jobChange(event: { component: SelectSearchableComponent, value: any }) {
     this.globalPhaseCode = [];
     this.clientPM = "";
-    //console.log(i);
-    //this.selectedArray = this.jobArray[i];
-    //this.afeString = this.selectedArray['AFE_Number'];
-    //console.log(this.afeString)
-    //this.jobSelected = true;
     var jobNumber = this.globalJob['Job_Number'];
-    console.log(jobNumber);
+    //console.log(jobNumber);
 
     for (let i = 0; i < this.reap.getPhaseCodes.length; i++) {
       if (this.reap.getPhaseCodes[i]['JobNumber'] == jobNumber) {
@@ -229,9 +192,12 @@ export class FieldTicketPage {
   }
 
   phasecodeChange(event: { component: SelectSearchableComponent, value: any }) {
-    console.log('value:', event.value);
-    console.log('Client PM: '+event.value['Client_PM']);
-    if(event.value['Client_PM']==""){
+    //console.log('value:', event.value);
+    //console.log('Client PM: '+event.value['Client_PM']);
+    if(event.value==null){
+      this.clientPM="No Phase Code Selected";
+    }
+    else if(event.value['Client_PM']==""){
       this.clientPM="No Client PM for this Phase Code";
     }
     else{

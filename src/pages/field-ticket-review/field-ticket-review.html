@@ -14,24 +14,12 @@
                 </ion-row>
                 <ion-row>
                   <ion-col>JOB:</ion-col>
-                  <ion-col>{{details.project?.Project_Name_Description}}</ion-col>
+                  <ion-col>{{details.Job?.JobName}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col>PHASE CODE:</ion-col>
                   <ion-col>{{details.PhaseCode?.Description}}</ion-col>
                 </ion-row>
-                <!-- <ion-row>
-                  <ion-col>COMPANY MAN:</ion-col>
-                  <ion-col>{{details?.companyMan}}</ion-col>
-                </ion-row> -->
-                <!-- <ion-row>
-                  <ion-col>AFE/ORDER NUMBER:</ion-col>
-                  <ion-col>{{details?.orderNumber}}</ion-col>
-                </ion-row> -->
-                <!-- <ion-row>
-                  <ion-col>FORM START TIME:</ion-col>
-                  <ion-col>{{details?.formStartTime}}</ion-col>
-                </ion-row> -->
                 <ion-row>
                   <ion-col>START TIME:</ion-col>
                   <ion-col>{{details?.startTime}}</ion-col>
@@ -41,14 +29,6 @@
                   <ion-col>{{details?.endTime }}</ion-col>
                   <!-- <ng-template  #noTime><ion-col>End Time Will be recorded once form is submitted!</ion-col></ng-template> -->
                 </ion-row>
-                <!-- <ion-row>
-                  <ion-col>FOREMAN:</ion-col>
-                  <ion-col>{{details?.foreman}}</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col>WO/CHARGE CODE NUMBER:</ion-col>
-                  <ion-col>{{details?.workOrder}}</ion-col>
-                </ion-row> -->
                 <ion-row>
                   <ion-col>WORK DESCRIPTION:</ion-col>
                   <ion-col>{{details?.description}}</ion-col>
@@ -111,16 +91,16 @@
                         <ion-row>
                             <ion-col col-6>PERSONNEL:</ion-col>
                             <!-- <ion-col col-6>{{labor.Personnel?.FullName | uppercase}}</ion-col> -->
-                            <ion-col col-6>{{personnel?.FullName}}</ion-col>
+                            <ion-col col-6>{{personnel?.Name}}</ion-col>
                         </ion-row>
                         <ion-row>
                             <ion-col>HOURS:</ion-col>
                             <ion-col class="formCol">{{personnel?.Hours}}</ion-col>
                         </ion-row>
-                        <!-- <ion-row>
-                            <ion-col>EMPLOYEE ID:</ion-col>
-                            <ion-col>{{personnel?.ID}}</ion-col>
-                        </ion-row> -->
+                        <ion-row>
+                            <ion-col>TITLE:</ion-col>
+                            <ion-col>{{personnel?.Title}}</ion-col>
+                        </ion-row>
                  </ion-grid>
    <hr>
   <!-- <ion-label class="subLabel">ADDED LABOR</ion-label>

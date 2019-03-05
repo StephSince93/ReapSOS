@@ -55,8 +55,8 @@ export class FieldTicketReviewPage {
                 }
             this.formDetails.push(this.reap.fieldTicketForm);
             //console.log(this.formDetails[0]['project']);
-            if(this.reap.globalCrewProject!=null){
-              this.formDetails[0]['project'] = this.reap.globalCrewProject;
+            if(this.reap.globalCrewJob!=null){
+              this.formDetails[0]['Job'] = this.reap.globalCrewJob;
             }
             //console.log(this.jobDetails);
             //console.log(this.equipmentDetails);
@@ -170,7 +170,7 @@ export class FieldTicketReviewPage {
                  loading.present();
                 console.log(this.submitData);
                  //creates a loading controller while user submits
-                 this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result) =>{
+                 this.stemAPI.submitSaulsburyForm(this.submitData,this.reap.token).subscribe((result) =>{
 
                   //setTimeout(() => {
                   if(result['Status'] == false){
@@ -196,12 +196,12 @@ export class FieldTicketReviewPage {
                                 //If the system notices there is a duplicate form it wil push user to success page and let them know to contact the office
                                 if(reRoute){
                                   loading.dismiss();
-                                  this.reap.formStart = null;
-                                  var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
-                                  //console.log(getTimeEnd);
-                                  this.storage.remove('getTimeStart');//Probably going to start form with time start
-                                  this.reap.formStart = false;
-                                  this.storage.set('formStart',this.reap.formStart);
+                                  // this.reap.formStart = null;
+                                  // var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
+                                  // //console.log(getTimeEnd);
+                                  // this.storage.remove('getTimeStart');//Probably going to start form with time start
+                                  // this.reap.formStart = false;
+                                  // this.storage.set('formStart',this.reap.formStart);
                                   //Can fix message on API Side
                                   //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
                                   this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS ALREADY SUBMITTED, PLEASE CONTACT THE OFFICE TO CONFIRM!'});
@@ -211,8 +211,6 @@ export class FieldTicketReviewPage {
                                 },1000);
                                 //this.reap.formStart==null
                                 this.mergeEquipment = [];//resets equipment array
-                                // this.storage.remove('formStart');
-                                //this.storage.set('offlineSubmission',this.submitData);
                                 this.submitClicked=false;//enables the submission button to resubmit
                                 this.submitData = [];//resets Submission so data isnt inserted twice
                                 //this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
@@ -225,13 +223,13 @@ export class FieldTicketReviewPage {
                           }
                           else{
                          loading.dismiss();
-                         this.reap.formStart = null;
-                         var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
+                        //  this.reap.formStart = null;
+                        //  var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
                          //console.log(getTimeEnd);
                          //Updates Local storage upon form success
-                         this.storage.remove('getTimeStart');
-                         this.reap.formStart = false;
-                         this.storage.set('formStart',this.reap.formStart);
+                        //  this.storage.remove('getTimeStart');
+                        //  this.reap.formStart = false;
+                        //  this.storage.set('formStart',this.reap.formStart);
                          //Can fix message on API Side
                          //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
                          this.navCtrl.push(SuccessPage,{'Success':'FIELD TICKET WAS SUBMITTED SUCCESSFULLY'});
@@ -262,9 +260,9 @@ export class FieldTicketReviewPage {
                                  no data will be submitted until interenet connection is made via a sync or observable call */
                                  /****** TESTING    *********************/
 
-                                 this.storage.remove('getTimeStart');
-                                 this.reap.formStart = false;
-                                 this.storage.set('formStart',this.reap.formStart);
+                                //  this.storage.remove('getTimeStart');
+                                //  this.reap.formStart = false;
+                                //  this.storage.set('formStart',this.reap.formStart);
                                  this.reap.offlineFormSubmissions.push({"Type":"WO","Info":this.submitData,"Status":"Pending"});
                                  this.storage.set('offlineSubmission',this.reap.offlineFormSubmissions);
                                  this.submitData = [];

@@ -37,32 +37,41 @@ export class LaborPage {
                 console.log(this.crewPersonnel);
                 if(!Array.isArray(this.crewPersonnel) || !this.crewPersonnel.length){
                   this.doeshaveCrew = false;
-                  //console.log(this.doeshaveCrew);
                 }
                 else{
                   this.doeshaveCrew = true;
-                  //console.log(this.doeshaveCrew);
                 }
-                //console.log(this.reap.globalCrewPersonnel);
-                //console.log(this.personnelArray);
 
   }
 
   onSubmit(form: NgForm){
     //console.log(form.value);
     let hours:any = 'hours';
+    let laborBillCodes:any = 'LaborBillCode';
     if((Array.isArray(this.reap.globalCrewPersonnel) || (this.reap.globalCrewPersonnel!=null))||(Array.isArray(this.crewPersonnel) || this.crewPersonnel!=null)){
     for(let i=0;i<this.reap.globalCrewPersonnel.length;i++){
       if((this.crewPersonnel[i]['hours']||(form.value[hours+[i]]===""))){
           //Filler for data already in system
       }else{
       this.crewPersonnel[i]={'ID':this.reap.globalCrewPersonnel[i]['ID']
-                ,'FullName':this.reap.globalCrewPersonnel[i]['FullName']
-                ,'Hours':form.value[hours+[i]]};
+                ,'Name':this.reap.globalCrewPersonnel[i]['Name']
+                ,'Hours':form.value[hours+[i]]
+                ,'Title':this.reap.globalCrewPersonnel[i]['Title']
+                ,'BillingCode':this.reap.globalCrewPersonnel[i]['BillingCode']};
               }
-       }
-    }
-    //console.log(this.reap.globalCrewPersonnel);
+       //updating Billing Code and Title
+      if((form.value[laborBillCodes+[i]]===""||form.value[laborBillCodes+[i]]==null)){
+        //Filler for data already in system
+      }else{
+      this.crewPersonnel[i]={'ID':this.reap.globalCrewPersonnel[i]['ID']
+                ,'Name':this.reap.globalCrewPersonnel[i]['Name']
+                ,'Hours':form.value[hours+[i]]
+                ,'Title':form.value[laborBillCodes+[i]]['BillCodeDescription']
+                ,'BillingCode':form.value[laborBillCodes+[i]]['Bill_Code']};
+      }
+      //console.log(this.crewPersonnel[i]);
+     }//end loop
+    }//end if
     this.reap.globalCrewPersonnel = this.crewPersonnel;
     //this.reap.totalLabor(form.value);
     if(this.personnelInfo!=undefined){

@@ -14,9 +14,9 @@ import { OfflineDataPage }  from '../offline-data/offline-data';
   templateUrl: 'support.html',
 })
 export class SupportPage {
-  devonianPlatform:any;
+  saulsburyPlatform:any;
   deviceVersion:any;
-  devonianVersion:any = this.reap.devonianVersion;
+  saulsburyVersion:any = this.reap.saulsburyVersion;
   public downloadProgress = 0;
   //private networkType:string = this.reap.networkType;
   constructor(public navCtrl: NavController,
@@ -31,12 +31,12 @@ export class SupportPage {
               private alertCtrl: AlertController,
             //  private toast: ToastController,
               private modalCtrl: ModalController) {
-                this.devonianPlatform = this.device.platform;
+                this.saulsburyPlatform = this.device.platform;
                 this.deviceVersion = this.device.version;
 
                 this.appVersion.getVersionNumber().then((version) => {
-                      this.devonianVersion = version;
-                      //console.log(JSON.stringify(this.devonianVersion));
+                      this.saulsburyVersion = version;
+                      //console.log(JSON.stringify(this.saulsburyVersion));
                     },(error)=>{
                         //console.log(error);
                       })

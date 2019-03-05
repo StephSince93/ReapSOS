@@ -48,12 +48,12 @@ export class ManageCrewPage {
   project: JobList;
   private phaseArray: PhaseCodeList[];
   phase: PhaseCodeList;
-  private globalJob:any [] = this.reap.globalCrewJob;
-  private globalPersonnel:any [] = this.reap.globalCrewPersonnel;
-  private globalEquipment:any [] = this.reap.globalCrewEquipment;
-  private globalPhaseCode:any [] = this.reap.globalCrewPhaseCodes;
-  private tempEquipment:any[] = [];
-  private tempPhase:any[] = [];
+  public globalJob:any [] = this.reap.globalCrewJob;
+  public globalPersonnel:any [] = this.reap.globalCrewPersonnel;
+  public globalEquipment:any [] = this.reap.globalCrewEquipment;
+  public globalPhaseCode:any [] = this.reap.globalCrewPhaseCodes;
+  public tempEquipment:any[] = [];
+  public tempPhase:any[] = [];
   //private crewItems:any [] = [];
   //private globalItems:any [] = this.reap.globalCrewItems;
   private noJob:boolean;

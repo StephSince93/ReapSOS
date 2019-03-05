@@ -12,10 +12,11 @@ ion-label.label-md[stacked]{
 
 }
 .button-md{ //For Saulsbury
-  background-color: black;
+  background-color: rgb(72, 72, 82);
 }
+
 .button-ios{ //For Saulsbury
-  background-color: black;
+  background-color: rgb(72, 72, 82);
 }
 .ionField ion-label.label-md[stacked]{
   height:25px;
@@ -66,6 +67,9 @@ ion-label.label-ios[stacked]{
 .specialSelect{//Select Searchable elements fits same size as normal elements
   font-size: 20px;
   font-weight:bold;
+  .button-ios{ //For Saulsbury
+    background-color: none;
+  }
 }
 .searchbar-md .searchbar-input{//makes background-color for ion-search bar white
   background-color:white!important;

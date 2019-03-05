@@ -36,7 +36,7 @@ export class JsaPage {
   private userLocation:any = [];
   private wellLocation: any [] = [];
   private selectedClosestLoc:boolean = false;
-  private projectArray:any[] = this.reap.getProject;
+  private projectArray:any[] = this.reap.getJobs;
   private projectSelected:boolean = false;
   private selectedArray:any[] = [];//saves array selected from projects
   private afeString:string;//stores AFE from selected project number

@@ -94,16 +94,13 @@ page-manage-crew {
   .select-searchable-value-item{
     display:none !important;
   }
-  div.item-inner{
-    background: grey;
-  }
-  .select-searchable-ios .select-searchable-icon-inner{
-    color:black;
-  }
   p{
     font-size: 12px;
     text-align: center;
     font-weight:bold;
     color: red;
+  }
+  .item-select-searchable .item-inner .input-wrapper{
+    background-color: rgb(129, 111, 111)
   }
 }
