@@ -43,7 +43,7 @@ export class ProjectReviewPage {
     this.submitData.push({'project':this.reap.projectForm});
     //console.log(this.submitData);
     loading.present();
-    this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result)=>{
+    this.stemAPI.submitSaulsburyForm(this.submitData,this.reap.token).subscribe((result)=>{
     //console.log(result['Status']);
         //setTimeout(() => {
         loading.dismiss();

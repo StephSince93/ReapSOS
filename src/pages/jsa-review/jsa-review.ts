@@ -81,7 +81,7 @@ export class JsaReviewPage {
       */
     //console.log(this.submitData);
     loading.present();
-    this.stemAPI.submitDevonianForm(this.submitData,this.reap.token).subscribe((result)=>{
+    this.stemAPI.submitSaulsburyForm(this.submitData,this.reap.token).subscribe((result)=>{
       if(result['Status'] == false){
         if (result['MSG']=='Field Form Was Not Saved!\nThis is a duplicate form.'){
           this.reap.presentToast('Work Ticket Form has already been submitted!');
