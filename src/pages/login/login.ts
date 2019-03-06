@@ -4,6 +4,7 @@ import { StemApiProvider } from '../../providers/stem-api/stem-api';
 import { NgForm } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 
+import { ReapService } from '../../services/reap-service';
 import { MenuPage } from '../menu/menu';
 import { TermsOfServicePage } from '../terms-of-service/terms-of-service';
 @Component({
@@ -13,14 +14,14 @@ import { TermsOfServicePage } from '../terms-of-service/terms-of-service';
 export class LoginPage {
     res:any = {};
     didAcceptTOS:boolean = false;
-    static initialLogin:boolean = false;
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public stemAPI: StemApiProvider,
                 private loadingCtrl: LoadingController,
                 private alertCtrl: AlertController,
                 private storage: Storage,
-                private modalCtrl: ModalController) {
+                private modalCtrl: ModalController,
+                public reap: ReapService) {
                   /* Verifies if the user is authenticated */
                 //console.log(this.storage.get('authToken'));
                 this.storage.get('authToken').then((data)=>{
@@ -46,16 +47,14 @@ export class LoginPage {
       }
     if(this.res.groupName!=""){//sets groupName directed to GET data
       this.storage.set('groupName',this.res.groupName)
-      const alert = this.alertCtrl.create({
-        title: this.res.groupName,
-        buttons: ['Dismiss']
-        });
-    alert.present();
+    }
+    else{
+      this.storage.set('groupName',"")
     }
       //console.log(localStorage);
       if(this.res.status == true){
         setTimeout(() => {
-          LoginPage.initialLogin = true;
+          this.reap.initialLogin = true;//Initial Login Variable
             this.navCtrl.push(MenuPage);
             loading.dismiss();
           }, 1000);

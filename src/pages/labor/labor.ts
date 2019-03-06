@@ -18,11 +18,11 @@ class BillCodesList {
   templateUrl: 'labor.html',
 })
 export class LaborPage {
-  private LaborBillCodes : BillCodesList[];
+  public LaborBillCodes : BillCodesList[];
   laborbillcodes: BillCodesList;
 
   crewPersonnel:any[]=[];
-  private doeshaveCrew:boolean = false;
+  public doeshaveCrew:boolean = false;
   private personnelInfo:any [] = [];
   private totalExtraPersonnel:any [] = [];
   constructor(public navCtrl: NavController,

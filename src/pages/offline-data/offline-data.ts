@@ -19,9 +19,9 @@ export interface WriteOptions {
   templateUrl: 'offline-data.html',
 })
 export class OfflineDataPage {
-  private offlineData:any [] =[];
-  private isData:boolean = false;
-  private emailJSONData:any = [];
+  public offlineData:any [] =[];
+  public isData:boolean = false;
+  public emailJSONData:any = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public storage: Storage,

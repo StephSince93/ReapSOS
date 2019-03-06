@@ -38,35 +38,34 @@ class PhaseCodeList{
   templateUrl: 'manage-crew.html',
 })
 export class ManageCrewPage {
-  private personnelArray: Personnel[];
+  public personnelArray: Personnel[];
   personnel: Personnel;
-  private equipmentArray: EquipmentList[];
+  public equipmentArray: EquipmentList[];
   equipment: EquipmentList;
   // private itemArray: ItemList[];
   // item: ItemList;
-  private jobArray: JobList[];
+  public jobArray: JobList[];
   project: JobList;
-  private phaseArray: PhaseCodeList[];
+  public phaseArray: PhaseCodeList[];
   phase: PhaseCodeList;
-  public globalJob:any [] = this.reap.globalCrewJob;
-  public globalPersonnel:any [] = this.reap.globalCrewPersonnel;
-  public globalEquipment:any [] = this.reap.globalCrewEquipment;
-  public globalPhaseCode:any [] = this.reap.globalCrewPhaseCodes;
+  public globalJob:any = this.reap.globalCrewJob;
+  public globalPersonnel:any = this.reap.globalCrewPersonnel;
+  public globalEquipment:any = this.reap.globalCrewEquipment;
+  public globalPhaseCode:any = this.reap.globalCrewPhaseCodes;
   public tempEquipment:any[] = [];
   public tempPhase:any[] = [];
   //private crewItems:any [] = [];
   //private globalItems:any [] = this.reap.globalCrewItems;
-  private noJob:boolean;
-  private noPersonnel:boolean = true;
-  private noEquipment:boolean = true;
-  private noPhaseCode:boolean = true;
-  private noType:boolean = true;
+  public noJob:boolean;
+  public noPersonnel:boolean = true;
+  public noEquipment:boolean = true;
+  public noPhaseCode:boolean = true;
+  public noType:boolean = true;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
               public alertCtrl: AlertController,
-              private platform: Platform,
-              private storage: Storage) {
+              public storage: Storage) {
     try{
           if(this.globalJob==null){
             this.noJob= true;
@@ -76,7 +75,6 @@ export class ManageCrewPage {
             //this.itemArray = this.reap.getJobs;
           }
           else{
-            console.log('Project Here');
             //console.log(this.globalProject);
             var jobCost = this.globalJob['CostCenter'];
             var jobNumber =  this.globalJob['JobName'];
@@ -98,7 +96,7 @@ export class ManageCrewPage {
                   this.tempPhase.push(this.reap.getPhaseCodes[i]);
                 }
               }
-              console.log(this.tempPhase);
+              //console.log(this.tempPhase);
               this.phaseArray = this.tempPhase;
               this.tempPhase = [];
             // for(let i=0;i<this.reap.getJobs.length;i++){

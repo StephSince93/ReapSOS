@@ -11,8 +11,8 @@
 
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-list>
-      <ion-label class="gridLabel">CREW EQUIPMENT</ion-label>
-      <ion-label class="gridLabel" *ngIf="!doeshaveCrew">NO EQUIPMENT IN CREW</ion-label>
+      <ion-label class="gridLabel" *ngIf="doeshaveCrew; else noCrew">CREW EQUIPMENT</ion-label>
+      <ng-template #noCrew><ion-label class="gridLabel">NO EQUIPMENT IN CREW</ion-label></ng-template>
       <ion-grid class="formDetails" *ngFor="let equipment of crewEquipment;index as i;">
             <ion-row>
                 <ion-col col-6>NAME:</ion-col>
@@ -39,11 +39,10 @@
                 <ion-col>{{equipment?.hours}}</ion-col>
             </ion-row> -->
       </ion-grid>
-      <ion-label class="gridLabel">ADD ADDITIONAL EQUIPMENT</ion-label>
         <ion-grid class="custEquipment" *ngFor="let equipment of equipmentInfo;let i = index">
            <!-- <button type="button" name="editPersonnel" id='hidden-button' (tap)="editPersonnel()"> -->
              <ion-row>
-               <ion-col>Equipment Description:</ion-col>
+               <ion-col>EQUIPMENT DESCRIPTION:</ion-col>
                <ion-col>{{equipment?.Equipment.Name}}</ion-col>
              </ion-row>
               <!-- <ion-row>
@@ -63,12 +62,18 @@
       <ion-row>
         <ion-col  class="noBorder" col-6 offset-3 text-center>
           <button id="equipmentButton" type="button"  (tap)="addEquipment()" ion-button icon-only clear large><ion-icon name="add-circle"></ion-icon></button>
+          <br><b>ADD ADDITIONAL EQUIPMENT</b>
         </ion-col>
       </ion-row>
+      <!-- <ion-row>
+          <ion-col>
+             <ion-label class="gridLabel">ADD ADDITIONAL EQUIPMENT</ion-label>
+          </ion-col>
+        </ion-row> -->
     </ion-grid>
 
       <ion-item>
-        <button id="submitButton" ion-button full large>SUBMIT</button>
+        <button id="submitButton" ion-button full large [disabled]="!noEquipment()">SUBMIT</button>
      </ion-item>
    </ion-list>
   </form>

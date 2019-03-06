@@ -20,15 +20,15 @@ export class FieldTicketReviewPage {
   public crewPersonnel:any [] = this.reap.globalCrewPersonnel;//From existing CrewPersonnel
   public crewEquipment:any [] = this.reap.globalCrewEquipment;//From existing CrewEquipment
   public crewItems:any [] = this.reap.globalCrewItems;
-  private mergeEquipment:any [] = [];//merges all equipment together
-  private formDetails:any[] = [];//from main Work Order form
-  private miscDetails:any[] = this.reap.misc;// stores misc form
+  public mergeEquipment:any [] = [];//merges all equipment together
+  public formDetails:any[] = [];//from main Work Order form
+  public miscDetails:any[] = this.reap.misc;// stores misc form
   public isMisc:boolean = false;
   public isPhoto:boolean = false;
-  private laborDetails:any[] = this.reap.extraLabor;//When adding new Labor
-  private equipmentDetails:any[] = this.reap.equipment;//When adding new Equipment
+  public laborDetails:any[] = this.reap.extraLabor;//When adding new Labor
+  public equipmentDetails:any[] = this.reap.equipment;//When adding new Equipment
   //private jobDetails:any[] = this.reap.job;//stores job form
-  private photoDetails:any[] = this.reap.photo;//stores photo globally
+  public photoDetails:any[] = this.reap.photo;//stores photo globally
   public signatureImage: string;//stores signature
   public cancelled = "false";//boolean to see if user cancelled form submisison
   private submitData:any[] = [];//Main array to submit everything

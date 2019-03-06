@@ -17,7 +17,7 @@ class EquipmentList {
   templateUrl: 'add-extra-equipment.html',
 })
 export class AddExtraEquipmentPage {
-  private extraEquipmentArray: EquipmentList[];
+  public extraEquipmentArray: EquipmentList[];
   equipment: EquipmentList;
   private noSubmission:boolean = true;
   private jobCost:any;

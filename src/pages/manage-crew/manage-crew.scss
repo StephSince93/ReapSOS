@@ -101,6 +101,12 @@ page-manage-crew {
     color: red;
   }
   .item-select-searchable .item-inner .input-wrapper{
-    background-color: rgb(129, 111, 111)
+    background-color: #999;
+  }
+  .ionField ion-label.label-ios[stacked]{
+    color: white;
+  }
+  .select-searchable-ios .select-searchable-icon-inner{
+    color: white;
   }
 }

@@ -32,11 +32,11 @@ export class SupportPage {
       content: 'Syncing...'
     });
     loading.present();
-    this.reap.grabAPIData(this.reap.token,this.reap.groupName);
+
+    this.reap.grabAPIData(this.reap.token,this.reap.groupName)
        setTimeout(() => {
          loading.dismiss();
       }, 2000);
-
   }
 
   onLogout(){

@@ -16,15 +16,15 @@ class EquipmentList {
   templateUrl: 'equipment.html',
 })
 export class EquipmentPage {
-  private equipmentType:any[] = [];
-  private equipmentArray: EquipmentList[];
-  private test:any = [];
+  public equipmentType:any[] = [];
+  public equipmentArray: EquipmentList[];
+  public test:any = [];
   equipment: EquipmentList;
-  private Type:any;
-  private crewEquipment = this.reap.globalCrewEquipment;
-  private doeshaveCrew:boolean = false;
-  private equipmentInfo:any [] = [];
-  private totalExtraEquipment:any [] = [];
+  public Type:any;
+  public crewEquipment = this.reap.globalCrewEquipment;
+  public doeshaveCrew:boolean = false;
+  public equipmentInfo:any [] = [];
+  public totalExtraEquipment:any [] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
@@ -103,6 +103,15 @@ export class EquipmentPage {
       let inputChar = String.fromCharCode(event.charCode);
       if (event.keyCode != 8 && !pattern.test(inputChar)) {
         event.preventDefault();
+    }
+  }
+  noEquipment(){
+    //allows user to submit only if there is added equipment
+    if(this.equipmentInfo!=[]&&this.equipmentInfo.length){
+      return true;
+    }
+    else{
+      return false;
     }
   }
 }
