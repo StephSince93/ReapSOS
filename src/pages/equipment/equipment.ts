@@ -114,11 +114,11 @@ export class EquipmentPage {
   }
   doeshaveEquipment(){
     //allows user to submit only if there is added equipment
-    if((this.equipmentInfo!=[]&&this.equipmentInfo.length)||(this.crewEquipment!=[]&&this.crewEquipment.length)){
-      return true;
+    if((this.equipmentInfo!= null && this.equipmentInfo.length < 1)||(this.crewEquipment!= null && this.crewEquipment.length < 1)){
+      return false;
     }
     else{
-      return false;
+      return true;
     }
   }
 }
