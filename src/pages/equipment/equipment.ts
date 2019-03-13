@@ -41,35 +41,42 @@ export class EquipmentPage {
           {this.doeshaveCrew = false;}  else{this.doeshaveCrew = true;}
   }
   onSubmit(form: NgForm){
-    //console.log(form);
+    console.log(form.value);
     let test =  [];
-    //let hours:any = 'hours';
-    //let endingOdometer:any = 'endingOdometer';
-    //if(this.reap.globalCrewEquipment||this.crewEquipment){
-    //for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
-      // if((this.crewEquipment[i]['endingOdometer']&&(form.value[endingOdometer+[i]]==""))){
-      //     //Filler for data alreday in system
-      // }else{
-      // this.crewEquipment[i]={'ID':this.reap.globalCrewEquipment[i]['ID']
-      //           ,'Name':this.reap.globalCrewEquipment[i]['Name']
-      //           // ,'Odometer':this.reap.globalCrewEquipment[i]['Odometer']
-      //           // ,'endingOdometer':form.value[endingOdometer+[i]]
-      //           // ,'each':form.value[hours+[i]]};
-      //         }
-      //     }
-      //   }
-      // }
+    let hours:any = 'hours';
+
+    if(this.reap.globalCrewEquipment||this.crewEquipment){
+    for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
+      if((this.crewEquipment[i]['Hours']&&(form.value[hours+[i]]==""))){
+          //Filler for data alreday in system
+      }else{
+      this.crewEquipment[i]={
+                            'ID':this.reap.globalCrewEquipment[i]['ID']
+                            ,'Cost_Center': this.reap.globalCrewEquipment[i]['Cost_Center']
+                            ,'Equipment_Bill_Code': this.reap.globalCrewEquipment[i]['Equipment_Bill_Code']
+                            ,'Name': this.reap.globalCrewEquipment[i]['Name']
+                            ,'Name2': this.reap.globalCrewEquipment[i]['Name2']
+                            ,'Hours':form.value[hours+[i]]
+                            };
+          }
+         }
+       }
   this.reap.globalCrewEquipment = this.crewEquipment;
   // console.log(this.reap.globalCrewEquipment);
   if(this.equipmentInfo!=undefined){
   for(let i=0;i<this.equipmentInfo.length;i++){
-  this.totalExtraEquipment.push({'ID':this.equipmentInfo[i].Equipment.ID,
-                          'Name':this.equipmentInfo[i].Equipment.Name,
-                          'Name2':this.equipmentInfo[i].Equipment.Name2,
-                          // 'endingOdometer':this.equipmentInfo[i].endingOdometer
-                          });
-                    //console.log(equipment);
+  this.totalExtraEquipment.push({
+    'ID':this.equipmentInfo[i]['Equipment']['ID']
+    ,'Cost_Center': this.equipmentInfo[i]['Equipment']['Cost_Center']
+    ,'Equipment_Bill_Code': this.equipmentInfo[i]['Equipment']['Equipment_Bill_Code']
+    ,'Name': this.equipmentInfo[i]['Equipment']['Name']
+    ,'Name2': this.equipmentInfo[i]['Equipment']['Name2']
+    ,'Hours':this.equipmentInfo[i]['Hours'],
+    });
   }
+  console.log(this.equipmentInfo);
+  console.log(this.totalExtraEquipment);
+  console.log(this.crewEquipment);
   this.reap.totalEquipment(this.totalExtraEquipment);
     }
   this.navCtrl.pop();
@@ -98,16 +105,16 @@ export class EquipmentPage {
     //console.log(this.equipmentDetails);
   }
   keyPress(event: any) {
-      const pattern = /[0-9\+\-\ ]/;
+    const pattern = /[0-9\.\ ]/;
 
-      let inputChar = String.fromCharCode(event.charCode);
-      if (event.keyCode != 8 && !pattern.test(inputChar)) {
-        event.preventDefault();
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
     }
   }
-  noEquipment(){
+  doeshaveEquipment(){
     //allows user to submit only if there is added equipment
-    if(this.equipmentInfo!=[]&&this.equipmentInfo.length){
+    if((this.equipmentInfo!=[]&&this.equipmentInfo.length)||(this.crewEquipment!=[]&&this.crewEquipment.length)){
       return true;
     }
     else{

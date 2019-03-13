@@ -46,7 +46,7 @@ export class FieldTicketReviewPage {
               public loadingCtrl: LoadingController,
               private storage: Storage,
               private toastCtrl: ToastController) {
-                console.log(this.reap.misc);
+
                 if(this.reap.misc!=[]||this.reap.misc!=null){
                   this.isMisc = true;
                 }
@@ -55,8 +55,8 @@ export class FieldTicketReviewPage {
                 }
             this.formDetails.push(this.reap.fieldTicketForm);
             //console.log(this.formDetails[0]['project']);
-            if(this.reap.globalCrewJob!=null){
-              this.formDetails[0]['Job'] = this.reap.globalCrewJob;
+            if(this.reap.selectedJob!=null){
+              this.formDetails[0]['Job'] = this.reap.selectedJob;
             }
             //console.log(this.jobDetails);
             //console.log(this.equipmentDetails);
@@ -102,18 +102,16 @@ export class FieldTicketReviewPage {
     if(this.reap.globalCrewEquipment){
     for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
       this.mergeEquipment.push({'ID':this.reap.globalCrewEquipment[i]['ID'],
-                        // 'Name':this.reap.globalCrewEquipment[i]['Name'],
-                        // 'Odometer':this.reap.globalCrewEquipment[i]['Odometer'],
-                        // 'endingOdometer':this.reap.globalCrewEquipment[i]['endingOdometer']
+                         'Name':this.reap.globalCrewEquipment[i]['Name'],
+                         'Hours':this.reap.globalCrewEquipment[i]['Hours']
                       });
       }
     }
     if(this.equipmentDetails){
     for(let i=0;i<this.equipmentDetails.length;i++){
       this.mergeEquipment.push({'ID':this.equipmentDetails[i]['ID'],
-                      // 'Name':this.equipmentDetails[i]['Name'],
-                      // 'Odometer':this.equipmentDetails[i]['Odometer'],
-                      // 'endingOdometer':this.equipmentDetails[i]['endingOdometer']
+                          'Name':this.reap.globalCrewEquipment[i]['Name'],
+                          'Hours':this.reap.globalCrewEquipment[i]['Hours']
                     });
                     }
                   }
@@ -124,9 +122,9 @@ export class FieldTicketReviewPage {
     //                         // ,'each':this.reap.globalCrewItems[i].each
     //                       };
     //               }
-    // console.log(this.equipmentDetails);
-    // console.log(this.mergeEquipment);
-    //console.log(this.formDetails);
+    console.log(this.equipmentDetails);
+    console.log(this.mergeEquipment);
+    console.log(this.formDetails);
     this.submitClicked = true;
     var md5 = new Md5();//md5 hash for custom guid
     var time = new Date();//timestamp
@@ -180,8 +178,8 @@ export class FieldTicketReviewPage {
                       var reRoute = true;
                     }
                     else{
-                      var response = "Please Select Location in Main Form!";
-                      var reRoute = false;
+                      response = "Please Select Location in Main Form!";
+                      reRoute = false;
                     }
                   loading.dismiss();
                   let alert = this.alertCtrl.create({

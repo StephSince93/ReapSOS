@@ -51,7 +51,7 @@ export class FieldTicketPage {
     private geolocation: Geolocation,
     private platform: Platform,
     private alertCtrl: AlertController) {
-
+      console.log(this.reap.globalCrewEquipment);
     if (this.reap.globalCrewJob != null) {
       this.globalJob = this.reap.globalCrewJob;
       this.jobArray = this.reap.getJobs;
@@ -165,6 +165,21 @@ export class FieldTicketPage {
         }
       }
 
+      //Updates Equipment Array with total hours worked on form fields
+      if (!Array.isArray(this.reap.globalCrewEquipment) || !this.reap.globalCrewEquipment.length) { }
+      else {
+        for (let i = 0; i < this.reap.globalCrewEquipment.length; i++) {
+          this.reap.globalCrewEquipment[i] = {
+            'ID': this.reap.globalCrewEquipment[i]['ID']
+            ,'Cost_Center': this.reap.globalCrewEquipment[i]['Cost_Center']
+            ,'Equipment_Bill_Code': this.reap.globalCrewEquipment[i]['Equipment_Bill_Code']
+            , 'Name': this.reap.globalCrewEquipment[i]['Name']
+            , 'Name2': this.reap.globalCrewEquipment[i]['Name2']
+            , 'Hours': this.totalTime.toString()
+          };
+        }
+      }
+      console.log(this.reap.globalCrewEquipment);
       //console.log(this.reap.globalCrewPersonnel);
       //Form.value.formStartTime = this.reap.formStartTime;
       console.log(Form.value);

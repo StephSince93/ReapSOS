@@ -62,7 +62,6 @@ getData(authToken,groupName){
    // params = params.append('groupName',groupName);
    // params = params.append('authToken',authToken);
    //console.log(authToken);
-   return this.http.get(this.apiGetUrl, httpOptions)
-   .retry(3).timeout(15000)// This will retry 3 times in case there's an error
+   return this.http.get(this.apiGetUrl, httpOptions).timeout(15000)
  }
 }
