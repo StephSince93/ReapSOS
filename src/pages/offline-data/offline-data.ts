@@ -48,7 +48,7 @@ export class OfflineDataPage {
   anyData(){
     console.log(this.offlineData);
     try{
-        if(this.offlineData==[]||this.offlineData==null){
+        if(this.offlineData==[]||this.offlineData==null||!this.offlineData.length){
           this.isData = false;
           //console.log(this.isData);
         }
@@ -171,7 +171,15 @@ console.log(csv.join('\r\n'))
       var API;
       switch(type){
         case "WO":
+          // if(data[4]['Equipment']!=[]){
+          //   for(let i=0;i<data[4]['Equipment'].length;i++){
+          //     console.log(data[4]['Equipment'][i]['Name']);
+          //     data[4]['Equipment'][i]['Name']= data[4]['Equipment'][i]['Name'].replace(/['"]+/g, '');
+          //     console.log(data[4]['Equipment'][i]['Name']);
+          //   }
+          // }
           API = this.stemAPI.submitSaulsburyForm(data,this.reap.token);
+
           //console.log(API);
           break;
 
@@ -192,7 +200,7 @@ console.log(csv.join('\r\n'))
         //   //console.log(API);
         //   break;
       }
-
+      //console.log(data,type,index);
       let loading = this.loadingCtrl.create({
                     content: 'Submitting...'
                    });
@@ -223,4 +231,5 @@ console.log(csv.join('\r\n'))
       console.log(err);
       });
     }
+
 }

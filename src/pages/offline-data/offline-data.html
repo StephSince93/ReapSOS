@@ -14,7 +14,7 @@
   <ion-label class="noData" *ngIf="!isData">NO OFFLINE DATA SUBMITTED</ion-label>
   <ion-card *ngFor="let data of offlineData;let i = index">
 
-    <ion-card-content *ngIf="data?.Type=='GPS'">
+    <!-- <ion-card-content *ngIf="data?.Type=='GPS'">
       <h1>{{i+1}}</h1>
       <h2 class="bold">Form - {{data?.Type}}</h2>
       <p>Well ID - {{data?.Info[0].ID}}</p>
@@ -30,27 +30,26 @@
       <p>Location - {{data?.Info[0].project.Location.Location}}</p>
       <p>Company Man - {{data?.Info[0].project.companyMan}}</p>
       <p>AFE - {{data?.Info[0].project.orderNumber}}</p>
-    </ion-card-content>
+    </ion-card-content> -->
 
     <ion-card-content *ngIf="data?.Type=='WO'">
       <button ion-button round class="submitButton" (click)="retrySubmit(data?.Info,data?.Type,i)">Re-Try Submission</button>
       <h1>{{i+1}}</h1>
       <h2 class="bold">Form - Work Order</h2>
-      <p>Project - {{data?.Info[0].wo[0].project?.Project_Name_Description}}</p>
-      <p>Company Man - {{data?.Info[0].wo[0].companyMan}}</p>
-      <p>Current Date - {{data?.Info[0].wo[0].currentDate}}</p>
+      <p>Date - {{data?.Info[0].wo[0].currentDate}}</p>
+      <p>Job - {{data?.Info[0].wo[0].Job?.JobName}}</p>
+      <p>Phase Code - {{data?.Info[0].wo[0].PhaseCode?.Description}}</p>
+      <p>Client PM - {{data?.Info[0].wo[0].clientPM}}</p>
       <p>Start Time - {{data?.Info[0].wo[0].startTime}}</p>
       <p>End Time - {{data?.Info[0].wo[0].endTime}}</p>
-      <p>Company Man Signing - {{data?.Info[0].wo[0].companyMan}}</p>
       <p>Job Description - {{data?.Info[0].wo[0].description}}</p>
 
       <br>
       <h2 class="bold">Sub Form - Equipment</h2>
       <br>
       <div *ngFor="let subData of data.Info[4].Equipment">
-      <p>Name - {{subData?.ID}}</p>
-      <!-- <p>Starting Odometer - {{subData?.Odometer}}</p>
-      <p>Ending Odometer - {{subData?.endingOdometer}}</p> -->
+      <p>Name - {{subData?.Name}}</p>
+      <p>Hours - {{subData?.Hours}}</p>
       <br>
       </div>
 
@@ -58,19 +57,20 @@
       <h2 class="bold">Sub Form - Labor</h2>
       <br>
       <div *ngFor="let subData of data.Info[5].Labor">
-      <p>Employee - {{subData?.FullName}}</p>
+      <p>Employee - {{subData?.Name}}</p>
+      <p>Title - {{subData?.Title}}</p>
       <p>Hours - {{subData?.Hours}}</p>
       <br>
       </div>
 
-      <br>
+      <!-- <br>
       <h2 class="bold">Sub Form - Extra Labor</h2>
       <br>
       <div *ngFor="let subData of data.Info[9].extraLabor">
       <p>Name - {{subData?.Name}}</p>
       <p>Hours - {{subData?.Hours}}</p>
       <br>
-      </div>
+      </div> -->
 
       <br>
       <h2 class="bold">Sub Form - Misc.</h2>
@@ -81,7 +81,7 @@
       <br>
       </div>
 
-      <br>
+      <!-- <br>
       <h2 class="bold">Sub Form - Job Description</h2>
       <br>
       <div *ngFor="let subData of data.Info[7].JobDescription">
@@ -89,7 +89,7 @@
       <p>Quantity - {{subData?.quantity}}</p>
       <p>Hours/Days/Cost - {{subData?.each}}</p>
       <br>
-      </div>
+      </div> -->
       </ion-card-content>
   </ion-card>
   <ion-item>

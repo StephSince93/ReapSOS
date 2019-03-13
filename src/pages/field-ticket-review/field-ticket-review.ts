@@ -102,7 +102,7 @@ export class FieldTicketReviewPage {
     if(this.reap.globalCrewEquipment){
     for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
       this.mergeEquipment.push({'ID':this.reap.globalCrewEquipment[i]['ID'],
-                         'Name':this.reap.globalCrewEquipment[i]['Name'],
+                         'Name':this.reap.globalCrewEquipment[i]['Name'].replace(/['"]+/g, ''),// This is commented out because of quotes breaking API
                          'Hours':this.reap.globalCrewEquipment[i]['Hours']
                       });
       }
@@ -110,7 +110,7 @@ export class FieldTicketReviewPage {
     if(this.equipmentDetails){
     for(let i=0;i<this.equipmentDetails.length;i++){
       this.mergeEquipment.push({'ID':this.equipmentDetails[i]['ID'],
-                          'Name':this.reap.globalCrewEquipment[i]['Name'],
+                          'Name':this.reap.globalCrewEquipment[i]['Name'].replace(/['"]+/g, ''),// This is commented out because of quotes breaking API
                           'Hours':this.reap.globalCrewEquipment[i]['Hours']
                     });
                     }

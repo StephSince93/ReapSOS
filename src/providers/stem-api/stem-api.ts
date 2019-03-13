@@ -7,7 +7,7 @@ import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class StemApiProvider {
-      //private v3URL:string = 'https://v3.stemsoftware.com/api.php?action=';
+      //private saulsburyProdURL:string = 'https://saulsbury.poweredbystem.com/api.php?action=';
       private sandboxURL:string = 'https://sandbox.stemsoftware.com/api.php?action=';
       //private DanielsDevURL:string = 'http://10.0.0.21/api.php?action=';
 
