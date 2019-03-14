@@ -71,30 +71,31 @@ export class ManageCrewPage {
             this.noJob= true;
             this.equipmentArray = this.reap.getEquipment;
             this.phaseArray = this.reap.getPhaseCodes;
-            this.equipmentArray = this.reap.getEquipment;
+            this.personnelArray = this.reap.getPersonnel;
             //this.itemArray = this.reap.getJobs;
           }
           else{
-            //console.log(this.globalProject);
-            var jobCost = this.globalJob['CostCenter'];
-            var jobNumber =  this.globalJob['JobName'];
-            //console.log(projectCost);
-            for(let i=0;i<this.reap.getEquipment.length;i++){
-              if(this.reap.getEquipment[i]['CostCenter']==jobCost){
-                //console.log(this.reap.getEquipment[i]);
-                this.tempEquipment.push(this.reap.getEquipment[i]);
-              }
-
-            }
+            //var jobCost = this.globalJob['Cost_Center_Code'];
+            var jobNumber =  this.globalJob['Job_Number'];
+            //console.log(jobCost);
+            // for(let i=0;i<this.reap.getEquipment.length;i++){
+            //   if(this.reap.getEquipment[i]['Cost_Center']==jobCost){
+            //     console.log(this.reap.getEquipment[i]);
+            //     this.tempEquipment.push(this.reap.getEquipment[i]);
+            //   }
+            //   console.log(this.reap.getEquipment[i]);
+            // }
             //console.log(this.tempEquipment);
-              this.equipmentArray = this.tempEquipment;
-              this.tempEquipment = [];
+            // this.equipmentArray = this.tempEquipment;
+            // this.tempEquipment = [];
+              //console.log(this.reap.getPhaseCodes.length);
 
               for(let i=0;i<this.reap.getPhaseCodes.length;i++){
                 if(this.reap.getPhaseCodes[i]['JobNumber']==jobNumber){
-                  //console.log(this.reap.getEquipment[i]);
+                  //console.log(this.reap.getPhaseCodes[i]);
                   this.tempPhase.push(this.reap.getPhaseCodes[i]);
                 }
+                //console.log(this.reap.getPhaseCodes[i]);
               }
               //console.log(this.tempPhase);
               this.phaseArray = this.tempPhase;
@@ -132,6 +133,7 @@ export class ManageCrewPage {
     //console.log(this.reap.getEquipment);
     //this.itemArray = this.reap.getJobs;
     this.personnelArray = this.reap.getPersonnel;
+    this.equipmentArray = this.reap.getEquipment;
     this.jobArray = this.reap.getJobs;
   }
   catch(e){
@@ -157,26 +159,16 @@ export class ManageCrewPage {
           else{
             this.noJob = false;
 
-          //console.log(this.globalProject);
-          //var projectCost = this.globalJob['CostCenter'];
-          var jobNumber =  this.globalJob['Job_Number'];
-          //console.log(projectNumber);
-          // for(let i=0;i<this.reap.getEquipment.length;i++){
-          //   if(this.reap.getEquipment[i]['CostCenter']==projectCost){
-          //     console.log(this.reap.getEquipment[i]);
-          //     this.tempEquipment.push(this.reap.getEquipment[i]);
-          //   }
 
-          // }
-          // //console.log(this.tempEquipment);
-          // this.equipmentArray = this.tempEquipment;
-          // this.tempEquipment = [];
+          var jobNumber =  this.globalJob['Job_Number'];
+          //console.log(jobNumber);
 
           for(let i=0;i<this.reap.getPhaseCodes.length;i++){
             if(this.reap.getPhaseCodes[i]['JobNumber']==jobNumber){
               //console.log(this.reap.getEquipment[i]);
               this.tempPhase.push(this.reap.getPhaseCodes[i]);
             }
+            //console.log(this.reap.getPhaseCodes[i]);
           }
           console.log(this.tempPhase);
           this.phaseArray = this.tempPhase;

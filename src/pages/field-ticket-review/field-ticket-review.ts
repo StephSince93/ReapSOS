@@ -102,7 +102,7 @@ export class FieldTicketReviewPage {
     if(this.reap.globalCrewEquipment){
     for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
       this.mergeEquipment.push({'ID':this.reap.globalCrewEquipment[i]['ID'],
-                         'Name':this.reap.globalCrewEquipment[i]['Name'].replace(/['"]+/g, ''),// This is commented out because of quotes breaking API
+                         'Name':this.reap.globalCrewEquipment[i]['Name'].replace(/["]+/g, 'in.').replace(/[']+/g, 'ft.'),// This is commented out because of quotes breaking API
                          'Hours':this.reap.globalCrewEquipment[i]['Hours']
                       });
       }
@@ -110,7 +110,7 @@ export class FieldTicketReviewPage {
     if(this.equipmentDetails){
     for(let i=0;i<this.equipmentDetails.length;i++){
       this.mergeEquipment.push({'ID':this.equipmentDetails[i]['ID'],
-                          'Name':this.reap.globalCrewEquipment[i]['Name'].replace(/['"]+/g, ''),// This is commented out because of quotes breaking API
+                          'Name':this.reap.globalCrewEquipment[i]['Name'].replace(/["]+/g, 'in.').replace(/[']+/g, 'ft.'),// This is commented out because of quotes breaking API
                           'Hours':this.reap.globalCrewEquipment[i]['Hours']
                     });
                     }
@@ -124,6 +124,8 @@ export class FieldTicketReviewPage {
     //               }
     console.log(this.equipmentDetails);
     console.log(this.mergeEquipment);
+    //replaces quotes with ft and in
+    this.formDetails[0]['PhaseCode']['Description'] = this.formDetails[0]['PhaseCode']['Description'].replace(/["]+/g, 'in.').replace(/[']+/g, 'ft.');
     console.log(this.formDetails);
     this.submitClicked = true;
     var md5 = new Md5();//md5 hash for custom guid

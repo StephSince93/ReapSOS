@@ -166,7 +166,7 @@ console.log(csv.join('\r\n'))
     // Send a text message using default options
     this.emailComposer.open(email);
     }
-    retrySubmit(data,type,index){
+    retrySubmit(data:any,type:any,index:any){
       console.log(data,type,index);
       var API;
       switch(type){

@@ -59,7 +59,7 @@ export class FieldTicketPage {
       if (this.reap.globalCrewPhaseCodes != null) {
         this.globalPhaseCode = this.reap.globalCrewPhaseCodes;
         if(this.globalPhaseCode['Client_PM']==""||this.globalPhaseCode['Client_PM']==null){
-          this.clientPM="No Client PM for this Phase Code";
+          this.clientPM="";
         }
         else{
           this.clientPM = this.globalPhaseCode['Client_PM'];
@@ -213,7 +213,7 @@ export class FieldTicketPage {
       this.clientPM="No Phase Code Selected";
     }
     else if(event.value['Client_PM']==""){
-      this.clientPM="No Client PM for this Phase Code";
+      this.clientPM="";
     }
     else{
       this.clientPM = event.value['Client_PM'];

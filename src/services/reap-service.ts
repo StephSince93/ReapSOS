@@ -137,17 +137,25 @@ export class ReapService {
           this.getEquipment = this.getData['EquipmentList'];
           this.storage.set('Equipment',this.getEquipment);
 
+          //Saulsbury PersonnelList
           this.getPersonnel = this.getData['Personnel'];
           this.storage.set('Personnel',this.getPersonnel);
 
+          //Saulsbury Job Labor Billing Rates
           this.getJobLaborBR = this.getData['JobLaborBR'];
           this.storage.set('JobLaborBR',this.getJobLaborBR);
 
-          this.getJobs = this.getData['Jobs'];
-          this.storage.set('Jobs',this.getJobs);
-
+          //Saulsbury PhaseCodes
           this.getPhaseCodes = this.getData['PhaseCode'];
           this.storage.set('PhaseCodes',this.getPhaseCodes);
+
+          //Saulsbury Jobs
+          this.getJobs = this.getData['Jobs'];
+
+          this.getJobs = this.filterJobs(this.getJobs);//Removes Jobs from list if no phase codes are associated with them
+
+          console.log(this.getJobs);
+          this.storage.set('Jobs',this.getJobs);
 
           //calls method to store App Version to local storage globally
           if(this.saulsburyVersion==null||this.saulsburyVersion=="Could not Grab App Version!"){
@@ -161,14 +169,14 @@ export class ReapService {
         });
     }
       getLocalStorage(){
-        //console.log('grabbed local storage');
+        console.log('grabbed local storage');
 
         this.storage.get('authToken').then((data)=>{
         this.token = data;
         });
 
         this.storage.get('groupName').then((data)=>{
-          this.groupName = data;
+        this.groupName = data;
         });
 
         this.storage.get('MD5').then((data)=>{
@@ -194,6 +202,10 @@ export class ReapService {
 
         this.storage.get('Jobs').then((data)=>{
         this.getJobs = data;
+        });
+
+        this.storage.get('PhaseCodes').then((data)=>{
+        this.getPhaseCodes = data;
         });
 
         //Set Crew Global data devonian
@@ -242,28 +254,26 @@ export class ReapService {
       }
 
     //creates and pushes mileage array
-    totalMisc(data){
+    totalMisc(data:any){
       this.misc.push(data);
       //console.log(this.mileage);
     }
-    /*Devonian Custom*/
     //creates and pushes labor array
-    addLabor(data){
+    addLabor(data:any){
       this.extraLabor = data;
       //console.log(this.extraLabor);
     }
-    /*Devonian Custom*/
     //creates and pushes equipment array
-    totalEquipment(data){
+    totalEquipment(data:any){
       this.equipment = data;
       //console.log('Here in totalEquipment');
       //console.log(this.equipment);
     }
-    totalPhotos(data){
+    totalPhotos(data:any){
       this.photo.push(data);
       //console.log(this.photo);
     }
-    totalMileage(data){
+    totalMileage(data:any){
       this.job.push(data);
     }
 
@@ -273,7 +283,7 @@ export class ReapService {
       //this.connected.unsubscribe();
       //this.disconnected.unsubscribe();
     }
-    presentToast(msg) {
+    presentToast(msg:any) {
       let toast = this.toast.create({
         message: msg,
         duration: 3000,
@@ -289,7 +299,7 @@ export class ReapService {
       toast.present();
       }
 
-    presentAlert(title,subTitle,button){
+    presentAlert(title:any,subTitle:any,button:any){
 
       let alert = this.alertCtrl.create({
            title: title,
@@ -297,6 +307,19 @@ export class ReapService {
            buttons: [button]
          });
        alert.present();
+    }
+    filterJobs(jobs:any []=[]){
+      let temp:any []=[];
+
+          for(var key in jobs){
+                let JobNumber = jobs[key]['Job_Number'];
+                  const found =  this.getPhaseCodes.some(el => el.JobNumber === JobNumber);
+                  if (found){
+                    temp.push(jobs[key]);
+                  }
+          }
+          jobs= temp;
+      return jobs;
     }
 }
 

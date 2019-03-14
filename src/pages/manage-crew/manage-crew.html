@@ -67,8 +67,8 @@
         <!-- <div *ngIf="globalPersonnel; else emptyPersonnel"> -->
         <ion-grid *ngIf="!noPhaseCode">
           <ion-row>
-            <ion-col >PHASE CODE:</ion-col>
-            <ion-col col-10>{{globalPhaseCode?.Description}}</ion-col>
+            <ion-col col-4>PHASE CODE:</ion-col>
+            <ion-col col-8>{{globalPhaseCode?.Description}}</ion-col>
             <!-- <ion-col><button type="button" (tap)="removePersonnel(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col> -->
           </ion-row>
         </ion-grid>
