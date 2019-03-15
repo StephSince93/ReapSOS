@@ -36,12 +36,13 @@ export class EquipmentPage {
           this.reap.presentAlert('Error','Error Grabbing API data, please re-sync in settings','Dismiss')
           this.navCtrl.pop();
           }
-          //console.log(this.equipmentArray);
+
           if(!Array.isArray(this.crewEquipment) || !this.crewEquipment.length)
           {this.doeshaveCrew = false;}  else{this.doeshaveCrew = true;}
+          //console.log(this.doeshaveCrew);
   }
   onSubmit(form: NgForm){
-    console.log(form.value);
+    //console.log(form.value);
     let test =  [];
     let hours:any = 'hours';
 
@@ -74,9 +75,9 @@ export class EquipmentPage {
     ,'Hours':this.equipmentInfo[i]['Hours'],
     });
   }
-  console.log(this.equipmentInfo);
-  console.log(this.totalExtraEquipment);
-  console.log(this.crewEquipment);
+  // console.log(this.equipmentInfo);
+  // console.log(this.totalExtraEquipment);
+  // console.log(this.crewEquipment);
   this.reap.totalEquipment(this.totalExtraEquipment);
     }
   this.navCtrl.pop();
@@ -114,7 +115,7 @@ export class EquipmentPage {
   }
   doeshaveEquipment(){
     //allows user to submit only if there is added equipment
-    if((this.equipmentInfo!= null && this.equipmentInfo.length < 1)||(this.crewEquipment!= null && this.crewEquipment.length < 1)){
+    if((this.equipmentInfo!= null && this.equipmentInfo.length < 1)&&!this.doeshaveCrew){
       return false;
     }
     else{

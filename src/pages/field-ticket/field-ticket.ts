@@ -29,29 +29,30 @@ export class FieldTicketPage {
   public phaseArray: PhaseCodeList[];
   phase: PhaseCodeList;
   /**************************************************************/
-  private tempPhase: any[] = [];
-  private selectedArray: any[] = [];//saves array selected from jobs
-  private jobSelected: boolean = false;
-  private afeString: string;//stores AFE from selected job number
-  private startDate: any;
-  private foreman: string;//current user logged in
-  private personnelSelected: boolean = false;//check to see if user selected exists
-  private totalTime: any;
+  public tempPhase: any[] = [];
+  public selectedArray: any[] = [];//saves array selected from jobs
+  public jobSelected: boolean = false;
+  public afeString: string;//stores AFE from selected job number
+  public startDate: any;
+  public foreman: string;//current user logged in
+  public personnelSelected: boolean = false;//check to see if user selected exists
+  public totalTime: any;
   public clientPM: any;
-  globalJob: any[] = [];
-  globalPhaseCode: any[] = [];
-  currentDate: any = new Date().toISOString();
-  defaultStartTime: string;
-  defaultEndTime: string;
-
+  public globalJob: any[] = [];
+  public globalPhaseCode: any[] = [];
+  public currentDate: any = new Date().toISOString();
+  public defaultStartTime: string;
+  public defaultEndTime: string;
+  public startTime: string;
+  public endTime: string;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public reap: ReapService,
     public toastCtrl: ToastController,
-    private geolocation: Geolocation,
-    private platform: Platform,
-    private alertCtrl: AlertController) {
-      console.log(this.reap.globalCrewEquipment);
+    public geolocation: Geolocation,
+    public platform: Platform,
+    public alertCtrl: AlertController) {
+
     if (this.reap.globalCrewJob != null) {
       this.globalJob = this.reap.globalCrewJob;
       this.jobArray = this.reap.getJobs;
@@ -89,7 +90,7 @@ export class FieldTicketPage {
   }
   ionViewWillEnter() {
     //If user backtracks to main form, the variables are re-initialized
-    this.defaultStartTime = new Date(new Date().setHours(-1, 0, 0)).toISOString();
+    this.defaultStartTime = new Date(new Date().setHours(1, 0, 0)).toISOString();
     this.defaultEndTime = new Date(new Date().setHours(13, 0, 0)).toISOString();
   }
   jobChange(event: { component: SelectSearchableComponent, value: any }) {
@@ -111,46 +112,18 @@ export class FieldTicketPage {
 
   onSubmit(Form: NgForm) {
     //console.log(Form.value);
-    //var t0 = performance.now();
-    var sT = new Date(Form.value.startTime);
-    var eT = new Date(Form.value.endTime);
-    var sTHours = sT.getUTCHours();
-    var sTMinutes = sT.getUTCMinutes();
-    var eTHours = eT.getUTCHours();
-    var eTMinutes = eT.getUTCMinutes();
-    //Changes form value back to normal time
-    if (sT.getUTCMinutes() == 0) {
-      Form.value.startTime = (sT.getUTCHours() + ':' + sT.getUTCMinutes() + sT.getUTCMinutes() + ' AM').toString();
-    }
-    else {
-      Form.value.startTime = (sT.getUTCHours() + ':' + sT.getUTCMinutes() + ' AM').toString();
-    }
-    if (eT.getUTCMinutes() == 0) {
-      if (eT.getUTCHours() > 12) {
-        Form.value.endTime = (eT.getUTCHours() - 12 + ':' + eT.getUTCMinutes() + eT.getUTCMinutes() + ' PM').toString();
-      }
-      else {
-        Form.value.endTime = (eT.getUTCHours() + ':' + eT.getUTCMinutes() + eT.getUTCMinutes() + ' PM').toString();
-      }
-    }
-    else {
-      Form.value.endTime = (eT.getUTCHours() + ':' + eT.getUTCMinutes() + ' PM').toString();
-    }
-    // console.log(Form.value.startTime);
-    // console.log(Form.value.endTime);
-    var totalHours = eTHours - sTHours;
-    var totalMinutes = ((eTMinutes - sTMinutes) / 60);
-    // console.log('hours: ' + totalHours);
-    // console.log('minutes: ' + (totalMinutes / 60));
-    this.totalTime = (totalHours + totalMinutes);
-    // console.log(totalHours + totalMinutes);
-    // console.log('total time: ' + totalTime);
-    //this.reap.totalTime = totalTime;
-    if (this.totalTime < 0) {
+    this.startTime = Form.value.startTime;
+    this.endTime = Form.value.endTime;
+    this.totalTime = this.calculateTime(this.startTime,this.endTime);
+
+    Form.value.startTime = this.startTime;
+    Form.value.endTime = this.endTime;
+    if (this.totalTime < 0|| this.totalTime == 0) {//When Time extends to next day
       //console.log('Starting Time is greater than Ending Time');
-      this.presentAlert();
+      this.totalTime = 24 + this.totalTime;
+      //console.log(this.totalTime);
     }
-    else {
+
       //Updates Labor Array with total hours worked on form fields
       if (!Array.isArray(this.reap.globalCrewPersonnel) || !this.reap.globalCrewPersonnel.length) { }
       else {
@@ -179,10 +152,10 @@ export class FieldTicketPage {
           };
         }
       }
-      console.log(this.reap.globalCrewEquipment);
+      //console.log(this.reap.globalCrewEquipment);
       //console.log(this.reap.globalCrewPersonnel);
       //Form.value.formStartTime = this.reap.formStartTime;
-      console.log(Form.value);
+      //console.log(Form.value);
       var selectedJobNumber = Form.value.Job.Job_Number;
       var selectedJob = Form.value.Job;
       this.reap.selectedJobNumber = selectedJobNumber;
@@ -198,12 +171,8 @@ export class FieldTicketPage {
       //console.log(LaborBillCodes);
 
       this.reap.fieldTicketForm = Form.value;
-      //var t1 = performance.now();
-      //console.log("Formatting time took " + (t1 - t0) + " milliseconds.");
-      //alert("Formatting time took " + (t1 - t0) + " milliseconds.");
-      //console.log(this.reap.safetyForm);
+
       this.navCtrl.push(SubMenuPage);
-    }
   }
 
   phasecodeChange(event: { component: SelectSearchableComponent, value: any }) {
@@ -220,12 +189,90 @@ export class FieldTicketPage {
     }
   }
 
-  presentAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Time Mismatch',
-      subTitle: 'Start Time is greater than End Time',
-      buttons: ['Dismiss']
-    });
-    alert.present();
+  // presentAlert() {
+  //   var tof:any;
+  //   let alert = this.alertCtrl.create({
+  //     title: 'Time Mismatch',
+  //     subTitle: 'Are you exting hours into two days?',
+  //     buttons: [
+  //       {
+  //         text: 'Yes',
+  //         handler: () => {
+  //           tof = true;
+  //         }
+  //       },
+  //       {
+  //         text: 'No, Update Hours',
+  //         handler: () => {
+  //           tof = false;
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   alert.present();
+  // }
+
+  calculateTime(startTime:string,endTime:string){
+
+    var sT = new Date(startTime);
+    var eT = new Date(endTime);
+    console.log('Start '+sT)
+    console.log('End '+eT)
+    //Changes form value back to 12 Hour Time
+    if (sT.getUTCMinutes() == 0) {//If Starting Time Minutes Are 0
+      if(sT.getUTCHours() == 0){
+          this.startTime = (sT.getUTCHours()  + 12 +  ':' + sT.getUTCMinutes() + sT.getUTCMinutes() + ' AM').toString();
+      }
+      else if(sT.getUTCHours() > 12){
+        this.startTime = (sT.getUTCHours() - 12 + ':' + sT.getUTCMinutes() + sT.getUTCMinutes() + ' PM').toString();
+      }
+      else{
+          this.startTime = (sT.getUTCHours()  +   ':' + sT.getUTCMinutes() + sT.getUTCMinutes() + ' AM').toString();
+      }
+    }
+    else {//If Starting Time Minutes Are 15,30, or 45
+        if(sT.getUTCHours() == 0){
+          this.startTime = (sT.getUTCHours() + 12 + ':' + sT.getUTCMinutes() + ' AM').toString();
+        }
+        else if(sT.getUTCHours() > 12){
+          this.startTime = (sT.getUTCHours() - 12 + ':' + sT.getUTCMinutes() + ' PM').toString();
+        }
+        else{
+          this.startTime = (sT.getUTCHours() + ':' + sT.getUTCMinutes() + ' AM').toString();
+        }
+    }
+
+    if (eT.getUTCMinutes() == 0) {//If Starting Time Minutes Are 0
+      if (eT.getUTCHours() > 12) {
+        this.endTime = (eT.getUTCHours() - 12 + ':' + eT.getUTCMinutes() + eT.getUTCMinutes() + ' PM').toString();
+      }
+      else {
+        this.endTime = (eT.getUTCHours() + ':' + eT.getUTCMinutes() + eT.getUTCMinutes() + ' AM').toString();
+      }
+    }
+    else {//If Ending Time Minutes Are 15,30, or 45
+      if (eT.getUTCHours() > 12) {
+        this.endTime = (eT.getUTCHours() - 12 + ':' + eT.getUTCMinutes() + eT.getUTCMinutes() + ' PM').toString();
+      }
+      else {
+        this.endTime = (eT.getUTCHours() + ':' + eT.getUTCMinutes() +  ' AM').toString();
+      }
+    }
+    //  console.log(this.startTime);
+    //  console.log(this.endTime);
+    var sTHours = sT.getUTCHours();
+    var sTMinutes = sT.getUTCMinutes();
+    var eTHours = eT.getUTCHours();
+    var eTMinutes = eT.getUTCMinutes();
+    var totalHours = eTHours - sTHours;
+    var totalMinutes = ((eTMinutes - sTMinutes) / 60);
+    // console.log('hours: ' + totalHours);
+    // console.log('minutes: ' + (totalMinutes / 60));
+    var totalTime = (totalHours + totalMinutes);
+    // console.log(totalHours + totalMinutes);
+    console.log('total time: ' + totalTime);
+    //this.reap.totalTime = totalTime;
+
+    return totalTime;
   }
 }

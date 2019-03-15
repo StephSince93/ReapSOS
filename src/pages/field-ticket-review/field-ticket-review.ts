@@ -122,11 +122,11 @@ export class FieldTicketReviewPage {
     //                         // ,'each':this.reap.globalCrewItems[i].each
     //                       };
     //               }
-    console.log(this.equipmentDetails);
-    console.log(this.mergeEquipment);
+    // console.log(this.equipmentDetails);
+    // console.log(this.mergeEquipment);
     //replaces quotes with ft and in
     this.formDetails[0]['PhaseCode']['Description'] = this.formDetails[0]['PhaseCode']['Description'].replace(/["]+/g, 'in.').replace(/[']+/g, 'ft.');
-    console.log(this.formDetails);
+    //console.log(this.formDetails);
     this.submitClicked = true;
     var md5 = new Md5();//md5 hash for custom guid
     var time = new Date();//timestamp
@@ -168,7 +168,7 @@ export class FieldTicketReviewPage {
                  *
                  */
                  loading.present();
-                console.log(this.submitData);
+                //console.log(this.submitData);
                  //creates a loading controller while user submits
                  this.stemAPI.submitSaulsburyForm(this.submitData,this.reap.token).subscribe((result) =>{
 

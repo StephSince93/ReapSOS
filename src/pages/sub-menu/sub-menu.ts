@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MiscPage } from '../misc/misc';
 import { LaborPage } from '../labor/labor';
 import { EquipmentPage } from '../equipment/equipment';
-import { ItemTypePage } from '../item-type/item-type';
 import { AddPhotoPage } from '../add-photo/add-photo';
 import { FieldTicketReviewPage } from '../field-ticket-review/field-ticket-review';
 import { ReapService } from '../../services/reap-service';
@@ -39,8 +38,4 @@ export class SubMenuPage {
   toReview(){
     this.navCtrl.push(FieldTicketReviewPage);
   }
-  toMileage(){
-    this.navCtrl.push(ItemTypePage);
-  }
-
 }

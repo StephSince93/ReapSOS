@@ -46,7 +46,7 @@ export class OfflineDataPage {
       });
   }
   anyData(){
-    console.log(this.offlineData);
+    //console.log(this.offlineData);
     try{
         if(this.offlineData==[]||this.offlineData==null||!this.offlineData.length){
           this.isData = false;
@@ -100,7 +100,7 @@ export class OfflineDataPage {
   })
   csv.unshift(fields.join(',')) // add header column
 
-console.log(csv.join('\r\n'))
+//console.log(csv.join('\r\n'))
     // console.log(data)
     //
     // var formCount = data.length
@@ -167,7 +167,7 @@ console.log(csv.join('\r\n'))
     this.emailComposer.open(email);
     }
     retrySubmit(data:any,type:any,index:any){
-      console.log(data,type,index);
+      //console.log(data,type,index);
       var API;
       switch(type){
         case "WO":

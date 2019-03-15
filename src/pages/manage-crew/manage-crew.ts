@@ -170,7 +170,7 @@ export class ManageCrewPage {
             }
             //console.log(this.reap.getPhaseCodes[i]);
           }
-          console.log(this.tempPhase);
+          //console.log(this.tempPhase);
           this.phaseArray = this.tempPhase;
           this.tempPhase = [];
         }
@@ -267,7 +267,7 @@ export class ManageCrewPage {
 
     //console.log(this.reap.globalCrewItems);
     //this.reap.globalCrewItems = this.globalItems;
-    console.log(form.value);
+    //console.log(form.value);
     this.reap.globalCrewJob = form.value.Job;
     this.reap.globalCrewPersonnel = form.value.Personnel;
     this.reap.globalCrewEquipment = form.value.Equipment;

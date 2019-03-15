@@ -31,9 +31,9 @@ export class LaborPage {
               public storage: Storage,
               public modalCtrl: ModalController) {
                 this.LaborBillCodes = this.reap.LaborBC;
-                console.log(this.LaborBillCodes);
+                // console.log(this.LaborBillCodes);
                 this.crewPersonnel = this.reap.globalCrewPersonnel;
-                console.log(this.crewPersonnel);
+                //console.log(this.crewPersonnel);
                 if(!Array.isArray(this.crewPersonnel) || !this.crewPersonnel.length){
                   this.doeshaveCrew = false;
                 }
@@ -91,7 +91,6 @@ export class LaborPage {
 
   removePersonnel(index){
     this.personnelInfo.splice(index, 1);
-    //console.log(this.equipmentDetails);
   }
   keyPress(event: any) {
     const pattern = /[0-9\.\ ]/;

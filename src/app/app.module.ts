@@ -25,7 +25,6 @@ import { FieldTicketPage } from '../pages/field-ticket/field-ticket';
 import { MiscPage } from '../pages/misc/misc';
 import { EquipmentPage } from '../pages/equipment/equipment';
 import { LaborPage } from '../pages/labor/labor';
-import { ItemTypePage } from '../pages/item-type/item-type';
 import { AddPhotoPage } from '../pages/add-photo/add-photo';
 import { FieldTicketReviewPage } from '../pages/field-ticket-review/field-ticket-review';
 import { SubMenuPage } from '../pages/sub-menu/sub-menu';
@@ -33,7 +32,6 @@ import { SuccessPage } from '../pages/success/success';
 import { SupportPage } from '../pages/support/support';
 import { ReapService } from '../services/reap-service';
 import { StemApiProvider } from '../providers/stem-api/stem-api';
-import { InvoicePage } from '../pages/invoice/invoice';
 import { ManageCrewPage } from '../pages/manage-crew/manage-crew';
 import { OfflineDataPage } from '../pages/offline-data/offline-data';
 import { AddExtraEquipmentPage } from '../pages/add-extra-equipment/add-extra-equipment';
@@ -72,13 +70,11 @@ export class MyErrorHandler implements ErrorHandler {
     MiscPage,
     EquipmentPage,
     LaborPage,
-    ItemTypePage,
     AddPhotoPage,
     SubMenuPage,
     FieldTicketReviewPage,
     SuccessPage,
     SupportPage,
-    InvoicePage,
     ManageCrewPage,
     OfflineDataPage,
     AddExtraEquipmentPage,
@@ -103,12 +99,10 @@ export class MyErrorHandler implements ErrorHandler {
     MiscPage,
     EquipmentPage,
     LaborPage,
-    ItemTypePage,
     AddPhotoPage,
     SubMenuPage,
     FieldTicketReviewPage,
     SuccessPage,
-    InvoicePage,
     SupportPage,
     ManageCrewPage,
     OfflineDataPage,
