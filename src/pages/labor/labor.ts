@@ -73,25 +73,25 @@ export class LaborPage {
     }//end if
     this.reap.globalCrewPersonnel = this.crewPersonnel;
     //this.reap.totalLabor(form.value);
-    if(this.personnelInfo!=undefined){
-      for(let i=0;i<this.personnelInfo.length;i++){
-    this.totalExtraPersonnel.push({'ID':this.personnelInfo[i].extraPersonnel.ID,
-                      'Title':this.personnelInfo[i].extraPersonnel.Extras,
-                      'Name':this.personnelInfo[i].personnelName,
-                      'Hours':this.personnelInfo[i].hours});
-        }
-        //console.log(this.totalExtraPersonnel);
-        this.reap.addLabor(this.totalExtraPersonnel);
-      }
+    // if(this.personnelInfo!=undefined){
+    //   for(let i=0;i<this.personnelInfo.length;i++){
+    // this.totalExtraPersonnel.push({'ID':this.personnelInfo[i].extraPersonnel.ID,
+    //                   'Title':this.personnelInfo[i].extraPersonnel.Extras,
+    //                   'Name':this.personnelInfo[i].personnelName,
+    //                   'Hours':this.personnelInfo[i].hours});
+    //     }
+    //     //console.log(this.totalExtraPersonnel);
+    //     this.reap.addLabor(this.totalExtraPersonnel);
+    //   }
     this.navCtrl.pop();
     }
   personnelChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
     }
 
-  removePersonnel(index){
-    this.personnelInfo.splice(index, 1);
-  }
+  // removePersonnel(index){
+  //   this.personnelInfo.splice(index, 1);
+  // }
   keyPress(event: any) {
     const pattern = /[0-9\.\ ]/;
 

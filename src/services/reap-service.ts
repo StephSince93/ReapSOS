@@ -36,7 +36,7 @@ export class ReapService {
     public globalCrewJob: any [] = [];
     public globalCrewPersonnel: any [] = [];
     public globalCrewEquipment: any [] = [];
-    public globalCrewItems: any [] = [];
+    //public globalCrewItems: any [] = [];
     public globalCrewPhaseCodes: any [] = [];
     //Offline Form Submission
     public offlineFormSubmissions:any [] = [];
@@ -154,7 +154,7 @@ export class ReapService {
 
           this.getJobs = this.filterJobs(this.getJobs);//Removes Jobs from list if no phase codes are associated with them
 
-          console.log(this.getJobs);
+          //console.log(this.getJobs);
           this.storage.set('Jobs',this.getJobs);
 
           //calls method to store App Version to local storage globally
@@ -169,7 +169,7 @@ export class ReapService {
         });
     }
       getLocalStorage(){
-        console.log('grabbed local storage');
+        //console.log('grabbed local storage');
 
         this.storage.get('authToken').then((data)=>{
         this.token = data;
@@ -217,10 +217,6 @@ export class ReapService {
         this.globalCrewEquipment = data;
         });
 
-        this.storage.get('globalCrewItems').then((data)=>{
-        this.globalCrewItems = data;
-        });
-
         this.storage.get('globalCrewJob').then((data)=>{
         this.globalCrewJob = data;
         });
@@ -259,10 +255,10 @@ export class ReapService {
       //console.log(this.mileage);
     }
     //creates and pushes labor array
-    addLabor(data:any){
-      this.extraLabor = data;
-      //console.log(this.extraLabor);
-    }
+    // addLabor(data:any){
+    //   this.extraLabor = data;
+    //   //console.log(this.extraLabor);
+    // }
     //creates and pushes equipment array
     totalEquipment(data:any){
       this.equipment = data;

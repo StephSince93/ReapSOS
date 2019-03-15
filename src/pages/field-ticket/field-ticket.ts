@@ -216,8 +216,8 @@ export class FieldTicketPage {
 
     var sT = new Date(startTime);
     var eT = new Date(endTime);
-    console.log('Start '+sT)
-    console.log('End '+eT)
+    // console.log('Start '+sT)
+    // console.log('End '+eT)
     //Changes form value back to 12 Hour Time
     if (sT.getUTCMinutes() == 0) {//If Starting Time Minutes Are 0
       if(sT.getUTCHours() == 0){
@@ -270,7 +270,7 @@ export class FieldTicketPage {
     // console.log('minutes: ' + (totalMinutes / 60));
     var totalTime = (totalHours + totalMinutes);
     // console.log(totalHours + totalMinutes);
-    console.log('total time: ' + totalTime);
+    //console.log('total time: ' + totalTime);
     //this.reap.totalTime = totalTime;
 
     return totalTime;

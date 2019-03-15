@@ -1,11 +1,10 @@
 import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController,LoadingController, NavParams, ViewController, AlertController, Platform, ToastController } from 'ionic-angular';
+import { IonicPage, NavController,LoadingController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
 
-import { MenuPage } from '../menu/menu';
 import { SuccessPage } from '../success/success';
 import { ReapService } from '../../services/reap-service';
 import { StemApiProvider } from '../../providers/stem-api/stem-api';
@@ -19,13 +18,16 @@ export class FieldTicketReviewPage {
 
   public crewPersonnel:any [] = this.reap.globalCrewPersonnel;//From existing CrewPersonnel
   public crewEquipment:any [] = this.reap.globalCrewEquipment;//From existing CrewEquipment
-  public crewItems:any [] = this.reap.globalCrewItems;
+  //public crewItems:any [] = this.reap.globalCrewItems;
   public mergeEquipment:any [] = [];//merges all equipment together
   public formDetails:any[] = [];//from main Work Order form
   public miscDetails:any[] = this.reap.misc;// stores misc form
   public isMisc:boolean = false;
   public isPhoto:boolean = false;
-  public laborDetails:any[] = this.reap.extraLabor;//When adding new Labor
+  public isCrewEquipment:boolean = false;
+  public isAddedEquipment:boolean = false;
+  public isCrewLabor:boolean = false;
+  //public laborDetails:any[] = this.reap.extraLabor;//When adding new Labor
   public equipmentDetails:any[] = this.reap.equipment;//When adding new Equipment
   //private jobDetails:any[] = this.reap.job;//stores job form
   public photoDetails:any[] = this.reap.photo;//stores photo globally
@@ -38,8 +40,6 @@ export class FieldTicketReviewPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private alertCtrl: AlertController,
-              private viewCtrl: ViewController,
-              private platform: Platform,
               private geolocation: Geolocation,
               private stemAPI: StemApiProvider,
               private reap: ReapService,
@@ -47,37 +47,29 @@ export class FieldTicketReviewPage {
               private storage: Storage,
               private toastCtrl: ToastController) {
 
-                if(this.reap.misc!=[]||this.reap.misc!=null){
-                  this.isMisc = true;
-                }
-                if(this.reap.photo!=[]||this.reap.photo!=null){
-                  this.isPhoto= true;
-                }
+                this.reap.misc==null||!this.reap.misc.length ? this.isMisc = false :this.isMisc = true;
+                this.reap.photo==null||!this.reap.photo.length ? this.isPhoto= false : this.isPhoto= true;
+                this.crewEquipment==null||!this.crewEquipment.length ? this.isCrewEquipment= false : this.isCrewEquipment= true;
+                this.equipmentDetails==null||!this.equipmentDetails.length ? this.isAddedEquipment= false : this.isAddedEquipment= true;
+                this.crewPersonnel==null||!this.crewPersonnel.length ? this.isCrewLabor= false : this.isCrewLabor= true;
             this.formDetails.push(this.reap.fieldTicketForm);
-            //console.log(this.formDetails[0]['project']);
+
             if(this.reap.selectedJob!=null){
               this.formDetails[0]['Job'] = this.reap.selectedJob;
             }
-            //console.log(this.jobDetails);
-            //console.log(this.equipmentDetails);
-            //console.log(this.laborDetails);
+
             var date = new Date(this.formDetails[0]['currentDate']);
             this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
-            //console.log(this.laborDetails);
-            //console.log(this.formDetails[0]['currentDate'])
-            //console.log(this.mileageDetails);
-            /* Ensure the platform is ready */
   }
   ionViewWillEnter(){
-    this.platform.ready().then(() => {
         /* Perform initial geolocation */
         this.geolocation.getCurrentPosition().then((resp) => {
             this.lonlat = [resp.coords.latitude,resp.coords.longitude];
             //console.log(this.lonlat);
           }).catch((error) => {
             this.presentToast(error);
+            this.lonlat = ["Error grabbing location"];
           });//end of error
-        });//end of platform
     //fixes issue with signature swiping back.
   this.navCtrl.swipeBackEnabled = false;
   }
@@ -163,7 +155,7 @@ export class FieldTicketReviewPage {
                  /*md5 hashes form data with signature and timestamp for unique guid*/
                  this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
                  /*Pushes all data to array for form submission*/
-                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'ItemDescription':[]},{'Photo':this.photoDetails},{'extraLabor':this.laborDetails},{'AppVersion':this.reap.saulsburyVersion});
+                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'ItemDescription':[]},{'Photo':this.photoDetails},{'AppVersion':this.reap.saulsburyVersion});
                  /*
                  *
                  */
@@ -344,30 +336,22 @@ export class FieldTicketReviewPage {
 
      this.reap.misc.splice(index, 1);
      this.miscDetails = this.reap.misc;
-     //console.log(this.mileageDetails);
- }
- // removeDescription(index){
- //
- //     this.reap.job.splice(index, 1);
- //     this.jobDetails = this.reap.job;
- //     //console.log(this.mileageDetails);
- // }
- removeLabor(index){
 
-     this.reap.extraLabor.splice(index, 1);
-     this.laborDetails = this.reap.extraLabor;
-     //console.log(this.laborDetails);
+     this.reap.misc==null||!this.reap.misc.length ? this.isMisc = false :this.isMisc = true;
  }
+
  removeEquipment(index){
 
      this.reap.equipment.splice(index, 1);
      this.equipmentDetails = this.reap.equipment;
-     //console.log(this.equipmentDetails);
+
+     this.equipmentDetails==null||!this.equipmentDetails.length ? this.isAddedEquipment= false : this.isAddedEquipment= true;
  }
  removePhoto(index){
      this.reap.photo.splice(index, 1);
      this.photoDetails = this.reap.photo;
-     //console.log(this.photoDetails);
+
+     this.reap.photo==null||!this.reap.photo.length ? this.isPhoto= false : this.isPhoto= true;
  }
  presentToast(msg) {
    let toast = this.toastCtrl.create({

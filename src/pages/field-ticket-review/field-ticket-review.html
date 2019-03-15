@@ -47,6 +47,7 @@
               </ion-grid>
       <br>
       <br>
+   <div *ngIf="isCrewEquipment">
       <hr>
     <ion-label>EQUIPMENT SUMMARY</ion-label>
       <hr>
@@ -61,6 +62,8 @@
                           <ion-col col-6 class="formCol">{{equipment?.Hours}}</ion-col>
                       </ion-row>
                   </ion-grid>
+  </div>
+  <div *ngIf="isAddedEquipment">
     <hr>
     <ion-label class="subLabel">ADDED EQUIPMENT</ion-label>
                   <ion-grid class="formDetails" *ngFor="let equipment of equipmentDetails;index as i;">
@@ -76,6 +79,8 @@
                         <ion-col col-12 style="text-align:center"> <button (tap)="removeEquipment(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
                       </ion-row>
                   </ion-grid>
+  </div>
+  <div *ngIf="isCrewLabor">
     <ion-label>LABOR SUMMARY</ion-label>
     <hr>
     <ion-label class="subLabel">EXISTING PERSONNEL(CREW)</ion-label>
@@ -95,58 +100,8 @@
                         </ion-row>
                  </ion-grid>
    <hr>
-  <!-- <ion-label class="subLabel">ADDED LABOR</ion-label>
-                <ion-grid class="formDetails" *ngFor="let labor of laborDetails;index as i;">
-                        <ion-row>
-                            <ion-col col-6>TITLE:</ion-col>
-                            <ion-col col-6 class="formCol">{{labor?.Title}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-6>NAME:</ion-col>
-                            <ion-col col-6 class="formCol">{{labor?.Name}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-6>HOURS:</ion-col>
-                            <ion-col col-6 class="formCol">{{labor?.Hours}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-12 style="text-align:center"> <button (tap)="removeLabor(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
-                        </ion-row>
-                </ion-grid>
-  <hr> -->
-  <!-- <ion-label>JOB TYPE SUMMARY</ion-label>
-  <hr>
-            <ion-grid class="formDetails" *ngFor="let items of crewItems;index as i;">
-                <ion-row>
-                  <ion-col col-6> JOB DESCRIPTION:</ion-col>
-                  <ion-col col-6>{{items?.BillCodeDescription}}</ion-col>
-                </ion-row> -->
-                <!-- <ion-row>
-                  <ion-col col-6>QUANTITY:</ion-col>
-                  <ion-col col-6 class="formCol">{{items?.quantity}}</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col col-6>HOURS/DAYS/COST:</ion-col>
-                  <ion-col col-6 class="formCol">{{items?.each}}</ion-col>
-                </ion-row> -->
-            <!-- </ion-grid> -->
-  <!-- <hr> -->
-  <!-- <ion-label class="subLabel">ADDED ITEM TYPES</ion-label>
-            <ion-grid class="formDetails" *ngFor="let labor of laborDetails;index as i;">
-                <ion-row>
-                  <ion-col col-6>NAME:</ion-col>
-                  <ion-col col-6>{{labor?.Name}}</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col col-6>Hours:</ion-col>
-                  <ion-col col-6 class="formCol">{{labor?.Hours}}</ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col col-12 style="text-align:center"> <button (tap)="removeLabor(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
-                </ion-row>
-            </ion-grid> -->
-  <!-- <hr> -->
-<div *ngIf="!isMisc">
+</div>
+<div *ngIf="isMisc">
     <ion-label>MISC. SUMMARY</ion-label>
     <hr>
             <ion-grid class="formDetails" *ngFor="let misc of miscDetails;index as i;">
@@ -163,18 +118,20 @@
                 </ion-row>
             </ion-grid>
 </div>
-<div *ngIf="!isPhoto">
+<div *ngIf="isPhoto">
   <ion-label>PHOTOS</ion-label>
   <hr>
   <ion-grid class="formDetails" *ngFor="let photo of photoDetails;index as i;">
                 <ion-row>
-                    <ion-col col-12 style="text-align:center"><img src="{{photo}}" alt="Upload Error"/></ion-col>
+                  <ion-col col-12 style="text-align:center"> <button (tap)="removePhoto(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
                 </ion-row>
                 <ion-row>
-                  <ion-col col-12 style="text-align:center"> <button (tap)="removePhoto(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                    <ion-col col-12 style="text-align:center"><img src="{{photo}}" alt="Upload Error"/></ion-col>
                 </ion-row>
               </ion-grid>
   <hr>
+  <br>
+  <br>
   </div>
   <ion-label color="primary" stacked>SIGNATURE</ion-label>
   <div class="box">
