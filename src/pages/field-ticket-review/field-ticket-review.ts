@@ -46,7 +46,9 @@ export class FieldTicketReviewPage {
               public loadingCtrl: LoadingController,
               private storage: Storage,
               private toastCtrl: ToastController) {
-
+                console.log(this.crewEquipment)
+                console.log(this.crewPersonnel)
+                console.log(this.equipmentDetails)
                 this.reap.misc==null||!this.reap.misc.length ? this.isMisc = false :this.isMisc = true;
                 this.reap.photo==null||!this.reap.photo.length ? this.isPhoto= false : this.isPhoto= true;
                 this.crewEquipment==null||!this.crewEquipment.length ? this.isCrewEquipment= false : this.isCrewEquipment= true;
@@ -62,6 +64,7 @@ export class FieldTicketReviewPage {
             this.formDetails[0]['currentDate'] = (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear();
   }
   ionViewWillEnter(){
+        this.reap.getVersionNumber();
         /* Perform initial geolocation */
         this.geolocation.getCurrentPosition().then((resp) => {
             this.lonlat = [resp.coords.latitude,resp.coords.longitude];
@@ -84,50 +87,36 @@ export class FieldTicketReviewPage {
     this.signaturePad.clear();
   }
   sigSubmit(){
-    if(this.reap.globalCrewPersonnel==null){
-      this.reap.globalCrewPersonnel = [];
-    }
-    if(this.reap.globalCrewEquipment==null){
-      this.reap.globalCrewEquipment = [];
-    }
-    //this.mergeEquipment = this.reap.globalCrewEquipment;
-    if(this.reap.globalCrewEquipment){
-    for(let i=0;i<this.reap.globalCrewEquipment.length;i++){
-      this.mergeEquipment.push({'ID':this.reap.globalCrewEquipment[i]['ID'],
-                         'Name':this.reap.globalCrewEquipment[i]['Name'].replace(/["]+/g, 'in.').replace(/[']+/g, 'ft.'),// This is commented out because of quotes breaking API
-                         'Hours':this.reap.globalCrewEquipment[i]['Hours']
+    if(this.isCrewLabor = false){this.crewPersonnel = [];}
+
+    if(this.isCrewEquipment){
+    for(let i=0;i<this.crewEquipment.length;i++){
+      this.mergeEquipment.push({'ID':this.crewEquipment[i]['ID'],
+                         'Name':this.crewEquipment[i]['Name'].replace(/["]+/g, 'in. ').replace(/[']+/g, 'ft. '),// This is commented out because of quotes breaking API
+                         'Hours':this.crewEquipment[i]['Hours'],
+                         'Cost_Center':this.crewEquipment[i]['Cost_Center'],
+                         'Equipment_Bill_Code':this.crewEquipment[i]['Equipment_Bill_Code']
                       });
       }
     }
-    if(this.equipmentDetails){
+    if(this.isAddedEquipment){
     for(let i=0;i<this.equipmentDetails.length;i++){
       this.mergeEquipment.push({'ID':this.equipmentDetails[i]['ID'],
-                          'Name':this.reap.globalCrewEquipment[i]['Name'].replace(/["]+/g, 'in.').replace(/[']+/g, 'ft.'),// This is commented out because of quotes breaking API
-                          'Hours':this.reap.globalCrewEquipment[i]['Hours']
+                          'Name':this.equipmentDetails[i]['Name'].replace(/["]+/g, 'in. ').replace(/[']+/g, 'ft. '),// This is commented out because of quotes breaking API
+                          'Hours':this.equipmentDetails[i]['Hours'],
+                          'Cost_Center':this.equipmentDetails[i]['Cost_Center'],
+                          'Equipment_Bill_Code':this.equipmentDetails[i]['Equipment_Bill_Code']
                     });
                     }
                   }
-    // for(let i=0;i<this.reap.globalCrewItems.length;i++){
-    //     this.reap.globalCrewItems[i]={'JobID':this.reap.globalCrewItems[i].JobID
-    //                         // ,'BillCodeDescription':this.reap.globalCrewItems[i].BillCodeDescription
-    //                         ,'JobNumber':this.reap.globalCrewItems[i].JobNumber
-    //                         // ,'each':this.reap.globalCrewItems[i].each
-    //                       };
-    //               }
-    // console.log(this.equipmentDetails);
-    // console.log(this.mergeEquipment);
+
     //replaces quotes with ft and in
     this.formDetails[0]['PhaseCode']['Description'] = this.formDetails[0]['PhaseCode']['Description'].replace(/["]+/g, 'in.').replace(/[']+/g, 'ft.');
     //console.log(this.formDetails);
     this.submitClicked = true;
     var md5 = new Md5();//md5 hash for custom guid
     var time = new Date();//timestamp
-    //console.log(this.formDetails[0]['endTime']);
-    //If user didn't select end time, the time stamp will grab it for them
-      //if(this.formDetails[0]['endTime'] == ""){
-        //var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");//timeEnd
-        //this.formDetails[0]['endTime'] = getTimeEnd;//Grabs when user hits submit on Form
-      //}
+
     let alert = this.alertCtrl.create({
    title: 'Confirm Submission',
    message: 'Are you sure you want to submit?',
@@ -155,12 +144,12 @@ export class FieldTicketReviewPage {
                  /*md5 hashes form data with signature and timestamp for unique guid*/
                  this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
                  /*Pushes all data to array for form submission*/
-                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.reap.globalCrewPersonnel},{'Misc':this.miscDetails},{'ItemDescription':[]},{'Photo':this.photoDetails},{'AppVersion':this.reap.saulsburyVersion});
+                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.crewPersonnel},{'Misc':this.miscDetails},{'Photo':this.photoDetails},{'AppVersion':this.reap.saulsburyVersion});
                  /*
                  *
                  */
                  loading.present();
-                //console.log(this.submitData);
+                console.log(this.submitData);
                  //creates a loading controller while user submits
                  this.stemAPI.submitSaulsburyForm(this.submitData,this.reap.token).subscribe((result) =>{
 
@@ -188,14 +177,7 @@ export class FieldTicketReviewPage {
                                 //If the system notices there is a duplicate form it wil push user to success page and let them know to contact the office
                                 if(reRoute){
                                   loading.dismiss();
-                                  // this.reap.formStart = null;
-                                  // var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
-                                  // //console.log(getTimeEnd);
-                                  // this.storage.remove('getTimeStart');//Probably going to start form with time start
-                                  // this.reap.formStart = false;
-                                  // this.storage.set('formStart',this.reap.formStart);
-                                  //Can fix message on API Side
-                                  //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
+
                                   this.navCtrl.push(SuccessPage,{'Success':'WORK ORDER WAS ALREADY SUBMITTED, PLEASE CONTACT THE OFFICE TO CONFIRM!'});
                                 }
                                 setTimeout(() => {
@@ -205,7 +187,6 @@ export class FieldTicketReviewPage {
                                 this.mergeEquipment = [];//resets equipment array
                                 this.submitClicked=false;//enables the submission button to resubmit
                                 this.submitData = [];//resets Submission so data isnt inserted twice
-                                //this.navCtrl.push(SuccessPage,{'Success':'Please go to support page and manually submit current form before submitting any new forms!'});
                              }
                            }
                         ]
@@ -215,15 +196,7 @@ export class FieldTicketReviewPage {
                           }
                           else{
                          loading.dismiss();
-                        //  this.reap.formStart = null;
-                        //  var getTimeEnd:any = new Date().toLocaleTimeString().replace("/.*(\d{2}:\d{2}:\d{2}).*/", "$1");
-                         //console.log(getTimeEnd);
-                         //Updates Local storage upon form success
-                        //  this.storage.remove('getTimeStart');
-                        //  this.reap.formStart = false;
-                        //  this.storage.set('formStart',this.reap.formStart);
-                         //Can fix message on API Side
-                         //this.navCtrl.push(SuccessPage,{'Success':result['MSG']});
+
                          this.navCtrl.push(SuccessPage,{'Success':'FIELD TICKET WAS SUBMITTED SUCCESSFULLY'});
                        }
                       // }, 2000);
@@ -250,11 +223,7 @@ export class FieldTicketReviewPage {
                               handler: () => {
                                  /* allows user to submit offline and saves form data into a form variable
                                  no data will be submitted until interenet connection is made via a sync or observable call */
-                                 /****** TESTING    *********************/
 
-                                //  this.storage.remove('getTimeStart');
-                                //  this.reap.formStart = false;
-                                //  this.storage.set('formStart',this.reap.formStart);
                                  this.reap.offlineFormSubmissions.push({"Type":"WO","Info":this.submitData,"Status":"Pending"});
                                  this.storage.set('offlineSubmission',this.reap.offlineFormSubmissions);
                                  this.submitData = [];

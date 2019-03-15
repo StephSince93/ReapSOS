@@ -188,7 +188,7 @@ export class ManageCrewPage {
         //console.log(this.globalPersonnel);
   }
   equipmentChange(event: { component: SelectSearchableComponent, value: any }) {
-          console.log('value:', event.value);
+          //console.log('value:', event.value);
           if(event.value==null){
             this.noEquipment =true;
           }
@@ -209,65 +209,11 @@ export class ManageCrewPage {
           this.globalPhaseCode = event.value;
           //console.log(this.globalEquipment);
   }
-  // itemChange(event: { component: SelectSearchableComponent, value: any }) {
-  //         //console.log('value:', event.value);
-  //         if(event.value==null){
-  //           this.noType =true;
-  //         }
-  //         else{
-  //           this.noType = false
-  //         }
-  //         this.globalItems = event.value;
-  //         this.reap.globalCrewItems = this.globalItems;
-  //         //console.log(this.globalItems);
-  // }
-  // keyPress(event: any) {
-  //   const pattern = /[0-9\+\-\ ]/;
-  //
-  //   let inputChar = String.fromCharCode(event.charCode);
-  //   if (event.keyCode != 8 && !pattern.test(inputChar)) {
-  //     event.preventDefault();
-  //   }
-  //}
-    // removePersonnel(index){
-    //     this.globalPersonnel.splice(index, 1);
-    //     this.personnelArray.splice(index, 1);
-    //   }
-    // removeEquipment(index){
-    //   //console.log(this.globalEquipment);
-    // //  console.log(this.equipmentArray);
-    //     this.globalEquipment.splice(index, 1);
-    //     this.equipmentArray.splice(index, 1);
-    //   }
+
   onSubmit(form: NgForm){
     //console.log(form.value);
 
-    // let quantity:any = 'quantity';
-    // let each:any = 'each';
 
-    // if((Array.isArray(this.reap.globalCrewItems) || (this.reap.globalCrewItems!=null))){
-    // //console.log(this.reap.globalCrewItems);
-    // for(let i=0;i<this.reap.globalCrewItems.length;i++){
-    //
-    //     //If user inputs new data on each
-    //     if((this.reap.globalCrewItems[i]['each']==undefined||(form.value[each+[i]]!=""))&&(this.reap.globalCrewItems[i]['quantity']==undefined||(form.value[quantity+[i]]!=""))){
-    //       //console.log("1");
-    //     this.reap.globalCrewItems[i]={'ItemID':form.value.Items[i].JobID
-    //               ,'BillCodeDescription':form.value.Items[i].BillCodeDescription
-    //               // ,'quantity':form.value[quantity+[i]]
-    //               // ,'each':form.value[each+[i]]
-    //             };
-    //     }
-        //If user had previous data in fields, the previous failed still stay
-        // else if((this.reap.globalCrewItems[i].quantity!=undefined&&(form.value[quantity+[i]]==""))&&(this.reap.globalCrewItems[i].each!=undefined&&(form.value[each+[i]]==""))){
-        // //console.log("2");
-
-    // }
-    //}
-
-    //console.log(this.reap.globalCrewItems);
-    //this.reap.globalCrewItems = this.globalItems;
-    //console.log(form.value);
     this.reap.globalCrewJob = form.value.Job;
     this.reap.globalCrewPersonnel = form.value.Personnel;
     this.reap.globalCrewEquipment = form.value.Equipment;
