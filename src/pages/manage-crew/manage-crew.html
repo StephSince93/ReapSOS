@@ -124,11 +124,11 @@
             class="specialSelect"
              item-content
              [(ngModel)]="globalEquipment"
+             [items]="equipmentArray"
              title="Equipment"
              itemValueField=ID
              itemTextField=Name
              name="Equipment"
-             [items]="equipmentArray"
              [canSearch]="true"
              [canClear]="true"
              [isMultiple]="true"

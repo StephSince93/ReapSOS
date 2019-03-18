@@ -46,9 +46,9 @@ export class FieldTicketReviewPage {
               public loadingCtrl: LoadingController,
               private storage: Storage,
               private toastCtrl: ToastController) {
-                console.log(this.crewEquipment)
-                console.log(this.crewPersonnel)
-                console.log(this.equipmentDetails)
+                // console.log(this.crewEquipment)
+                // console.log(this.crewPersonnel)
+                // console.log(this.equipmentDetails)
                 this.reap.misc==null||!this.reap.misc.length ? this.isMisc = false :this.isMisc = true;
                 this.reap.photo==null||!this.reap.photo.length ? this.isPhoto= false : this.isPhoto= true;
                 this.crewEquipment==null||!this.crewEquipment.length ? this.isCrewEquipment= false : this.isCrewEquipment= true;
@@ -87,7 +87,7 @@ export class FieldTicketReviewPage {
     this.signaturePad.clear();
   }
   sigSubmit(){
-    if(this.isCrewLabor = false){this.crewPersonnel = [];}
+    if(this.isCrewLabor == false){this.crewPersonnel = [];}
 
     if(this.isCrewEquipment){
     for(let i=0;i<this.crewEquipment.length;i++){

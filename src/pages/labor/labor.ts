@@ -53,6 +53,7 @@ export class LaborPage {
           //Filler for data already in system
       }else{
       this.crewPersonnel[i]={'ID':this.reap.globalCrewPersonnel[i]['ID']
+                ,'EmployeeCode':this.reap.globalCrewPersonnel[i]['EmployeeCode']
                 ,'Name':this.reap.globalCrewPersonnel[i]['Name']
                 ,'Hours':form.value[hours+[i]]
                 ,'Title':this.reap.globalCrewPersonnel[i]['Title']
@@ -63,6 +64,7 @@ export class LaborPage {
         //Filler for data already in system
       }else{
       this.crewPersonnel[i]={'ID':this.reap.globalCrewPersonnel[i]['ID']
+                ,'EmployeeCode':this.reap.globalCrewPersonnel[i]['EmployeeCode']
                 ,'Name':this.reap.globalCrewPersonnel[i]['Name']
                 ,'Hours':this.reap.globalCrewPersonnel[i]['Hours']
                 ,'Title':form.value[laborBillCodes+[i]]['BillCodeDescription']
@@ -71,27 +73,15 @@ export class LaborPage {
       //console.log(this.crewPersonnel[i]);
      }//end loop
     }//end if
+    //console.log(this.reap.globalCrewPersonnel);
     this.reap.globalCrewPersonnel = this.crewPersonnel;
-    //this.reap.totalLabor(form.value);
-    // if(this.personnelInfo!=undefined){
-    //   for(let i=0;i<this.personnelInfo.length;i++){
-    // this.totalExtraPersonnel.push({'ID':this.personnelInfo[i].extraPersonnel.ID,
-    //                   'Title':this.personnelInfo[i].extraPersonnel.Extras,
-    //                   'Name':this.personnelInfo[i].personnelName,
-    //                   'Hours':this.personnelInfo[i].hours});
-    //     }
-    //     //console.log(this.totalExtraPersonnel);
-    //     this.reap.addLabor(this.totalExtraPersonnel);
-    //   }
+
     this.navCtrl.pop();
     }
   personnelChange(event: { component: SelectSearchableComponent, value: any }) {
         //console.log('value:', event.value);
     }
 
-  // removePersonnel(index){
-  //   this.personnelInfo.splice(index, 1);
-  // }
   keyPress(event: any) {
     const pattern = /[0-9\.\ ]/;
 

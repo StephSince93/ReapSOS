@@ -28,12 +28,12 @@ export class AddExtraEquipmentPage {
               public viewCtrl: ViewController) {
                 try{
                 if(this.reap.selectedJob!=null){
-                  this.jobCost=this.reap.selectedJob['CostCenter'];
-
-      for(let i=0;i<this.reap.getEquipment.length;i++){
-          if(this.reap.getEquipment[i]['CostCenter']==this.jobCost){
-          //console.log(this.reap.getEquipment[i]);
-          this.tempEquipment.push(this.reap.getEquipment[i]);
+                  this.jobCost=this.reap.selectedJob['Cost_Center_Code'];
+                  console.log(this.reap.selectedJob['Cost_Center_Code']);
+      for(let key in this.reap.getEquipment){
+          if(this.reap.getEquipment[key]['Cost_Center']===this.jobCost){
+          //console.log(this.reap.getEquipment[key]);
+          this.tempEquipment.push(this.reap.getEquipment[key]);
           }
         }
       }

@@ -68,10 +68,8 @@ export class FieldTicketPage {
         this.phaseArray = this.reap.getPhaseCodes;
 
         var jobNumber = this.globalJob['Job_Number'];
-        //console.log(jobNumber)
         for (let i = 0; i < this.reap.getPhaseCodes.length; i++) {
           if (this.reap.getPhaseCodes[i]['JobNumber'] == jobNumber) {
-            //console.log(this.reap.getEquipment[i]);
             this.tempPhase.push(this.reap.getPhaseCodes[i]);
           }
         }
@@ -97,21 +95,17 @@ export class FieldTicketPage {
     this.globalPhaseCode = [];
     this.clientPM = "";
     var jobNumber = this.globalJob['Job_Number'];
-    //console.log(jobNumber);
 
     for (let i = 0; i < this.reap.getPhaseCodes.length; i++) {
       if (this.reap.getPhaseCodes[i]['JobNumber'] == jobNumber) {
-        //console.log(this.reap.getEquipment[i]);
         this.tempPhase.push(this.reap.getPhaseCodes[i]);
       }
     }
-    //  console.log(this.tempPhase);
     this.phaseArray = this.tempPhase;
     this.tempPhase = [];
   }
 
   onSubmit(Form: NgForm) {
-    //console.log(Form.value);
     this.startTime = Form.value.startTime;
     this.endTime = Form.value.endTime;
     this.totalTime = this.calculateTime(this.startTime,this.endTime);
@@ -119,9 +113,7 @@ export class FieldTicketPage {
     Form.value.startTime = this.startTime;
     Form.value.endTime = this.endTime;
     if (this.totalTime < 0|| this.totalTime == 0) {//When Time extends to next day
-      //console.log('Starting Time is greater than Ending Time');
       this.totalTime = 24 + this.totalTime;
-      //console.log(this.totalTime);
     }
 
       //Updates Labor Array with total hours worked on form fields
@@ -130,6 +122,7 @@ export class FieldTicketPage {
         for (let i = 0; i < this.reap.globalCrewPersonnel.length; i++) {
           this.reap.globalCrewPersonnel[i] = {
             'ID': this.reap.globalCrewPersonnel[i]['ID']
+            , 'EmployeeCode': this.reap.globalCrewPersonnel[i]['EmployeeCode']
             , 'Name': this.reap.globalCrewPersonnel[i]['Name']
             , 'Title': this.reap.globalCrewPersonnel[i]['Title']
             , 'BillingCode':this.reap.globalCrewPersonnel[i]['BillingCode']
@@ -152,23 +145,18 @@ export class FieldTicketPage {
           };
         }
       }
-      //console.log(this.reap.globalCrewEquipment);
-      //console.log(this.reap.globalCrewPersonnel);
       //Form.value.formStartTime = this.reap.formStartTime;
-      //console.log(Form.value);
       var selectedJobNumber = Form.value.Job.Job_Number;
       var selectedJob = Form.value.Job;
       this.reap.selectedJobNumber = selectedJobNumber;
       this.reap.selectedJob = selectedJob;
       var LaborBillCodes:any []=[];//This is for the Labor form
       for(let i=0;i<this.reap.getJobLaborBR.length;i++){
-        //console.log(this.reap.getJobLaborBR[i]);
         if(this.reap.getJobLaborBR[i]['Job_Number']==this.reap.selectedJobNumber){
           LaborBillCodes.push(this.reap.getJobLaborBR[i]);
         }
       }
       this.reap.LaborBC = LaborBillCodes;
-      //console.log(LaborBillCodes);
 
       this.reap.fieldTicketForm = Form.value;
 
@@ -176,8 +164,6 @@ export class FieldTicketPage {
   }
 
   phasecodeChange(event: { component: SelectSearchableComponent, value: any }) {
-    //console.log('value:', event.value);
-    //console.log('Client PM: '+event.value['Client_PM']);
     if(event.value==null){
       this.clientPM="No Phase Code Selected";
     }
@@ -216,8 +202,6 @@ export class FieldTicketPage {
 
     var sT = new Date(startTime);
     var eT = new Date(endTime);
-    // console.log('Start '+sT)
-    // console.log('End '+eT)
     //Changes form value back to 12 Hour Time
     if (sT.getUTCMinutes() == 0) {//If Starting Time Minutes Are 0
       if(sT.getUTCHours() == 0){
@@ -258,19 +242,13 @@ export class FieldTicketPage {
         this.endTime = (eT.getUTCHours() + ':' + eT.getUTCMinutes() +  ' AM').toString();
       }
     }
-    //  console.log(this.startTime);
-    //  console.log(this.endTime);
     var sTHours = sT.getUTCHours();
     var sTMinutes = sT.getUTCMinutes();
     var eTHours = eT.getUTCHours();
     var eTMinutes = eT.getUTCMinutes();
     var totalHours = eTHours - sTHours;
     var totalMinutes = ((eTMinutes - sTMinutes) / 60);
-    // console.log('hours: ' + totalHours);
-    // console.log('minutes: ' + (totalMinutes / 60));
     var totalTime = (totalHours + totalMinutes);
-    // console.log(totalHours + totalMinutes);
-    //console.log('total time: ' + totalTime);
     //this.reap.totalTime = totalTime;
 
     return totalTime;

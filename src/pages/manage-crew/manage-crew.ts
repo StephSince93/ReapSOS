@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
 import { NgForm } from '@angular/forms';
 import { Storage } from '@ionic/storage';
@@ -8,6 +8,7 @@ import { ReapService } from '../../services/reap-service';
 class Personnel {
   public ID: number;
   public FullName: string;
+  public EmployeeCode: string;
   //private personnelArray:any[] = [];
 }
 class EquipmentList {
@@ -75,39 +76,28 @@ export class ManageCrewPage {
             //this.itemArray = this.reap.getJobs;
           }
           else{
-            //var jobCost = this.globalJob['Cost_Center_Code'];
-            var jobNumber =  this.globalJob['Job_Number'];
-            //console.log(jobCost);
-            // for(let i=0;i<this.reap.getEquipment.length;i++){
-            //   if(this.reap.getEquipment[i]['Cost_Center']==jobCost){
-            //     console.log(this.reap.getEquipment[i]);
-            //     this.tempEquipment.push(this.reap.getEquipment[i]);
-            //   }
-            //   console.log(this.reap.getEquipment[i]);
-            // }
-            //console.log(this.tempEquipment);
-            // this.equipmentArray = this.tempEquipment;
-            // this.tempEquipment = [];
-              //console.log(this.reap.getPhaseCodes.length);
+            //Filters Equipment
+            var jobCost = this.globalJob['Cost_Center_Code'];
 
-              for(let i=0;i<this.reap.getPhaseCodes.length;i++){
-                if(this.reap.getPhaseCodes[i]['JobNumber']==jobNumber){
-                  //console.log(this.reap.getPhaseCodes[i]);
-                  this.tempPhase.push(this.reap.getPhaseCodes[i]);
-                }
-                //console.log(this.reap.getPhaseCodes[i]);
+            jobCost = jobCost.replace("2", "1");
+            for(let key in this.reap.getEquipment){
+              if(this.reap.getEquipment[key]['Cost_Center']===jobCost){
+                this.tempEquipment.push(this.reap.getEquipment[key]);
               }
-              //console.log(this.tempPhase);
+            }
+            this.equipmentArray = this.tempEquipment;
+            this.tempEquipment = [];
+            //Filters Phase Codes
+            var jobNumber =  this.globalJob['Job_Number'];
+
+              for(let key in this.reap.getPhaseCodes){
+                if(this.reap.getPhaseCodes[key]['JobNumber']==jobNumber){
+                  this.tempPhase.push(this.reap.getPhaseCodes[key]);
+                }
+              }
               this.phaseArray = this.tempPhase;
               this.tempPhase = [];
-            // for(let i=0;i<this.reap.getJobs.length;i++){
-            //   if(this.reap.getJobs[i]['JobNumber']==projectNumber){
-            //     //console.log(this.reap.getEquipment[i]);
-            //     this.tempJobs.push(this.reap.getJobs[i]);
-            //   }
-            // }
-            //console.log(this.tempJobs);
-            //this.itemArray = this.tempJobs;
+
             this.noJob = false;
           }
           if(this.globalPersonnel==null||this.globalPersonnel.length==0){
@@ -116,7 +106,6 @@ export class ManageCrewPage {
           else{
             this.noPersonnel = false;
           }
-          //console.log(this.globalEquipment)
           if(this.globalEquipment==null||this.globalEquipment.length==0){
             this.noEquipment = true;
           }
@@ -130,10 +119,7 @@ export class ManageCrewPage {
             this.noPhaseCode = false;
           }
     //Pre-Setting variables for Item Type
-    //console.log(this.reap.getEquipment);
-    //this.itemArray = this.reap.getJobs;
     this.personnelArray = this.reap.getPersonnel;
-    this.equipmentArray = this.reap.getEquipment;
     this.jobArray = this.reap.getJobs;
   }
   catch(e){
@@ -150,7 +136,6 @@ export class ManageCrewPage {
           this.globalPersonnel = [];
           this.globalEquipment = [];
           this.globalPhaseCode = [];
-          //console.log('value:', event.value);
           this.globalJob = event.value;
           if(event.value==null){
             this.noJob = true;
@@ -161,23 +146,28 @@ export class ManageCrewPage {
 
 
           var jobNumber =  this.globalJob['Job_Number'];
-          //console.log(jobNumber);
 
-          for(let i=0;i<this.reap.getPhaseCodes.length;i++){
-            if(this.reap.getPhaseCodes[i]['JobNumber']==jobNumber){
-              //console.log(this.reap.getEquipment[i]);
-              this.tempPhase.push(this.reap.getPhaseCodes[i]);
+          for(let key in this.reap.getPhaseCodes){
+            if(this.reap.getPhaseCodes[key]['JobNumber']==jobNumber){
+              this.tempPhase.push(this.reap.getPhaseCodes[key]);
             }
-            //console.log(this.reap.getPhaseCodes[i]);
           }
-          //console.log(this.tempPhase);
           this.phaseArray = this.tempPhase;
           this.tempPhase = [];
+
+          var jobCost = this.globalJob['Cost_Center_Code'];
+            jobCost = jobCost.replace("2", "1");
+            for(let key in this.reap.getEquipment){
+              if(this.reap.getEquipment[key]['Cost_Center']===jobCost){
+                this.tempEquipment.push(this.reap.getEquipment[key]);
+              }
+            }
+            this.equipmentArray = this.tempEquipment;
+            this.tempEquipment = [];
         }
   }
 
   personnelChange(event: { component: SelectSearchableComponent, value: any }) {
-        //console.log('value:', event.value);
         this.globalPersonnel = event.value;
         if(event.value==null){
           this.noPersonnel =true;
@@ -185,10 +175,8 @@ export class ManageCrewPage {
         else{
           this.noPersonnel = false
         }
-        //console.log(this.globalPersonnel);
   }
   equipmentChange(event: { component: SelectSearchableComponent, value: any }) {
-          //console.log('value:', event.value);
           if(event.value==null){
             this.noEquipment =true;
           }
@@ -196,10 +184,8 @@ export class ManageCrewPage {
             this.noEquipment = false
           }
           this.globalEquipment = event.value;
-          //console.log(this.globalEquipment);
   }
   phaseChange(event: { component: SelectSearchableComponent, value: any }) {
-          //console.log('value:', event.value);
           if(event.value==null){
             this.noPhaseCode =true;
           }
@@ -207,18 +193,15 @@ export class ManageCrewPage {
             this.noPhaseCode = false
           }
           this.globalPhaseCode = event.value;
-          //console.log(this.globalEquipment);
   }
 
   onSubmit(form: NgForm){
-    //console.log(form.value);
 
 
     this.reap.globalCrewJob = form.value.Job;
     this.reap.globalCrewPersonnel = form.value.Personnel;
     this.reap.globalCrewEquipment = form.value.Equipment;
     this.reap.globalCrewPhaseCodes = form.value.Phase;
-    //console.log(this.reap.globalCrewPersonnel);
     this.storage.set('globalCrewJob',this.reap.globalCrewJob);
     this.storage.set('globalCrewPersonnel',this.reap.globalCrewPersonnel);
     this.storage.set('globalCrewEquipment',this.reap.globalCrewEquipment);

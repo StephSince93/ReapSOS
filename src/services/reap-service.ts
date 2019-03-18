@@ -64,37 +64,27 @@ export class ReapService {
     //May have to unsubscribe from Observable
     /* Time Interval checking for network connection */
     this.checkConnection = Observable.interval(250 * 60).subscribe(x => {
-      //console.log('here every 15 seconds');
           this.connected;
           this.disconnected;
           this.networkType = this.network.type;
-          //console.log(this.networkType)
           this.connected = this.network.onConnect().subscribe(data =>{
-               //console.log(data.type)
-               //console.log('online');
                this.online = data.type;
              }, error => console.error(error));
 
           this.network.onDisconnect().subscribe(data =>{
-                //console.log(data.type)
                 this.online = data.type;
-                //console.log('offline');
              },);
             }, error => console.error(error));
         /* Time Interval checking for new data */
         this.getAndPost = Observable.interval(10000 * 60).subscribe(x => {
         /*******************TESTING***********************************/
         this.storage.get('MD5').then((data)=>{
-        //console.log(data);
-        //console.log('here in MD5');
 /** Temporarily disabled to allow user to manually sync in support */
         //this.checkMD5();
         });
     /*******************TESTING***********************************/
       this.storage.get('offlineSubmission').then((data)=>{
-        //console.log('here every 5 minutes');
         if(data!=null){
-          console.log(data);
           //this.submitOfflineForm(data);
             }
         });
@@ -104,10 +94,8 @@ export class ReapService {
      this.appVersion.getVersionNumber().then((version) => {
           this.saulsburyVersion = version;
           this.storage.set('AppVersion',this.saulsburyVersion);
-          //console.log(JSON.stringify(this.saulsburyVersion));
             },(error)=>{
           this.saulsburyVersion = "Could not Grab App Version!";
-          //console.log('Cannot Grab App Version!');
         });
       }
 
@@ -115,17 +103,14 @@ export class ReapService {
       /* Initialize Observables */
       this.getAndPost;
       this.checkConnection;
-      //console.log('GET request happened');
       this.token = token;
       this.groupName = groupName;
-      //console.log(this.token,this.groupName);
       this.initialLogin = false;//changes login variable to false after user logs in
       this.storage.set('initialLogin', this.initialLogin);
         //imported data from API
         this.stemAPI.getData(this.token,this.groupName).subscribe((result) =>{
           this.getData = (JSON.stringify(result));
           this.getData = JSON.parse(this.getData);
-          console.log(this.getData);
 
           this.getMD5 = this.getData['md5'];
           this.storage.set('MD5',this.getMD5);
@@ -154,7 +139,6 @@ export class ReapService {
 
           this.getJobs = this.filterJobs(this.getJobs);//Removes Jobs from list if no phase codes are associated with them
 
-          //console.log(this.getJobs);
           this.storage.set('Jobs',this.getJobs);
 
           //calls method to store App Version to local storage globally
@@ -165,11 +149,9 @@ export class ReapService {
           this.presentToast('Sync Successful');
         }, (err) => {
           this.presentToast(err['message']);
-          console.log(err);
         });
     }
       getLocalStorage(){
-        //console.log('grabbed local storage');
 
         this.storage.get('authToken').then((data)=>{
         this.token = data;
@@ -181,7 +163,6 @@ export class ReapService {
 
         this.storage.get('MD5').then((data)=>{
         this.getMD5 = data;
-        //console.log(this.getMD5);
         });
 
         this.storage.get('Locations').then((data)=>{
@@ -220,7 +201,6 @@ export class ReapService {
         this.storage.get('globalCrewJob').then((data)=>{
         this.globalCrewJob = data;
         });
-        //console.log(this.globalCrewJob);
         this.storage.get('globalCrewPhaseCodes').then((data)=>{
         this.globalCrewPhaseCodes = data;
         });
@@ -237,11 +217,9 @@ export class ReapService {
       this.storage.get('offlineSubmission').then((data)=>{
       if(data!=null){
         this.offlineFormSubmissions = data;
-        //console.log(this.offlineFormSubmissions);
        }
        else{
          this.offlineFormSubmissions = [];
-         //console.log(this.offlineFormSubmissions);
        }
       });
 
@@ -252,22 +230,17 @@ export class ReapService {
     //creates and pushes mileage array
     totalMisc(data:any){
       this.misc.push(data);
-      //console.log(this.mileage);
     }
     //creates and pushes labor array
     // addLabor(data:any){
     //   this.extraLabor = data;
-    //   //console.log(this.extraLabor);
     // }
     //creates and pushes equipment array
     totalEquipment(data:any){
       this.equipment = data;
-      //console.log('Here in totalEquipment');
-      //console.log(this.equipment);
     }
     totalPhotos(data:any){
       this.photo.push(data);
-      //console.log(this.photo);
     }
     totalMileage(data:any){
       this.job.push(data);
@@ -289,7 +262,6 @@ export class ReapService {
       });
 
       toast.onDidDismiss(() => {
-        //console.log('Dismissed toast');
       });
 
       toast.present();
