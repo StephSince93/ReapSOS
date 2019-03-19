@@ -23,6 +23,7 @@ export class EquipmentPage {
   public Type:any;
   public crewEquipment = this.reap.globalCrewEquipment;
   public doeshaveCrew:boolean = false;
+  public doeshaveAddedEquipment:boolean = false;
   public equipmentInfo:any [] = [];
   public totalExtraEquipment:any [] = [];
   constructor(public navCtrl: NavController,
@@ -32,8 +33,15 @@ export class EquipmentPage {
           //this.equipmentType = reap.equipmentType;
           try{
           this.equipmentArray = reap.getEquipment;
+          if(!Array.isArray(this.reap.equipment) || !this.reap.equipment.length){
+            this.equipmentInfo=[];
+          }
+          else{
+            this.doeshaveAddedEquipment = true;
+            this.equipmentInfo=this.reap.equipment;
+          }
           }catch{
-          this.reap.presentAlert('Error','Error Grabbing API data, please re-sync in settings','Dismiss')
+          this.reap.presentAlert('Error','Error Grabbing Equipment Data, please re-sync in settings','Dismiss')
           this.navCtrl.pop();
           }
 
@@ -65,16 +73,16 @@ export class EquipmentPage {
   this.reap.globalCrewEquipment = this.crewEquipment;
   // console.log(this.reap.globalCrewEquipment);
   if(this.equipmentInfo!=undefined){
-  for(let i=0;i<this.equipmentInfo.length;i++){
-  this.totalExtraEquipment.push({
-    'ID':this.equipmentInfo[i]['Equipment']['ID']
-    ,'Cost_Center': this.equipmentInfo[i]['Equipment']['Cost_Center']
-    ,'Equipment_Bill_Code': this.equipmentInfo[i]['Equipment']['Equipment_Bill_Code']
-    ,'Name': this.equipmentInfo[i]['Equipment']['Name']
-    ,'Name2': this.equipmentInfo[i]['Equipment']['Name2']
-    ,'Hours':this.equipmentInfo[i]['Hours'],
-    });
-  }
+  for(let key in this.equipmentInfo){
+    this.totalExtraEquipment.push({
+      'ID':this.equipmentInfo[key]['ID']
+      ,'Cost_Center': this.equipmentInfo[key]['Cost_Center']
+      ,'Equipment_Bill_Code': this.equipmentInfo[key]['Equipment_Bill_Code']
+      ,'Name': this.equipmentInfo[key]['Name']
+      ,'Name2': this.equipmentInfo[key]['Name2']
+      ,'Hours':this.equipmentInfo[key]['Hours'],
+      });
+    }
   // console.log(this.equipmentInfo);
   // console.log(this.totalExtraEquipment);
   // console.log(this.crewEquipment);
@@ -92,18 +100,28 @@ export class EquipmentPage {
 
            modal.onDidDismiss((returnParam: any) => {
              if(returnParam!=true){
+               console.log(returnParam);
+               returnParam = {
+                'ID':returnParam['Equipment']['ID']
+                ,'Cost_Center': returnParam['Equipment']['Cost_Center']
+                ,'Equipment_Bill_Code': returnParam['Equipment']['Equipment_Bill_Code']
+                ,'Name': returnParam['Equipment']['Name']
+                ,'Name2': returnParam['Equipment']['Name2']
+                ,'Hours':returnParam['Hours']
+               }
+               console.log(returnParam);
+               this.doeshaveAddedEquipment = true;
                this.equipmentInfo.push(returnParam);
-               //console.log(this.equipmentInfo);
-
              }
              else{
                //console.log('backed out of no chemical!');
             }
            });
   }
-  removeEquipment(index){
+  removeEquipment(index:any){
     this.equipmentInfo.splice(index, 1);
     //console.log(this.equipmentDetails);
+    if(!this.equipmentInfo.length){this.doeshaveAddedEquipment=false;}
   }
   keyPress(event: any) {
     const pattern = /[0-9\.\ ]/;

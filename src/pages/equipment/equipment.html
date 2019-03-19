@@ -27,21 +27,22 @@
                 <ion-col>{{equipment?.Hours}}</ion-col>
             </ion-row>
       </ion-grid>
+      <ion-label class="gridLabel" *ngIf="doeshaveAddedEquipment">ADDITIONAL EQUIPMENT</ion-label>
         <ion-grid class="custEquipment" *ngFor="let equipment of equipmentInfo;let i = index">
-           <!-- <button type="button" name="editPersonnel" id='hidden-button' (tap)="editPersonnel()"> -->
              <ion-row>
                <ion-col>EQUIPMENT DESCRIPTION:</ion-col>
-               <ion-col>{{equipment?.Equipment.Name}}</ion-col>
+               <ion-col>{{equipment?.Name}}</ion-col>
              </ion-row>
              <ion-row>
               <ion-col>HOURS:</ion-col>
               <ion-col>{{equipment?.Hours}}</ion-col>
              </ion-row>
               <ion-row>
-                <ion-col><button (tap)="removeEquipment(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                <ion-col><button type="button" (tap)="removeEquipment(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
               </ion-row>
             <!-- </button> -->
         </ion-grid>
+    <br>
      <ion-grid>
       <ion-row>
         <ion-col  class="noBorder" col-6 offset-3 text-center>
@@ -50,9 +51,9 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
+    <br>
       <ion-item>
-        <button id="submitButton" ion-button full large [disabled]="!doeshaveEquipment()">SUBMIT</button>
+        <button id="submitButton" type="submit" ion-button full large [disabled]="!doeshaveEquipment()">SUBMIT</button>
      </ion-item>
    </ion-list>
   </form>

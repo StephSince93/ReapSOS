@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs/Subscription';
 import {ToastController, LoadingController, AlertController } from 'ionic-angular';
 import { AppVersion } from '@ionic-native/app-version';
 
-import { LoginPage } from '../pages/login/login';
 import { StemApiProvider } from '../providers/stem-api/stem-api';
 import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
@@ -231,10 +230,6 @@ export class ReapService {
     totalMisc(data:any){
       this.misc.push(data);
     }
-    //creates and pushes labor array
-    // addLabor(data:any){
-    //   this.extraLabor = data;
-    // }
     //creates and pushes equipment array
     totalEquipment(data:any){
       this.equipment = data;
@@ -242,10 +237,6 @@ export class ReapService {
     totalPhotos(data:any){
       this.photo.push(data);
     }
-    totalMileage(data:any){
-      this.job.push(data);
-    }
-
     removeConnections(){
       this.checkConnection.unsubscribe();
       this.getAndPost.unsubscribe();
