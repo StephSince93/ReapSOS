@@ -12,7 +12,7 @@ import { Network } from '@ionic-native/network';
 export class ReapService {
     //data exported and saved into service values
     public getData:any;
-    public getLocations:any[]=[];
+    public getUser:any[]=[];
     public getEquipment:any[]=[];
     public getPersonnel:any[]=[];
     public getJobLaborBR:any[]=[];
@@ -23,7 +23,7 @@ export class ReapService {
   /********************************************/
     public misc:any[]=[];
     public equipment:any[]=[];//Only For new Equipment
-    public extraLabor:any[]=[];//Only For new Personnel
+    public personnel:any[]=[];//Only For new Personnel
     public job:any[]=[];
     public photo:any[]=[];
     public fieldTicketForm:any[]=[];
@@ -111,11 +111,11 @@ export class ReapService {
           this.getData = (JSON.stringify(result));
           this.getData = JSON.parse(this.getData);
 
-          this.getMD5 = this.getData['md5'];
-          this.storage.set('MD5',this.getMD5);
-
-          this.getLocations = this.getData['Locations'];
-          this.storage.set('Locations',this.getLocations);
+          // this.getMD5 = this.getData['md5'];
+          // this.storage.set('MD5',this.getMD5);
+          //Saulsbury User ID
+          this.getUser = this.getData['User'];
+          this.storage.set('User',this.getUser);
 
           //Saulsbury EquipmentList
           this.getEquipment = this.getData['EquipmentList'];
@@ -164,8 +164,8 @@ export class ReapService {
         this.getMD5 = data;
         });
 
-        this.storage.get('Locations').then((data)=>{
-        this.getLocations = data;
+        this.storage.get('User').then((data)=>{
+        this.getUser = data;
         });
 
         this.storage.get('Equipment').then((data)=>{
@@ -233,6 +233,9 @@ export class ReapService {
     //creates and pushes equipment array
     totalEquipment(data:any){
       this.equipment = data;
+    }
+    totalPersonnel(data:any){
+      this.personnel = data;
     }
     totalPhotos(data:any){
       this.photo.push(data);

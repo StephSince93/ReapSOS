@@ -16,7 +16,7 @@ export class SuccessPage {
                   }
   ionViewDidLoad(){
     this.reap.equipment = [];
-    this.reap.extraLabor = [];
+    this.reap.personnel = [];
     this.reap.misc = [];
     this.reap.photo = [];
     this.reap.job = [];

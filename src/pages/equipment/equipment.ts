@@ -47,10 +47,8 @@ export class EquipmentPage {
 
           if(!Array.isArray(this.crewEquipment) || !this.crewEquipment.length)
           {this.doeshaveCrew = false;}  else{this.doeshaveCrew = true;}
-          //console.log(this.doeshaveCrew);
   }
   onSubmit(form: NgForm){
-    //console.log(form.value);
     let test =  [];
     let hours:any = 'hours';
 
@@ -71,7 +69,6 @@ export class EquipmentPage {
          }
        }
   this.reap.globalCrewEquipment = this.crewEquipment;
-  // console.log(this.reap.globalCrewEquipment);
   if(this.equipmentInfo!=undefined){
   for(let key in this.equipmentInfo){
     this.totalExtraEquipment.push({
@@ -83,15 +80,11 @@ export class EquipmentPage {
       ,'Hours':this.equipmentInfo[key]['Hours'],
       });
     }
-  // console.log(this.equipmentInfo);
-  // console.log(this.totalExtraEquipment);
-  // console.log(this.crewEquipment);
   this.reap.totalEquipment(this.totalExtraEquipment);
     }
   this.navCtrl.pop();
   }
   equipmentChange(event: { component: SelectSearchableComponent, value: any }) {
-        //console.log('value:', event.value);
     }
   addEquipment(){
       const modal = this.modalCtrl.create(AddExtraEquipmentPage);
@@ -100,7 +93,6 @@ export class EquipmentPage {
 
            modal.onDidDismiss((returnParam: any) => {
              if(returnParam!=true){
-               console.log(returnParam);
                returnParam = {
                 'ID':returnParam['Equipment']['ID']
                 ,'Cost_Center': returnParam['Equipment']['Cost_Center']
@@ -109,18 +101,15 @@ export class EquipmentPage {
                 ,'Name2': returnParam['Equipment']['Name2']
                 ,'Hours':returnParam['Hours']
                }
-               console.log(returnParam);
                this.doeshaveAddedEquipment = true;
                this.equipmentInfo.push(returnParam);
              }
              else{
-               //console.log('backed out of no chemical!');
             }
            });
   }
   removeEquipment(index:any){
     this.equipmentInfo.splice(index, 1);
-    //console.log(this.equipmentDetails);
     if(!this.equipmentInfo.length){this.doeshaveAddedEquipment=false;}
   }
   keyPress(event: any) {
@@ -133,7 +122,7 @@ export class EquipmentPage {
   }
   doeshaveEquipment(){
     //allows user to submit only if there is added equipment
-    if((this.equipmentInfo!= null && this.equipmentInfo.length < 1)&&!this.doeshaveCrew){
+    if(!this.doeshaveAddedEquipment&&!this.doeshaveCrew){
       return false;
     }
     else{

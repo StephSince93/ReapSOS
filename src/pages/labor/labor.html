@@ -58,8 +58,38 @@
         <!-- autofilled by sub form data-->
         <br>
         <br>
+        <ion-label class="gridLabel" *ngIf="doeshaveAddedPersonnel">ADDITIONAL PERSONNEL</ion-label>
+          <ion-grid class="custPersonnel" *ngFor="let personnel of personnelInfo;let i = index">
+             <!-- <button type="button" name="editPersonnel" id='hidden-button' (tap)="editPersonnel()"> -->
+               <ion-row>
+                 <ion-col>NAME:</ion-col>
+                 <ion-col>{{personnel?.Name}}</ion-col>
+               </ion-row>
+                <ion-row>
+                  <ion-col>HOURS:</ion-col>
+                  <ion-col>{{personnel?.Hours}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>BILL CODE/TITLE:</ion-col>
+                  <ion-col>{{personnel?.Title}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col><button type="button" (tap)="removePersonnel(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                </ion-row>
+              <!-- </button> -->
+          </ion-grid>
+          <br>
+          <ion-grid>
+           <ion-row>
+             <ion-col  class="noBorder" col-6 offset-3 text-center>
+               <button id="personnelButton" type="button"  (tap)="addPersonnel()" ion-button icon-only clear large><ion-icon name="add-circle"></ion-icon></button>
+               <br><b>ADD ADDITIONAL PERSONNEL</b>
+             </ion-col>
+           </ion-row>
+         </ion-grid>
+         <br>
       <ion-item>
-        <button id="submitButton" [disabled]="!doeshaveCrew" ion-button full large>SUBMIT</button>
+        <button id="submitButton" [disabled]="!doeshavePersonnel()" ion-button full large>SUBMIT</button>
      </ion-item>
    </ion-list>
   </form>

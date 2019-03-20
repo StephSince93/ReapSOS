@@ -158,8 +158,9 @@ export class FieldTicketPage {
       }
       this.reap.LaborBC = LaborBillCodes;
 
-      this.reap.fieldTicketForm = Form.value;
+      Form.value.user = this.reap.getUser;//Puts username in the Form and submits data with user info
 
+      this.reap.fieldTicketForm = Form.value;
       this.navCtrl.push(SubMenuPage);
   }
 
@@ -174,29 +175,6 @@ export class FieldTicketPage {
       this.clientPM = event.value['Client_PM'];
     }
   }
-
-  // presentAlert() {
-  //   var tof:any;
-  //   let alert = this.alertCtrl.create({
-  //     title: 'Time Mismatch',
-  //     subTitle: 'Are you exting hours into two days?',
-  //     buttons: [
-  //       {
-  //         text: 'Yes',
-  //         handler: () => {
-  //           tof = true;
-  //         }
-  //       },
-  //       {
-  //         text: 'No, Update Hours',
-  //         handler: () => {
-  //           tof = false;
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   alert.present();
-  // }
 
   calculateTime(startTime:string,endTime:string){
 

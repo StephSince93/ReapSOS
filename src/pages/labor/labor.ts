@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
 import { Storage } from '@ionic/storage';
 
+import { AddExtraPersonnelPage } from '../add-extra-personnel/add-extra-personnel';
 import { ReapService } from '../../services/reap-service';
 
 class BillCodesList {
@@ -19,21 +20,35 @@ class BillCodesList {
 })
 export class LaborPage {
   public LaborBillCodes : BillCodesList[];
-  laborbillcodes: BillCodesList;
+  public laborbillcodes: BillCodesList;
 
-  crewPersonnel:any[]=[];
+  public crewPersonnel:any[]=[];
   public doeshaveCrew:boolean = false;
-  private personnelInfo:any [] = [];
-  private totalExtraPersonnel:any [] = [];
+  public doeshaveAddedPersonnel:boolean = false;
+  public personnelInfo:any [] = [];
+  public totalExtraPersonnel:any [] = [];
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
               public storage: Storage,
               public modalCtrl: ModalController) {
                 this.LaborBillCodes = this.reap.LaborBC;
-                // console.log(this.LaborBillCodes);
                 this.crewPersonnel = this.reap.globalCrewPersonnel;
-                //console.log(this.crewPersonnel);
+                try{
+
+                  if(!Array.isArray(this.reap.personnel) || !this.reap.personnel.length){
+                    this.personnelInfo=[];
+                  }
+                  else{
+                    this.doeshaveAddedPersonnel = true;
+                    this.personnelInfo=this.reap.personnel;
+                  }
+                  }catch{
+                  this.reap.presentAlert('Error','Error Grabbing Equipment Data, please re-sync in settings','Dismiss')
+                  this.navCtrl.pop();
+                  }
+
+
                 if(!Array.isArray(this.crewPersonnel) || !this.crewPersonnel.length){
                   this.doeshaveCrew = false;
                 }
@@ -44,7 +59,6 @@ export class LaborPage {
   }
 
   onSubmit(form: NgForm){
-    //console.log(form.value);
     let hours:any = 'hours';
     let laborBillCodes:any = 'LaborBillCode';
     if((Array.isArray(this.reap.globalCrewPersonnel) || (this.reap.globalCrewPersonnel!=null))||(Array.isArray(this.crewPersonnel) || this.crewPersonnel!=null)){
@@ -70,16 +84,27 @@ export class LaborPage {
                 ,'Title':form.value[laborBillCodes+[i]]['BillCodeDescription']
                 ,'BillingCode':form.value[laborBillCodes+[i]]['Bill_Code']};
       }
-      //console.log(this.crewPersonnel[i]);
      }//end loop
     }//end if
-    //console.log(this.reap.globalCrewPersonnel);
     this.reap.globalCrewPersonnel = this.crewPersonnel;
+
+    if(this.personnelInfo!=undefined){
+      for(let key in this.personnelInfo){
+        this.totalExtraPersonnel.push({
+          'ID':this.personnelInfo[key]['ID']
+          ,'EmployeeCode': this.personnelInfo[key]['EmployeeCode']
+          ,'BillingCode': this.personnelInfo[key]['BillingCode']
+          ,'Name': this.personnelInfo[key]['Name']
+          ,'Title': this.personnelInfo[key]['Title']
+          ,'Hours':this.personnelInfo[key]['Hours'],
+          });
+        }
+    }
+    this.reap.totalPersonnel(this.totalExtraPersonnel);
 
     this.navCtrl.pop();
     }
   personnelChange(event: { component: SelectSearchableComponent, value: any }) {
-        //console.log('value:', event.value);
     }
 
   keyPress(event: any) {
@@ -92,4 +117,52 @@ export class LaborPage {
   }
   laborbillcodeChange(event: { component: SelectSearchableComponent, value: any }) {
    }
+
+   addPersonnel(){
+    const modal = this.modalCtrl.create(AddExtraPersonnelPage);
+
+        modal.present();//presents the signature modal
+
+         modal.onDidDismiss((returnParam: any) => {
+           if(returnParam!=true){
+             if(returnParam['LaborBillCode']==""){
+              returnParam = {
+                'ID':returnParam['Personnel']['ID']
+                ,'EmployeeCode': returnParam['Personnel']['EmployeeCode']
+                ,'Name': returnParam['Personnel']['Name']
+                ,'Title': returnParam['Personnel']['Title']
+                ,'BillingCode': returnParam['Personnel']['BillingCode']
+                ,'Hours':returnParam['Hours']
+              }
+             }
+             else{
+              returnParam = {
+                'ID':returnParam['Personnel']['ID']
+                ,'EmployeeCode': returnParam['Personnel']['EmployeeCode']
+                ,'Name': returnParam['Personnel']['Name']
+                ,'Title': returnParam['LaborBillCode']['BillCodeDescription']
+                ,'BillingCode': returnParam['LaborBillCode']['Bill_Code']
+                ,'Hours':returnParam['Hours']
+              }
+             }
+             this.doeshaveAddedPersonnel = true;
+             this.personnelInfo.push(returnParam);
+           }
+           else{
+          }
+         });
+  }
+  doeshavePersonnel(){
+      //allows user to submit only if there is added equipment
+    if((!this.doeshaveAddedPersonnel)&&(!this.doeshaveCrew)){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  removePersonnel(index:any){
+    this.personnelInfo.splice(index, 1);
+    if(!this.personnelInfo.length){this.doeshaveAddedPersonnel=false;}
+  }
 }

@@ -36,6 +36,8 @@ import { ManageCrewPage } from '../pages/manage-crew/manage-crew';
 import { OfflineDataPage } from '../pages/offline-data/offline-data';
 import { AddExtraEquipmentPage } from '../pages/add-extra-equipment/add-extra-equipment';
 import { TermsOfServicePage } from '../pages/terms-of-service/terms-of-service';
+import { AddExtraPersonnelPage } from '../pages/add-extra-personnel/add-extra-personnel';
+
 Pro.init('9df6dd99', {
   appVersion: '1.0.0'
 })
@@ -78,6 +80,7 @@ export class MyErrorHandler implements ErrorHandler {
     ManageCrewPage,
     OfflineDataPage,
     AddExtraEquipmentPage,
+    AddExtraPersonnelPage,
     TermsOfServicePage
   ],
   imports: [
@@ -107,6 +110,7 @@ export class MyErrorHandler implements ErrorHandler {
     ManageCrewPage,
     OfflineDataPage,
     AddExtraEquipmentPage,
+    AddExtraPersonnelPage,
     TermsOfServicePage
   ],
   providers: [

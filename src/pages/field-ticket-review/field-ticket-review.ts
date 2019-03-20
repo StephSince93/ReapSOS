@@ -20,6 +20,7 @@ export class FieldTicketReviewPage {
   public crewEquipment:any [] = this.reap.globalCrewEquipment;//From existing CrewEquipment
   //public crewItems:any [] = this.reap.globalCrewItems;
   public mergeEquipment:any [] = [];//merges all equipment together
+  public mergePersonnel:any [] = [];//merges all equipment together
   public formDetails:any[] = [];//from main Work Order form
   public miscDetails:any[] = this.reap.misc;// stores misc form
   public isMisc:boolean = false;
@@ -27,7 +28,8 @@ export class FieldTicketReviewPage {
   public isCrewEquipment:boolean = false;
   public isAddedEquipment:boolean = false;
   public isCrewLabor:boolean = false;
-  //public laborDetails:any[] = this.reap.extraLabor;//When adding new Labor
+  public isAddedLabor:boolean = false;
+  public personnelDetails:any[] = this.reap.personnel;//When adding new Labor
   public equipmentDetails:any[] = this.reap.equipment;//When adding new Equipment
   //private jobDetails:any[] = this.reap.job;//stores job form
   public photoDetails:any[] = this.reap.photo;//stores photo globally
@@ -46,14 +48,12 @@ export class FieldTicketReviewPage {
               public loadingCtrl: LoadingController,
               private storage: Storage,
               private toastCtrl: ToastController) {
-                // console.log(this.crewEquipment)
-                // console.log(this.crewPersonnel)
-                // console.log(this.equipmentDetails)
                 this.reap.misc==null||!this.reap.misc.length ? this.isMisc = false :this.isMisc = true;
                 this.reap.photo==null||!this.reap.photo.length ? this.isPhoto= false : this.isPhoto= true;
                 this.crewEquipment==null||!this.crewEquipment.length ? this.isCrewEquipment= false : this.isCrewEquipment= true;
                 this.equipmentDetails==null||!this.equipmentDetails.length ? this.isAddedEquipment= false : this.isAddedEquipment= true;
                 this.crewPersonnel==null||!this.crewPersonnel.length ? this.isCrewLabor= false : this.isCrewLabor= true;
+                this.personnelDetails==null||!this.personnelDetails.length ? this.isAddedLabor= false : this.isAddedLabor= true;
             this.formDetails.push(this.reap.fieldTicketForm);
 
             if(this.reap.selectedJob!=null){
@@ -68,7 +68,6 @@ export class FieldTicketReviewPage {
         /* Perform initial geolocation */
         this.geolocation.getCurrentPosition().then((resp) => {
             this.lonlat = [resp.coords.latitude,resp.coords.longitude];
-            //console.log(this.lonlat);
           }).catch((error) => {
             this.presentToast(error);
             this.lonlat = ["Error grabbing location"];
@@ -87,7 +86,29 @@ export class FieldTicketReviewPage {
     this.signaturePad.clear();
   }
   sigSubmit(){
-    if(this.isCrewLabor == false){this.crewPersonnel = [];}
+    if(this.isCrewLabor){
+      for(let i=0;i<this.crewPersonnel.length;i++){
+        this.mergePersonnel.push({'ID':this.crewPersonnel[i]['ID'],
+                                  'Name':this.crewPersonnel[i]['Name'],
+                                  'Hours':this.crewPersonnel[i]['Hours'],
+                                  'Title':this.crewPersonnel[i]['Title'],
+                                  'BillingCode':this.crewPersonnel[i]['BillingCode'],
+                                  'EmployeeCode':this.crewPersonnel[i]['EmployeeCode']
+                               });
+      }
+    }
+
+    if(this.isAddedLabor){
+      for(let i=0;i<this.personnelDetails.length;i++){
+        this.mergePersonnel.push({'ID':this.personnelDetails[i]['ID'],
+                                  'Name':this.personnelDetails[i]['Name'],
+                                  'Hours':this.personnelDetails[i]['Hours'],
+                                  'Title':this.personnelDetails[i]['Title'],
+                                  'BillingCode':this.personnelDetails[i]['BillingCode'],
+                                  'EmployeeCode':this.personnelDetails[i]['EmployeeCode']
+                               });
+      }
+    }
 
     if(this.isCrewEquipment){
     for(let i=0;i<this.crewEquipment.length;i++){
@@ -112,7 +133,6 @@ export class FieldTicketReviewPage {
 
     //replaces quotes with ft and in
     this.formDetails[0]['PhaseCode']['Description'] = this.formDetails[0]['PhaseCode']['Description'].replace(/["]+/g, 'in.').replace(/[']+/g, 'ft.');
-    //console.log(this.formDetails);
     this.submitClicked = true;
     var md5 = new Md5();//md5 hash for custom guid
     var time = new Date();//timestamp
@@ -137,19 +157,16 @@ export class FieldTicketReviewPage {
                  let loading = this.loadingCtrl.create({
                    content: 'Submitting...'
                   });
-                 //console.log('Yes clicked');
                  //saves as base64
                  this.signatureImage = this.signaturePad.toDataURL();
-                 //console.log(this.signatureImage);
                  /*md5 hashes form data with signature and timestamp for unique guid*/
                  this.md5Data = md5.appendStr(JSON.stringify(this.formDetails)).appendStr(this.signatureImage.toString()).appendStr(this.lonlat.toString()).appendStr(time.getTime().toString()).end();
                  /*Pushes all data to array for form submission*/
-                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.crewPersonnel},{'Misc':this.miscDetails},{'Photo':this.photoDetails},{'AppVersion':this.reap.saulsburyVersion});
+                 this.submitData.push({'wo':this.formDetails},{'sig':this.signatureImage},{'gpsLoc':this.lonlat.toString()},{'md5':this.md5Data},{'Equipment':this.mergeEquipment},{'Labor':this.mergePersonnel},{'Misc':this.miscDetails},{'Photo':this.photoDetails},{'AppVersion':this.reap.saulsburyVersion});
                  /*
                  *
                  */
                  loading.present();
-                console.log(this.submitData);
                  //creates a loading controller while user submits
                  this.stemAPI.submitSaulsburyForm(this.submitData,this.reap.token).subscribe((result) =>{
 
@@ -192,7 +209,6 @@ export class FieldTicketReviewPage {
                         ]
                     });
                   alert.present();
-                  //console.log(this.res.MSG);
                           }
                           else{
                          loading.dismiss();
@@ -202,8 +218,6 @@ export class FieldTicketReviewPage {
                       // }, 2000);
                      }, (err) => {
                        loading.dismiss();
-                        //console.log(err);
-                        //console.log(err.message);
                        let alert = this.alertCtrl.create({
                        title: 'Error: ',
                        message: 'Try submitting again,or Submit Form Offline!',
@@ -234,7 +248,6 @@ export class FieldTicketReviewPage {
                              ]
                          });
                        alert.present();
-                      //console.log(err);
                      });
                 }
              },{//Second alert asking about submission
@@ -243,7 +256,6 @@ export class FieldTicketReviewPage {
                   handler: () => {
                      this.mergeEquipment = [];
                      this.submitClicked=false;//enables the submission button to resubmit
-                    //console.log('No clicked');
                   }
                 },
               ]
@@ -267,7 +279,6 @@ export class FieldTicketReviewPage {
 
 
   ngAfterViewInit(){
-  //  console.log("Comes here!");
     this.signaturePad.clear();
     this.canvasResize();
   }
@@ -282,8 +293,12 @@ export class FieldTicketReviewPage {
              text: 'Yes',
               role: 'Yes',
              handler: () => {
-               //console.log('Yes clicked');
                //pops to home page
+                this.reap.equipment = [];
+                this.reap.personnel = [];
+                this.reap.misc = [];
+                this.reap.photo = [];
+                this.reap.job = [];
                this.navCtrl.popTo(this.navCtrl.getByIndex(1));
              }
            },
@@ -291,7 +306,6 @@ export class FieldTicketReviewPage {
              text: 'No',
              role: 'cancel',
              handler: () => {
-               //console.log('No clicked');
              }
            }
         ]
@@ -316,6 +330,14 @@ export class FieldTicketReviewPage {
 
      this.equipmentDetails==null||!this.equipmentDetails.length ? this.isAddedEquipment= false : this.isAddedEquipment= true;
  }
+ removePersonnel(index){
+
+  this.reap.personnel.splice(index, 1);
+  this.personnelDetails = this.reap.personnel;
+
+  this.personnelDetails==null||!this.personnelDetails.length ? this.isAddedLabor= false : this.isAddedLabor= true;
+}
+
  removePhoto(index){
      this.reap.photo.splice(index, 1);
      this.photoDetails = this.reap.photo;
@@ -332,7 +354,6 @@ export class FieldTicketReviewPage {
    });
 
    toast.onDidDismiss(() => {
-     //console.log('Dismissed toast');
    });
 
    toast.present();

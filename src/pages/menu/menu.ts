@@ -51,6 +51,12 @@ export class MenuPage {
       },err=>{
         console.log('How`d you get here?'+err);
       });
+    //Resets Additional Global form Data
+    this.reap.equipment = [];
+    this.reap.personnel = [];
+    this.reap.misc = [];
+    this.reap.photo = [];
+    this.reap.job = [];
     }
     else{
       this.reap.getLocalStorage();

@@ -100,6 +100,27 @@
                         </ion-row>
                  </ion-grid>
    <hr>
+  </div>
+  <div *ngIf="isAddedLabor">
+      <hr>
+      <ion-label class="subLabel">ADDED PERSONNEL</ion-label>
+                    <ion-grid class="formDetails" *ngFor="let personnel of personnelDetails;index as i;">
+                        <ion-row>
+                          <ion-col col-6>NAME:</ion-col>
+                          <ion-col col-6 class="formCol">{{personnel?.Name}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                          <ion-col col-6>HOURS:</ion-col>
+                          <ion-col col-6 class="formCol">{{personnel?.Hours}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-6>TITLE:</ion-col>
+                            <ion-col col-6 class="formCol">{{personnel?.Title}}</ion-col>
+                          </ion-row>
+                        <ion-row>
+                          <ion-col col-12 style="text-align:center"> <button type="button" (tap)="removePersonnel(i)"ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
+                        </ion-row>
+                    </ion-grid>
 </div>
 <div *ngIf="isMisc">
     <ion-label>MISC. SUMMARY</ion-label>

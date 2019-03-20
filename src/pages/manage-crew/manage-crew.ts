@@ -17,12 +17,6 @@ class EquipmentList {
   public CostCenter:number;
 
 }
-// class ItemList {
-//   public JobID: number;
-//   public BillCode: number;
-//   public BillCodeDescription: string;
-//   public JobNumber: number;
-// }
 class JobList{
   //public PhaseCode:number;
   public JobNumber:number;
@@ -43,8 +37,6 @@ export class ManageCrewPage {
   personnel: Personnel;
   public equipmentArray: EquipmentList[];
   equipment: EquipmentList;
-  // private itemArray: ItemList[];
-  // item: ItemList;
   public jobArray: JobList[];
   project: JobList;
   public phaseArray: PhaseCodeList[];
@@ -55,8 +47,6 @@ export class ManageCrewPage {
   public globalPhaseCode:any = this.reap.globalCrewPhaseCodes;
   public tempEquipment:any[] = [];
   public tempPhase:any[] = [];
-  //private crewItems:any [] = [];
-  //private globalItems:any [] = this.reap.globalCrewItems;
   public noJob:boolean;
   public noPersonnel:boolean = true;
   public noEquipment:boolean = true;
