@@ -32,10 +32,7 @@ export class FieldTicketPage {
   public tempPhase: any[] = [];
   public selectedArray: any[] = [];//saves array selected from jobs
   public jobSelected: boolean = false;
-  public afeString: string;//stores AFE from selected job number
   public startDate: any;
-  public foreman: string;//current user logged in
-  public personnelSelected: boolean = false;//check to see if user selected exists
   public totalTime: any;
   public clientPM: any;
   public globalJob: any[] = [];
@@ -45,6 +42,8 @@ export class FieldTicketPage {
   public defaultEndTime: string;
   public startTime: string;
   public endTime: string;
+  public isJobSelected:boolean = false;
+  public isPhaseCodeSelected:boolean = false;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public reap: ReapService,
@@ -57,15 +56,15 @@ export class FieldTicketPage {
       this.globalJob = this.reap.globalCrewJob;
       this.jobArray = this.reap.getJobs;
 
-      if (this.reap.globalCrewPhaseCodes != null) {
-        this.globalPhaseCode = this.reap.globalCrewPhaseCodes;
-        if(this.globalPhaseCode['Client_PM']==""||this.globalPhaseCode['Client_PM']==null){
-          this.clientPM="";
-        }
-        else{
-          this.clientPM = this.globalPhaseCode['Client_PM'];
-        }
-        this.phaseArray = this.reap.getPhaseCodes;
+      // if (this.reap.globalCrewPhaseCodes != null) {
+      //   this.globalPhaseCode = this.reap.globalCrewPhaseCodes;
+      //   if(this.globalPhaseCode['Client_PM']==""||this.globalPhaseCode['Client_PM']==null){
+      //     this.clientPM="";
+      //   }
+      //   else{
+      //     this.clientPM = this.globalPhaseCode['Client_PM'];
+      //   }
+      //   this.phaseArray = this.reap.getPhaseCodes;
 
         var jobNumber = this.globalJob['Job_Number'];
         for (let i = 0; i < this.reap.getPhaseCodes.length; i++) {
@@ -75,13 +74,15 @@ export class FieldTicketPage {
         }
         this.phaseArray = this.tempPhase;
         this.tempPhase = [];
-      }
-      else {
-        this.phaseArray = this.reap.getPhaseCodes;
-      }
+      // }
+      // else {
+      //  this.phaseArray = this.reap.getPhaseCodes;
+      // }
+      this.isJobSelected = true;
     }
     else {
       this.jobArray = this.reap.getJobs;
+      this.phaseArray = this.reap.getPhaseCodes;
     }
 
     /**************** Catch Error ************/
@@ -94,6 +95,8 @@ export class FieldTicketPage {
   jobChange(event: { component: SelectSearchableComponent, value: any }) {
     this.globalPhaseCode = [];
     this.clientPM = "";
+    if(event.value!=null){
+    this.isJobSelected = true;
     var jobNumber = this.globalJob['Job_Number'];
 
     for (let i = 0; i < this.reap.getPhaseCodes.length; i++) {
@@ -103,6 +106,11 @@ export class FieldTicketPage {
     }
     this.phaseArray = this.tempPhase;
     this.tempPhase = [];
+    }
+    else{
+      this.isJobSelected = false;
+      this.isPhaseCodeSelected = false;
+    }
   }
 
   onSubmit(Form: NgForm) {
@@ -167,11 +175,14 @@ export class FieldTicketPage {
   phasecodeChange(event: { component: SelectSearchableComponent, value: any }) {
     if(event.value==null){
       this.clientPM="No Phase Code Selected";
+      this.isPhaseCodeSelected = false;
     }
     else if(event.value['Client_PM']==""){
+      this.isPhaseCodeSelected = true;
       this.clientPM="";
     }
     else{
+      this.isPhaseCodeSelected = true;
       this.clientPM = event.value['Client_PM'];
     }
   }

@@ -45,6 +45,12 @@ export class LoginPage {
     if(this.res.token!=""){//sets authtoken to local storage
       this.storage.set('authToken',this.res.token)
       }
+    if(this.res.fullName!=""){//sets groupName directed to GET data
+      this.storage.set('fullName',this.res.fullName)
+    }
+    if(this.res.userName!=""){//sets groupName directed to GET data
+      this.storage.set('userName',this.res.userName)
+    }
     if(this.res.groupName!=""){//sets groupName directed to GET data
       this.storage.set('groupName',this.res.groupName)
     }

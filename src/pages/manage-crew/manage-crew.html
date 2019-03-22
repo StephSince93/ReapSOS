@@ -44,7 +44,7 @@
 <hr>
 <br>
 <br>
-<div *ngIf="!noJob">
+<!-- <div *ngIf="!noJob">
       <ion-item class="formField ionField">
         <ion-label color="primary" class="searchableLabel" stacked >SELECT PHASE CODE</ion-label>
           <select-searchable
@@ -64,22 +64,22 @@
       </ion-item>
 <br>
       <ion-label *ngIf="!noPhaseCode; else emptyPhaseCode" class="headerLabel" stacked>CURRENT PHASE CODE</ion-label>
-        <!-- <div *ngIf="globalPersonnel; else emptyPersonnel"> -->
+        <div *ngIf="globalPersonnel; else emptyPersonnel">
         <ion-grid *ngIf="!noPhaseCode">
           <ion-row>
             <ion-col col-4>PHASE CODE:</ion-col>
             <ion-col col-8>{{globalPhaseCode?.Description}}</ion-col>
-            <!-- <ion-col><button type="button" (tap)="removePersonnel(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col> -->
+            <ion-col><button type="button" (tap)="removePersonnel(i)" ion-button class="trashButton"><ion-icon name="trash" ios="ios-trash" md="md-trash"></ion-icon></button></ion-col>
           </ion-row>
         </ion-grid>
-      <!-- </div> -->
+      /div>
       <ng-template #emptyPhaseCode>
       <ion-label class="headerLabel" stacked>NO PHASE CODE SELECTED</ion-label>
       </ng-template>
 <br>
 <hr>
 <br>
-<br>
+<br> -->
       <ion-item class="formField ionField">
         <ion-label color="primary" class="searchableLabel" stacked >SELECT PERSONNEL</ion-label>
           <select-searchable
@@ -154,7 +154,7 @@
 <br>
 <br>
 
-</div>
+<!-- </div> -->
       <ion-item>
         <button [disabled]="!f.valid" type="submit" id="submitButton" ion-button full large>Submit</button>
      </ion-item>

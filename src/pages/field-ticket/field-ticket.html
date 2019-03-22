@@ -94,7 +94,9 @@
         name="description"
         ngModel></ion-textarea>
       </ion-item>
-
+      <ion-label *ngIf="!isJobSelected" class="warningLabel">Job Must Be Selected Before Continuing!</ion-label>
+      <br>
+      <ion-label *ngIf="!isPhaseCodeSelected" class="warningLabel">Phase Code Must Be Selected Before Continuing!</ion-label>
       <ion-item>
         <button [disabled]="!f.valid" type="submit" id="submitButton" ion-button full large>Submit</button>
      </ion-item>

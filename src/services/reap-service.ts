@@ -44,6 +44,8 @@ export class ReapService {
     public selectedJobNumber:any;
     public LaborBC:any []=[];
     public groupName:any;
+    public userName:any;
+    public fullName:any;
     public token:any;
     //public formStart:any;
     //public formStartTime:any;//testing with Saulsbury
@@ -154,6 +156,14 @@ export class ReapService {
 
         this.storage.get('authToken').then((data)=>{
         this.token = data;
+        });
+
+        this.storage.get('fullName').then((data)=>{
+        this.fullName = data;
+        });
+
+        this.storage.get('userName').then((data)=>{
+        this.userName = data;
         });
 
         this.storage.get('groupName').then((data)=>{

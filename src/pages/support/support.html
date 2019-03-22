@@ -10,63 +10,78 @@
 
 <ion-content padding>
   <ion-grid>
-    <ion-row style="padding-bottom:15px;">
-      <ion-col>
+   <ion-row>
+      <ion-col col-12>
       <h1>For Technical Support</h1>
     </ion-col>
-  </ion-row>
-  <ion-row>
+   </ion-row>
+   <ion-row >
+      <ion-col>
+          <h3 style="color:red;">Group: {{this.groupName}}</h3>
+     </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+          <h3 style="color:red;">User Name: {{this.userName}}</h3>
+     </ion-col>
+   </ion-row>
+   <ion-row>
+      <ion-col>
+          <h3 style="color:red;">Full Name: {{this.fullName}}</h3>
+     </ion-col>
+   </ion-row>
+   <ion-row>
     <ion-col>
       <h1>Email Us</h1>
     </ion-col>
-  </ion-row>
-  <ion-row class="supportData">
+   </ion-row>
+   <ion-row class="supportData">
     <ion-col>
       <a href="mailto:support@stemsoftware.com">support@stemsoftware.com</a>
     </ion-col>
-  </ion-row>
-  <ion-row>
+   </ion-row>
+   <ion-row>
     <ion-col>
       <h1>Call Us</h1>
     </ion-col>
-  </ion-row>
-  <ion-row class="supportData">
+   </ion-row>
+   <ion-row class="supportData">
     <ion-col>
       <a href="tel:432-550-7836">432-550-7836</a>
     </ion-col>
-  </ion-row>
-  <ion-row>
+   </ion-row>
+   <ion-row>
     <ion-col>
       <h1>Connection: {{this.networkType}}</h1>
     </ion-col>
-  </ion-row>
-  <ion-row>
+   </ion-row>
+   <ion-row>
     <ion-col>
       <h1>Platform Type: {{this.saulsburyPlatform}}</h1>
     </ion-col>
-  </ion-row>
-  <ion-row>
+   </ion-row>
+   <ion-row>
     <ion-col>
       <h1>OS Version: {{this.deviceVersion}}</h1>
     </ion-col>
-  </ion-row>
-  <ion-row>
+   </ion-row>
+   <ion-row>
     <ion-col>
       <h1>App Version:
          {{this.saulsburyVersion}}
       </h1>
     </ion-col>
-  </ion-row>
-  <ion-row>
+   </ion-row>
+   <ion-row>
     <ion-col>
       <button ion button id="supportButton" (click)="toSync()" block large>Sync Data</button>
     </ion-col>
-  </ion-row>
-  <ion-row>
+   </ion-row>
+   <ion-row>
     <ion-col>
       <button ion button id="supportButton" (click)="toviewData()" block large>View Offline Data</button>
     </ion-col>
-  </ion-row>
+   </ion-row>
 </ion-grid>
 
 </ion-content>

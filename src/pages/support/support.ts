@@ -16,6 +16,9 @@ export class SupportPage {
   public deviceVersion:any;
   public saulsburyVersion:any = this.reap.saulsburyVersion;
   public networkType:any = this.reap.networkType;
+  public groupName: string = this.reap.groupName;
+  public userName: string = this.reap.userName;
+  public fullName: string = this.reap.fullName;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private loadingCtrl: LoadingController,
