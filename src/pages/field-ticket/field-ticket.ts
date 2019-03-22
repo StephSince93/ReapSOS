@@ -106,6 +106,7 @@ export class FieldTicketPage {
     }
     this.phaseArray = this.tempPhase;
     this.tempPhase = [];
+    this.isPhaseCodeSelected = false;
     }
     else{
       this.isJobSelected = false;
