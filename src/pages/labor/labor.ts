@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
 import { Storage } from '@ionic/storage';
@@ -31,7 +31,8 @@ export class LaborPage {
               public navParams: NavParams,
               public reap: ReapService,
               public storage: Storage,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              public alertCtrl: AlertController) {
                 this.LaborBillCodes = this.reap.LaborBC;
                 this.crewPersonnel = this.reap.globalCrewPersonnel;
                 try{
@@ -162,7 +163,26 @@ export class LaborPage {
     }
   }
   removePersonnel(index:any){
-    this.personnelInfo.splice(index, 1);
-    if(!this.personnelInfo.length){this.doeshaveAddedPersonnel=false;}
-  }
+    var alert = this.alertCtrl.create({
+      title: 'Confirm Delete',
+      subTitle: 'Are you sure you want to Delete?',
+       buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.personnelInfo.splice(index, 1);
+            if(!this.personnelInfo.length){this.doeshaveAddedPersonnel=false;}
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'Cancel',
+          handler: () => {
+          }
+        }
+
+       ]
+     });
+    alert.present();
+   }
 }

@@ -47,12 +47,12 @@
                 class="specialSelect"
                 item-content
                 ngModel
-                [searchFailText]="'No Labor Bill Codes Associated with Selected Job.'"
+                [searchFailText]="'No items found.'"
                 [items]="LaborBillCodes"
                 title="LaborBillCode"
                 itemValueField=ID
                 itemTextField=BillCodeDescription
-                name="LaborBillCode{{i}}"
+                name="LaborBillCode"
                 [canSearch]="true"
                 [canClear]="true"
                 [isMultiple]="false"

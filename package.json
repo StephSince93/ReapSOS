@@ -36,6 +36,7 @@
     "@ionic/pro": "^2.0.4",
     "@ionic/storage": "^2.2.0",
     "angular2-signaturepad": "^2.8.0",
+    "cordova-android": "7.1.4",
     "cordova-browser": "^6.0.0",
     "cordova-build-increment": "^0.1.0",
     "cordova-ios": "4.5.5",
@@ -99,7 +100,8 @@
     },
     "platforms": [
       "browser",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

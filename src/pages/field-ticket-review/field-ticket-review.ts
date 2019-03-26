@@ -69,7 +69,7 @@ export class FieldTicketReviewPage {
         this.geolocation.getCurrentPosition().then((resp) => {
             this.lonlat = [resp.coords.latitude,resp.coords.longitude];
           }).catch((error) => {
-            this.presentToast(error);
+            this.reap.presentToast(error);
             this.lonlat = ["Error grabbing location"];
           });//end of error
     //fixes issue with signature swiping back.
@@ -173,7 +173,7 @@ export class FieldTicketReviewPage {
                   //setTimeout(() => {
                   if(result['Status'] == false){
                     if (result['MSG']=='Field Form Was Not Saved!\nThis is a duplicate form.'){
-                      this.presentToast('Work Ticket Form has already been submitted!');
+                      this.reap.presentToast('Work Ticket Form has already been submitted!');
                       var response = "Work Ticket Form has already been submitted! Will Exit Form!"
                       var reRoute = true;
                     }
@@ -316,46 +316,111 @@ export class FieldTicketReviewPage {
   this.navCtrl.popTo(this.navCtrl.getByIndex(2));
  }
  removeMisc(index){
+  //this.reap.presentAlert2('Confirm Delete','Are you sure you want to Delete?','Yes','Cancel');
+  var alert = this.alertCtrl.create({
+    title: 'Confirm Delete',
+    subTitle: 'Are you sure you want to Delete?',
+     buttons: [
+      {
+        text: 'Yes',
+        handler: () => {
+          this.reap.misc.splice(index, 1);
+          this.miscDetails = this.reap.misc;
+          this.reap.misc==null||!this.reap.misc.length ? this.isMisc = false :this.isMisc = true;
+        }
+      },
+      {
+        text: 'Cancel',
+        role: 'Cancel',
+        handler: () => {
+        }
+      }
 
-     this.reap.misc.splice(index, 1);
-     this.miscDetails = this.reap.misc;
-
-     this.reap.misc==null||!this.reap.misc.length ? this.isMisc = false :this.isMisc = true;
+     ]
+   });
+  alert.present();
  }
 
  removeEquipment(index){
+  //this.reap.presentAlert2('Confirm Delete','Are you sure you want to Delete?','Yes','Cancel');
+  var alert = this.alertCtrl.create({
+    title: 'Confirm Delete',
+    subTitle: 'Are you sure you want to Delete?',
+     buttons: [
+      {
+        text: 'Yes',
+        handler: () => {
+          this.reap.equipment.splice(index, 1);
+          this.equipmentDetails = this.reap.equipment;
+          this.equipmentDetails==null||!this.equipmentDetails.length ? this.isAddedEquipment= false : this.isAddedEquipment= true;
+        }
+      },
+      {
+        text: 'Cancel',
+        role: 'Cancel',
+        handler: () => {
+        }
+      }
 
-     this.reap.equipment.splice(index, 1);
-     this.equipmentDetails = this.reap.equipment;
-
-     this.equipmentDetails==null||!this.equipmentDetails.length ? this.isAddedEquipment= false : this.isAddedEquipment= true;
+     ]
+   });
+  alert.present();
  }
  removePersonnel(index){
+  // this.reap.presentAlert2('Confirm Delete','Are you sure you want to Delete?','Yes','Cancel').then((value) =>{
+  //   console.log(value);
+  // },(err)=>{
+  //   console.log(err);
+  // });
+  var alert = this.alertCtrl.create({
+      title: 'Confirm Delete',
+      subTitle: 'Are you sure you want to Delete?',
+       buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.reap.personnel.splice(index, 1);
+            this.personnelDetails = this.reap.personnel;
+            this.personnelDetails==null||!this.personnelDetails.length ? this.isAddedLabor= false : this.isAddedLabor= true;
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'Cancel',
+          handler: () => {
+          }
+        }
 
-  this.reap.personnel.splice(index, 1);
-  this.personnelDetails = this.reap.personnel;
-
-  this.personnelDetails==null||!this.personnelDetails.length ? this.isAddedLabor= false : this.isAddedLabor= true;
-}
+       ]
+     });
+    alert.present();
+ }
 
  removePhoto(index){
-     this.reap.photo.splice(index, 1);
-     this.photoDetails = this.reap.photo;
+    //this.reap.presentAlert2('Confirm Delete','Are you sure you want to Delete?','Yes','Cancel');
 
-     this.reap.photo==null||!this.reap.photo.length ? this.isPhoto= false : this.isPhoto= true;
+    var alert = this.alertCtrl.create({
+      title: 'Confirm Delete',
+      subTitle: 'Are you sure you want to Delete?',
+       buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.reap.photo.splice(index, 1);
+            this.photoDetails = this.reap.photo;
+            this.reap.photo==null||!this.reap.photo.length ? this.isPhoto= false : this.isPhoto= true;
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'Cancel',
+          handler: () => {
+          }
+        }
+
+       ]
+     });
+    alert.present();
  }
- presentToast(msg) {
-   let toast = this.toastCtrl.create({
-     message: msg,
-     duration: 3000,
-     position: 'bottom',
-     dismissOnPageChange: false,
-     cssClass: 'customToast'
-   });
 
-   toast.onDidDismiss(() => {
-   });
-
-   toast.present();
-   }
 }

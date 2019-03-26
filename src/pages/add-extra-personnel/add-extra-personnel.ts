@@ -36,9 +36,16 @@ export class AddExtraPersonnelPage {
               public viewCtrl: ViewController,
               public reap: ReapService) {
   this.LaborBillCodes = this.reap.LaborBC;// Grabs Bill Codes
-  console.log(this.LaborBillCodes)
   this.extraPersonnelArray = this.reap.getPersonnel;//Grabs Personnel
-  console.log(this.extraPersonnelArray)
+    //Filters out existing Employees in crew
+    if(this.reap.globalCrewPersonnel!=null||this.reap.globalCrewPersonnel!=[]||this.reap.globalCrewPersonnel.length){
+      for(let i=0;i<this.reap.globalCrewPersonnel.length;i++)
+      for(let j=0;j<this.extraPersonnelArray.length;j++){
+        if(this.extraPersonnelArray[j]['ID']===this.reap.globalCrewPersonnel[i]['ID']){
+          this.extraPersonnelArray.splice(j,1);
+        }
+      }
+    }
   }
 
 
@@ -53,6 +60,7 @@ export class AddExtraPersonnelPage {
   }
 
   dismissModal(){
+
     this.viewCtrl.dismiss(this.noSubmission);
  }
 }

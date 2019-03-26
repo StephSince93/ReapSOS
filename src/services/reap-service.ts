@@ -270,7 +270,7 @@ export class ReapService {
 
       toast.present();
       }
-
+    //Alert w/ one button
     presentAlert(title:any,subTitle:any,button:any){
 
       let alert = this.alertCtrl.create({
@@ -280,6 +280,35 @@ export class ReapService {
          });
        alert.present();
     }
+    //Alert w/ two buttons
+    // presentAlert2(title:any,subTitle:any,button:any,button2:any){
+    //   var cancel;
+    //   var alert = this.alertCtrl.create({
+    //        title: title,
+    //       subTitle: subTitle,
+    //        buttons: [
+    //         {
+    //           text: button,
+    //           handler: (value) => {
+    //             cancel = true;
+    //             console.log(value)
+    //             return value;
+    //           }
+    //         },
+    //         {
+    //           text: button2,
+    //           role: button2,
+    //           handler: () => {
+    //             cancel = false;
+    //             console.log(cancel)
+    //           }
+    //         }
+
+    //        ]
+    //      });
+    //    return alert.present();
+
+    // }
     filterJobs(jobs:any []=[]){
       let temp:any []=[];
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController,AlertController } from 'ionic-angular';
 import { NgForm, FormsModule } from '@angular/forms';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
 
@@ -29,7 +29,8 @@ export class EquipmentPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public reap: ReapService,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              public alertCtrl: AlertController) {
           //this.equipmentType = reap.equipmentType;
           try{
           this.equipmentArray = reap.getEquipment;
@@ -109,8 +110,27 @@ export class EquipmentPage {
            });
   }
   removeEquipment(index:any){
-    this.equipmentInfo.splice(index, 1);
-    if(!this.equipmentInfo.length){this.doeshaveAddedEquipment=false;}
+    var alert = this.alertCtrl.create({
+      title: 'Confirm Delete',
+      subTitle: 'Are you sure you want to Delete?',
+       buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.equipmentInfo.splice(index, 1);
+            if(!this.equipmentInfo.length){this.doeshaveAddedEquipment=false;}
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'Cancel',
+          handler: () => {
+          }
+        }
+
+       ]
+     });
+    alert.present();
   }
   keyPress(event: any) {
     const pattern = /[0-9\.\ ]/;
